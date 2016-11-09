@@ -202,7 +202,7 @@ public class OpenHabEvent {
 
 		@Override
 		protected OHItemCommandPayload createPayload() {
-			return new Gson().fromJson(payload, OHItemCommandEvent.class);
+			return new Gson().fromJson(payload, OHItemCommandPayload.class);
 		}
 	}
 
