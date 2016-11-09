@@ -3,12 +3,12 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
-    xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
-    xmlns:projectset="http://www.eclipse.org/oomph/setup/projectset/1.0"
+    xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/setup/projectset/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/ProjectSet.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore"
     name="vicci.process"
     label="Vicci Process">
   <setupTask
@@ -52,38 +52,22 @@
   </setupTask>
   <setupTask
       xsi:type="setup:ResourceCreationTask"
-      predecessor="//@setupTasks.2"
-      content="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;psf version=&quot;2.0&quot;>&#xA;&lt;provider id=&quot;org.tigris.subversion.subclipse.core.svnnature&quot;>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.client,eu.vicci.process.client&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.client.tests,eu.vicci.process.client.tests&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.core,eu.vicci.process.core&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.engine,eu.vicci.process.engine&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.gesture,eu.vicci.process.gesture&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.graphiti,eu.vicci.process.graphiti&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.graphiti.adapter.client,eu.vicci.process.graphiti.adapter.client&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.graphiti.adapter.engine,eu.vicci.process.graphiti.adapter.engine&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.graphiti.execution,eu.vicci.process.graphiti.execution&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.model,eu.vicci.process.model&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.model.implementation.tests,eu.vicci.process.model.implementation.tests&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.model.implementations,eu.vicci.process.model.implementations&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.model.util,eu.vicci.process.model.util&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.osgi,eu.vicci.process.osgi&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.repository,eu.vicci.process.repository&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/eu.vicci.process.server,eu.vicci.process.server&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/ProjectSet,ProjectSet&quot;/>&#xA;&lt;project reference=&quot;0.9.3,https://scm.fusionforge.zih.tu-dresden.de/authscm/${fusionforge.usr.login}/svn/cps-lab/trunk/processes/TargetPlatform,TargetPlatform&quot;/>&#xA;&lt;/provider>&#xA;&lt;/psf>"
-      targetURL="${workspace.location|uri}/ProjectSet/processEngineAll.psf"
-      encoding="UTF-8">
-    <description></description>
-  </setupTask>
-  <setupTask
-      xsi:type="projectset:ProjectSetImportTask"
-      id="importprojects"
-      predecessor="//@setupTasks.3"
-      uRL="${workspace.location|uri}/ProjectSet/processEngineAll.psf">
-    <description></description>
-  </setupTask>
-  <setupTask
-      xsi:type="pde:TargetPlatformTask"
-      id="setplattform"
-      name="Process Engine Platform">
-    <description>Setting Process Engine Target Platform</description>
-  </setupTask>
-  <setupTask
-      xsi:type="setup:ResourceCreationTask"
       filter=""
       content="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?> "
       targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml"
       encoding="UTF-8"/>
   <setupTask
-      xsi:type="setup:VariableTask"
-      id="fusionforge.usr.login"
-      name="fusionforge.usr.login"
-      defaultValue=""
-      label="Fusionforge Login Name">
-    <description>The login name for fusionforge</description>
+      xsi:type="git:GitCloneTask"
+      id="git.clone.proteus-all"
+      remoteURI="https://github.com/IoTUDresden/proteus.git"
+      pushURI="https://github.com/IoTUDresden/proteus.git">
+    <description>PROtEUS all</description>
+  </setupTask>
+  <setupTask
+      xsi:type="projects:ProjectsImportTask">
+    <sourceLocator
+        rootFolder="$(git.clone.proteus-all.location/)"
+        locateNestedProjects="true"/>
   </setupTask>
   <stream name="master"
       label="Master"/>
