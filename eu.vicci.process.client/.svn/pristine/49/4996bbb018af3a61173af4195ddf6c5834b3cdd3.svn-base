@@ -1,0 +1,4 @@
+ip = localhost
+port = 8081
+namespace = vicciWs
+realmName = vicciRealm

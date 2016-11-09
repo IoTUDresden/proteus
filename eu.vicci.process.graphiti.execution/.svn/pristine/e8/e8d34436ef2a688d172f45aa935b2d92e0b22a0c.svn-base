@@ -1,0 +1,351 @@
+package eu.vicci.process.graphiti.execution.interpreter;
+
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
+import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
+import org.eclipse.graphiti.mm.pictograms.ContainerShape;
+import org.eclipse.graphiti.mm.pictograms.Diagram;
+import org.eclipse.graphiti.mm.pictograms.PictogramElement;
+import org.eclipse.graphiti.mm.pictograms.Shape;
+import org.eclipse.graphiti.services.Graphiti;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+
+import eu.vicci.process.client.core.IProcessEngineClient;
+import eu.vicci.process.engine.core.IProcessManager;
+import eu.vicci.process.graphiti.adapter.core.IEngineAdapterService;
+import eu.vicci.process.graphiti.execution.debug.ProcessDebugger;
+import eu.vicci.process.graphiti.execution.ui.ExecuteProcessEditor;
+import eu.vicci.process.graphiti.execution.ui.SetPortValuesDialog;
+import eu.vicci.process.graphiti.execution.ui.SetPortValuesDialogResult;
+import eu.vicci.process.model.sofia.DataType;
+import eu.vicci.process.model.sofia.Identifiable;
+import eu.vicci.process.model.sofia.Port;
+import eu.vicci.process.model.sofia.Process;
+import eu.vicci.process.model.sofia.StartDataPort;
+import eu.vicci.process.model.sofiainstance.DataTypeInstance;
+import eu.vicci.process.model.sofiainstance.State;
+import eu.vicci.process.model.util.configuration.TopicId;
+import eu.vicci.process.model.util.messages.core.IMessageReceiver;
+import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
+import eu.vicci.process.model.util.messages.core.MessageType;
+import eu.vicci.process.model.util.messages.core.StateChangeListener;
+
+/**
+ * Runner to execute a process model in the engine and gives feedback about states, port
+ * values, etc. in the ui.
+ */
+public class ProcessInterpreter extends AbstractProcessInterpreter implements StateChangeListener, IMessageReceiver{	
+	private static final String INSTANCE_SUFFIX = "_Instance_";
+	
+	private final ProcessInterpreterConfig config;
+	private IEngineAdapterService adapterService;
+	private ProcessDebugger debugger;
+	
+	private String rootProcessId;
+	private Process process; 
+	
+	private boolean isCanceled = false;
+	
+	private CountDownLatch waitTillFinished;
+	
+	//maps the ids of process contents to their shapes
+	private Map<String, Shape> objectsMap = Collections.synchronizedMap(new HashMap<String, Shape>());
+
+	public ProcessInterpreter(ProcessInterpreterConfig config, ExecuteProcessEditor editor) {
+		super(editor);
+		this.config = config;
+		this.adapterService = config.getEngineAdapterService();
+	}
+	
+	@Override
+	public void init() {
+		super.init();
+		createMapping();
+		process = getEditorProcess();
+	}
+	
+	public void setDebugger(ProcessDebugger debugger){
+		this.debugger = debugger;
+	}
+
+	@Override
+	protected IStatus run(IProgressMonitor monitor) {
+		logger.debug("running process runner");
+		waitTillFinished = new CountDownLatch(1);
+		if(debugger != null)
+			debugger.loaded();		
+		
+		if(adapterService.isClient())
+			connectClient();		
+		
+		IProcessManager processManager = adapterService.getProcessManager();
+		
+		processManager.addStateChangeListener(this);
+
+		String processDefinition = getProcessDefinition(process);		
+		
+		processManager.uploadProcessDefinition(process.getId(), processDefinition, false, true);
+		processManager.deployProcess(process.getId());
+		rootProcessId = processManager.deployProcessInstance(process.getId());
+		
+		List<StartDataPort> startDataPorts = getStartDataPortsList(process);
+		Map<String, DataTypeInstance> inputParamter = null;
+		if(!startDataPorts.isEmpty()){
+			inputParamter = getInputParameterMap(startDataPorts);
+			if(inputParamter == null){
+				if(debugger != null)
+					debugger.terminated();
+				return Status.CANCEL_STATUS;
+			}
+		}
+		
+		processManager.startProcessInstance(rootProcessId, process.getId(), inputParamter, config.isRunInLoop());
+		
+		try {
+			waitTillFinished.await();
+		} catch (InterruptedException e1) {
+			e1.printStackTrace();
+		}
+
+		//sometimes not all sync methods have returned their futures. This evtl. 
+		//happens if the debugger is terminated before the actors can return the future.
+		//Waiting at the and should prevent this but is a workaround.
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}		
+		
+		processManager.removeStateChangeListener(this);
+		processManager.removeInstance(rootProcessId);
+		
+		if(debugger != null)
+			debugger.terminated();
+		
+		adapterService.disconnect();
+		
+		if(isCanceled)
+			return Status.CANCEL_STATUS;
+		return Status.OK_STATUS;
+	}	
+	
+	private void connectClient() {
+		String name = adapterService.getAdapterName();
+		String ip = config.getVicciUrl();
+		String port = config.getPort();
+		String realmName = config.getRealm();
+		String namespace = config.getNamespace();
+		boolean isServer = config.getIsServer();
+		
+		IProcessEngineClient client = adapterService.connect(name, ip, port, realmName, namespace, isServer);
+		client.subscribeTo(TopicId.STATE_CHANGE, MessageType.WAMPMESSAGE, this);			
+	}
+	
+	private boolean stateNotFinished(State state){
+		return !(state == State.DEACTIVATED || state == State.FAILED || state == State.EXECUTED);
+	}
+
+	//StateChangeListener
+	@Override
+	public synchronized void onMessage(IStateChangeMessage message) {	
+		if(debugger != null)
+			debugger.processStateChanged(message);
+		Shape shape = objectsMap.get(message.getProcessId());
+		if(shape == null)
+			return;
+		AsyncChanging changing = new AsyncChanging(shape, message);
+		Display.getDefault().asyncExec(changing);
+		
+		if(rootProcessId.equals(message.getProcessInstanceId()) && !stateNotFinished(message.getState()))
+				waitTillFinished.countDown();		
+	}
+	
+	//IMessageReceiver
+	@Override
+	public void onMessage(MessageType messageType, Object arg) {
+		if(messageType == MessageType.WAMPMESSAGE && arg instanceof IStateChangeMessage)
+			onMessage((IStateChangeMessage)arg);		
+	}
+	
+	public ProcessInterpreterConfig getConfig(){
+		return config;
+	}
+	
+	public void terminate(){
+		try {
+			adapterService.getProcessManager().stopProcessInstance(rootProcessId);	
+			isCanceled = true;
+			waitTillFinished.countDown();
+//			if(debugger != null)
+//				debugger.terminated();
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("cant stop process with id '{}'", rootProcessId);
+		}
+	}
+	
+	/**
+	 * Gets the root process from the diagram. The process should only be accessed in a reading state.
+	 * Write operations should be done within a EditingDomain.
+	 * @return
+	 */
+	public Process getVicciProcess(){
+		return process;
+	}
+	
+	private Map<String, DataTypeInstance> getInputParameterMap(List<StartDataPort> startDataPorts){		
+		ShowDialog showDialog = new ShowDialog(startDataPorts);		
+		Display.getDefault().syncExec(showDialog);
+		SetPortValuesDialogResult result = showDialog.getResult();
+		if(result == null || result.isCanceled())
+			return null;
+		return result.getValues();
+	}
+	
+	//gets a list with copies from the startdataports
+	private List<StartDataPort> getStartDataPortsList(Process process){
+		List<StartDataPort> startDataPorts = new ArrayList<>();
+		for (Port port : process.getPorts())
+			if(port instanceof StartDataPort)
+				startDataPorts.add(copyStartDataPort((StartDataPort) port));		
+		return startDataPorts;		
+	}
+	
+	private StartDataPort copyStartDataPort(StartDataPort port){
+		StartDataPort copyPort = EcoreUtil.copy(port);
+		DataType copyType = EcoreUtil.copy(port.getPortDatatype());
+		copyPort.setPortDatatype(copyType);
+		return copyPort;
+	}
+	
+	private void createMapping() {
+		Diagram diagram = editor.getDiagramTypeProvider().getDiagram();
+		List<Shape> shapes = diagram.getChildren();
+		if (shapes.size() != 1) {
+			logger.error("The root process was not found. "
+					+ "Process models should always have a root process, which contains all other processes");
+			return;
+		}		
+		addShapeContentToMap(shapes.get(0));
+	}
+	
+	private void addShapeContentToMap(Shape shape){
+		if(shape instanceof ContainerShape)
+			for (Shape child : ((ContainerShape)shape).getChildren())
+				addShapeContentToMap(child);
+		PictogramElement element = shape.getLink().getPictogramElement();
+		Object bo = Graphiti.getLinkService().getBusinessObjectForLinkedPictogramElement(element);		
+	
+		if(bo == null)
+			logger.error("can not get the business object for '{}'", shape.toString());
+		
+		String uid = null;
+		if(bo instanceof Identifiable)
+			uid = ((Identifiable)bo).getId();
+		else
+			logger.warn("'{}' is no Identifiable", bo.toString());
+		
+		if(uid != null)
+			objectsMap.put(uid, shape);		
+	}	
+	
+	private Process getEditorProcess(){		
+		EList<Shape> children = getDiagram().getChildren();
+		Process process = (Process)Graphiti.getLinkService()
+				.getBusinessObjectForLinkedPictogramElement((PictogramElement) children.get(0));
+		return process;		
+	}
+	
+	private String getProcessDefinition(Process process){
+		Process processCopy = EcoreUtil.copy(process);		
+		XMLResourceImpl resource = new XMLResourceImpl();
+		XMLProcessor processor = new XMLProcessor();		
+		String processDefinition = null;		
+		resource.getContents().add(processCopy);
+		
+		try {
+			processDefinition = processor.saveToString(resource, null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return processDefinition;
+	}
+	
+	
+	private class AsyncChanging implements Runnable{
+		Shape shape;
+		IStateChangeMessage message;
+		
+		public AsyncChanging(Shape shape, IStateChangeMessage message) {
+			this.shape = shape;
+			this.message = message;
+		}
+
+		@Override
+		public void run() {
+			changeBorderColor(shape, getStateColor(message.getState()));	
+			//other async ui changing stuff goes here			
+		}
+	}
+	
+	private class ShowDialog implements Runnable, DataTypeInstanceCreator{
+		SetPortValuesDialogResult result;
+		List<StartDataPort> startDataPorts;
+		
+		public ShowDialog(List<StartDataPort> startDataPorts) {
+			this.startDataPorts = startDataPorts;
+		}
+
+		@Override
+		public void run() {
+			Shell shell = editor.getSite().getShell();
+			SetPortValuesDialog dialog = new SetPortValuesDialog(shell, this);
+			result = dialog.open(startDataPorts);			
+		}
+		
+		public SetPortValuesDialogResult getResult(){
+			return result;
+		}
+		
+		@Override
+		public DataTypeInstance createDataTypeInstance(StartDataPort port) {
+			//TODO Instance Numbers - Make a Util or something
+			DataTypeInstance dti = null;
+			String methodName = null;
+			try {
+				methodName = port.getPortDatatype().getClass().getSimpleName();
+				methodName = methodName.replaceFirst("TypeImpl", "Type");
+				methodName = "create" + methodName + "Instance";
+				Method method = adapterService.getInstanceFactory().getClass().getMethod(methodName);
+				Object dtio = method.invoke(adapterService.getInstanceFactory());
+				dti = (DataTypeInstance) dtio;
+				dti.setInstanceId(port.getPortDatatype().getId() + INSTANCE_SUFFIX + 999);
+				dti.setInstancenumber(999);
+				dti.parse(port.getValue());
+				dti.setDataTypeType(port.getPortDatatype());
+				dti.setName(port.getPortDatatype().getName());
+				dti.setTypeId(port.getPortDatatype().getId());
+			} catch (Exception e) {
+				logger.error("Error while creating DataTypeInstance. Method: {} Value: {}", methodName, 
+						port.getValue());
+				e.printStackTrace();
+				return null;
+			} 	
+			return dti;
+		}
+	}
+}

@@ -1,0 +1,24 @@
+package eu.vicci.process.devices.util;
+
+/**
+ * Payload for OH ItemStateChangedEvent
+ * 
+ * new Event name: message data:
+ * {"topic":"smarthome/items/Button2_2/state","payload":"{\"type\":\"OnOffType\",\"value\":\"ON\"}",
+ * "type":"ItemStateEvent"}
+ * 
+ */
+public class Payload {
+
+	private String type;
+	private String value;
+
+	public String getType() {
+		return type;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+}

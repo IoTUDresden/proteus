@@ -1,0 +1,59 @@
+package eu.vicci.process.devices.util;
+
+/**
+ * Simple immutable object to hold the event information from OpenHab. This object is used
+ * to generate informations from the received json content with the help of gson.
+ * 
+ * event: message data:
+ * {"topic":"smarthome/update/TinkerforgeAmbientLight_2","object":"69.7"}
+ * 
+ * 
+ * new Event
+ *    name: message
+ *    data: {"topic":"smarthome/items/Button2_2/state","payload":"{\"type\":\"OnOffType\",\"value\":\"ON\"}","type":"ItemStateEvent"}
+ * 
+ * @author André Kühnert
+ *
+ */
+public class OpenHabEvent {
+	private String topic;
+	private String payload;
+	private String type;
+
+	private String itemName = null;
+	private long timestamp = 0;
+
+	public OpenHabEvent(){
+		timestamp = System.currentTimeMillis();
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public long getTimestamp() {
+		return timestamp;
+	}
+
+	public String getItemName() {
+		if (itemName != null)
+			return itemName;	
+		setItemNameFromTopic();
+		return itemName;
+	}
+	
+	public String getPayload() {
+		return payload;
+	}
+
+	public String getType() {
+		return type;
+	}
+	
+	private void setItemNameFromTopic(){
+		int last = topic.lastIndexOf("/");
+		String temp = topic.substring(0, last);
+		last = temp.lastIndexOf("/");
+		itemName = temp.substring(last + 1);		
+	}
+}

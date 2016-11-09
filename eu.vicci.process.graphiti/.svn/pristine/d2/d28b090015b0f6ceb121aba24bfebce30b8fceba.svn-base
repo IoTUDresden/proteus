@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="org.eclipse.emf.validation.constraintProviders">
+      <category
+            id="eu.vicci.process.graphiti"
+            mandatory="true"
+            name="Sofia Constraints"/>
+      <constraintProvider
+            cache="true"
+            mode="Batch">
+         <package
+               namespaceUri="http://vicci.eu/sofia/1.0">
+         </package>
+         <constraints
+               categories="eu.vicci.process.graphiti">
+            <constraint
+                  class="eu.vicci.process.graphiti.validation.constraint.NonEmptyNameConstraint"
+                  id="eu.vicci.process.graphiti.validation.constraint.NonEmptyNameConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="NonEmptyNameConstraint"
+                  severity="ERROR"
+                  statusCode="1">
+               <message>
+                  message body text
+               </message>
+               <target class="Nameable"/>
+            </constraint>
+            <constraint
+                  class="eu.vicci.process.graphiti.validation.constraint.NonEmptyIDConstraint"
+                  id="eu.vicci.process.graphiti.validation.constraint.NonEmptyIDConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="NonEmptyIDConstraint"
+                  severity="ERROR"
+                  statusCode="2">
+               <message>
+                  message body text
+               </message>
+               <target class="Identifiable"/>
+            </constraint>
+            <constraint
+                  class="eu.vicci.process.graphiti.validation.constraint.UniqueIDConstraint"
+                  id="eu.vicci.process.graphiti.validation.constraint.UniqueIDConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="UniqueIDConstraint"
+                  severity="ERROR"
+                  statusCode="2">
+               <message>
+                  message body text
+               </message>
+               <target class="Identifiable"/>
+            </constraint>
+            <constraint
+                  class="eu.vicci.process.graphiti.validation.constraint.NoIncomingTransitionConstraint"
+                  id="eu.vicci.process.graphiti.validation.constraint.NoIncomingTransitionConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="NoIncomingTransitionConstraint"
+                  severity="ERROR"
+                  statusCode="2">
+               <message>
+                  message body text
+               </message>
+               <target
+                     class="Port">
+               </target>
+            </constraint>
+            <constraint
+                  class="eu.vicci.process.graphiti.validation.constraint.NoDataTypeConstraint"
+                  id="eu.vicci.process.graphiti.validation.constraint.NoDataTypeConstraint"
+                  isEnabledByDefault="true"
+                  lang="Java"
+                  mode="Batch"
+                  name="NoDataTypeConstraint"
+                  severity="ERROR"
+                  statusCode="2">
+               <message>
+                  message body text
+               </message>
+               <target
+                     class="DataPort">
+               </target>
+            </constraint>
+         </constraints>
+      </constraintProvider>
+   </extension>
+   
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypeProviders">
+      <diagramTypeProvider
+            class="eu.vicci.process.graphiti.ProcessDiagramTypeProvider"
+            context="org.eclipse.graphiti.ui.diagramEditor"
+            id="eu.vicci.process.graphiti.ProcessDiagramTypeProvider"
+            name="VICCIProcess">
+         <diagramType
+               id="eu.vicci.process.graphiti.ProcessDiagramType">
+         </diagramType>
+      </diagramTypeProvider>
+   </extension>
+   
+   
+   <!-- Editor for the Process Execution -->
+      <extension
+         point="org.eclipse.ui.editors">
+         
+          	  <editor
+          class="eu.vicci.process.graphiti.GestureEditor"
+          contributorClass="org.eclipse.graphiti.ui.editor.DiagramEditorActionBarContributor"
+          default="false"
+          extensions="diagram"
+          id="eu.vicci.process.graphiti.gestureEditor"
+          matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorMatchingStrategy"
+          name="Gesture Editor">
+       <contentTypeBinding
+             contentTypeId="org.eclipse.graphiti.content.diagram">
+       </contentTypeBinding>
+      </editor> 	  	
+ 	  	
+   </extension>
+ 
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypes">
+      <diagramType
+            id="eu.vicci.process.graphiti.ProcessDiagramType"
+            name="Process Diagram Type"
+            type="VICCIProcess">
+      </diagramType>
+   </extension>
+   
+   <extension
+	    point="org.eclipse.ui.views.properties.tabbed.propertyContributor">
+	    <propertyContributor contributorId="VICCIProcess.PropertyContributor">
+	        <propertyCategory category="Graphiti">
+	        </propertyCategory>
+	    </propertyContributor>
+	</extension>
+	 
+	<extension
+	    point="org.eclipse.ui.views.properties.tabbed.propertyTabs">
+	    <propertyTabs contributorId="VICCIProcess.PropertyContributor">
+	        <propertyTab label="Main" category="Graphiti" 
+	            id="graphiti.main.tab">
+	        </propertyTab>
+	        
+			<propertyTab
+				category="Graphiti"	id="graphiti.table.tab"	label="Table">
+			</propertyTab>
+	    </propertyTabs>
+	</extension>			
+	
+	<extension
+	    point="org.eclipse.ui.views.properties.tabbed.propertySections">
+	    <propertySections contributorId="VICCIProcess.PropertyContributor">
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.NameIDSection"
+	         filter="eu.vicci.process.graphiti.property.NameIDFilter"
+	         id="graphiti.main.tab.emfclass1">
+	        </propertySection>	
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.TypeSection"
+	         filter="eu.vicci.process.graphiti.property.ProcessStepFilter"
+	         id="graphiti.main.tab.emfclass2">
+	        </propertySection>	
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.PortSection"
+	         filter="eu.vicci.process.graphiti.property.PortFilter"
+	         id="graphiti.main.tab.emfclass3">
+	        </propertySection>	 
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.DataPortSection"
+	         filter="eu.vicci.process.graphiti.property.DataPortFilter"
+	         id="graphiti.main.tab.emfclass4">
+	        </propertySection>	
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.SOAPInvokeSection"
+	         filter="eu.vicci.process.graphiti.property.SOAPInvokeFilter"
+	         id="graphiti.main.tab.emfclass5">
+	        </propertySection>	 
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.XMLRPCInvokeSection"
+	         filter="eu.vicci.process.graphiti.property.XMLRPCInvokeFilter"
+	         id="graphiti.main.tab.emfclass6">
+	        </propertySection>	      
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.SeMiWaInvokeSection"
+	         filter="eu.vicci.process.graphiti.property.SeMiWaInvokeFilter"
+	         id="graphiti.main.tab.emfclass7">
+	        </propertySection>	
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.TriggeredEventSection"
+	         filter="eu.vicci.process.graphiti.property.TriggeredEventFilter"
+	         id="graphiti.main.tab.emfclass8">
+	        </propertySection>	    
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.ConditionSection"
+	         filter="eu.vicci.process.graphiti.property.ConditionFilter"
+	         id="graphiti.main.tab.emfclass9">
+	        </propertySection>	  
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.LoadClassStepSection"
+	         filter="eu.vicci.process.graphiti.property.LoadClassStepFilter"
+	         id="graphiti.main.tab.emfclass10">
+	        </propertySection>	
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.SeMiWaRequestSection"
+	         filter="eu.vicci.process.graphiti.property.SeMiWaRequestFilter"
+	         id="graphiti.main.tab.emfclass11">
+	        </propertySection>	
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.RESTInvokeSection"
+	         filter="eu.vicci.process.graphiti.property.RESTInvokeFilter"
+	         id="graphiti.main.tab.emfclass12">
+	        </propertySection>	
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.OSGiInvokeSection"
+	         filter="eu.vicci.process.graphiti.property.OSGiInvokeFilter"
+	         id="graphiti.main.tab.emfclass13">
+	        </propertySection>	
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.ROSInvokeSection"
+	         filter="eu.vicci.process.graphiti.property.ROSInvokeFilter"
+	         id="graphiti.main.tab.emfclass14">
+	        </propertySection>	   
+	    
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.ComplexTypeSection"
+	         filter="eu.vicci.process.graphiti.property.ComplexTypeFilter"
+	         id="graphiti.main.tab.emfclass15">
+	        </propertySection>	 
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.CollectionTypeSection"
+	         filter="eu.vicci.process.graphiti.property.CollectionTypeFilter"
+	         id="graphiti.main.tab.emfclass16">
+	        </propertySection>	
+	    
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.EscalationPortSection"
+	         filter="eu.vicci.process.graphiti.property.EscalationPortFilter"
+	         id="graphiti.main.tab.emfclass17">
+	        </propertySection>	
+	    
+	    
+	    	
+	    		        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.ConditionOperandSection"
+	         filter="eu.vicci.process.graphiti.property.ConditionOperandFilter"
+	         id="graphiti.main.tab.emfclass18">
+	        </propertySection>	
+	    	
+	    	<propertySection tab="graphiti.main.tab"            
+	        	class="eu.vicci.process.graphiti.property.ForLoopSection"
+	         	filter="eu.vicci.process.graphiti.property.ForLoopFilter"
+	         	id="graphiti.main.tab.emfclass19">
+	        </propertySection>	    
+	        
+	       	<propertySection tab="graphiti.main.tab"            
+	         	class="eu.vicci.process.graphiti.property.LoopSection"
+	         	filter="eu.vicci.process.graphiti.property.LoopFilter"
+	         	id="graphiti.main.tab.emfclass20">
+	        </propertySection>	        
+	        
+	       	<propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.WhileLoopSection"
+	         filter="eu.vicci.process.graphiti.property.WhileLoopFilter"
+	         id="graphiti.main.tab.emfclass21">
+	        </propertySection>	        
+	        
+	        <propertySection tab="graphiti.main.tab"            
+	         	class="eu.vicci.process.graphiti.property.IntegerTypeSection"
+	         	filter="eu.vicci.process.graphiti.property.IntegerTypeFilter"
+	         	id="graphiti.main.tab.emfclass22">
+	        </propertySection>	  
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.OpenHabSemanticInvokeSection"
+	         filter="eu.vicci.process.graphiti.property.OpenHabSemanticInvokeFilter"
+	         id="graphiti.main.tab.emfclass23">
+	        </propertySection>	 
+	    
+	    
+	    	        <propertySection tab="graphiti.main.tab"            
+	         class="eu.vicci.process.graphiti.property.OpenHabSemanticCommandInvokeSection"
+	         filter="eu.vicci.process.graphiti.property.OpenHabSemanticCommandInvokeFilter"
+	         id="graphiti.main.tab.emfclass24">
+	        </propertySection>
+              <propertySection
+                    class="eu.vicci.process.graphiti.property.CpsSection"
+                    filter="eu.vicci.process.graphiti.property.ProcessStepFilter"
+                    id="graphiti.main.tab.emfclass25"
+                    tab="graphiti.main.tab">
+              </propertySection>
+              <propertySection
+                    class="eu.vicci.process.graphiti.property.CpsSection2"
+                    filter="eu.vicci.process.graphiti.property.ProcessStepFilter"
+                    id="graphiti.main.tab.emfclass26"
+                    tab="graphiti.main.tab">
+              </propertySection>
+              <propertySection
+                    class="eu.vicci.process.graphiti.property.HumanTaskSection"
+                    filter="eu.vicci.process.graphiti.property.HumanTaskFilter"
+                    id="graphiti.main.tab.emfclass27"
+                    tab="graphiti.main.tab">
+              </propertySection>    
+	    
+	    </propertySections>	    
+	</extension>	
+	
+    <extension
+          point="org.eclipse.emf.validation.constraintBindings">
+       <clientContext
+             default="false"
+             id="eu.vicci.process.graphiti.clientContext1">
+             <enablement/>
+       </clientContext>
+       <binding
+             category="eu.vicci.process.graphiti"
+             context="eu.vicci.process.graphiti.clientContext1">
+       </binding>
+    </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated sofiagraphics -->
+      <package
+            uri="http://vicci.eu/sofiagraphics/1.0"
+            class="eu.vicci.process.graphiti.sofiagraphics.SofiagraphicsPackage"
+            genModel="model/sofiagraphics.genmodel"/>
+   </extension>
+	
+	 <extension point="org.eclipse.ui.views">
+	 	<category 
+        	id="eu.vicci.process"
+        	name="Vicci Process">
+        </category>	 
+	 
+	 	<view
+         category="eu.vicci.process"
+         class="eu.vicci.process.graphiti.upload.UploadToEngineView"
+         icon="media/vicci-logo-small.png"
+         id="eu.vicci.process.graphiti.uploadView"
+         name="Upload to Engine"/> 
+	 
+	</extension>	
+
+</plugin>

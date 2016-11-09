@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" active="true" name="">
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <graphicsAlgorithm xsi:type="al:RoundedRectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="2" width="12" height="12" cornerHeight="4" cornerWidth="4"/>
+    <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
+    <children>
+      <properties key="gesture" value="0"/>
+      <graphicsAlgorithm xsi:type="al:Polyline">
+        <points x="50"/>
+        <points/>
+        <points y="50"/>
+        <points x="50" y="50"/>
+      </graphicsAlgorithm>
+    </children>
+  </children>
+  <colors red="102" green="102" blue="255"/>
+  <colors red="255" green="102" blue="102"/>
+</pi:Diagram>

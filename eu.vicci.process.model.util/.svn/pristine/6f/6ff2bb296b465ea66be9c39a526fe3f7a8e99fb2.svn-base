@@ -1,0 +1,119 @@
+package eu.vicci.process.model.util;
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
+
+import eu.vicci.process.client.core.IConfigurationReader;
+
+public class ConfigurationReader implements IConfigurationReader {
+	private static final String TRUE_STR = "true";
+	
+	private String ip;
+	private String port;
+	private String path;
+	private String realmName;
+	private String namespace;
+	
+	//listeners for runtime
+	private boolean startOsgiRuntime;
+	private boolean startSemiwaListener;
+	private boolean startOpenHabListener;
+	private boolean startCepEngine;
+	private boolean startXmlRpcWebServer;
+	private boolean deployExistingProcessModels;
+	
+	public ConfigurationReader(String path) {
+		this.path = path;
+		readProperties();
+	}
+
+	@Override
+	public String getIp() {
+		return ip;
+	}
+
+	@Override
+	public String getPort() {
+		return port;
+	}
+	
+	@Override
+	public String getNamespace(){
+		return namespace;
+	}
+	
+	@Override
+	public int getPortAsInt(){
+		return Integer.parseInt(port);
+	}
+	
+	@Override
+	public String getRealmName(){
+		return realmName;
+	}
+	
+	@Override
+	public boolean startOsgiRuntime() {
+		return startOsgiRuntime;
+	}
+
+	@Override
+	public boolean startSemiwaListener() {
+		return startSemiwaListener;
+	}
+
+	@Override
+	public boolean startOpenHabListener() {
+		return startOpenHabListener;
+	}
+
+	@Override
+	public boolean startCepEngine() {
+		return startCepEngine;
+	}
+
+	@Override
+	public boolean startXmlRpcWebServer() {
+		return startXmlRpcWebServer;
+	}
+
+	@Override
+	public boolean deployExistingProcessModels() {
+		return deployExistingProcessModels;
+	}
+	
+	private void readProperties(){
+		Properties properties = new Properties();
+		BufferedInputStream stream = null;
+		try {
+			stream = new BufferedInputStream(new FileInputStream(path));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return;
+		}
+		try {
+			properties.load(stream);
+			stream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		setProps(properties);
+	}
+	
+	private void setProps(Properties properties){
+		ip = properties.getProperty("ip");
+		port = properties.getProperty("port");
+		startOsgiRuntime = TRUE_STR.equals(properties.getProperty("startOsgiRuntime"));
+		startSemiwaListener = TRUE_STR.equals(properties.getProperty("startSemiwaListener"));
+		startOpenHabListener = TRUE_STR.equals(properties.getProperty("startOpenHabListener"));
+		startCepEngine = TRUE_STR.equals(properties.getProperty("startCepEngine"));
+		startXmlRpcWebServer = TRUE_STR.equals(properties.getProperty("startXmlRpcWebServer"));
+		deployExistingProcessModels = TRUE_STR.equals(properties.getProperty("deployExistingProcessModels"));		
+		realmName = properties.getProperty("realmName");
+		namespace = properties.getProperty("namespace");
+	}
+}

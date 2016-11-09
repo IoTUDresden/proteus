@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Adapter View
+Bundle-SymbolicName: eu.vicci.process.graphiti.adapter.view;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: eu.vicci.process.graphiti.adapter.view.Activator
+Bundle-Vendor: TUD
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ eu.vicci.process.core;bundle-version="1.0.0",
+ eu.vicci.process.model.util;bundle-version="1.0.0",
+ eu.vicci.process.model,
+ eu.vicci.process.graphiti.adapter;bundle-version="1.0.0",
+ eu.vicci.process.graphiti.execution;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .,
+ maven_libs/log4j-1.2.17.jar,
+ maven_libs/slf4j-api-1.7.13.jar,
+ maven_libs/slf4j-log4j12-1.7.13.jar
+Import-Package: eu.vicci.process.client,
+ org.eclipse.core.resources,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.emf.ecore.xmi.impl,
+ org.eclipse.graphiti.ui.editor;version="0.12.2"

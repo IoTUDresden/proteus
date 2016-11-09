@@ -1,0 +1,60 @@
+package eu.vicci.process.graphiti.adapter.core;
+
+import eu.vicci.process.client.core.IProcessEngineClient;
+import eu.vicci.process.engine.core.IProcessManager;
+import eu.vicci.process.model.sofiainstance.SofiaInstanceFactory;
+
+/**
+ * Specifies the Service Interface for the Adapter which connects the process editor with a engine.
+ * The connection can be realized over client-server or the engine adapter holds only the engine on the local machine.
+ */
+public interface IEngineAdapterService {
+	
+	/**
+	 * Gets the Process Manager which can upload, deploy, etc processes.
+	 * This can also be a client which uploads the process to a server and handles all other {@link IProcessManager} methods
+	 * @return
+	 */
+	IProcessManager getProcessManager();
+	
+	/**
+	 * Gets the adpater name e.g. "a client server adapter".
+	 * @return
+	 */
+	String getAdapterName();
+	
+	/**
+	 * Gets the instance factory, which is needed for e.g. creating DataTypeInstances for the StartValues of processes.
+	 * @return
+	 */
+	SofiaInstanceFactory getInstanceFactory();
+	
+	/**
+	 * Indicates if this adapter holds a client e.g. the ProcessEngineClient
+	 * @return
+	 */
+	boolean isClient();
+	
+	/**
+	 * Gets the underlying {@link IProcessEngineClient} if {@link #isClient()} returns true. 
+	 * Otherwise null is returned.
+	 * @return
+	 */
+	IProcessEngineClient getClient();
+	
+	/**
+	 * Connects a client adapter.
+	 * @param name
+	 * @param ip
+	 * @param port
+	 * @param realmName
+	 * @param namespace
+	 * @param isServer
+	 */
+	IProcessEngineClient connect(String name, String ip, String port, String realmName, String namespace, boolean isServer);
+	
+	/**
+	 * Disconnects the client after use
+	 */
+	void disconnect();
+}

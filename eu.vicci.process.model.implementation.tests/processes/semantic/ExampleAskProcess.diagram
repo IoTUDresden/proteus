@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" xmlns:sofia="http://vicci.eu/sofia/1.0">
+  <pi:Diagram visible="true" gridUnit="10" diagramTypeId="VICCIProcess" name="ExampleAskProcess" snapToGrid="true" pictogramLinks="/0/@children.0/@link /0/@children.0/@children.0/@link /0/@children.0/@children.1/@link /0/@children.0/@children.2/@link /0/@children.0/@children.3/@link /0/@children.0/@children.4/@link /0/@children.0/@children.5/@link /0/@children.0/@children.5/@children.0/@link /0/@children.0/@children.5/@children.1/@link /0/@children.0/@children.5/@children.2/@link /0/@children.0/@children.5/@children.3/@link /0/@children.0/@children.5/@children.4/@link /0/@children.0/@children.6/@link /0/@children.0/@children.6/@children.0/@link /0/@children.0/@children.5/@children.5/@link /0/@children.0/@children.5/@children.5/@children.0/@link /0/@children.0/@children.5/@children.6/@link /0/@children.0/@children.5/@children.6/@children.0/@link /0/@children.0/@children.5/@children.6/@children.1/@link /0/@children.0/@children.7/@link /0/@children.0/@children.7/@children.0/@link /0/@children.0/@children.7/@children.1/@link /0/@children.0/@children.5/@children.7/@link /0/@children.0/@children.5/@children.7/@children.0/@link /0/@children.0/@children.5/@children.7/@children.1/@link /0/@children.0/@children.8/@link /0/@children.0/@children.8/@children.0/@link /0/@children.0/@children.8/@children.1/@link /0/@connections.0/@link /0/@connections.1/@link /0/@connections.2/@link" version="0.11.0">
+    <graphicsAlgorithm xsi:type="al:Rectangle" background="/0/@colors.1" foreground="/0/@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
+    <children xsi:type="pi:ContainerShape" visible="true" active="true">
+      <properties key="gesture" value="1"/>
+      <properties key="portYPosition" value="25"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" filled="false" width="721" height="381" x="130" y="40">
+        <properties key="resizable" value="width, height"/>
+        <foreground href="../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.0"/>
+      </graphicsAlgorithm>
+      <link businessObjects="/1"/>
+      <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="721" height="20">
+          <properties key="resizable" value="width"/>
+          <background href="../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.2"/>
+          <foreground href="../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.0"/>
+        </graphicsAlgorithm>
+        <link businessObjects="/1"/>
+      </children>
+      <children visible="true">
+        <graphicsAlgorithm xsi:type="al:Text" filled="false" width="721" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="Process">
+          <properties key="resizable" value="width"/>
+          <foreground href="../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
+        </graphicsAlgorithm>
+        <link businessObjects="/1"/>
+      </children>
+      <children visible="true">
+        <properties key="name" value="name"/>
+        <graphicsAlgorithm xsi:type="al:Text" filled="false" width="721" height="20" x="15" y="24" value="name: ExampleAskProcess">
+          <properties key="resizable" value="width"/>
+          <properties key="name" value="name"/>
+          <foreground href="../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
+        </graphicsAlgorithm>
+        <link businessObjects="/1"/>
+      </children>
+      <children visible="true">
+        <properties key="name" value="type"/>
+        <graphicsAlgorithm xsi:type="al:Text" filled="false" width="721" height="20" x="15" y="40" value="type: ">
+          <properties key="resizable" value="width"/>
+          <properties key="name" value="type"/>
+          <foreground href="../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
+        </graphicsAlgorithm>
+        <link businessObjects="/1"/>
+      </children>
+      <children visible="true">
+        <properties key="name" value="resource"/>
+        <graphicsAlgorithm xsi:type="al:Text" filled="false" width="721" height="20" x="15" y="56" value="resource: ">
+          <properties key="resizable" value="width"/>
+          <properties key="name" value="resource"/>
+          <foreground href="../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
+        </graphicsAlgorithm>
+        <link businessObjects="/1"/>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <properties key="portYPosition" value="25"/>
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" filled="false" width="321" height="161" x="150" y="100">
+          <properties key="resizable" value="width, height"/>
+          <foreground href="../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.0"/>
+        </graphicsAlgorithm>
+        <link businessObjects="/1/@subSteps.0"/>
+        <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="321" height="20">
+            <properties key="resizable" value="width"/>
+            <background href="../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.2"/>
+            <foreground href="../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.0"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@subSteps.0"/>
+        </children>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" filled="false" width="321" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="OpenHabSemanticInvoke">
+            <properties key="resizable" value="width"/>
+            <foreground href="../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.1"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@subSteps.0"/>
+        </children>
+        <children visible="true">
+          <properties key="name" value="name"/>
+          <graphicsAlgorithm xsi:type="al:Text" filled="false" width="321" height="20" x="15" y="24" value="name: AnyDimmersAtHome">
+            <properties key="resizable" value="width"/>
+            <properties key="name" value="name"/>
+            <foreground href="../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.1"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@subSteps.0"/>
+        </children>
+        <children visible="true">
+          <properties key="name" value="type"/>
+          <graphicsAlgorithm xsi:type="al:Text" filled="false" width="321" height="20" x="15" y="40" value="type:">
+            <properties key="resizable" value="width"/>
+            <properties key="name" value="type"/>
+            <foreground href="../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.1"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@subSteps.0"/>
+        </children>
+        <children visible="true">
+          <properties key="name" value="baseuri"/>
+          <graphicsAlgorithm xsi:type="al:Text" filled="false" width="321" height="20" x="15" y="72" value="baseuri: http://localhost:8080">
+            <properties key="resizable" value="width"/>
+            <properties key="name" value="baseuri"/>
+            <foreground href="../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.1"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@subSteps.0"/>
+        </children>
+        <children xsi:type="pi:ContainerShape" visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineWidth="2" width="12" height="12" y="25" cornerHeight="4" cornerWidth="4">
+            <background href="../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.1"/>
+            <foreground href="../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.0"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@subSteps.0/@ports.0"/>
+          <anchors xsi:type="pi:ChopboxAnchor" active="true" incomingConnections="/0/@connections.2"/>
+          <children visible="true">
+            <graphicsAlgorithm xsi:type="al:Ellipse" width="4" height="4" x="4" y="4">
+              <background href="../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.0"/>
+            </graphicsAlgorithm>
+            <link businessObjects="/1/@subSteps.0/@ports.0"/>
+          </children>
+        </children>
+        <children xsi:type="pi:ContainerShape" visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineWidth="2" width="12" height="12" x="309" y="25" cornerHeight="4" cornerWidth="4">
+            <background href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.1"/>
+            <foreground href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.0"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@subSteps.0/@ports.1"/>
+          <anchors xsi:type="pi:ChopboxAnchor" active="true" outgoingConnections="/0/@connections.0"/>
+          <children visible="true">
+            <graphicsAlgorithm xsi:type="al:Ellipse" width="4" height="4" x="4" y="4">
+              <background href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.0"/>
+            </graphicsAlgorithm>
+            <link businessObjects="/1/@subSteps.0/@ports.1"/>
+          </children>
+          <children>
+            <graphicsAlgorithm xsi:type="al:Polyline">
+              <points x="50"/>
+              <points/>
+              <points y="50"/>
+              <points x="50" y="50"/>
+            </graphicsAlgorithm>
+            <link businessObjects="/1/@subSteps.0/@ports.1"/>
+          </children>
+        </children>
+        <children xsi:type="pi:ContainerShape" visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineWidth="2" width="12" height="12" x="309" y="40" cornerHeight="4" cornerWidth="4">
+            <background href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.1"/>
+            <foreground href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.0"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@subSteps.0/@ports.2"/>
+          <anchors xsi:type="pi:ChopboxAnchor" active="true" outgoingConnections="/0/@connections.1"/>
+          <children visible="true">
+            <graphicsAlgorithm xsi:type="al:Ellipse" width="4" height="4" x="4" y="4">
+              <background href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.0"/>
+            </graphicsAlgorithm>
+            <link businessObjects="/1/@subSteps.0/@ports.2"/>
+          </children>
+          <children>
+            <graphicsAlgorithm xsi:type="al:Polyline">
+              <points x="50"/>
+              <points/>
+              <points y="50"/>
+              <points x="50" y="50"/>
+            </graphicsAlgorithm>
+            <link businessObjects="/1/@subSteps.0/@ports.2"/>
+          </children>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineWidth="2" width="12" height="12" y="25" cornerHeight="4" cornerWidth="4">
+          <background href="../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.1"/>
+          <foreground href="../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.0"/>
+        </graphicsAlgorithm>
+        <link businessObjects="/1/@ports.0"/>
+        <anchors xsi:type="pi:ChopboxAnchor" active="true" outgoingConnections="/0/@connections.2"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Ellipse" width="4" height="4" x="4" y="4">
+            <background href="../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.0"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@ports.0"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineWidth="2" width="12" height="12" x="709" y="25" cornerHeight="4" cornerWidth="4">
+          <background href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.1"/>
+          <foreground href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.0"/>
+        </graphicsAlgorithm>
+        <link businessObjects="/1/@ports.1"/>
+        <anchors xsi:type="pi:ChopboxAnchor" active="true" incomingConnections="/0/@connections.0"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Ellipse" width="4" height="4" x="4" y="4">
+            <background href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.0"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@ports.1"/>
+        </children>
+        <children>
+          <graphicsAlgorithm xsi:type="al:Polyline">
+            <points x="50"/>
+            <points/>
+            <points y="50"/>
+            <points x="50" y="50"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@ports.1"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineWidth="2" width="12" height="12" x="709" y="40" cornerHeight="4" cornerWidth="4">
+          <background href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.1"/>
+          <foreground href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.0"/>
+        </graphicsAlgorithm>
+        <link businessObjects="/1/@ports.2"/>
+        <anchors xsi:type="pi:ChopboxAnchor" active="true" incomingConnections="/0/@connections.1"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Ellipse" width="4" height="4" x="4" y="4">
+            <background href="../../../plugin/eu.vicci.process.graphiti/model/endcontrolport.pictograms#//@colors.0"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@ports.2"/>
+        </children>
+        <children>
+          <graphicsAlgorithm xsi:type="al:Polyline">
+            <points x="50"/>
+            <points/>
+            <points y="50"/>
+            <points x="50" y="50"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@ports.2"/>
+        </children>
+      </children>
+    </children>
+    <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="/0/@children.0/@children.5/@children.6/@anchors.0" end="/0/@children.0/@children.7/@anchors.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
+      <link businessObjects="/1/@subSteps.0/@ports.1/@outTransitions.0"/>
+      <connectionDecorators visible="true" locationRelative="true" location="1.0">
+        <graphicsAlgorithm xsi:type="al:Polygon" background="/0/@colors.2" foreground="/0/@colors.2" lineWidth="1" filled="true" transparency="0.0">
+          <points x="-10" y="5"/>
+          <points/>
+          <points x="-10" y="-5"/>
+        </graphicsAlgorithm>
+      </connectionDecorators>
+      <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+        <graphicsAlgorithm xsi:type="al:Text" lineWidth="1" filled="false" transparency="0.0" font="/0/@fonts.0" value="TrueTransition"/>
+      </connectionDecorators>
+    </connections>
+    <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="/0/@children.0/@children.5/@children.7/@anchors.0" end="/0/@children.0/@children.8/@anchors.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="/0/@colors.3" lineWidth="1" filled="false" transparency="0.0"/>
+      <link businessObjects="/1/@subSteps.0/@ports.2/@outTransitions.0"/>
+      <connectionDecorators visible="true" locationRelative="true" location="1.0">
+        <graphicsAlgorithm xsi:type="al:Polygon" background="/0/@colors.3" foreground="/0/@colors.3" lineWidth="1" filled="true" transparency="0.0">
+          <points x="-10" y="5"/>
+          <points/>
+          <points x="-10" y="-5"/>
+        </graphicsAlgorithm>
+      </connectionDecorators>
+      <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+        <graphicsAlgorithm xsi:type="al:Text" lineWidth="1" filled="false" transparency="0.0" font="/0/@fonts.0" value="FalseTransition"/>
+      </connectionDecorators>
+    </connections>
+    <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="/0/@children.0/@children.6/@anchors.0" end="/0/@children.0/@children.5/@children.5/@anchors.0">
+      <graphicsAlgorithm xsi:type="al:Polyline" foreground="/0/@colors.4" lineWidth="1" filled="false" transparency="0.0"/>
+      <link businessObjects="/1/@ports.0/@outTransitions.0"/>
+      <connectionDecorators visible="true" locationRelative="true" location="1.0">
+        <graphicsAlgorithm xsi:type="al:Polygon" background="/0/@colors.4" foreground="/0/@colors.4" lineWidth="1" filled="true" transparency="0.0">
+          <points x="-10" y="5"/>
+          <points/>
+          <points x="-10" y="-5"/>
+        </graphicsAlgorithm>
+      </connectionDecorators>
+      <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
+        <graphicsAlgorithm xsi:type="al:Text" lineWidth="1" filled="false" transparency="0.0" font="/0/@fonts.0" value="transition"/>
+      </connectionDecorators>
+    </connections>
+    <colors red="227" green="238" blue="249"/>
+    <colors red="255" green="255" blue="255"/>
+    <colors green="127"/>
+    <colors red="187" green="102"/>
+    <colors/>
+    <fonts name="Arial" size="8"/>
+  </pi:Diagram>
+  <sofia:Process id="__ceeMDg4EeWFsZQlVuKLeg" name="ExampleAskProcess" type="" description="" resource="">
+    <ports xsi:type="sofia:StartControlPort" id="_F3s1MDg5EeWFsZQlVuKLeg" name="start_0">
+      <outTransitions id="_KY2sMDg5EeWFsZQlVuKLeg" name="transition" targetPort="/1/@subSteps.0/@ports.0"/>
+    </ports>
+    <ports xsi:type="sofia:EndControlPort" id="_HLKoMDg5EeWFsZQlVuKLeg" name="end_0" inTransitions="/1/@subSteps.0/@ports.1/@outTransitions.0"/>
+    <ports xsi:type="sofia:EndControlPort" id="_HsvEMDg5EeWFsZQlVuKLeg" name="end_1" inTransitions="/1/@subSteps.0/@ports.2/@outTransitions.0"/>
+    <subSteps xsi:type="sofia:OpenHabSemanticAskInvoke" id="_B6yTsDg5EeWFsZQlVuKLeg" name="AnyDimmersAtHome" query="PREFIX rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>&#xA;PREFIX rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#>&#xA;PREFIX dogont:&lt;http://elite.polito.it/ontologies/dogont.owl#>&#xA;PREFIX instance:&lt;http://openhab-semantic/0.1/instance#>&#xA;&#xA;ASK{&#xA;?dimmer rdf:type dogont:DimmerSwitch .&#xA;}" serverBaseAddress="http://localhost:8080">
+      <ports xsi:type="sofia:StartControlPort" id="_GM6QMDg5EeWFsZQlVuKLeg" name="start_0" inTransitions="/1/@ports.0/@outTransitions.0"/>
+      <ports xsi:type="sofia:EndControlPort" id="_GoJasDg5EeWFsZQlVuKLeg" name="end_0">
+        <outTransitions xsi:type="sofia:TrueTransition" id="_IuXgUDg5EeWFsZQlVuKLeg" name="TrueTransition" targetPort="/1/@ports.1"/>
+      </ports>
+      <ports xsi:type="sofia:EndControlPort" id="_HZbtsDg5EeWFsZQlVuKLeg" name="end_1">
+        <outTransitions xsi:type="sofia:FalseTransition" id="_JpoOsDg5EeWFsZQlVuKLeg" name="FalseTransition" targetPort="/1/@ports.2"/>
+      </ports>
+    </subSteps>
+  </sofia:Process>
+</xmi:XMI>

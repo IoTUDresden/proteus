@@ -1,0 +1,17 @@
+{
+  "head": {
+    "vars": [ "subject" , "type" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "subject": { "type": "uri" , "value": "http://elite.polito.it/ontologies/dogont.owl#Thing_yahooweather_weather_berlin" } ,
+        "type": { "type": "uri" , "value": "http://elite.polito.it/ontologies/dogont.owl#SingleTemperatureSensor" }
+      } ,
+      {
+        "subject": { "type": "uri" , "value": "http://elite.polito.it/ontologies/dogont.owl#Thing_fingerscanner_identify_25b1defb" } ,
+        "type": { "type": "uri" , "value": "http://elite.polito.it/ontologies/dogont.owl#AccessControlSystem" }
+      }
+    ]
+  }
+}

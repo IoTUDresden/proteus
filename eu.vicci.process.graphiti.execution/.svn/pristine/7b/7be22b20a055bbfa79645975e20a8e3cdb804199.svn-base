@@ -1,0 +1,34 @@
+package eu.vicci.process.graphiti.execution.util;
+
+public class StringResource {
+	
+	private StringResource() {	}
+	
+	
+	public static final String ERR_OPEN_EDITOR = "error while opening the process execution editor";
+	
+	public static final String ERR_CONFIG_WRONG = "config in launcher wrong";
+	
+	public static final String ERR_CONFIG_WRONG_MSG = "The config for executing this process step is wrong. "
+			+ "Is a Adapter Plugin loaded?";
+	
+	public static final String TT_OPENHAB_URI = "Enter the OpenHAB base URI here e.g. http://192.168.2.5:8080. "
+			+ "Leave empty if no OH Instance is running.";
+	
+	public static final String TT_VICCI_RUNTIME_URL = "Enter the Vicci Runtime Url here. "
+			+ "If the Process is run via 'Local Process Engine Adapter' this is ignored";
+	
+	public static final String TT_RUN_IN_LOOP = "Select this, if the Process should run in a Loop "
+			+ "(a new instance is started, after this process was executed)";
+	
+	public static final String TT_PORT = "The Port on which the vicci runtime is listening.";
+	
+	public static final String TT_REALM = "The realm for the vicci runtime wamp server";
+	
+	public static final String TT_NAMESPACE = "The namespace for the vicci runtime.";
+	
+	public static final String TT_ENGINE_ADAPTER_SERVICE = "Select the service, which should run the process. "
+			+ "Client services are needing a running vicci runtime on the specified target.";
+	
+
+}

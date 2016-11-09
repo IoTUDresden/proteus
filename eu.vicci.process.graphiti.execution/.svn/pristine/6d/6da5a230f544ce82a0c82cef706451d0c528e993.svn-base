@@ -1,0 +1,23 @@
+package eu.vicci.process.graphiti.execution.ui;
+
+import java.util.Map;
+
+import eu.vicci.process.model.sofiainstance.DataTypeInstance;
+
+public class SetPortValuesDialogResult {
+	private final Map<String, DataTypeInstance> values;
+	private final boolean isCanceled;
+	
+	public SetPortValuesDialogResult(Map<String, DataTypeInstance> values, boolean isCanceled) {
+		this.values = values;
+		this.isCanceled = isCanceled;
+	}
+
+	public Map<String, DataTypeInstance> getValues() {
+		return values;
+	}
+
+	public boolean isCanceled() {
+		return isCanceled;
+	}
+}

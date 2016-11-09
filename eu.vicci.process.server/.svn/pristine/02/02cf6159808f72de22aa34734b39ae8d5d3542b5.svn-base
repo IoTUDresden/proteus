@@ -1,0 +1,36 @@
+package eu.vicci.process.wampserver.subscribers;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import eu.vicci.process.model.util.messages.HumanTaskMessageManager;
+import eu.vicci.process.model.util.messages.HumanTaskResponse;
+import eu.vicci.process.model.util.messages.core.IHumanTaskResponse;
+import eu.vicci.process.model.util.messages.core.MessageType;
+import ws.wamp.jawampa.PubSubData;
+
+public class HumanTaskResponseSubscriber extends AbstractSubscriber<PubSubData> {
+	private static final Logger logger = LoggerFactory.getLogger(HumanTaskResponseSubscriber.class);
+	
+	private IHumanTaskResponse response;
+
+	@Override
+	public void onCompleted() {
+		logger.debug("completed");			
+	}
+
+	@Override
+	public void onError(Throwable e) {
+		logger.error(e.getMessage());		
+	}
+
+	@Override
+	public void onNext(PubSubData t) {
+		response = convertFromJson(t.arguments().get(0), HumanTaskResponse.class);
+		HumanTaskMessageManager.getInstance().addHumanTaskResponse(response);
+		if(receiver != null)
+			receiver.onMessage(MessageType.HUMANTASKRESPONSE, response);		
+	}
+	
+
+}

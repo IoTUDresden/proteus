@@ -1,0 +1,67 @@
+package eu.vicci.process.model.sofiainstance.impl.custom;
+
+import eu.vicci.process.model.sofia.OpenHabSemanticInvoke;
+import eu.vicci.process.model.sofiainstance.OpenHabSemanticInvokeInstance;
+import eu.vicci.process.openhab.util.IOpenHabRestClient;
+import eu.vicci.process.openhab.util.OpenHabRestClient;
+
+/**
+ * Base Class for the OpenHabSemanticInvoke Step. Encapsulate the base informations needed
+ * to get access to the semantic layer on OpenHAB.
+ * 
+ * @author André Kühnert
+ *
+ */
+public abstract class OpenHabSemanticInvokeInstanceImplCustom extends ProcessStepInstanceImplCustom implements
+		OpenHabSemanticInvokeInstance {
+
+	/**
+	 * The REST Client for OpenHab
+	 */
+	protected IOpenHabRestClient client;
+
+	/**
+	 * The Server Base Uri for OpenHAB
+	 */
+	protected String serverBaseUri;
+	
+	/**
+	 * The Query (e.g. Ask, Select or Command)
+	 */
+	protected String query;
+	
+	/**
+	 * Should Sensor Values up to date before queryExecution
+	 */
+	protected boolean withLatest;
+
+	/**
+	 * Fills the private members with the values from the process type definition and
+	 * creates a new OpenHAB REST-client.
+	 * 
+	 * @return true if all values could be set, otherwise false.
+	 */
+	protected boolean fillPrivateMembersAndStartClient() {
+		if (!fillPrivateMembers())
+			return false;
+		client = new OpenHabRestClient(serverBaseUri);
+		return true;
+	}
+
+	/**
+	 * Fills the private members with the values from the process type definition.
+	 * 
+	 * @return true if all values could be set, otherwise false.
+	 */
+	protected boolean fillPrivateMembers() {
+		if (!(getProcessStepType() instanceof OpenHabSemanticInvoke)) {
+			LOGGER.error("OpenHabSemanticInvoke cannot be mapped");
+			return false;
+		}
+		OpenHabSemanticInvoke openhab = (OpenHabSemanticInvoke) getProcessStepType();
+		serverBaseUri = openhab.getServerBaseAddress();
+		query = openhab.getQuery();
+		withLatest = openhab.isWithLatest();
+		return true;
+	}
+}

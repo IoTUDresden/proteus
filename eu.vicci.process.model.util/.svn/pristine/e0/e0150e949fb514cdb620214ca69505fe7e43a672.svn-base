@@ -1,0 +1,39 @@
+package eu.vicci.process.model.util.logging;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
+
+public class LoggingManager {
+	
+	private static LoggingManager lm;
+	private Map<String, InstanceLogger> loggers = new HashMap<String, InstanceLogger>();
+	private List<IStateChangeMessage> recentStateChanges = new LinkedList<IStateChangeMessage>(); 
+	
+	public static synchronized LoggingManager getInstance() {
+		if (lm == null) {
+			lm = new LoggingManager();
+		}
+		
+		return lm;
+	}
+
+	public Map<String, InstanceLogger> getLoggers() {
+		return loggers;
+	}
+
+	public void setLoggers(Map<String, InstanceLogger> loggers) {
+		this.loggers = loggers;
+	}
+
+	public List<IStateChangeMessage> getRecentStateChanges() {
+		for (InstanceLogger il : LoggingManager.getInstance().getLoggers().values()) {
+			recentStateChanges.add(il.getRecentLoggingMessage());
+		}
+		return recentStateChanges;
+	}
+	
+}

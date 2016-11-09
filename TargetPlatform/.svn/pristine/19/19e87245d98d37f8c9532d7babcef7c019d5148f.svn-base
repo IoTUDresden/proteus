@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target includeMode="feature" name="Process Engine Platform" sequenceNumber="80">
+<locations>
+<location path="${project_loc:/eu.vicci.process.repository}/required plugins" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.graphiti.feature.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
+<unit id="org.eclipse.graphiti.export.feature.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.graphiti.feature.tools.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.graphiti.sdk.feature.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.graphiti.feature.examples.source.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.graphiti.feature.examples.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.graphiti.source.feature.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.graphiti.sdk.plus.feature.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.graphiti.sdk.source.feature.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.graphiti.feature.tools.source.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.graphiti.sdk.plus.source.feature.feature.group" version="0.12.1.v20150916-0905"/>
+<unit id="org.eclipse.graphiti.export.source.feature.feature.group" version="0.12.1.v20150916-0905"/>
+<repository location="http://download.eclipse.org/graphiti/updates/0.12.1/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.rcp.sdk.id" version="4.5.1.M20150904-0015"/>
+<unit id="org.eclipse.emf.ecore.feature.group" version="2.11.1.v20150805-0538"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.11.1.v20150806-0404"/>
+<unit id="org.eclipse.emf.feature.group" version="2.11.1.v20150806-0404"/>
+<unit id="org.eclipse.platform.feature.group" version="4.5.1.v20150904-0015"/>
+<unit id="org.eclipse.jdt.source.feature.group" version="3.11.1.v20150904-0015"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="3.6.200.v20150602-1417"/>
+<unit id="epp.package.modeling" version="4.5.1.20150917-1200"/>
+<unit id="org.eclipse.equinox.p2.user.ui.feature.group" version="2.2.101.v20150826-1318"/>
+<repository location="http://download.eclipse.org/releases/mars/"/>
+</location>
+</locations>
+<environment>
+<nl>de_DE</nl>
+</environment>
+<targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+<launcherArgs>
+<vmArgs>-Dosgi.requiredJavaVersion=1.7 -Xms256m -Xmx1024m</vmArgs>
+</launcherArgs>
+</target>

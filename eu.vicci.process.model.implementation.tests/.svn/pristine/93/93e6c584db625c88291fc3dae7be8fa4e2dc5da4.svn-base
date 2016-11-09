@@ -1,0 +1,58 @@
+package eu.vicci.process.client.tests;
+
+import org.glassfish.jersey.media.sse.EventListener;
+import org.glassfish.jersey.media.sse.InboundEvent;
+import org.junit.Test;
+
+import eu.vicci.process.openhab.util.OpenHabEventProvider;
+
+public class OpenHabEventProviderTests {
+	private static final String SERVER_BASE_PATH = "http://localhost:8080";
+
+	/**
+	 * Register to all Events on the OpenHab Bus. This Test runs 10 seconds.
+	 * In this time you should toggle a button or something and check the console output on this test.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void registerToAllItemsTest() throws Exception {
+		OpenHabEventProvider provider = new OpenHabEventProvider(SERVER_BASE_PATH);
+		provider.registerToAllEvents(new EventListener() {			
+			@Override
+			public void onEvent(InboundEvent arg0) {
+				System.out.println(arg0.getName() + " : " + arg0.readData(String.class));
+			}
+		});
+		System.out.println("registerToAllItemsTest: runs 10 seconds.");
+		for (int i = 0; i < 10; i++) {
+			System.out.println("wait...");
+			Thread.sleep(1000);			
+		}
+		System.out.println("end");
+	}
+	
+	/**
+	 * Register only to ItemStateUpdate events. This Test runs 10 seconds.
+	 * In this time you should toggle a button or something and check the console output on this test.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	public void registerToUpdatesTest() throws Exception{
+		OpenHabEventProvider provider = new OpenHabEventProvider(SERVER_BASE_PATH);
+		provider.registerToUpdates(new EventListener() {			
+			@Override
+			public void onEvent(InboundEvent arg0) {
+				System.out.println(arg0.getName() + " : " + arg0.readData(String.class));
+			}
+		});
+		System.out.println("registerToUpdatesTest: runs 10 seconds.");
+		for (int i = 0; i < 10; i++) {
+			System.out.println("wait...");
+			Thread.sleep(1000);			
+		}
+		System.out.println("end");
+	}
+
+}

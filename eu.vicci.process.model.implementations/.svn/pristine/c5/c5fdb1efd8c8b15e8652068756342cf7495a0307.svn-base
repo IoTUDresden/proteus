@@ -1,0 +1,128 @@
+package eu.vicci.process.devices.util;
+
+import java.util.List;
+
+import org.glassfish.jersey.media.sse.EventListener;
+import org.glassfish.jersey.media.sse.InboundEvent;
+
+import com.google.gson.Gson;
+
+import eu.vicci.process.devices.DeviceManager;
+import eu.vicci.process.devices.Sensor;
+import eu.vicci.process.devices.events.SensorEvent;
+import eu.vicci.process.model.cep.EsperEngine;
+import eu.vicci.process.openhab.util.IOpenHabRestClient;
+import eu.vicci.process.openhab.util.OpenHabEventProvider;
+import eu.vicci.process.openhab.util.OpenHabRestClient;
+
+/**
+ * Listener for receiving openhab events in the process engine
+ * 
+ * @author André Kühnert
+ */
+public class OpenHabListener {
+	private static final String DEFAULT_SERVER_URI = "http://localhost:8080";
+	
+	private String openHabBaseUri = null;
+	private boolean isRunning = false;
+	private OpenHabEventProvider provider = null;
+	private IOpenHabRestClient restClient = null;
+	
+	private OpenHabListener(){}
+	
+	// threadsafe lazy init.
+	// https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom
+	private static class OpenHabListenerHolder{
+		private static final OpenHabListener INSTANCE = new OpenHabListener();
+	}
+	
+	/**
+	 * Gets the singleton instance of the Listener. Lazy threadsafe implementation.
+	 * @return
+	 */
+	public static OpenHabListener getInstance(){
+		return OpenHabListenerHolder.INSTANCE;
+	}	
+	
+	/**
+	 * Starts the event listener with the default uri on localhost.
+	 * All State Things are received from OpenHab, mapped as sensors and added to the DeviceManager.
+	 */
+	public void start(){
+		start(DEFAULT_SERVER_URI);
+	}
+	
+	/**
+	 * Starts the event listener with the given uri on all events.
+	 * All State Things are received from OpenHab, mapped as sensors and added to the DeviceManager.
+	 * @param openHabBaseUri
+	 */
+	public synchronized void start(String openHabBaseUri){
+		if(isRunning)
+			throw new IllegalStateException("Listener already running!");		
+		this.openHabBaseUri = openHabBaseUri;
+		startRestClientAndRegisterAllDevices();
+		startEventProvider();
+		isRunning = true;
+	}
+	
+	/**
+	 * Gets the uri to which openhab uri the listener is connected to
+	 * @return
+	 */
+	public String getOpenHabBaseUri(){
+		return openHabBaseUri;
+	}
+	
+	public boolean isRunning(){
+		return isRunning;
+	}
+	
+	public synchronized void close(){
+		if(!isRunning)
+			throw new IllegalStateException("Listener is not running!");
+		provider.closeAllEventSources();
+		isRunning = false;		
+		provider = null;
+		restClient = null;
+		openHabBaseUri = null;
+	}
+	
+	private void startRestClientAndRegisterAllDevices(){
+		restClient = new OpenHabRestClient(openHabBaseUri);
+		List<Sensor> sensors = restClient.getAllSensorsSemantic();
+		DeviceManager.getInstance().addDevices(sensors);
+	}
+	
+	private void startEventProvider(){
+		provider = new OpenHabEventProvider(openHabBaseUri);
+		provider.registerToUpdates(new EventListener() {			
+			@Override
+			public void onEvent(InboundEvent event) {
+				addSensorEventToEsper(event);
+			}
+		});			
+	}
+	
+	//TODO Esper only uses Sensor events at the moment
+	private void addSensorEventToEsper(InboundEvent event){		
+		OpenHabEvent openHabEvent = getOpenHabEvent(event);		
+		Sensor sensor = Devicifier.createDevice(openHabEvent, restClient);
+		Payload payload = getPayload(openHabEvent.getPayload());
+		
+		SensorEvent event2 = new SensorEvent(sensor.getEventType(), payload.getValue(), openHabEvent.getTimestamp(), sensor);
+		EsperEngine.getInstance().sendSensorEvent(event2);
+	}
+	
+	private Payload getPayload(String payload){
+		Gson gson = new Gson();
+		Payload payload2 = gson.fromJson(payload, Payload.class);
+		return payload2 ;		
+	}
+	
+	private OpenHabEvent getOpenHabEvent(InboundEvent event){
+		Gson gson = new Gson();
+		OpenHabEvent openHabEvent = gson.fromJson(event.readData(String.class), OpenHabEvent.class);
+		return openHabEvent;
+	}
+}

@@ -1,0 +1,90 @@
+package eu.vicci.process.graphiti.execution;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceReference;
+
+import eu.vicci.process.graphiti.adapter.core.IEngineAdapterService;
+
+/**
+ * The activator class controls the plug-in life cycle
+ */
+public class Activator extends AbstractUIPlugin {
+
+	// The plug-in ID
+	public static final String PLUGIN_ID = "eu.vicci.process.graphiti.execution"; //$NON-NLS-1$
+
+	// The shared instance
+	private static Activator plugin;
+	
+	private Map<String, Image> imageMap = new HashMap<String, Image>();
+	
+	/**
+	 * The constructor
+	 */
+	public Activator() {
+	}
+
+
+	public void start(BundleContext context) throws Exception {
+		super.start(context);
+		plugin = this;
+	}
+
+	public void stop(BundleContext context) throws Exception {
+		plugin = null;
+		super.stop(context);
+	}
+
+	/**
+	 * Returns the shared instance
+	 *
+	 * @return the shared instance
+	 */
+	public static Activator getDefault() {
+		return plugin;
+	}
+	
+	/**
+	 * Gets the image from the given path
+	 * @param path
+	 * @return
+	 */
+	public Image getImage(String path){
+		Image result = imageMap.get(path);
+		if (result == null) {
+			ImageDescriptor descriptor = imageDescriptorFromPlugin(PLUGIN_ID, path);
+			if (descriptor != null) {
+				result = descriptor.createImage();
+				imageMap.put(path, result);
+			}
+		}
+		return result;
+	}
+	
+	public static IEngineAdapterService getEngineAdapterService(String name){
+		if(name == null)
+			return null;
+		try {
+			Collection<ServiceReference<IEngineAdapterService>> allFound = getDefault().getBundle()
+					.getBundleContext()
+					.getServiceReferences(IEngineAdapterService.class, null);
+			for (ServiceReference<IEngineAdapterService> serviceReference : allFound) {
+				IEngineAdapterService service = serviceReference.getBundle().getBundleContext().getService(serviceReference);
+				if(service.getAdapterName().equals(name))
+					return service;
+			}
+		} catch (InvalidSyntaxException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

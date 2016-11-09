@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/eu.vicci.process.graphiti/src-gen" editDirectory="/eu.vicci.process.graphiti.edit/src-gen"
+    editorDirectory="/eu.vicci.process.graphiti.editor/src-gen" modelPluginID="eu.vicci.process.graphiti"
+    modelName="Sofiagraphics" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    testsDirectory="/eu.vicci.process.graphiti.tests/src-gen" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>sofiagraphics.ecore</foreignModel>
+  <genPackages prefix="Sofiagraphics" basePackage="eu.vicci.process.graphiti" disposableProviderFactory="true"
+      ecorePackage="sofiagraphics.ecore#/">
+    <genClasses ecoreClass="sofiagraphics.ecore#//Point">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sofiagraphics.ecore#//Point/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sofiagraphics.ecore#//Point/y"/>
+    </genClasses>
+    <genClasses ecoreClass="sofiagraphics.ecore#//Dimension">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sofiagraphics.ecore#//Dimension/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sofiagraphics.ecore#//Dimension/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sofiagraphics.ecore#//Dimension/absolute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sofiagraphics.ecore#//Dimension/adaptable"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sofiagraphics.ecore#//Widget">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sofiagraphics.ecore#//Widget/gesture"/>
+    </genClasses>
+    <genClasses ecoreClass="sofiagraphics.ecore#//Group">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sofiagraphics.ecore#//Group/children"/>
+    </genClasses>
+    <genClasses ecoreClass="sofiagraphics.ecore#//Rectangle">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sofiagraphics.ecore#//Rectangle/pos"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sofiagraphics.ecore#//Rectangle/dim"/>
+    </genClasses>
+    <genClasses ecoreClass="sofiagraphics.ecore#//RoundedRectangle">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sofiagraphics.ecore#//RoundedRectangle/pos"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sofiagraphics.ecore#//RoundedRectangle/corner"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sofiagraphics.ecore#//RoundedRectangle/dim"/>
+    </genClasses>
+    <genClasses ecoreClass="sofiagraphics.ecore#//Ellipse">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sofiagraphics.ecore#//Ellipse/pos"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sofiagraphics.ecore#//Ellipse/dim"/>
+    </genClasses>
+    <genClasses ecoreClass="sofiagraphics.ecore#//Polyline">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sofiagraphics.ecore#//Polyline/points"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

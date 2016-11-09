@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sofia:Process xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:sofia="http://vicci.eu/sofia/1.0" id="Pid1" name="Process1" type="SuperProcess" description="This is a process."/>

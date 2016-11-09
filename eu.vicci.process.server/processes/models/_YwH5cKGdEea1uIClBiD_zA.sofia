@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sofia:Process xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sofia="http://vicci.eu/sofia/1.0" id="_YwH5cKGdEea1uIClBiD_zA" name="LightLoop" goal="" eplQuery="" type="" description="" resource="">
+  <ports xsi:type="sofia:StartDataPort" id="_hoKRIKGdEea1uIClBiD_zA" name="start_0" value="true" portDatatype="//@dataTypeDefinitions.0">
+    <outTransitions id="_kNAMcKGdEea1uIClBiD_zA" name="transition" targetPort="//@subSteps.0/@ports.0"/>
+  </ports>
+  <subSteps xsi:type="sofia:WhileLoop" id="_cY-2gKGdEea1uIClBiD_zA" name="While" goal="" eplQuery="" controlProcessId="" type="" description="" resource="">
+    <ports xsi:type="sofia:StartDataPort" id="_iVKhEKGdEea1uIClBiD_zA" name="start_0" inTransitions="//@ports.0/@outTransitions.0" value="" portDatatype="//@dataTypeDefinitions.0">
+      <outTransitions id="_OPHt8KGfEea1uIClBiD_zA" name="transition" targetPort="//@subSteps.0/@subSteps.0/@ports.0"/>
+    </ports>
+    <ports xsi:type="sofia:StartDataPort" id="_iqc0kKGdEea1uIClBiD_zA" name="start_1" optional="true" description="" value="true" portDatatype="//@dataTypeDefinitions.0"/>
+    <subSteps xsi:type="sofia:TriggeredEvent" id="_x6yLEKGdEea1uIClBiD_zA" name="WaitForLightChange" goal="" eplQuery="" type="" description="" resource="" EPLStatement="select value from SensorEvent where device.uid = 'tinkerforge_ambientLight_ambientLight_1' and (  cast(value?, double) &lt; 650 or cast(value?, double)  > 750 )">
+      <ports xsi:type="sofia:StartDataPort" id="_NQwBMKGfEea1uIClBiD_zA" name="start_0" inTransitions="//@subSteps.0/@ports.0/@outTransitions.0" value="" portDatatype="//@dataTypeDefinitions.0"/>
+      <ports xsi:type="sofia:EndDataPort" id="_Q_nDIKGgEea1uIClBiD_zA" name="end_0" value="" portDatatype="//@dataTypeDefinitions.3">
+        <outTransitions id="_mH5rgKGgEea1uIClBiD_zA" name="transition" targetPort="//@subSteps.0/@subSteps.1/@ports.0"/>
+      </ports>
+    </subSteps>
+    <subSteps xsi:type="sofia:If" id="_T5OUkKGgEea1uIClBiD_zA" name="CheckSensorValue" goal="" eplQuery="" type="" description="" resource="">
+      <ports xsi:type="sofia:StartDataPort" id="_XRdbsKGgEea1uIClBiD_zA" name="start_0" inTransitions="//@subSteps.0/@subSteps.0/@ports.1/@outTransitions.0" value="" portDatatype="//@dataTypeDefinitions.3"/>
+      <ports xsi:type="sofia:StartDataPort" id="_XsxesKGgEea1uIClBiD_zA" name="start_1" optional="true" description="" value="750" portDatatype="//@dataTypeDefinitions.3"/>
+      <ports xsi:type="sofia:EndControlPort" id="_CQxasKGhEea1uIClBiD_zA" name="end_0">
+        <outTransitions xsi:type="sofia:TrueTransition" id="_F5DwAKGhEea1uIClBiD_zA" name="TrueTransition" targetPort="//@subSteps.0/@subSteps.2/@ports.0"/>
+      </ports>
+      <ports xsi:type="sofia:EndControlPort" id="_CjneMKGhEea1uIClBiD_zA" name="end_1">
+        <outTransitions xsi:type="sofia:FalseTransition" id="_Gdc2gKGhEea1uIClBiD_zA" name="FalseTransition" targetPort="//@subSteps.0/@subSteps.3/@ports.0"/>
+      </ports>
+      <ifCondition leftSide="//@subSteps.0/@subSteps.1/@ports.0" rightSide="//@subSteps.0/@subSteps.1/@ports.1"/>
+    </subSteps>
+    <subSteps xsi:type="sofia:RESTInvoke" id="__fTYoKGgEea1uIClBiD_zA" name="DecreaseLight" goal="" eplQuery="" type="" description="" resource="" HTTPMethod="POST" ServerUri="http://localhost:8080/rest/items/homematic_dimmer_dimmer_1">
+      <ports xsi:type="sofia:StartControlPort" id="_C93KMKGhEea1uIClBiD_zA" name="start_0" inTransitions="//@subSteps.0/@subSteps.1/@ports.2/@outTransitions.0"/>
+      <ports xsi:type="sofia:StartDataPort" id="_uzHSsKGhEea1uIClBiD_zA" name="start_1" optional="true" description="" value="DECREASE" portDatatype="//@dataTypeDefinitions.2"/>
+    </subSteps>
+    <subSteps xsi:type="sofia:RESTInvoke" id="__2vBMKGgEea1uIClBiD_zA" name="IncreaseLight" goal="" eplQuery="" type="" description="" resource="" HTTPMethod="POST" ServerUri="http://localhost:8080/rest/items/homematic_dimmer_dimmer_1">
+      <ports xsi:type="sofia:StartControlPort" id="_DPBysKGhEea1uIClBiD_zA" name="start_0" inTransitions="//@subSteps.0/@subSteps.1/@ports.3/@outTransitions.0"/>
+      <ports xsi:type="sofia:StartDataPort" id="_vTxIsKGhEea1uIClBiD_zA" name="start_1" optional="true" description="" value="INCREASE" portDatatype="//@dataTypeDefinitions.1"/>
+    </subSteps>
+    <loopCondition comparator="Equal" leftSide="//@subSteps.0/@ports.0" rightSide="//@subSteps.0/@ports.1"/>
+  </subSteps>
+  <dataTypeDefinitions xsi:type="sofia:BooleanType" name="CheckLoop" id="_mmUNMKGdEea1uIClBiD_zA" portMembers="//@subSteps.0/@ports.0 //@subSteps.0/@ports.1 //@ports.0 //@subSteps.0/@subSteps.0/@ports.0"/>
+  <dataTypeDefinitions xsi:type="sofia:StringType" name="IncreaseCommand" id="_wko6sKGhEea1uIClBiD_zA" portMembers="//@subSteps.0/@subSteps.3/@ports.1"/>
+  <dataTypeDefinitions xsi:type="sofia:StringType" name="DecreaseCommand" id="_3NmLsKGhEea1uIClBiD_zA" portMembers="//@subSteps.0/@subSteps.2/@ports.1"/>
+  <dataTypeDefinitions xsi:type="sofia:DoubleType" name="value" id="_yBhz0KG_EeaY4NGlX2GgrA" portMembers="//@subSteps.0/@subSteps.0/@ports.1 //@subSteps.0/@subSteps.1/@ports.0 //@subSteps.0/@subSteps.1/@ports.1"/>
+</sofia:Process>

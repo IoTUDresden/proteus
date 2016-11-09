@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://vicci.eu/sofia/1.0"
+            class="eu.vicci.process.model.sofia.SofiaPackage"
+            genModel="model/sofia.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated sofiainstance -->
+      <package
+            uri="http://vicci.eu/sofiainstance/1.0"
+            class="eu.vicci.process.model.sofiainstance.SofiaInstancePackage"
+            genModel="model/sofiainstance.genmodel"/>
+   </extension>
+</plugin>

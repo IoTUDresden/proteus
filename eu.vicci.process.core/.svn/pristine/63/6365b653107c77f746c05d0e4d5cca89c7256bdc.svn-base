@@ -1,0 +1,18 @@
+package eu.vicci.process.model.util.messages.core;
+
+/**
+ * Interface for receiving messages which are received from subscriptions
+ */
+public interface IMessageReceiver {
+
+	/**
+	 * The incoming message with the given {@link MessageType}.
+	 * 
+	 * @param messageType
+	 *            the {@link MessageType}
+	 * @param arg
+	 *            the values or arguments received
+	 */
+	void onMessage(MessageType messageType, Object arg);
+
+}

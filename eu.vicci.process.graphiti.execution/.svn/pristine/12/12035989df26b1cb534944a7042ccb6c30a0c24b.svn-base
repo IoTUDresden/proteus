@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="eu.vicci.process.graphiti.execution.ui.ExecuteProcessEditor"
+            contributorClass="org.eclipse.graphiti.ui.editor.DiagramEditorActionBarContributor"
+            default="false"
+            extensions="diagram"
+            icon="media/vicci-logo-small.png"
+            id="eu.vicci.process.graphiti.execution.executeProcessEditor"
+            matchingStrategy="org.eclipse.graphiti.ui.editor.DiagramEditorMatchingStrategy"
+            name="Process Execution Editor">
+         <contentTypeBinding
+               contentTypeId="org.eclipse.graphiti.content.diagram">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            delegate="eu.vicci.process.graphiti.execution.launch.ExecuteProcessConfigurationType"
+            delegateDescription="The Vicci Process Launcher supports the execution of process diagrams, modeled with the vicci editor."
+            delegateName="Vicci Process Launcher"
+            id="eu.vicci.process.graphiti.execution.launch.executeProcessConfigurationType"
+            modes="run, debug"
+            name="Vicci Process"
+            public="true">
+      </launchConfigurationType>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+      <launchConfigurationTypeImage
+            configTypeID="eu.vicci.process.graphiti.execution.launch.executeProcessConfigurationType"
+            icon="media/vicci-launch.png"
+            id="org.eclipse.jdt.debug.ui.launchConfigurationTypeImage.javaApplet">
+      </launchConfigurationTypeImage>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup
+            class="eu.vicci.process.graphiti.execution.launch.ExecuteProcessLaunchTabGroup"
+            id="eu.vicci.process.graphiti.execution.launch.executeProcessLaunchTabGroup"
+            type="eu.vicci.process.graphiti.execution.launch.executeProcessConfigurationType">
+      </launchConfigurationTabGroup>
+   </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="eu.vicci.process.graphiti.execution.launch.ExecuteProcessLaunchShortcut"
+            description="Execute Process"
+            icon="media/vicci-launch.png"
+            id="eu.vicci.process.graphiti.execution.launch.executeProcessLaunchShortcut"
+            label="Vicci Process"
+            modes="run, debug">
+         <contextualLaunch>
+            <enablement>
+               <with
+                     variable="selection">
+                  <count
+                        value="1">
+                  </count>
+                  <iterate
+                        ifEmpty="false"
+                        operator="or">
+                     <test
+                           property="org.eclipse.debug.ui.matchesPattern"
+                           value="*.diagram">
+                     </test>
+                  </iterate>
+               </with>
+            </enablement>
+         </contextualLaunch>
+         <configurationType
+               id="eu.vicci.process.graphiti.execution.launch.executeProcessConfigurationType">
+         </configurationType>
+      </shortcut>
+   </extension>
+   <extension
+         point="org.eclipse.graphiti.ui.diagramTypeProviders">
+   </extension>
+
+</plugin>

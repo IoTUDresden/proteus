@@ -1,0 +1,73 @@
+package eu.vicci.process.client.examples;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import eu.vicci.process.client.ProcessEngineClientBuilder;
+import eu.vicci.process.client.core.IConfigurationReader;
+import eu.vicci.process.client.core.IProcessEngineClient;
+import eu.vicci.process.model.util.ConfigurationReader;
+import eu.vicci.process.model.util.configuration.TopicId;
+import eu.vicci.process.model.util.messages.core.IMessageReceiver;
+import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
+import eu.vicci.process.model.util.messages.core.MessageType;
+
+
+public class SimpleOrTest implements IMessageReceiver {
+	private static final int timeout = 60;
+	
+	private IProcessEngineClient pec;
+	private CountDownLatch termination;
+
+	public static void main(String[] args) throws InterruptedException {
+		SimpleOrTest test = new SimpleOrTest();
+		test.run();	
+	}
+	
+	public void run() throws InterruptedException{
+		IConfigurationReader reader = new ConfigurationReader("server.conf");
+		ProcessEngineClientBuilder builder = new ProcessEngineClientBuilder();
+		
+		termination = new CountDownLatch(1);
+		
+		pec = builder.fromConfig(reader).build();
+		pec.connect();
+		pec.subscribeTo(TopicId.STATE_CHANGE, MessageType.WAMPMESSAGE, this);
+		loadForTest();
+		
+		termination.await(timeout, TimeUnit.SECONDS); //no busy waiting
+		pec.close();
+	}
+
+
+	private void loadForTest() {
+		System.out.println("Upload SimpleOrTest...");		
+		String processId = pec.uploadModelFile("processes/SimpleOrTest.diagram");
+		System.out.println("ForLoopTest ID: " + processId);
+		
+		System.out.println("Deploy SimpleOrTest...");	
+		String dmhStat = pec.deployProcess(processId);
+		System.out.println("State: " + dmhStat);	
+		
+		System.out.println("Deploy SimpleOrTest Instance...");
+		String instanceId = pec.deployProcessInstance(processId);
+		System.out.println("ForLoopTest Instance ID: " + instanceId);
+		
+		System.out.print("Start execution...");
+		String state = pec.startProcessInstance(instanceId, processId, null);
+		System.out.print("State: " + state);
+	}
+
+
+	@Override
+	public void onMessage(MessageType messageType, Object arg) {
+		System.out.println();
+		System.out.println("received message from type: " + messageType.name());
+		if(arg instanceof IStateChangeMessage){
+			IStateChangeMessage message = (IStateChangeMessage)arg;
+			System.out.println(message.getTimeStamp() + " " + message.getProcessId() + " " + message.getProcessName() + " to state " + message.getState());
+			if("_dv1Y0Mi4EeSKccvjc0DMJA".equals(message.getProcessId()) && "executed".equalsIgnoreCase(message.getState().getName()))
+				termination.countDown();
+		}		
+	}
+}

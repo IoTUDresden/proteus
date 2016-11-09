@@ -1,0 +1,117 @@
+package eu.vicci.process.client.examples;
+
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
+
+import eu.vicci.process.client.ProcessEngineClientBuilder;
+import eu.vicci.process.client.core.IConfigurationReader;
+import eu.vicci.process.client.core.IProcessEngineClient;
+import eu.vicci.process.model.sofia.DataType;
+import eu.vicci.process.model.sofia.Process;
+import eu.vicci.process.model.sofiainstance.DataTypeInstance;
+import eu.vicci.process.model.sofiainstance.ProcessInstance;
+import eu.vicci.process.model.util.ConfigurationReader;
+import eu.vicci.process.model.util.configuration.TopicId;
+import eu.vicci.process.model.util.messages.core.IMessageReceiver;
+import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
+import eu.vicci.process.model.util.messages.core.MessageType;
+
+public abstract class AbstractProcessRunner implements IMessageReceiver {
+	protected IProcessEngineClient pec;
+	protected CountDownLatch termination = new CountDownLatch(1);
+	protected String rootInstanceId;
+	protected Process processInfo;
+	protected ProcessInstance processInstanceInfo;
+	
+	public AbstractProcessRunner() {	}	
+	
+	public void run(){
+		createClient();
+		pec.connect();
+		pec.subscribeTo(TopicId.STATE_CHANGE, MessageType.WAMPMESSAGE, this);
+		pec.subscribeTo(TopicId.HUMAN_TASK_REQ, MessageType.HUMANTASKREQUEST, this);
+		loadAndStartProcess();
+		
+		try {
+			termination.await();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		pec.close();
+	}
+	
+	protected abstract String getModelFilePath();
+	
+	protected IConfigurationReader getConfigurationReader(){
+		return new ConfigurationReader("server.conf");
+	}
+	
+	protected Map<String, DataTypeInstance> getInputParameter(){
+		return null;
+	}
+	
+	protected void loadAndStartProcess() {
+		System.out.println("upload model file...");		
+		String processId = pec.uploadModelFile(getModelFilePath());
+		System.out.println("model id: " + processId);
+		
+		System.out.println("deploy " + processId + "...");	
+		pec.deployProcess(processId);
+		
+		System.out.println("deploy instance for " + processId + "...");
+		rootInstanceId = pec.deployProcessInstance(processId);
+		System.out.println("instance id: " + rootInstanceId);
+		
+		try {
+			Thread.sleep(1500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		processInstanceInfo = pec.getProcessInstanceInfos(rootInstanceId);
+		processInfo = pec.getProcessInfos(processId);		
+		
+		System.out.print("Start execution for " + rootInstanceId + "...");
+		pec.startProcessInstance(rootInstanceId, processId, getInputParameter());
+	}
+	
+	private void createClient(){
+		IConfigurationReader configReader = getConfigurationReader();		
+		ProcessEngineClientBuilder builder = new ProcessEngineClientBuilder();
+		pec = builder.fromConfig(configReader).build();		
+	}
+	
+	@Override
+	public void onMessage(MessageType messageType, Object arg) {
+		if(arg instanceof IStateChangeMessage){
+			IStateChangeMessage message = (IStateChangeMessage)arg;
+			println("");
+			println((message.getProcessName() + 
+					" changed to " + message.getState().toString()));
+			
+			//finished
+			if(message.getProcessInstanceId().equals(rootInstanceId) && 
+					"executed".equalsIgnoreCase(message.getState().toString()))
+				termination.countDown();
+		}		
+	}
+	
+	protected void println(String txt){
+		System.out.println(txt);
+	}
+	
+	/**
+	 * setName setIdOfOrigin setInstanceId setInstancenumber setTypeId setDataTypeType
+	 * @param type
+	 * @param typeInstance
+	 * @param instanceNumber
+	 */
+	protected static void copyBaseInfosToInstance(DataType type, DataTypeInstance typeInstance, int instanceNumber){
+		typeInstance.setName(type.getName());
+		typeInstance.setIdOfOrigin(type.getId());
+		typeInstance.setInstanceId(type.getId() + "_Instance_" + instanceNumber);
+		typeInstance.setInstancenumber(instanceNumber);
+		typeInstance.setTypeId(type.getId());
+		typeInstance.setDataTypeType(type);
+	}
+
+}

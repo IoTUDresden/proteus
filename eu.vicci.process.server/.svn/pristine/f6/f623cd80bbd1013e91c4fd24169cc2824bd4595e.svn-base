@@ -1,0 +1,10 @@
+ip = 192.168.2.102
+port = 8081
+namespace = vicciWs
+realmName = vicciRealm
+startOsgiRuntime = false
+startSemiwaListener = false
+startOpenHabListener = false
+startCepEngine = false
+startXmlRpcWebServer = false
+deployExistingProcessModels = false
