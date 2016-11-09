@@ -1,8 +1,0 @@
-<servlet>
-	<servlet-name>XmlRpcServlet</servlet-name>
-	<servlet-class>org.apache.xmlrpc.webserver.XmlRpcServlet</servlet-class>
-</servlet>
-<servlet-mapping>
-	<servlet-name>XmlRpcServlet</servlet-name>
-	<url-pattern>/xmlrpc</url-pattern>
-</servlet-mapping>

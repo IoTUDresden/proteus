@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: Client Tests
-Bundle-SymbolicName: eu.vicci.process.client.tests
-Bundle-Version: 1.0.0.qualifier
-Fragment-Host: eu.vicci.process.client;bundle-version="1.0.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Require-Bundle: org.junit
