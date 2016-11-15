@@ -109,7 +109,7 @@ public class SofiaInstanceFactoryImplCustom extends SofiaInstanceFactoryImpl {
 
 	
 	public ProcessStepInstance createLoadClassStepInstance() {
-		return new LoadClassStepImplCustom();
+		return new LoadClassStepInstanceImplCustom();
 	}
 	
 	@Override
