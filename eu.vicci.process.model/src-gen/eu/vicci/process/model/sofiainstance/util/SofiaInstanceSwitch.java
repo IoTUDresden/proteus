@@ -568,6 +568,15 @@ public class SofiaInstanceSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SofiaInstancePackage.GOAL_INVOKE_INSTANCE: {
+				GoalInvokeInstance goalInvokeInstance = (GoalInvokeInstance)theEObject;
+				T result = caseGoalInvokeInstance(goalInvokeInstance);
+				if (result == null) result = caseProcessStepInstance(goalInvokeInstance);
+				if (result == null) result = caseStateful(goalInvokeInstance);
+				if (result == null) result = caseInstanceIdentifiable(goalInvokeInstance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -1409,6 +1418,21 @@ public class SofiaInstanceSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMapeKInstance(MapeKInstance object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Goal Invoke Instance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Goal Invoke Instance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGoalInvokeInstance(GoalInvokeInstance object) {
 		return null;
 	}
 

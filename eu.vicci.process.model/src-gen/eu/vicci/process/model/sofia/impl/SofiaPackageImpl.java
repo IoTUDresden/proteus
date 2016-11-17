@@ -25,6 +25,7 @@ import eu.vicci.process.model.sofia.EscalationPort;
 import eu.vicci.process.model.sofia.Event;
 import eu.vicci.process.model.sofia.FalseTransition;
 import eu.vicci.process.model.sofia.ForLoop;
+import eu.vicci.process.model.sofia.GoalInvoke;
 import eu.vicci.process.model.sofia.HTTPverb;
 import eu.vicci.process.model.sofia.HumanTask;
 import eu.vicci.process.model.sofia.HumanTaskType;
@@ -528,6 +529,13 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 	 * @generated
 	 */
 	private EClass mapeKEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass goalInvokeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1863,6 +1871,42 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getGoalInvoke() {
+		return goalInvokeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGoalInvoke_InvokeGoal() {
+		return (EAttribute)goalInvokeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGoalInvoke_Quality() {
+		return (EAttribute)goalInvokeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGoalInvoke_Location() {
+		return (EAttribute)goalInvokeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getComparator() {
 		return comparatorEEnum;
 	}
@@ -2131,6 +2175,11 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 
 		mapeKEClass = createEClass(MAPE_K);
 
+		goalInvokeEClass = createEClass(GOAL_INVOKE);
+		createEAttribute(goalInvokeEClass, GOAL_INVOKE__INVOKE_GOAL);
+		createEAttribute(goalInvokeEClass, GOAL_INVOKE__QUALITY);
+		createEAttribute(goalInvokeEClass, GOAL_INVOKE__LOCATION);
+
 		// Create enums
 		comparatorEEnum = createEEnum(COMPARATOR);
 		httPverbEEnum = createEEnum(HTT_PVERB);
@@ -2233,6 +2282,7 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 		openHabSemanticAskInvokeEClass.getESuperTypes().add(this.getOpenHabSemanticInvoke());
 		openHabSemanticCommandInvokeEClass.getESuperTypes().add(this.getOpenHabSemanticInvoke());
 		mapeKEClass.getESuperTypes().add(this.getAtomicStep());
+		goalInvokeEClass.getESuperTypes().add(this.getInvoke());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2434,6 +2484,11 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 		initEReference(getCpsStep_ControlProcess(), this.getProcess(), null, "controlProcess", null, 0, 1, CpsStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mapeKEClass, MapeK.class, "MapeK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(goalInvokeEClass, GoalInvoke.class, "GoalInvoke", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getGoalInvoke_InvokeGoal(), ecorePackage.getEString(), "invokeGoal", null, 0, 1, GoalInvoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGoalInvoke_Quality(), ecorePackage.getEString(), "quality", null, 0, -1, GoalInvoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGoalInvoke_Location(), ecorePackage.getEString(), "location", null, 0, 1, GoalInvoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(comparatorEEnum, Comparator.class, "Comparator");

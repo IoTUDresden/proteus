@@ -103,6 +103,19 @@
                <target
                      class="Transition"></target>
             </constraint>
+            <constraint
+                  class="eu.vicci.process.graphiti.validation.constraint.NoGoalSetConstraint"
+                  id="eu.vicci.process.graphiti.validation.constraint.NoGoalSetConstraint"
+                  isEnabledByDefault="true"
+                  lang="java"
+                  mode="Batch"
+                  name="NoGoalSetConstraint"
+                  severity="ERROR"
+                  statusCode="2">
+               <message>
+                  message body text
+               </message>
+            </constraint>
          </constraints>
       </constraintProvider>
    </extension>
@@ -340,6 +353,13 @@
                     id="graphiti.main.tab.emfclass27"
                     tab="graphiti.main.tab">
               </propertySection>    
+              
+              <propertySection
+                    class="eu.vicci.process.graphiti.property.GoalInvokeSection"
+                    filter="eu.vicci.process.graphiti.property.GoalInvokeFilter"
+                    id="graphiti.main.tab.emfclass28"
+                    tab="graphiti.main.tab">
+              </propertySection>   
 	    
 	    </propertySections>	    
 	</extension>	

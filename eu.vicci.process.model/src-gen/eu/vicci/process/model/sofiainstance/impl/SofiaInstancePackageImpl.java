@@ -25,6 +25,7 @@ import eu.vicci.process.model.sofiainstance.EventInstance;
 import eu.vicci.process.model.sofiainstance.ExecutionPermission;
 import eu.vicci.process.model.sofiainstance.FalseTransitionInstance;
 import eu.vicci.process.model.sofiainstance.ForLoopInstance;
+import eu.vicci.process.model.sofiainstance.GoalInvokeInstance;
 import eu.vicci.process.model.sofiainstance.HumanTaskInstance;
 import eu.vicci.process.model.sofiainstance.IfInstance;
 import eu.vicci.process.model.sofiainstance.InstanceIdentifiable;
@@ -475,6 +476,13 @@ public class SofiaInstancePackageImpl extends EPackageImpl implements SofiaInsta
 	 * @generated
 	 */
 	private EClass mapeKInstanceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass goalInvokeInstanceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1556,6 +1564,15 @@ public class SofiaInstancePackageImpl extends EPackageImpl implements SofiaInsta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getGoalInvokeInstance() {
+		return goalInvokeInstanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getState() {
 		return stateEEnum;
 	}
@@ -1772,6 +1789,8 @@ public class SofiaInstancePackageImpl extends EPackageImpl implements SofiaInsta
 
 		mapeKInstanceEClass = createEClass(MAPE_KINSTANCE);
 
+		goalInvokeInstanceEClass = createEClass(GOAL_INVOKE_INSTANCE);
+
 		// Create enums
 		stateEEnum = createEEnum(STATE);
 		executionPermissionEEnum = createEEnum(EXECUTION_PERMISSION);
@@ -1865,6 +1884,7 @@ public class SofiaInstancePackageImpl extends EPackageImpl implements SofiaInsta
 		openHabSemanticAskInvokeInstanceEClass.getESuperTypes().add(this.getOpenHabSemanticInvokeInstance());
 		openHabSemanticCommandInvokeInstanceEClass.getESuperTypes().add(this.getOpenHabSemanticInvokeInstance());
 		mapeKInstanceEClass.getESuperTypes().add(this.getProcessStepInstance());
+		goalInvokeInstanceEClass.getESuperTypes().add(this.getProcessStepInstance());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(processInstanceEClass, ProcessInstance.class, "ProcessInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2120,6 +2140,8 @@ public class SofiaInstancePackageImpl extends EPackageImpl implements SofiaInsta
 		initEClass(openHabSemanticCommandInvokeInstanceEClass, OpenHabSemanticCommandInvokeInstance.class, "OpenHabSemanticCommandInvokeInstance", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mapeKInstanceEClass, MapeKInstance.class, "MapeKInstance", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(goalInvokeInstanceEClass, GoalInvokeInstance.class, "GoalInvokeInstance", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize enums and add enum literals
 		initEEnum(stateEEnum, State.class, "State");

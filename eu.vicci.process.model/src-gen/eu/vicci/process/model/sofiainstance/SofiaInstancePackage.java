@@ -6179,6 +6179,142 @@ public interface SofiaInstancePackage extends EPackage {
 	int MAPE_KINSTANCE_FEATURE_COUNT = PROCESS_STEP_INSTANCE_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link eu.vicci.process.model.sofiainstance.GoalInvokeInstance <em>Goal Invoke Instance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see eu.vicci.process.model.sofiainstance.GoalInvokeInstance
+	 * @see eu.vicci.process.model.sofiainstance.impl.SofiaInstancePackageImpl#getGoalInvokeInstance()
+	 * @generated
+	 */
+	int GOAL_INVOKE_INSTANCE = 56;
+
+	/**
+	 * The feature id for the '<em><b>Execution State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__EXECUTION_STATE = PROCESS_STEP_INSTANCE__EXECUTION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Cps Execution State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__CPS_EXECUTION_STATE = PROCESS_STEP_INSTANCE__CPS_EXECUTION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Instance Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__INSTANCE_ID = PROCESS_STEP_INSTANCE__INSTANCE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Instancenumber</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__INSTANCENUMBER = PROCESS_STEP_INSTANCE__INSTANCENUMBER;
+
+	/**
+	 * The feature id for the '<em><b>Process Step Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__PROCESS_STEP_TYPE = PROCESS_STEP_INSTANCE__PROCESS_STEP_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Permission</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__PERMISSION = PROCESS_STEP_INSTANCE__PERMISSION;
+
+	/**
+	 * The feature id for the '<em><b>Delay</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__DELAY = PROCESS_STEP_INSTANCE__DELAY;
+
+	/**
+	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__PORTS = PROCESS_STEP_INSTANCE__PORTS;
+
+	/**
+	 * The feature id for the '<em><b>Sub Steps</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__SUB_STEPS = PROCESS_STEP_INSTANCE__SUB_STEPS;
+
+	/**
+	 * The feature id for the '<em><b>Process Instance ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__PROCESS_INSTANCE_ID = PROCESS_STEP_INSTANCE__PROCESS_INSTANCE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Process Model ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__PROCESS_MODEL_ID = PROCESS_STEP_INSTANCE__PROCESS_MODEL_ID;
+
+	/**
+	 * The feature id for the '<em><b>Model ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__MODEL_ID = PROCESS_STEP_INSTANCE__MODEL_ID;
+
+	/**
+	 * The feature id for the '<em><b>Cyber Physical</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE__CYBER_PHYSICAL = PROCESS_STEP_INSTANCE__CYBER_PHYSICAL;
+
+	/**
+	 * The number of structural features of the '<em>Goal Invoke Instance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_INSTANCE_FEATURE_COUNT = PROCESS_STEP_INSTANCE_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofiainstance.State <em>State</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6186,7 +6322,7 @@ public interface SofiaInstancePackage extends EPackage {
 	 * @see eu.vicci.process.model.sofiainstance.impl.SofiaInstancePackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 56;
+	int STATE = 57;
 
 	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofiainstance.ExecutionPermission <em>Execution Permission</em>}' enum.
@@ -6196,7 +6332,7 @@ public interface SofiaInstancePackage extends EPackage {
 	 * @see eu.vicci.process.model.sofiainstance.impl.SofiaInstancePackageImpl#getExecutionPermission()
 	 * @generated
 	 */
-	int EXECUTION_PERMISSION = 57;
+	int EXECUTION_PERMISSION = 58;
 
 	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofiainstance.CpsState <em>Cps State</em>}' enum.
@@ -6206,7 +6342,7 @@ public interface SofiaInstancePackage extends EPackage {
 	 * @see eu.vicci.process.model.sofiainstance.impl.SofiaInstancePackageImpl#getCpsState()
 	 * @generated
 	 */
-	int CPS_STATE = 58;
+	int CPS_STATE = 59;
 
 
 	/**
@@ -7367,6 +7503,16 @@ public interface SofiaInstancePackage extends EPackage {
 	EClass getMapeKInstance();
 
 	/**
+	 * Returns the meta object for class '{@link eu.vicci.process.model.sofiainstance.GoalInvokeInstance <em>Goal Invoke Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Goal Invoke Instance</em>'.
+	 * @see eu.vicci.process.model.sofiainstance.GoalInvokeInstance
+	 * @generated
+	 */
+	EClass getGoalInvokeInstance();
+
+	/**
 	 * Returns the meta object for enum '{@link eu.vicci.process.model.sofiainstance.State <em>State</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8409,6 +8555,16 @@ public interface SofiaInstancePackage extends EPackage {
 		 * @generated
 		 */
 		EClass MAPE_KINSTANCE = eINSTANCE.getMapeKInstance();
+
+		/**
+		 * The meta object literal for the '{@link eu.vicci.process.model.sofiainstance.GoalInvokeInstance <em>Goal Invoke Instance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see eu.vicci.process.model.sofiainstance.GoalInvokeInstance
+		 * @see eu.vicci.process.model.sofiainstance.impl.SofiaInstancePackageImpl#getGoalInvokeInstance()
+		 * @generated
+		 */
+		EClass GOAL_INVOKE_INSTANCE = eINSTANCE.getGoalInvokeInstance();
 
 		/**
 		 * The meta object literal for the '{@link eu.vicci.process.model.sofiainstance.State <em>State</em>}' enum.

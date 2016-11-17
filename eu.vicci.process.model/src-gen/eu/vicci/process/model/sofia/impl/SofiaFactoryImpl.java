@@ -17,6 +17,7 @@ import eu.vicci.process.model.sofia.EndDataPort;
 import eu.vicci.process.model.sofia.EscalationPort;
 import eu.vicci.process.model.sofia.FalseTransition;
 import eu.vicci.process.model.sofia.ForLoop;
+import eu.vicci.process.model.sofia.GoalInvoke;
 import eu.vicci.process.model.sofia.HTTPverb;
 import eu.vicci.process.model.sofia.HumanTask;
 import eu.vicci.process.model.sofia.HumanTaskType;
@@ -153,6 +154,7 @@ public class SofiaFactoryImpl extends EFactoryImpl implements SofiaFactory {
 			case SofiaPackage.OPEN_HAB_SEMANTIC_ASK_INVOKE: return createOpenHabSemanticAskInvoke();
 			case SofiaPackage.OPEN_HAB_SEMANTIC_COMMAND_INVOKE: return createOpenHabSemanticCommandInvoke();
 			case SofiaPackage.MAPE_K: return createMapeK();
+			case SofiaPackage.GOAL_INVOKE: return createGoalInvoke();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -652,6 +654,16 @@ public class SofiaFactoryImpl extends EFactoryImpl implements SofiaFactory {
 	public MapeK createMapeK() {
 		MapeKImpl mapeK = new MapeKImpl();
 		return mapeK;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GoalInvoke createGoalInvoke() {
+		GoalInvokeImpl goalInvoke = new GoalInvokeImpl();
+		return goalInvoke;
 	}
 
 	/**

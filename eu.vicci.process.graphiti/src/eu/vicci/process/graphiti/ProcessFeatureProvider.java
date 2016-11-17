@@ -39,6 +39,7 @@ import eu.vicci.process.graphiti.feature.add.EndDataPortAddFeature;
 import eu.vicci.process.graphiti.feature.add.EscalationPortAddFeature;
 import eu.vicci.process.graphiti.feature.add.FalseTransitionAddFeature;
 import eu.vicci.process.graphiti.feature.add.ForLoopAddFeature;
+import eu.vicci.process.graphiti.feature.add.GoalInvokeAddFeature;
 import eu.vicci.process.graphiti.feature.add.HumanTaskAddFeature;
 import eu.vicci.process.graphiti.feature.add.IfAddFeature;
 import eu.vicci.process.graphiti.feature.add.LoadClassStepAddFeature;
@@ -69,6 +70,7 @@ import eu.vicci.process.graphiti.feature.create.EndDataPortCreateFeature;
 import eu.vicci.process.graphiti.feature.create.EscalationPortCreateFeature;
 import eu.vicci.process.graphiti.feature.create.FalseTransitionCreateFeature;
 import eu.vicci.process.graphiti.feature.create.ForLoopCreateFeature;
+import eu.vicci.process.graphiti.feature.create.GoalInvokeCreateFeature;
 import eu.vicci.process.graphiti.feature.create.HumanTaskCreateFeature;
 import eu.vicci.process.graphiti.feature.create.IfCreateFeature;
 import eu.vicci.process.graphiti.feature.create.LoadClassStepCreateFeature;
@@ -144,6 +146,7 @@ public class ProcessFeatureProvider extends DefaultFeatureProvider {
                 new ROSInvokeAddFeature(this),
                 new OpenHabSemanticInvokeAddFeature(this),
                 new LoadClassStepAddFeature(this), 
+                new GoalInvokeAddFeature(this),
                 
                 new OrAddFeature(this), new AndAddFeature(this), new IfAddFeature(this),
 
@@ -184,6 +187,7 @@ public class ProcessFeatureProvider extends DefaultFeatureProvider {
                 new OpenHabSemanticAskInvokeCreateFeature(this),
                 new OpenHabSemanticCommandInvokeCreateFeature(this),
                 new LoadClassStepCreateFeature(this), 
+                new GoalInvokeCreateFeature(this),
                 
                 new OrCreateFeature(this), new AndCreateFeature(this), new IfCreateFeature(this),
 

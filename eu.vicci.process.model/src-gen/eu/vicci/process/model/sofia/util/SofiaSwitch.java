@@ -24,6 +24,7 @@ import eu.vicci.process.model.sofia.EscalationPort;
 import eu.vicci.process.model.sofia.Event;
 import eu.vicci.process.model.sofia.FalseTransition;
 import eu.vicci.process.model.sofia.ForLoop;
+import eu.vicci.process.model.sofia.GoalInvoke;
 import eu.vicci.process.model.sofia.HumanTask;
 import eu.vicci.process.model.sofia.Identifiable;
 import eu.vicci.process.model.sofia.If;
@@ -767,6 +768,18 @@ public class SofiaSwitch<T> extends Switch<T> {
 				if (result == null) result = caseIdentifiable(mapeK);
 				if (result == null) result = caseNameable(mapeK);
 				if (result == null) result = caseCpsStep(mapeK);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SofiaPackage.GOAL_INVOKE: {
+				GoalInvoke goalInvoke = (GoalInvoke)theEObject;
+				T result = caseGoalInvoke(goalInvoke);
+				if (result == null) result = caseInvoke(goalInvoke);
+				if (result == null) result = caseAtomicStep(goalInvoke);
+				if (result == null) result = caseProcessStep(goalInvoke);
+				if (result == null) result = caseIdentifiable(goalInvoke);
+				if (result == null) result = caseNameable(goalInvoke);
+				if (result == null) result = caseCpsStep(goalInvoke);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1716,6 +1729,21 @@ public class SofiaSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMapeK(MapeK object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Goal Invoke</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Goal Invoke</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGoalInvoke(GoalInvoke object) {
 		return null;
 	}
 

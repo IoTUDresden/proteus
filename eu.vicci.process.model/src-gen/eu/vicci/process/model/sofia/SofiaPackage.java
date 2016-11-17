@@ -6744,6 +6744,160 @@ public interface SofiaPackage extends EPackage {
 	int MAPE_K_FEATURE_COUNT = ATOMIC_STEP_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link eu.vicci.process.model.sofia.impl.GoalInvokeImpl <em>Goal Invoke</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see eu.vicci.process.model.sofia.impl.GoalInvokeImpl
+	 * @see eu.vicci.process.model.sofia.impl.SofiaPackageImpl#getGoalInvoke()
+	 * @generated
+	 */
+	int GOAL_INVOKE = 63;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__ID = INVOKE__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__NAME = INVOKE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Cyber Physical</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__CYBER_PHYSICAL = INVOKE__CYBER_PHYSICAL;
+
+	/**
+	 * The feature id for the '<em><b>Goal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__GOAL = INVOKE__GOAL;
+
+	/**
+	 * The feature id for the '<em><b>Epl Query</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__EPL_QUERY = INVOKE__EPL_QUERY;
+
+	/**
+	 * The feature id for the '<em><b>Control Process Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__CONTROL_PROCESS_ID = INVOKE__CONTROL_PROCESS_ID;
+
+	/**
+	 * The feature id for the '<em><b>Control Process</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__CONTROL_PROCESS = INVOKE__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__PARENTSTEP = INVOKE__PARENTSTEP;
+
+	/**
+	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__PORTS = INVOKE__PORTS;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__TYPE = INVOKE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__DESCRIPTION = INVOKE__DESCRIPTION;
+
+	/**
+	 * The feature id for the '<em><b>Resource</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__RESOURCE = INVOKE__RESOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Invoke Goal</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__INVOKE_GOAL = INVOKE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Quality</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__QUALITY = INVOKE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__LOCATION = INVOKE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Goal Invoke</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE_FEATURE_COUNT = INVOKE_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofia.Comparator <em>Comparator</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6751,7 +6905,7 @@ public interface SofiaPackage extends EPackage {
 	 * @see eu.vicci.process.model.sofia.impl.SofiaPackageImpl#getComparator()
 	 * @generated
 	 */
-	int COMPARATOR = 63;
+	int COMPARATOR = 64;
 
 	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofia.HTTPverb <em>HTT Pverb</em>}' enum.
@@ -6761,7 +6915,7 @@ public interface SofiaPackage extends EPackage {
 	 * @see eu.vicci.process.model.sofia.impl.SofiaPackageImpl#getHTTPverb()
 	 * @generated
 	 */
-	int HTT_PVERB = 64;
+	int HTT_PVERB = 65;
 
 	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofia.SemanticTargetType <em>Semantic Target Type</em>}' enum.
@@ -6771,7 +6925,7 @@ public interface SofiaPackage extends EPackage {
 	 * @see eu.vicci.process.model.sofia.impl.SofiaPackageImpl#getSemanticTargetType()
 	 * @generated
 	 */
-	int SEMANTIC_TARGET_TYPE = 65;
+	int SEMANTIC_TARGET_TYPE = 66;
 
 	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofia.HumanTaskType <em>Human Task Type</em>}' enum.
@@ -6781,7 +6935,7 @@ public interface SofiaPackage extends EPackage {
 	 * @see eu.vicci.process.model.sofia.impl.SofiaPackageImpl#getHumanTaskType()
 	 * @generated
 	 */
-	int HUMAN_TASK_TYPE = 66;
+	int HUMAN_TASK_TYPE = 67;
 
 	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofia.HumanTaskUseCase <em>Human Task Use Case</em>}' enum.
@@ -6791,7 +6945,7 @@ public interface SofiaPackage extends EPackage {
 	 * @see eu.vicci.process.model.sofia.impl.SofiaPackageImpl#getHumanTaskUseCase()
 	 * @generated
 	 */
-	int HUMAN_TASK_USE_CASE = 67;
+	int HUMAN_TASK_USE_CASE = 68;
 
 
 	/**
@@ -8241,6 +8395,49 @@ public interface SofiaPackage extends EPackage {
 	EClass getMapeK();
 
 	/**
+	 * Returns the meta object for class '{@link eu.vicci.process.model.sofia.GoalInvoke <em>Goal Invoke</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Goal Invoke</em>'.
+	 * @see eu.vicci.process.model.sofia.GoalInvoke
+	 * @generated
+	 */
+	EClass getGoalInvoke();
+
+	/**
+	 * Returns the meta object for the attribute '{@link eu.vicci.process.model.sofia.GoalInvoke#getInvokeGoal <em>Invoke Goal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Invoke Goal</em>'.
+	 * @see eu.vicci.process.model.sofia.GoalInvoke#getInvokeGoal()
+	 * @see #getGoalInvoke()
+	 * @generated
+	 */
+	EAttribute getGoalInvoke_InvokeGoal();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link eu.vicci.process.model.sofia.GoalInvoke#getQuality <em>Quality</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Quality</em>'.
+	 * @see eu.vicci.process.model.sofia.GoalInvoke#getQuality()
+	 * @see #getGoalInvoke()
+	 * @generated
+	 */
+	EAttribute getGoalInvoke_Quality();
+
+	/**
+	 * Returns the meta object for the attribute '{@link eu.vicci.process.model.sofia.GoalInvoke#getLocation <em>Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Location</em>'.
+	 * @see eu.vicci.process.model.sofia.GoalInvoke#getLocation()
+	 * @see #getGoalInvoke()
+	 * @generated
+	 */
+	EAttribute getGoalInvoke_Location();
+
+	/**
 	 * Returns the meta object for enum '{@link eu.vicci.process.model.sofia.Comparator <em>Comparator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9533,6 +9730,40 @@ public interface SofiaPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MAPE_K = eINSTANCE.getMapeK();
+
+		/**
+		 * The meta object literal for the '{@link eu.vicci.process.model.sofia.impl.GoalInvokeImpl <em>Goal Invoke</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see eu.vicci.process.model.sofia.impl.GoalInvokeImpl
+		 * @see eu.vicci.process.model.sofia.impl.SofiaPackageImpl#getGoalInvoke()
+		 * @generated
+		 */
+		EClass GOAL_INVOKE = eINSTANCE.getGoalInvoke();
+
+		/**
+		 * The meta object literal for the '<em><b>Invoke Goal</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GOAL_INVOKE__INVOKE_GOAL = eINSTANCE.getGoalInvoke_InvokeGoal();
+
+		/**
+		 * The meta object literal for the '<em><b>Quality</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GOAL_INVOKE__QUALITY = eINSTANCE.getGoalInvoke_Quality();
+
+		/**
+		 * The meta object literal for the '<em><b>Location</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GOAL_INVOKE__LOCATION = eINSTANCE.getGoalInvoke_Location();
 
 		/**
 		 * The meta object literal for the '{@link eu.vicci.process.model.sofia.Comparator <em>Comparator</em>}' enum.

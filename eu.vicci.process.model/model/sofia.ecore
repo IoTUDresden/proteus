@@ -254,4 +254,10 @@
     <eLiterals name="BELL" value="5"/>
     <eLiterals name="HEALTH" value="6"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GoalInvoke" eSuperTypes="#//Invoke">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="invokeGoal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quality" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="location" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -294,6 +294,10 @@ public class SofiaInstanceAdapterFactory extends AdapterFactoryImpl {
 				return createMapeKInstanceAdapter();
 			}
 			@Override
+			public Adapter caseGoalInvokeInstance(GoalInvokeInstance object) {
+				return createGoalInvokeInstanceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -1094,6 +1098,20 @@ public class SofiaInstanceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMapeKInstanceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link eu.vicci.process.model.sofiainstance.GoalInvokeInstance <em>Goal Invoke Instance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see eu.vicci.process.model.sofiainstance.GoalInvokeInstance
+	 * @generated
+	 */
+	public Adapter createGoalInvokeInstanceAdapter() {
 		return null;
 	}
 

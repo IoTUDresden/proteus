@@ -418,6 +418,15 @@ public interface SofiaFactory extends EFactory {
 	MapeK createMapeK();
 
 	/**
+	 * Returns a new object of class '<em>Goal Invoke</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Goal Invoke</em>'.
+	 * @generated
+	 */
+	GoalInvoke createGoalInvoke();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

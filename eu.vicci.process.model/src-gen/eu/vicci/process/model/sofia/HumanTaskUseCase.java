@@ -66,7 +66,9 @@ public enum HumanTaskUseCase implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	PLANTS(4, "PLANTS", "PLANTS"), /**
+	PLANTS(4, "PLANTS", "PLANTS"),
+
+	/**
 	 * The '<em><b>BELL</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,7 +76,9 @@ public enum HumanTaskUseCase implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	BELL(5, "BELL", "BELL"), /**
+	BELL(5, "BELL", "BELL"),
+
+	/**
 	 * The '<em><b>HEALTH</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

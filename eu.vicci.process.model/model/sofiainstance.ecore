@@ -294,4 +294,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MapeKInstance" abstract="true" interface="true"
       eSuperTypes="#//ProcessStepInstance"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GoalInvokeInstance" abstract="true"
+      interface="true" eSuperTypes="#//ProcessStepInstance"/>
 </ecore:EPackage>
