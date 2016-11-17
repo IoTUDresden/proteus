@@ -19,7 +19,6 @@
   </setupTask>
   <setupTask
       xsi:type="setup:VariableTask"
-      id=""
       name="eclipse.target.platform"
       value="Mars"
       defaultValue="Mars"/>
@@ -66,7 +65,7 @@
   <setupTask
       xsi:type="projects:ProjectsImportTask">
     <sourceLocator
-        rootFolder="$(git.clone.proteus-all.location/proteus)"
+        rootFolder="${git.clone.proteus-all.location}"
         locateNestedProjects="true"/>
   </setupTask>
   <stream name="master"
