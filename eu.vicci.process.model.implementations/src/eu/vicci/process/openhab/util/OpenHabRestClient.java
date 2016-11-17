@@ -30,8 +30,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-import eu.vicci.process.devices.Sensor;
-import eu.vicci.process.devices.events.EventType;
+import eu.vicci.process.devices.core.Sensor;
+import eu.vicci.process.devices.events.core.EventType;
 import eu.vicci.process.model.util.messages.core.SemanticPerson;
 import scala.NotImplementedError;
 

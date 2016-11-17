@@ -1,5 +1,7 @@
 package eu.vicci.process.devices;
 
+import eu.vicci.process.devices.core.Device;
+
 public class Actuator extends Device {
 	
 	private String serviceName;

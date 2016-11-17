@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import eu.vicci.process.devices.core.Device;
+
 public class DeviceManager {
 	
 	private static DeviceManager dm;

@@ -28,6 +28,10 @@ import eu.vicci.process.graphiti.ProcessFeatureProvider;
 import eu.vicci.process.model.sofia.GoalInvoke;
 
 public class GoalInvokeSection extends PropertySectionBase {
+	private static final String REST_GOALS = "/rest/goal/goals";
+	private static final String REST_QUALITIES = "/rest/goal/qualities";
+	private static final String REST_LOCATIONS = "/rest/semantic/extended/locations";	
+	
 	private static final String LABEL_GOAL = "Invoke Goal: ";
 	private static final String LABEL_LOCATION = "Location: ";
 	
@@ -99,6 +103,17 @@ public class GoalInvokeSection extends PropertySectionBase {
 		};
 	};	
 	
+	// -----------------------------------------------------------------------------------------
+	// OH Connection ---------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------
+	
+	
+	
+	
+	
+	// -----------------------------------------------------------------------------------------
+	// create controls -------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------
 	
 	@Override
 	public void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {

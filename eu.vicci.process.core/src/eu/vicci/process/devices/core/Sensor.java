@@ -1,6 +1,6 @@
-package eu.vicci.process.devices;
+package eu.vicci.process.devices.core;
 
-import eu.vicci.process.devices.events.EventType;
+import eu.vicci.process.devices.events.core.EventType;
 
 public class Sensor extends Device {
 

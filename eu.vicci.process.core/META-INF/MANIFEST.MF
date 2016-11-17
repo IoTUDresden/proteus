@@ -10,6 +10,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Export-Package: com.fasterxml.jackson.annotation,
  eu.vicci.process.client.core,
+ eu.vicci.process.devices.core,
+ eu.vicci.process.devices.events.core,
  eu.vicci.process.engine.core,
  eu.vicci.process.model.util.core,
  eu.vicci.process.model.util.messages.core,

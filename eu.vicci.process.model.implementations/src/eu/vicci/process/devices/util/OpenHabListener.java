@@ -3,7 +3,7 @@ package eu.vicci.process.devices.util;
 import java.util.List;
 
 import eu.vicci.process.devices.DeviceManager;
-import eu.vicci.process.devices.Sensor;
+import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.devices.events.SensorEvent;
 import eu.vicci.process.devices.util.OpenHabEvent.OHItemAddedEvent;
 import eu.vicci.process.devices.util.OpenHabEvent.OHItemRemovedEvent;

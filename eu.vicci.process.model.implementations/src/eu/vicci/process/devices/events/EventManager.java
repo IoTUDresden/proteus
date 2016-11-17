@@ -4,7 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-import eu.vicci.process.devices.Device;
+import eu.vicci.process.devices.core.Device;
+import eu.vicci.process.devices.events.core.EventType;
 
 public class EventManager {
 

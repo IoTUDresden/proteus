@@ -1,4 +1,4 @@
-package eu.vicci.process.devices;
+package eu.vicci.process.devices.core;
 
 public class Device {
 	

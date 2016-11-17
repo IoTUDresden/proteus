@@ -1,4 +1,4 @@
-package eu.vicci.process.devices.events;
+package eu.vicci.process.devices.events.core;
 
 /**
  * EventType mostly for Esper

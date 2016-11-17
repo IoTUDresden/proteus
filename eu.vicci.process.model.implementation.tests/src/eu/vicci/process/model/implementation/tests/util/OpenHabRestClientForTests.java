@@ -2,7 +2,7 @@ package eu.vicci.process.model.implementation.tests.util;
 
 import java.util.List;
 
-import eu.vicci.process.devices.Sensor;
+import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.model.util.messages.core.SemanticPerson;
 import eu.vicci.process.openhab.util.IOpenHabRestClient;
 import eu.vicci.process.openhab.util.OpenHabItem;

@@ -13,9 +13,9 @@ import org.junit.Test;
 
 import com.espertech.esper.event.bean.BeanEventBean;
 
-import eu.vicci.process.devices.Sensor;
-import eu.vicci.process.devices.events.EventType;
+import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.devices.events.SensorEvent;
+import eu.vicci.process.devices.events.core.EventType;
 import eu.vicci.process.model.implementation.tests.util.TestUtil;
 import eu.vicci.process.model.sofia.EndDataPort;
 import eu.vicci.process.model.sofia.SimpleType;

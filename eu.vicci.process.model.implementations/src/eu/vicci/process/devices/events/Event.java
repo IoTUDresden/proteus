@@ -1,6 +1,7 @@
 package eu.vicci.process.devices.events;
 
-import eu.vicci.process.devices.Device;
+import eu.vicci.process.devices.core.Device;
+import eu.vicci.process.devices.events.core.EventType;
 
 /**
  * Base Class for Events used by the EsperEngine. Events should be immutable, so that

@@ -1,6 +1,7 @@
 package eu.vicci.process.devices.events;
 
-import eu.vicci.process.devices.Sensor;
+import eu.vicci.process.devices.core.Sensor;
+import eu.vicci.process.devices.events.core.EventType;
 
 /**
  * Immutable Sensor Event. Some properties are mirrored (additional properties with values

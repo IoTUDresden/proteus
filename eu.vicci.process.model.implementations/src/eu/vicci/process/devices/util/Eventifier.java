@@ -4,10 +4,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import eu.vicci.process.devices.DeviceManager;
-import eu.vicci.process.devices.Sensor;
+import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.devices.events.EventManager;
-import eu.vicci.process.devices.events.EventType;
 import eu.vicci.process.devices.events.SensorEvent;
+import eu.vicci.process.devices.events.core.EventType;
 import eu.vicci.process.model.cep.EsperManager;
 import eu.vicci.process.model.sofiainstance.BooleanTypeInstance;
 import eu.vicci.process.model.sofiainstance.DataPortInstance;

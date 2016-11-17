@@ -22,7 +22,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import eu.vicci.process.devices.Sensor;
+import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.model.sofiainstance.impl.custom.OpenHabSemanticResultSetReceiverInvokeInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.impl.custom.OpenHabSemanticSelectInvokeInstanceImplCustom;
 import eu.vicci.process.openhab.util.IOpenHabRestClient;
