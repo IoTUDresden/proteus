@@ -73,7 +73,7 @@ public abstract class OpenHabSemanticInvokeInstanceImplCustom extends ProcessSte
 			return false;
 		}
 		OpenHabSemanticInvoke openhab = (OpenHabSemanticInvoke) getProcessStepType();
-		serverBaseUri = ConfigurationManager.getInstance().getConfiguration(ConfigProperties.OPENHAB_URI, String.class);
+		serverBaseUri = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.OPENHAB_URI);
 		query = replacePlaceholder(openhab.getQuery(), startParameter);
 		withLatest = openhab.isWithLatest();
 		return true;

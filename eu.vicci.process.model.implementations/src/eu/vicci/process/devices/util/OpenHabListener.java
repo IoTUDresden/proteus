@@ -61,7 +61,7 @@ public class OpenHabListener {
 	 * mapped as sensors and added to the DeviceManager.
 	 */
 	public void start() {
-		String uri = ConfigurationManager.getInstance().getConfiguration(ConfigProperties.OPENHAB_URI, String.class);
+		String uri = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.OPENHAB_URI);
 		if (uri == null)
 			start(DEFAULT_SERVER_URI);
 		else

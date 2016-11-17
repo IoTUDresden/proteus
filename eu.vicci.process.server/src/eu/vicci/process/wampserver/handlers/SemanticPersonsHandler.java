@@ -38,8 +38,7 @@ public class SemanticPersonsHandler extends AbstractRpcHandler {
 	}
 	
 	private String createTargetPath(){
-		String tmp = ConfigurationManager.getInstance()
-				.getConfiguration(ConfigProperties.OPENHAB_URI, String.class);
+		String tmp = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.OPENHAB_URI);
 		if(tmp == null)
 			return null;
 		

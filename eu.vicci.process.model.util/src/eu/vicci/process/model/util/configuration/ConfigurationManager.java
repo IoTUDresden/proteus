@@ -73,6 +73,15 @@ public final class ConfigurationManager {
 	}
 	
 	/**
+	 * Gets the config value as String.
+	 * @param key
+	 * @return null if cant convert the value to String or a value for the given key does not exist.
+	 */
+	public String getConfigAsString(String key){
+		return getConfiguration(key, String.class);
+	}
+	
+	/**
 	 * Updates following values in the config:
 	 * - ConfigProperties.OPENHAB_URI
 	 * 
@@ -80,6 +89,8 @@ public final class ConfigurationManager {
 	 */
 	public void updateFromConfigReader(IConfigurationReader reader){
 		configurations.put(ConfigProperties.OPENHAB_URI, reader.getOpenHabUri());
+		configurations.put(ConfigProperties.FEEDBACK_SERVICE_URI, reader.getFeedbackServiceUri());
+		configurations.put(ConfigProperties.CONTEXT_URI, reader.getContextUri());
 	}
 
 }

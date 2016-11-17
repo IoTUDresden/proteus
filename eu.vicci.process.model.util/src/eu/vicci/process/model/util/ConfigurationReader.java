@@ -19,6 +19,9 @@ public class ConfigurationReader implements IConfigurationReader {
 	private String namespace;
 	private String openHabUri;
 	
+	private String contextUri;
+	private String feedbackServiceUri;
+	
 	//listeners for runtime
 	private boolean startOsgiRuntime;
 	private boolean startSemiwaListener;
@@ -26,6 +29,10 @@ public class ConfigurationReader implements IConfigurationReader {
 	private boolean startCepEngine;
 	private boolean startXmlRpcWebServer;
 	private boolean deployExistingProcessModels;
+	
+	//TODO
+//	- ContextUri (default: http://localhost:9000/contexts/0)
+//		- FeedbackServiceUri (default: http://192.168.1.3:9000)
 	
 	public ConfigurationReader(String path) {
 		this.path = path;
@@ -118,10 +125,23 @@ public class ConfigurationReader implements IConfigurationReader {
 		realmName = properties.getProperty(ConfigProperties.REALMNAME);
 		namespace = properties.getProperty(ConfigProperties.NAMESPACE);
 		openHabUri = properties.getProperty(ConfigProperties.OPENHAB_URI);
+		
+		contextUri = properties.getProperty(ConfigProperties.CONTEXT_URI);
+		feedbackServiceUri = properties.getProperty(ConfigProperties.FEEDBACK_SERVICE_URI);
 	}
 
 	@Override
 	public String getOpenHabUri() {
 		return openHabUri;
+	}
+
+	@Override
+	public String getContextUri() {
+		return contextUri;
+	}
+
+	@Override
+	public String getFeedbackServiceUri() {
+		return feedbackServiceUri;
 	}
 }
