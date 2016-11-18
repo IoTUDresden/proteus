@@ -5,8 +5,8 @@ import java.util.List;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.model.util.messages.core.SemanticPerson;
-import eu.vicci.process.openhab.util.IOpenHabRestClient;
-import eu.vicci.process.openhab.util.OpenHabRestClient;
+import eu.vicci.openhab.util.IOpenHabRestClient;
+import eu.vicci.openhab.util.OpenHabRestClient;
 import ws.wamp.jawampa.ApplicationError;
 import ws.wamp.jawampa.Request;
 

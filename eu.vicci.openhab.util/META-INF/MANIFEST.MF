@@ -18,5 +18,16 @@ Bundle-ClassPath: maven_libs/commons-codec-1.6.jar,
  maven_libs/slf4j-api-1.7.13.jar,
  maven_libs/slf4j-log4j12-1.7.13.jar,
  maven_libs/gson-2.5.jar,
- maven_libs/javax.ws.rs-api-2.0.1.jar
+ maven_libs/javax.ws.rs-api-2.0.1.jar,
+ maven_libs/aopalliance-repackaged-2.4.0-b12.jar,
+ maven_libs/hk2-api-2.4.0-b12.jar,
+ maven_libs/hk2-locator-2.4.0-b12.jar,
+ maven_libs/hk2-utils-2.4.0-b12.jar,
+ maven_libs/javassist-3.18.1-GA.jar,
+ maven_libs/javax.annotation-api-1.2.jar,
+ maven_libs/javax.inject-2.4.0-b12.jar,
+ maven_libs/jersey-common-2.18.jar,
+ maven_libs/jersey-guava-2.18.jar,
+ maven_libs/osgi-resource-locator-1.0.1.jar
 Bundle-Vendor: TUD
+Export-Package: eu.vicci.openhab.util

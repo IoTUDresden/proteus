@@ -25,10 +25,10 @@ import com.google.gson.JsonObject;
 import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.model.sofiainstance.impl.custom.OpenHabSemanticResultSetReceiverInvokeInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.impl.custom.OpenHabSemanticSelectInvokeInstanceImplCustom;
-import eu.vicci.process.openhab.util.IOpenHabRestClient;
-import eu.vicci.process.openhab.util.JsonUtil;
-import eu.vicci.process.openhab.util.OpenHabItem;
-import eu.vicci.process.openhab.util.OpenHabRestClient;
+import eu.vicci.process.model.util.JsonUtil;
+import eu.vicci.openhab.util.IOpenHabRestClient;
+import eu.vicci.openhab.util.OpenHabItem;
+import eu.vicci.openhab.util.OpenHabRestClient;
 
 /**
  * Tests the openhab client. This tests need a instance of openhab running.

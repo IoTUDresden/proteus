@@ -37,6 +37,11 @@
 			<artifactId>javax.ws.rs-api</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-common</artifactId>
+		</dependency>
+
 
 
 	</dependencies>
@@ -61,6 +66,11 @@
 				<groupId>javax.ws.rs</groupId>
 				<artifactId>javax.ws.rs-api</artifactId>
 				<version>2.0.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.glassfish.jersey.core</groupId>
+				<artifactId>jersey-common</artifactId>
+				<version>2.18</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

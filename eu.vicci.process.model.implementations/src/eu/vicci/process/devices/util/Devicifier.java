@@ -16,7 +16,7 @@ import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.DoubleTypeInstance;
 import eu.vicci.process.model.sofiainstance.IntegerTypeInstance;
 import eu.vicci.process.model.sofiainstance.StringTypeInstance;
-import eu.vicci.process.openhab.util.IOpenHabRestClient;
+import eu.vicci.openhab.util.IOpenHabRestClient;
 import eu.vicci.semiwa.common.enums.SeMiWaNodeEmum;
 import eu.vicci.semiwa.common.node.NodeInformation;
 

@@ -12,12 +12,12 @@ import eu.vicci.process.devices.util.OpenHabEvent.OHItemStatePayload;
 import eu.vicci.process.model.cep.EsperEngine;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
-import eu.vicci.process.openhab.util.IOpenHabRestClient;
+import eu.vicci.openhab.util.IOpenHabRestClient;
 import eu.vicci.process.openhab.util.OpenHabEventProvider;
 import eu.vicci.process.openhab.util.OpenHabEventProvider.OHEventItemAddedListener;
 import eu.vicci.process.openhab.util.OpenHabEventProvider.OHEventItemRemovedListener;
 import eu.vicci.process.openhab.util.OpenHabEventProvider.OHEventItemStateListener;
-import eu.vicci.process.openhab.util.OpenHabRestClient;
+import eu.vicci.openhab.util.OpenHabRestClient;
 
 /**
  * Listener for receiving openhab events in the process engine <br>

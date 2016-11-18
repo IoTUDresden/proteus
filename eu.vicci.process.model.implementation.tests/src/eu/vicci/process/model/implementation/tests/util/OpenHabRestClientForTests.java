@@ -4,8 +4,8 @@ import java.util.List;
 
 import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.model.util.messages.core.SemanticPerson;
-import eu.vicci.process.openhab.util.IOpenHabRestClient;
-import eu.vicci.process.openhab.util.OpenHabItem;
+import eu.vicci.openhab.util.IOpenHabRestClient;
+import eu.vicci.openhab.util.OpenHabItem;
 
 public class OpenHabRestClientForTests implements IOpenHabRestClient {
 

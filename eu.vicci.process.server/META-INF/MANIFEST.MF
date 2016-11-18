@@ -31,7 +31,8 @@ Require-Bundle: eu.vicci.process.osgi,
  eu.vicci.process.core;bundle-version="1.0.0",
  eu.vicci.process.client;bundle-version="1.0.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.11.1",
- org.eclipse.osgi;bundle-version="3.10.102"
+ org.eclipse.osgi;bundle-version="3.10.102",
+ eu.vicci.openhab.util;bundle-version="1.0.0"
 Export-Package: eu.vicci.process.runtime,
  eu.vicci.process.wampserver
 Bundle-ActivationPolicy: lazy

@@ -16,7 +16,7 @@ import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.EndDataPortInstance;
 import eu.vicci.process.model.sofiainstance.ListTypeInstance;
 import eu.vicci.process.model.sofiainstance.util.LifeCycleManager;
-import eu.vicci.process.openhab.util.JsonUtil;
+import eu.vicci.process.model.util.JsonUtil;
 
 /**
  * Base Class for all OpenHabSemanticInvoke Steps which receives ResultSets from the

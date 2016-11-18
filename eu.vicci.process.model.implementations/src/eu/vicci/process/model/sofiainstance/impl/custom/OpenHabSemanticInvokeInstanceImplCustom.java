@@ -8,8 +8,8 @@ import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.OpenHabSemanticInvokeInstance;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
-import eu.vicci.process.openhab.util.IOpenHabRestClient;
-import eu.vicci.process.openhab.util.OpenHabRestClient;
+import eu.vicci.openhab.util.IOpenHabRestClient;
+import eu.vicci.openhab.util.OpenHabRestClient;
 
 /**
  * Base Class for the OpenHabSemanticInvoke Step. Encapsulate the base informations needed
