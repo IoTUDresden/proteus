@@ -135,14 +135,16 @@ public class OpenHabRestClient implements IOpenHabRestClient {
 	@Override
 	public List<OpenHabItem> getAllItems() {
 		URI uri = UriBuilder.fromPath(serverBaseUri).path(ITEMS_PATH).build();
-		List<OpenHabItem> list = receiveList(uri, new TypeToken<ArrayList<OpenHabItem>>(){});
+		List<OpenHabItem> list = receiveList(uri, new TypeToken<ArrayList<OpenHabItem>>() {
+		});
 		return list == null ? new ArrayList<>() : list;
 	}
 
 	@Override
 	public List<SemanticPerson> getSemanticPersons() {
 		URI uri = UriBuilder.fromPath(serverBaseUri).path(SEMANTIC_PERSONS).build();
-		return receiveList(uri, new TypeToken<ArrayList<SemanticPerson>>(){});
+		return receiveList(uri, new TypeToken<ArrayList<SemanticPerson>>() {
+		});
 	}
 
 	@Override
@@ -171,24 +173,41 @@ public class OpenHabRestClient implements IOpenHabRestClient {
 	@Override
 	public List<SemanticLocation> getAllLocations() {
 		URI uri = UriBuilder.fromPath(serverBaseUri).path(SEMANTIC_LOCATIONS_PATH).build();
-		return receiveList(uri, new TypeToken<ArrayList<SemanticLocation>>(){});
+		return receiveList(uri, new TypeToken<ArrayList<SemanticLocation>>() {
+		});
 	}
 
 	@Override
 	public List<Quality> getAllQualities() {
 		URI uri = UriBuilder.fromPath(serverBaseUri).path(GOAL_QUALITY_PATH).build();
-		return receiveList(uri, new TypeToken<ArrayList<Quality>>(){});
+		return receiveList(uri, new TypeToken<ArrayList<Quality>>() {
+		});
 	}
 
 	@Override
 	public List<Goal> getAllGoals() {
 		URI uri = UriBuilder.fromPath(serverBaseUri).path(GOAL_GOAL_PATH).build();
-		return receiveList(uri, new TypeToken<ArrayList<Goal>>(){});
+		return receiveList(uri, new TypeToken<ArrayList<Goal>>() {
+		});
 	}
 
 	@Override
-	public void executeGoal(ExecuteGoalCommandBean cmd) {
-		throw new UnsupportedOperationException("not implemented yet");
+	public boolean executeGoal(ExecuteGoalCommandBean cmd) {
+		URI uri = UriBuilder.fromPath(serverBaseUri).path(GOAL_EXECUTE_GOAL_PATH).build();
+		HttpPost post = new HttpPost(uri);
+		String objString = getObjectAsJson(cmd);
+		if(objString == null){
+			logger.error("Cant executeGoal. Parameter is null");
+			return false;
+		}
+			
+		HttpEntity entity = new StringEntity(objString, ContentType.APPLICATION_JSON);
+		post.setEntity(entity);
+		logger.debug("post entity: {}", objString);
+		CloseableHttpResponse response = executeRequest(post);
+		boolean isOk = isStatusOk(response.getStatusLine().getStatusCode());
+		closeResponseSafely(response);
+		return isOk;
 	}
 
 	/**
@@ -237,6 +256,32 @@ public class OpenHabRestClient implements IOpenHabRestClient {
 			}
 		}
 		return out;
+	}
+
+	/**
+	 * tries to convert the object to a json string.
+	 * 
+	 * @param src
+	 * @return null if src is null or conversion failed
+	 */
+	private String getObjectAsJson(Object src) {
+		try {
+			if (src != null)
+				return new Gson().toJson(src);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error("failed to convert object from class {} to json", src.getClass().getSimpleName());
+		}
+		return null;
+	}
+	
+	private void closeResponseSafely(CloseableHttpResponse response){
+		if(response == null) return;
+		try {
+			response.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private boolean isStatusOk(int statusCode) {

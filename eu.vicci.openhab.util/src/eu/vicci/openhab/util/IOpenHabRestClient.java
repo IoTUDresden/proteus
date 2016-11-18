@@ -144,7 +144,8 @@ public interface IOpenHabRestClient {
 	/**
 	 * Executes the given goal on the OH Goal Layer
 	 * @param cmd
+	 * @return true if request was successful
 	 */
-	public abstract void executeGoal(ExecuteGoalCommandBean cmd);
+	public abstract boolean executeGoal(ExecuteGoalCommandBean cmd);
 
 }

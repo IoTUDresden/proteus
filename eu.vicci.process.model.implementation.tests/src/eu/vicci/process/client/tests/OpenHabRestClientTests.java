@@ -12,6 +12,7 @@ import java.lang.reflect.Method;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -22,17 +23,18 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import eu.vicci.openhab.util.IOpenHabRestClient;
+import eu.vicci.openhab.util.OpenHabRestClient;
+import eu.vicci.openhab.util.beans.ExecuteGoalCommandBean;
+import eu.vicci.openhab.util.beans.Goal;
+import eu.vicci.openhab.util.beans.OpenHabItem;
+import eu.vicci.openhab.util.beans.Quality;
+import eu.vicci.openhab.util.beans.SemanticLocation;
 import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.model.sofiainstance.impl.custom.OpenHabSemanticResultSetReceiverInvokeInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.impl.custom.OpenHabSemanticSelectInvokeInstanceImplCustom;
 import eu.vicci.process.model.util.JsonUtil;
 import eu.vicci.process.model.util.messages.core.SemanticPerson;
-import eu.vicci.openhab.util.IOpenHabRestClient;
-import eu.vicci.openhab.util.OpenHabRestClient;
-import eu.vicci.openhab.util.beans.Goal;
-import eu.vicci.openhab.util.beans.OpenHabItem;
-import eu.vicci.openhab.util.beans.Quality;
-import eu.vicci.openhab.util.beans.SemanticLocation;
 
 /**
  * Tests the openhab client. This tests need a instance of openhab running.
@@ -196,6 +198,34 @@ public class OpenHabRestClientTests {
 			System.out.println("    " + p);			
 		}
 		System.out.println("");		
+	}
+	
+	/**
+	 * Checks if it is possible to execute a goal.
+	 */
+	@Test
+	public void executeGoalTest(){
+		ExecuteGoalCommandBean cmd = new ExecuteGoalCommandBean();
+		cmd.goal = new Goal();
+		cmd.goal.name = "some_goal";
+		
+		cmd.location = new SemanticLocation();
+		cmd.location.setSemanticUri("some_uri_for_location");
+		
+		cmd.qualities = new ArrayList<>();
+		cmd.qualities.add(new Quality());
+		cmd.qualities.add(new Quality());
+		cmd.qualities.get(0).name = "some_quality_0";
+		cmd.qualities.get(1).name = "some_quality_1";
+		
+		assertTrue("executing goal failes", client.executeGoal(cmd));
+		assertFalse("executing a goal with empty command should fail", 
+				client.executeGoal(new ExecuteGoalCommandBean()));
+		
+		ExecuteGoalCommandBean cmd2 = new ExecuteGoalCommandBean();
+		cmd2.location = new SemanticLocation();
+		cmd2.location.setSemanticUri("some_new_location_uri");
+		assertFalse("executing a goal with missing goal should fail", client.executeGoal(cmd2));		
 	}
 	
 	/**
