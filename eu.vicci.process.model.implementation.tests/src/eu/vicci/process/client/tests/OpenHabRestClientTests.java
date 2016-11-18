@@ -26,9 +26,13 @@ import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.model.sofiainstance.impl.custom.OpenHabSemanticResultSetReceiverInvokeInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.impl.custom.OpenHabSemanticSelectInvokeInstanceImplCustom;
 import eu.vicci.process.model.util.JsonUtil;
+import eu.vicci.process.model.util.messages.core.SemanticPerson;
 import eu.vicci.openhab.util.IOpenHabRestClient;
-import eu.vicci.openhab.util.OpenHabItem;
 import eu.vicci.openhab.util.OpenHabRestClient;
+import eu.vicci.openhab.util.beans.Goal;
+import eu.vicci.openhab.util.beans.OpenHabItem;
+import eu.vicci.openhab.util.beans.Quality;
+import eu.vicci.openhab.util.beans.SemanticLocation;
 
 /**
  * Tests the openhab client. This tests need a instance of openhab running.
@@ -132,6 +136,66 @@ public class OpenHabRestClientTests {
 			System.out.println("	eventType:" + sensor.getEventType());
 			System.out.println("	dataType: " + sensor.getDatatype().getSimpleName());
 		}
+	}
+	
+	/**
+	 * checks if at least one location is returned. No further checks.
+	 */
+	@Test
+	public void getAllLocationsTest(){
+		List<SemanticLocation> locations = client.getAllLocations();
+		assertFalse("There should at least one location in the sal, to run this test", locations.isEmpty());
+		System.out.println("");
+		System.out.println("Locations: ");
+		for (SemanticLocation l : locations) {
+			System.out.println("    " + l);			
+		}
+		System.out.println("");
+	}
+	
+	/**
+	 * checks if at least one quality is returned. No further checks.
+	 */
+	@Test
+	public void getAllQualitiesTest(){
+		List<Quality> qualities = client.getAllQualities();
+		assertFalse("There should at least one quality in the sal, to run this test", qualities.isEmpty());	
+		System.out.println("");
+		System.out.println("Qualities: ");
+		for (Quality q : qualities) {
+			System.out.println("    " + q);			
+		}
+		System.out.println("");
+	}
+	
+	/**
+	 * checks if at least one goals is returned. No further checks.
+	 */
+	@Test
+	public void getAllGoalsTest(){
+		List<Goal> goals = client.getAllGoals();
+		assertFalse("There should at least one goal in the sal, to run this test", goals.isEmpty());	
+		System.out.println("");
+		System.out.println("Goals: ");
+		for (Goal g : goals) {
+			System.out.println("    " + g);			
+		}
+		System.out.println("");
+	}
+	
+	/**
+	 * checks if at least one person is returned. No further checks.
+	 */
+	@Test
+	public void getSemanticPersonsTest(){
+		List<SemanticPerson> persons = client.getSemanticPersons();
+		assertFalse("There should at least one person in the sal, to run this test", persons.isEmpty());	
+		System.out.println("");
+		System.out.println("Persons: ");
+		for (SemanticPerson p : persons) {
+			System.out.println("    " + p);			
+		}
+		System.out.println("");		
 	}
 	
 	/**

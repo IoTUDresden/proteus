@@ -1,7 +1,6 @@
 package eu.vicci.openhab.util;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,29 +25,36 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import eu.vicci.openhab.util.beans.ExecuteGoalCommandBean;
+import eu.vicci.openhab.util.beans.Goal;
+import eu.vicci.openhab.util.beans.OpenHabItem;
+import eu.vicci.openhab.util.beans.Quality;
+import eu.vicci.openhab.util.beans.SemanticLocation;
 import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.devices.events.core.EventType;
 import eu.vicci.process.model.util.JsonUtil;
 import eu.vicci.process.model.util.messages.core.SemanticPerson;
 
 /**
- * Rest Client for OpenHab. For receiving events use {@link OpenHabEventProvider} instead.
+ * Rest Client for OpenHab. For receiving events use
+ * {@link OpenHabEventProvider} instead.
+ * 
  * @author André Kühnert
  *
  */
 public class OpenHabRestClient implements IOpenHabRestClient {
 	private static final Logger logger = LoggerFactory.getLogger(OpenHabRestClient.class);
 	private final String serverBaseUri;
-	
+
 	private CloseableHttpClient client;
 
 	/**
-	 * Creates a new OpenHabRestClient to communicate with OpenHab via rest. This backs a
-	 * {@link org.apache.http.impl.client.CloseableHttpClient CloseableHttpClient} which
-	 * have to be closed after use. Call {@link #close()} to close it.
+	 * Creates a new OpenHabRestClient to communicate with OpenHab via rest.
+	 * This backs a {@link org.apache.http.impl.client.CloseableHttpClient
+	 * CloseableHttpClient} which have to be closed after use. Call
+	 * {@link #close()} to close it.
 	 * 
 	 * @param serverBaseUri
 	 *            the Uri where OpenHab is running<br>
@@ -57,8 +63,9 @@ public class OpenHabRestClient implements IOpenHabRestClient {
 	public OpenHabRestClient(String serverBaseUri) {
 		this.serverBaseUri = serverBaseUri;
 		client = HttpClients.createDefault();
-		//enables debug logging but this lib is not available in this project for now
-//		WebSocketImpl.DEBUG = true;
+		// enables debug logging but this lib is not available in this project
+		// for now
+		// WebSocketImpl.DEBUG = true;
 	}
 
 	@Override
@@ -107,68 +114,96 @@ public class OpenHabRestClient implements IOpenHabRestClient {
 		String json = getStringFromResponse(response);
 		return json;
 	}
-	
+
 	@Override
-	public String getLocationForItem(String itemName){
-		URI uri = UriBuilder.fromPath(serverBaseUri)
-				.path(SELECT_PATH)
-				.path(itemName)
-				.path(SEMANTIC_LOCATION_PATH)
+	public String getLocationForItem(String itemName) {
+		URI uri = UriBuilder.fromPath(serverBaseUri).path(SELECT_PATH).path(itemName).path(SEMANTIC_LOCATION_PATH)
 				.build();
 		HttpGet get = new HttpGet(uri);
 		CloseableHttpResponse response = executeRequest(get);
 		String out = getStringFromResponse(response);
-		if(out == null || out.compareToIgnoreCase("null") == 0)
+		if (out == null || out.compareToIgnoreCase("null") == 0)
 			return null;
 		return out;
 	}
-	
+
 	@Override
-	public String getSemanticType(String itemName){
+	public String getSemanticType(String itemName) {
 		return null;
-	}
-	
-	@Override
-	public List<OpenHabItem> getAllItems(){
-		URI uri = UriBuilder.fromPath(serverBaseUri).path(ITEMS_PATH).build();
-		HttpGet get = new HttpGet(uri);
-		CloseableHttpResponse response = executeRequest(get);
-		String json = getStringFromResponse(response);
-		return getItemListFromJson(json);
-	}
-	
-	@Override
-	public List<SemanticPerson> getSemanticPersons(){
-		URI uri = UriBuilder.fromPath(serverBaseUri).path(SEMANTIC_PERSONS).build();
-		HttpGet get = new HttpGet(uri);
-		CloseableHttpResponse response = executeRequest(get);
-		String json = getStringFromResponse(response);
-		return getObjectListFromJson(json, SemanticPerson.class);
 	}
 
 	@Override
-	public void close() {		
+	public List<OpenHabItem> getAllItems() {
+		URI uri = UriBuilder.fromPath(serverBaseUri).path(ITEMS_PATH).build();
+		List<OpenHabItem> list = receiveList(uri, new TypeToken<ArrayList<OpenHabItem>>(){});
+		return list == null ? new ArrayList<>() : list;
+	}
+
+	@Override
+	public List<SemanticPerson> getSemanticPersons() {
+		URI uri = UriBuilder.fromPath(serverBaseUri).path(SEMANTIC_PERSONS).build();
+		return receiveList(uri, new TypeToken<ArrayList<SemanticPerson>>(){});
+	}
+
+	@Override
+	public void close() {
 		try {
 			client.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public List<Sensor> getAllSensorsSemantic() {
-		URI uri = UriBuilder.fromPath(serverBaseUri)
-				.path(SEMANTIC_SENSOR_PATH)
-				.build();
+		URI uri = UriBuilder.fromPath(serverBaseUri).path(SEMANTIC_SENSOR_PATH).build();
 		HttpGet get = new HttpGet(uri);
 		CloseableHttpResponse response = executeRequest(get);
 		String json = getStringFromResponse(response);
 		return getSensorListFromJson(json);
 	}
-	
+
 	@Override
-	public void postCommand(OpenHabItem item, String command){
+	public void postCommand(OpenHabItem item, String command) {
 		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	@Override
+	public List<SemanticLocation> getAllLocations() {
+		URI uri = UriBuilder.fromPath(serverBaseUri).path(SEMANTIC_LOCATIONS_PATH).build();
+		return receiveList(uri, new TypeToken<ArrayList<SemanticLocation>>(){});
+	}
+
+	@Override
+	public List<Quality> getAllQualities() {
+		URI uri = UriBuilder.fromPath(serverBaseUri).path(GOAL_QUALITY_PATH).build();
+		return receiveList(uri, new TypeToken<ArrayList<Quality>>(){});
+	}
+
+	@Override
+	public List<Goal> getAllGoals() {
+		URI uri = UriBuilder.fromPath(serverBaseUri).path(GOAL_GOAL_PATH).build();
+		return receiveList(uri, new TypeToken<ArrayList<Goal>>(){});
+	}
+
+	@Override
+	public void executeGoal(ExecuteGoalCommandBean cmd) {
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+
+	/**
+	 * Receives a List from the given URI per GET REQUEST.
+	 * 
+	 * @param uri
+	 * @param token
+	 *            type token, for conversion from json
+	 * @return null if request fails
+	 */
+	private <T> T receiveList(URI uri, TypeToken<T> token) {
+		HttpGet get = new HttpGet(uri);
+		CloseableHttpResponse response = executeRequest(get);
+		String json = getStringFromResponse(response);
+		return getObjectListFromJson(json, token);
 	}
 
 	private URI getUriForSelectOrAsk(String queryStmt, boolean withLatest, String path) {
@@ -234,68 +269,54 @@ public class OpenHabRestClient implements IOpenHabRestClient {
 
 	private JsonObject getPostCommandEntityAsJson(String statement, String command, boolean withLatest) {
 		JsonObject object = new JsonObject();
-		String tmp = statement.replace("\t", " "); // Problems with tabstops in the query
+		String tmp = statement.replace("\t", " "); // Problems with tabstops in
+													// the query
 		object.addProperty("statement", tmp);
 		object.addProperty("command", command);
 		object.addProperty("withlatest", withLatest);
 		return object;
 	}
-	
-	private List<OpenHabItem> getItemListFromJson(String json){
-		List<OpenHabItem> out = new ArrayList<>();
-		if(json == null || json.isEmpty())
-			return out;
-		try {
-			Type listType = new TypeToken<List<OpenHabItem>>() {}.getType();
-			Gson gson = new Gson();
-			out =  gson.fromJson(json, listType);	
-		} catch (JsonSyntaxException e) {
-			logger.error("error while parsing json");
-		}
-		return out;
-	}
-	
-	//?instance ?shortName ?openHabName ?typeName ?location ?thingName ?unit ?symbol
-	private List<Sensor> getSensorListFromJson(String json){
+
+	// ?instance ?shortName ?openHabName ?typeName ?location ?thingName ?unit
+	// ?symbol
+	private List<Sensor> getSensorListFromJson(String json) {
 		List<Sensor> list = new ArrayList<>();
 		JsonObject object = JsonUtil.tryGetJsonObject(json);
 		JsonObject res = object.getAsJsonObject("results");
-		JsonArray results = res.getAsJsonArray("bindings");		
+		JsonArray results = res.getAsJsonArray("bindings");
 		Iterator<JsonElement> it = results.iterator();
 		while (it.hasNext()) {
-			JsonObject obj = (JsonObject)it.next();
+			JsonObject obj = (JsonObject) it.next();
 			String uid = getObjectValueAsString("openHabName", "value", obj);
 			String type = getObjectValueAsString("typeName", "value", obj);
 			String location = getObjectValueAsString("location", "value", obj);
 			String unit = getObjectValueAsString("symbol", "value", object);
-			
+
 			EventType et = new EventType(type, String.class);
 			Sensor sensor = new Sensor(uid, location, type, et, String.class, unit);
 			list.add(sensor);
 		}
 		return list;
 	}
-	
-	private <T> List<T> getObjectListFromJson(String json, Class<T> clazz){
-		if(json == null)
+
+	private <T> T getObjectListFromJson(String json, TypeToken<T> token) {
+		if (json == null)
 			return null;
-		
-		Gson gson = new Gson();		
-		List<T> result = null;
+
+		Gson gson = new Gson();
+		T result = null;
 		try {
-			result = gson.fromJson(json, new TypeToken<List<T>>(){}.getType());	
+			result = gson.fromJson(json, token.getType());
 		} catch (Exception e) {
-			logger.error(ERR_JSON_CONVERT, clazz.getName() , json);
+			logger.error(ERR_JSON_CONVERT, token.getType().getClass().getName(), json);
 		}
 		return result;
 	}
-	
-	private String getObjectValueAsString(String memberName, String memberValueField, JsonObject object){
-		if(!object.has(memberName))
+
+	private String getObjectValueAsString(String memberName, String memberValueField, JsonObject object) {
+		if (!object.has(memberName))
 			return null;
-		return object.getAsJsonObject(memberName)
-		.get(memberValueField)
-		.getAsString();
+		return object.getAsJsonObject(memberName).get(memberValueField).getAsString();
 	}
 
 }

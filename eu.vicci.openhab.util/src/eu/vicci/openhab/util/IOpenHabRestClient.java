@@ -2,6 +2,11 @@ package eu.vicci.openhab.util;
 
 import java.util.List;
 
+import eu.vicci.openhab.util.beans.ExecuteGoalCommandBean;
+import eu.vicci.openhab.util.beans.Goal;
+import eu.vicci.openhab.util.beans.OpenHabItem;
+import eu.vicci.openhab.util.beans.Quality;
+import eu.vicci.openhab.util.beans.SemanticLocation;
 import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.model.util.messages.core.SemanticPerson;
 
@@ -21,6 +26,12 @@ public interface IOpenHabRestClient {
 	public static final String SEMANTIC_LOCATION_PATH = "/location";
 	public static final String SEMANTIC_SENSOR_PATH = "/rest/semantic/sensors";
 	public static final String SEMANTIC_PERSONS = "/rest/semantic/extended/persons";
+	public static final String SEMANTIC_LOCATIONS_PATH = "/rest/semantic/extended/locations";
+	
+	public static final String GOAL_PATH = "/rest/goal";
+	public static final String GOAL_GOAL_PATH = GOAL_PATH + "/goals";
+	public static final String GOAL_QUALITY_PATH = GOAL_PATH + "/qualities";
+	public static final String GOAL_EXECUTE_GOAL_PATH = GOAL_PATH + "/execute/goal";
 		
 	public static final String ERR_JSON_CONVERT = "error converting json result to class {}: {}";
 
@@ -111,5 +122,29 @@ public interface IOpenHabRestClient {
 	 * Gets a list with all sensors. The informations are received from the semantic layer.
 	 */
 	public abstract List<Sensor> getAllSensorsSemantic();
+	
+	/**
+	 * Gets all locations from the OH SAL
+	 * @return
+	 */
+	public abstract List<SemanticLocation> getAllLocations();
+	
+	/**
+	 * Gets all qualities from the OH Goal Layer
+	 * @return
+	 */
+	public abstract List<Quality> getAllQualities();
+	
+	/**
+	 * Gets all goals from the OH Goal Layer
+	 * @return
+	 */
+	public abstract List<Goal> getAllGoals();
+	
+	/**
+	 * Executes the given goal on the OH Goal Layer
+	 * @param cmd
+	 */
+	public abstract void executeGoal(ExecuteGoalCommandBean cmd);
 
 }

@@ -30,4 +30,5 @@ Bundle-ClassPath: maven_libs/commons-codec-1.6.jar,
  maven_libs/jersey-guava-2.18.jar,
  maven_libs/osgi-resource-locator-1.0.1.jar
 Bundle-Vendor: TUD
-Export-Package: eu.vicci.openhab.util
+Export-Package: eu.vicci.openhab.util,
+ eu.vicci.openhab.util.beans

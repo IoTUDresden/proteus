@@ -1,4 +1,4 @@
-package eu.vicci.openhab.util;
+package eu.vicci.openhab.util.beans;
 
 import java.util.List;
 
