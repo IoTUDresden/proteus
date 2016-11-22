@@ -110,5 +110,11 @@ public class OpenHabWaitForEventWithResult implements ProcessStepWorker, OHEvent
 			resultInstance = null; //is necessary cause it is not possible to reset this step
 	}
 
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

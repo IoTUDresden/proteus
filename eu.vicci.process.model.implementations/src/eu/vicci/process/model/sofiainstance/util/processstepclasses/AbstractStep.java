@@ -15,12 +15,20 @@ import eu.vicci.process.model.sofiainstance.impl.custom.BooleanTypeInstanceImplC
 public abstract class AbstractStep implements ProcessStepWorker {
 
     private List<DataTypeInstance> input;
-
+    private List<DataTypeInstance> outPorts;
+    
     private List<DataTypeInstance> output = new ArrayList<>();
 
     @Override
     public List<DataTypeInstance> work(List<DataTypeInstance> input) {
         this.input = input;
+        work();
+        return this.output;
+    }
+    
+    public List<DataTypeInstance> work(List<DataTypeInstance> input,List<DataTypeInstance> outPorts) {
+        this.input = input;
+        this.outPorts = outPorts;
         work();
         return this.output;
     }
@@ -50,14 +58,16 @@ public abstract class AbstractStep implements ProcessStepWorker {
     }
 
     protected BooleanTypeInstance booleanNamed(String typeName, boolean value) {
-        BooleanTypeInstance instance = new BooleanTypeInstanceImplCustom();
-        BooleanType type = SofiaFactoryImpl.eINSTANCE.createBooleanType();
-
-        type.setName(typeName);
-        instance.setValue(value);
-        instance.setDataTypeType(type);
-
-        return instance;
+        
+        for (DataTypeInstance dti : outPorts) {
+        	
+        	if (typeName.equals(dti.getName())) {
+        		((BooleanTypeInstance)dti).setValue(value);
+        		return (BooleanTypeInstance)dti;
+        	}
+        }
+        
+        return null;
     }
 
     @Override

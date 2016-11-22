@@ -48,7 +48,7 @@ public class LoadClassStepInstanceImplCustom extends ProcessStepInstanceImplCust
 	 */
 	@Override
 	public void work() {
-		returnValues = processStepWorker.work(startParameter);
+		returnValues = processStepWorker.work(startParameter,endParameter);
 	}
 
 	private ClassLoader getClassLoader() {

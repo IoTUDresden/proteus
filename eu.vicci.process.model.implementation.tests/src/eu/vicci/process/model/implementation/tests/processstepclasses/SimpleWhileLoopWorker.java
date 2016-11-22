@@ -40,4 +40,10 @@ public class SimpleWhileLoopWorker implements ProcessStepWorker {
 	private void print(String text){
 		System.out.println(text);
 	}
+
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

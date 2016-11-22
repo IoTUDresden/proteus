@@ -38,6 +38,8 @@ public interface InternalProcessStepInterface {
 
 	public void aggregateStartParameter();
 
+	public void aggregateEndParameter();
+	
 	public void activateDataEndPorts();
 
 	public void activateControlEndPorts();

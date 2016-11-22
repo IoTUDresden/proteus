@@ -24,4 +24,10 @@ public class FalseConsoleOutput implements ProcessStepWorker {
 		System.out.println("The False Process is deplyoing...");		
 	}
 
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

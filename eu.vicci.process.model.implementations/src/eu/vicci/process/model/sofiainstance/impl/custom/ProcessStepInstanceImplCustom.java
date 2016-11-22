@@ -47,6 +47,7 @@ public class ProcessStepInstanceImplCustom extends ProcessStepInstanceImplCustom
 		logInfo("-------------> execution started");
 		cancelTimer();
 		aggregateStartParameter();
+		aggregateEndParameter();
 		startSubProcesses();
 		startStateTimerIfNeeded();
 

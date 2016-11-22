@@ -52,6 +52,7 @@ public abstract class ProcessStepInstanceImplCustomBase extends ProcessStepInsta
 
 	protected final Logger LOGGER = LoggerFactory.getLogger(getClass().getSimpleName());
 	protected List<DataTypeInstance> startParameter = new ArrayList<DataTypeInstance>();
+	protected List<DataTypeInstance> endParameter = new ArrayList<DataTypeInstance>();
 	protected List<DataTypeInstance> returnValues = new ArrayList<DataTypeInstance>();
 	protected List<ProcessExecutedListener> processExecutedListeners = new ArrayList<>();
 	protected List<ProcessResetListener> processResetListener = new ArrayList<>();
@@ -178,6 +179,14 @@ public abstract class ProcessStepInstanceImplCustomBase extends ProcessStepInsta
 	@Override
 	public void setStartParameter(List<DataTypeInstance> startParameter) {
 		this.startParameter = startParameter;
+	}
+
+	public List<DataTypeInstance> getEndParameter() {
+		return endParameter;
+	}
+
+	public void setEndParameter(List<DataTypeInstance> endParameter) {
+		this.endParameter = endParameter;
 	}
 
 	@Override
@@ -382,6 +391,22 @@ public abstract class ProcessStepInstanceImplCustomBase extends ProcessStepInsta
 			if (port instanceof StartDataPortInstance) {
 				DataPortInstance dataPortInstance = (DataPortInstance) port;
 				getStartParameter().add(dataPortInstance.getDataInstance());
+			}
+		}
+	}
+	
+	/**
+	 * Getting the parameter from EndDataPorts.<br>
+	 * <br>
+	 * This method aggregates all parameters from all EndDataPorts and provides them by filling
+	 * the field EndParameter.
+	 */
+	public void aggregateEndParameter() {
+		endParameter.clear();
+		for (PortInstance port : getPorts()) {
+			if (port instanceof EndDataPortInstance) {
+				DataPortInstance dataPortInstance = (DataPortInstance) port;
+				getEndParameter().add(dataPortInstance.getDataInstance());
 			}
 		}
 	}

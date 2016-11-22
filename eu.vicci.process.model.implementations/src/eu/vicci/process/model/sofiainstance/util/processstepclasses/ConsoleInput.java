@@ -31,4 +31,10 @@ public class ConsoleInput implements ProcessStepWorker{
 	public void deploy() {
 		System.out.println("A ProcessStepWorker-Class was deployed by a generic ProcessStep and says: 'Hello, I am a CONSOLE-INPUT!'");		
 	}
+
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

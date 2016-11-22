@@ -24,4 +24,10 @@ public class TrueConsoleOutput implements ProcessStepWorker {
 		System.out.println("The True Process is deplyoing");		
 	}
 
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

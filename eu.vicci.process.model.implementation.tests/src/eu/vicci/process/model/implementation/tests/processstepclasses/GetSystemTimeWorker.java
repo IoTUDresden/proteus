@@ -25,4 +25,10 @@ public class GetSystemTimeWorker implements ProcessStepWorker {
 		//nothing to do here		
 	}
 
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

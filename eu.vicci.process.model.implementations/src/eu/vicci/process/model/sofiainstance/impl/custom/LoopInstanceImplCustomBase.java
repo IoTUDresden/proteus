@@ -28,6 +28,7 @@ public abstract class LoopInstanceImplCustomBase extends ProcessStepInstanceImpl
 		logInfo("-------------> execution started");
 		cancelTimer();
 		aggregateStartParameter();
+		aggregateEndParameter();
 		startStateTimerIfNeeded();
 
 		if (anyEndPortsWhichRequiresWaiting())

@@ -65,6 +65,7 @@ public class ProcessStepUtil {
 						instUtil.changeExecutionState(State.EXECUTING);
 						instUtil.startSubProcesses();
 						instUtil.aggregateStartParameter();
+						instUtil.aggregateEndParameter();
 						instUtil.work();
 						instUtil.activateControlEndPorts();
 						instUtil.activateDataEndPorts();

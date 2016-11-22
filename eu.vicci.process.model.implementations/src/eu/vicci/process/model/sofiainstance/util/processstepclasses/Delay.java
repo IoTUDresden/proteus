@@ -50,4 +50,10 @@ public class Delay implements ProcessStepWorker{
 			return (Integer)instance.get().getValueAsObject();		
 		return null;		
 	}
+
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

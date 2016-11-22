@@ -136,5 +136,11 @@ public class OpenHabWaitForEvent implements ProcessStepWorker, OHEventItemStateL
 		}, delay);
 	}
 
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

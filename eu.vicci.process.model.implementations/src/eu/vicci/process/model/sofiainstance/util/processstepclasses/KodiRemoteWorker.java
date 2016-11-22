@@ -137,4 +137,10 @@ public class KodiRemoteWorker implements ProcessStepWorker{
 			return (T)value;						
 		return null;		
 	}
+
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

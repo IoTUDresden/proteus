@@ -56,4 +56,10 @@ public class RandomDummyDataGenerator implements ProcessStepWorker{
 		System.out.println("A ProcessStepWorker-Class was deployed by a generic ProcessStep and says: 'Hello, I am a RandomDummyDataGenerator!'");		
 	}
 
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
