@@ -90,6 +90,7 @@ public final class ConfigurationManager {
 	public void updateFromConfigReader(IConfigurationReader reader){
 		configurations.put(ConfigProperties.OPENHAB_URI, reader.getOpenHabUri());
 		configurations.put(ConfigProperties.FEEDBACK_SERVICE_URI, reader.getFeedbackServiceUri());
+		configurations.put(ConfigProperties.ELASTICSEARCH_HOST, reader.getElasticsearchHost());
 		configurations.put(ConfigProperties.CONTEXT_URI, reader.getContextUri());
 	}
 

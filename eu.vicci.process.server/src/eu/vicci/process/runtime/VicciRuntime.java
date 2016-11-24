@@ -1,10 +1,25 @@
 package eu.vicci.process.runtime;
 
+import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.elasticsearch.metrics.ElasticsearchReporter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.codahale.metrics.Counter;
+import com.codahale.metrics.Gauge;
+import com.codahale.metrics.Histogram;
+import com.codahale.metrics.Meter;
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.MetricRegistryListener;
+import com.codahale.metrics.Timer;
+import com.codahale.metrics.Timer.Context;
 
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.devices.util.OpenHabListener;
@@ -16,12 +31,18 @@ import eu.vicci.process.model.sofia.SofiaPackage;
 import eu.vicci.process.model.sofiainstance.SofiaInstancePackage;
 import eu.vicci.process.model.sofiainstance.impl.custom.SofiaInstanceFactoryImplCustom;
 import eu.vicci.process.model.util.ConfigurationReader;
+import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
+import eu.vicci.process.model.util.logging.LoggingManager;
 import eu.vicci.process.osgi.OSGiRuntime;
 import eu.vicci.process.wampserver.RuntimeServer;
 import ws.wamp.jawampa.ApplicationError;
 
 public class VicciRuntime {
+
+	private Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
+	
+	private MetricRegistry registry = new MetricRegistry();
 
 	/**
 	 * @param args
@@ -49,13 +70,42 @@ public class VicciRuntime {
 	}
 	
 	public boolean start(){
-		initializeSofiaModel();
 		IConfigurationReader configReader = new ConfigurationReader("server.conf");
 		ConfigurationManager.getInstance().updateFromConfigReader(configReader);
+		
+		initializeElasticsearchReportingWith(registry);
+		LoggingManager.getInstance().setMetricsReporter(registry);
+		Context timer = registry.timer("startup").time();
+		
+		initializeSofiaModel();
 		registerListener(configReader);
-		return startWebSocketServer(configReader);		
+		boolean isWebSocketServerStarted = startWebSocketServer(configReader);
+		
+		timer.stop();
+		return isWebSocketServerStarted;
 	}
 	
+	private MetricRegistry initializeElasticsearchReportingWith(MetricRegistry registry) {
+		String host = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.ELASTICSEARCH_HOST);
+		
+		try {
+			ElasticsearchReporter reporter = ElasticsearchReporter
+					.forRegistry(registry)
+					.hosts(host)
+					.index("mapek")
+					.prefixedWith("proteus")
+					.build();
+			
+			reporter.start(10, TimeUnit.SECONDS);
+			LOG.debug("Using Elasticsearch for metrics reporting");
+			
+		} catch (IOException e) {
+			LOG.warn("Cannot connect to Elasticsearch due to {}", e.getMessage());
+		}
+		
+		return registry;
+	}
+
 	public void stop(){
 		server.stop();
 	}

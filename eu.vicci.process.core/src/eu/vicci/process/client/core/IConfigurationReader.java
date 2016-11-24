@@ -92,6 +92,10 @@ public interface IConfigurationReader {
 	 */
 	String getFeedbackServiceUri();
 	
-	
+	/**
+	 * Gets the URI for the feedback service
+	 * @return
+	 */
+	String getElasticsearchHost();	
 
 }

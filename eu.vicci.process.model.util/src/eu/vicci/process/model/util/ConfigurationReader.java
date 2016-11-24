@@ -29,6 +29,8 @@ public class ConfigurationReader implements IConfigurationReader {
 	private boolean startCepEngine;
 	private boolean startXmlRpcWebServer;
 	private boolean deployExistingProcessModels;
+
+	private String elasticsearchHost;
 	
 	//TODO
 //	- ContextUri (default: http://localhost:9000/contexts/0)
@@ -128,6 +130,7 @@ public class ConfigurationReader implements IConfigurationReader {
 		
 		contextUri = properties.getProperty(ConfigProperties.CONTEXT_URI);
 		feedbackServiceUri = properties.getProperty(ConfigProperties.FEEDBACK_SERVICE_URI);
+		elasticsearchHost = properties.getProperty(ConfigProperties.ELASTICSEARCH_HOST);
 	}
 
 	@Override
@@ -144,4 +147,10 @@ public class ConfigurationReader implements IConfigurationReader {
 	public String getFeedbackServiceUri() {
 		return feedbackServiceUri;
 	}
+
+	@Override
+	public String getElasticsearchHost() {
+		return elasticsearchHost;
+	}
+	
 }
