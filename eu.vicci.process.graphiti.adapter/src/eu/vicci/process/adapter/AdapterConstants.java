@@ -31,6 +31,7 @@ public class AdapterConstants {
 	public static final String PREF_PORT = "pref_Port";
 	public static final String PREF_REALM = "pref_Realm";
 	public static final String PREF_NAMESPACE = "pref_Namespace";
+	public static final String PREF_OPENHAB_HOST = "pref_OpenHabHost";
 	
 	// default prefs for preferences page
 	
@@ -38,5 +39,6 @@ public class AdapterConstants {
 	public static final String DEFAULT_PREF_PORT = "8081";
 	public static final String DEFAULT_PREF_REALM = "vicciRealm";
 	public static final String DEFAULT_PREF_NAMESPACE = "vicciWs";
+	public static final String DEFAULT_PREF_OPENHAB_HOST = "http://127.0.0.1:8080";
 
 }

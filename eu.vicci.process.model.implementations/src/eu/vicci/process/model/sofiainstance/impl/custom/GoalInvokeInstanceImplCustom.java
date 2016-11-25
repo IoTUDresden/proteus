@@ -24,7 +24,8 @@ public class GoalInvokeInstanceImplCustom extends ProcessStepInstanceImplCustom 
 		
 		ExecuteGoalCommandBean cmd = getCommand();
 
-		client.executeGoal(cmd);				
+		client.executeGoal(cmd);	
+		client.close();
 	}
 	
 	//maps the modeled stuff to a command
@@ -32,7 +33,7 @@ public class GoalInvokeInstanceImplCustom extends ProcessStepInstanceImplCustom 
 		GoalInvoke gi = getGoalInvoke();
 		ExecuteGoalCommandBean cmd = new ExecuteGoalCommandBean();
 		Goal goal = new Goal();
-		goal.name = gi.getGoal();
+		goal.name = gi.getInvokeGoal();
 		SemanticLocation sl = new SemanticLocation();
 		sl.setSemanticUri(gi.getLocation());				
 		
@@ -44,7 +45,7 @@ public class GoalInvokeInstanceImplCustom extends ProcessStepInstanceImplCustom 
 	
 	private static List<Quality> mapQuality(GoalInvoke gi){
 		List<Quality> out = new ArrayList<>();
-		for (String qualiName : gi.getQuality()) {
+		for (String qualiName : gi.getQualities()) {
 			Quality quality = new Quality();
 			quality.name = qualiName;
 			out.add(quality);

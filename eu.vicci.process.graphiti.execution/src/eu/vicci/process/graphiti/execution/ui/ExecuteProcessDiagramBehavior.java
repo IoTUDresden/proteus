@@ -18,7 +18,6 @@ import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.actions.NewExampleAction;
 
 import eu.vicci.process.graphiti.execution.debug.model.ProcessDebugTarget;
 import eu.vicci.process.graphiti.execution.debug.model.ProcessThread;

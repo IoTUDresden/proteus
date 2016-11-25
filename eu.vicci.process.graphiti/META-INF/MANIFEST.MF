@@ -38,7 +38,10 @@ Bundle-ClassPath: .,
  maven_libs/slf4j-log4j12-1.7.13.jar
 Bundle-Vendor: TU Dresden
 Bundle-Localization: plugin
-Import-Package: eu.vicci.process.client,
+Import-Package: eu.vicci.openhab.util,
+ eu.vicci.openhab.util.beans,
+ eu.vicci.process.adapter,
+ eu.vicci.process.client,
  eu.vicci.process.gesture,
  eu.vicci.process.gesture.recognizer.ndollar,
  eu.vicci.process.model.util.serialization.jsontypeinstances

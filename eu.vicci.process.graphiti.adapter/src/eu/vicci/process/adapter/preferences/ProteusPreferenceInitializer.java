@@ -1,11 +1,14 @@
 package eu.vicci.process.adapter.preferences;
 
+
 import static eu.vicci.process.adapter.AdapterConstants.DEFAULT_PREF_HOST;
 import static eu.vicci.process.adapter.AdapterConstants.DEFAULT_PREF_NAMESPACE;
+import static eu.vicci.process.adapter.AdapterConstants.DEFAULT_PREF_OPENHAB_HOST;
 import static eu.vicci.process.adapter.AdapterConstants.DEFAULT_PREF_PORT;
 import static eu.vicci.process.adapter.AdapterConstants.DEFAULT_PREF_REALM;
 import static eu.vicci.process.adapter.AdapterConstants.PREF_HOST;
 import static eu.vicci.process.adapter.AdapterConstants.PREF_NAMESPACE;
+import static eu.vicci.process.adapter.AdapterConstants.PREF_OPENHAB_HOST;
 import static eu.vicci.process.adapter.AdapterConstants.PREF_PORT;
 import static eu.vicci.process.adapter.AdapterConstants.PREF_REALM;
 
@@ -25,6 +28,7 @@ public class ProteusPreferenceInitializer extends AbstractPreferenceInitializer 
 		store.setDefault(PREF_PORT, DEFAULT_PREF_PORT);	
 		store.setDefault(PREF_REALM, DEFAULT_PREF_REALM);	
 		store.setDefault(PREF_NAMESPACE, DEFAULT_PREF_NAMESPACE);	
+		store.setDefault(PREF_OPENHAB_HOST, DEFAULT_PREF_OPENHAB_HOST);	
 	}
 
 }

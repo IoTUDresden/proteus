@@ -1183,10 +1183,6 @@
   <children xmi:type="notation:Shape" xmi:id="_fsCt8Ky6EeaszJH_g1XT9Q" type="2001" fontName="Segoe UI">
     <children xmi:type="notation:DecorationNode" xmi:id="_fsDVAKy6EeaszJH_g1XT9Q" type="5001"/>
     <children xmi:type="notation:BasicCompartment" xmi:id="_fsDVAay6EeaszJH_g1XT9Q" type="7001">
-      <children xmi:type="notation:Node" xmi:id="_t-lmgKy6EeaszJH_g1XT9Q" type="3001">
-        <element xmi:type="ecore:EAttribute" href="sofia.ecore#//GoalInvoke/quality"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_t-lmgay6EeaszJH_g1XT9Q"/>
-      </children>
       <children xmi:type="notation:Node" xmi:id="_3bgz8Ky6EeaszJH_g1XT9Q" type="3001">
         <element xmi:type="ecore:EAttribute" href="sofia.ecore#//GoalInvoke/location"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_3bgz8ay6EeaszJH_g1XT9Q"/>
