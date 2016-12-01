@@ -30,11 +30,7 @@ public class ConfigurationReader implements IConfigurationReader {
 	private boolean startXmlRpcWebServer;
 	private boolean deployExistingProcessModels;
 
-	private String elasticsearchHost;
-	
-	//TODO
-//	- ContextUri (default: http://localhost:9000/contexts/0)
-//		- FeedbackServiceUri (default: http://192.168.1.3:9000)
+	private String elasticsearchHost;	
 	
 	public ConfigurationReader(String path) {
 		this.path = path;

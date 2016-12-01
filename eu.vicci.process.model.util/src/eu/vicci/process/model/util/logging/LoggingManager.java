@@ -7,7 +7,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.Timer.Context;
 
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
 import eu.vicci.process.model.sofiainstance.State;
@@ -60,7 +59,6 @@ public class LoggingManager {
 		
 		final String model = "model-" + message.getProcessId();
 		final String step  =  model   + ".step-" + message.getModelId();
-		final String modelInstance = model + ".model-instance-" + message.getProcessInstanceId();
 		final String stepInstance  = step  + ".step-instance-"  + message.getInstanceId();
 		
 		if (State.EXECUTING == message.getState())

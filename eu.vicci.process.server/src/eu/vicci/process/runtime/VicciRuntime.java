@@ -12,13 +12,7 @@ import org.elasticsearch.metrics.ElasticsearchReporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.codahale.metrics.Counter;
-import com.codahale.metrics.Gauge;
-import com.codahale.metrics.Histogram;
-import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.MetricRegistryListener;
-import com.codahale.metrics.Timer;
 import com.codahale.metrics.Timer.Context;
 
 import eu.vicci.process.client.core.IConfigurationReader;
@@ -41,8 +35,6 @@ import ws.wamp.jawampa.ApplicationError;
 public class VicciRuntime {
 
 	private Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
-	
-	private MetricRegistry registry = new MetricRegistry();
 
 	/**
 	 * @param args
@@ -73,21 +65,26 @@ public class VicciRuntime {
 		IConfigurationReader configReader = new ConfigurationReader("server.conf");
 		ConfigurationManager.getInstance().updateFromConfigReader(configReader);
 		
-		initializeElasticsearchReportingWith(registry);
-		LoggingManager.getInstance().setMetricsReporter(registry);
-		Context timer = registry.timer("startup").time();
-		
+		Optional<Context> timer = initReporting();		
 		initializeSofiaModel();
 		registerListener(configReader);
 		boolean isWebSocketServerStarted = startWebSocketServer(configReader);
 		
-		timer.stop();
+		timer.ifPresent(t -> t.stop());
 		return isWebSocketServerStarted;
 	}
 	
-	private MetricRegistry initializeElasticsearchReportingWith(MetricRegistry registry) {
+	private Optional<Context> initReporting(){
 		String host = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.ELASTICSEARCH_HOST);
-		
+		if(host == null)
+			return Optional.empty();
+		MetricRegistry registry = new MetricRegistry();			
+		initializeElasticsearchReportingWith(registry, host);
+		LoggingManager.getInstance().setMetricsReporter(registry);
+		return Optional.ofNullable(registry.timer("startup").time());		
+	}
+	
+	private void initializeElasticsearchReportingWith(MetricRegistry registry, String host) {
 		try {
 			ElasticsearchReporter reporter = ElasticsearchReporter
 					.forRegistry(registry)
@@ -102,8 +99,6 @@ public class VicciRuntime {
 		} catch (IOException e) {
 			LOG.warn("Cannot connect to Elasticsearch due to {}", e.getMessage());
 		}
-		
-		return registry;
 	}
 
 	public void stop(){
