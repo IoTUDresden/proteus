@@ -115,6 +115,25 @@
                <message>
                   message body text
                </message>
+               <target
+                     class="GoalInvoke">
+               </target>
+            </constraint>
+            <constraint
+                  class="eu.vicci.process.graphiti.validation.constraint.NoDelegationInLoadClassStep"
+                  id="eu.vicci.process.graphiti.validation.constraint.NoDelegationInLoadClassStep"
+                  isEnabledByDefault="true"
+                  lang="java"
+                  mode="Batch"
+                  name="NoDelegationInLoadClassStep"
+                  severity="ERROR"
+                  statusCode="2">
+               <message>
+                  message body text
+               </message>
+               <target
+                     class="LoadClassStep">
+               </target>
             </constraint>
          </constraints>
       </constraintProvider>
