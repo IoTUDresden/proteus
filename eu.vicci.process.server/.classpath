@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="maven_libs/metrics-core-3.1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="maven_libs/jawampa-core-0.4.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="maven_libs/jawampa-netty-0.4.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="maven_libs/log4j-1.2.17.jar"/>
@@ -19,8 +20,6 @@
 	<classpathentry exported="true" kind="lib" path="maven_libs/netty-handler-4.0.24.Final.jar"/>
 	<classpathentry exported="true" kind="lib" path="maven_libs/netty-transport-4.0.24.Final.jar"/>
 	<classpathentry exported="true" kind="lib" path="maven_libs/rxjava-1.0.8.jar"/>
-	<classpathentry kind="lib" path="maven_libs/metrics-core-3.0.1.jar"/>
-	<classpathentry kind="lib" path="maven_libs/metrics-core-3.1.2.jar"/>
 	<classpathentry kind="lib" path="maven_libs/metrics-elasticsearch-reporter-2.0.jar" sourcepath="/home/openhab/.m2/repository/org/elasticsearch/metrics-elasticsearch-reporter/2.0/metrics-elasticsearch-reporter-2.0-sources.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>

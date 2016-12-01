@@ -1889,7 +1889,7 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getGoalInvoke_Quality() {
+	public EAttribute getGoalInvoke_Qualities() {
 		return (EAttribute)goalInvokeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -2177,7 +2177,7 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 
 		goalInvokeEClass = createEClass(GOAL_INVOKE);
 		createEAttribute(goalInvokeEClass, GOAL_INVOKE__INVOKE_GOAL);
-		createEAttribute(goalInvokeEClass, GOAL_INVOKE__QUALITY);
+		createEAttribute(goalInvokeEClass, GOAL_INVOKE__QUALITIES);
 		createEAttribute(goalInvokeEClass, GOAL_INVOKE__LOCATION);
 
 		// Create enums
@@ -2487,7 +2487,7 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 
 		initEClass(goalInvokeEClass, GoalInvoke.class, "GoalInvoke", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getGoalInvoke_InvokeGoal(), ecorePackage.getEString(), "invokeGoal", null, 0, 1, GoalInvoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getGoalInvoke_Quality(), ecorePackage.getEString(), "quality", null, 0, -1, GoalInvoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGoalInvoke_Qualities(), ecorePackage.getEString(), "qualities", null, 0, -1, GoalInvoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getGoalInvoke_Location(), ecorePackage.getEString(), "location", null, 0, 1, GoalInvoke.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals

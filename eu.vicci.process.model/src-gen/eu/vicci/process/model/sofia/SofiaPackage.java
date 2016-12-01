@@ -6871,13 +6871,13 @@ public interface SofiaPackage extends EPackage {
 	int GOAL_INVOKE__INVOKE_GOAL = INVOKE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Quality</b></em>' attribute list.
+	 * The feature id for the '<em><b>Qualities</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GOAL_INVOKE__QUALITY = INVOKE_FEATURE_COUNT + 1;
+	int GOAL_INVOKE__QUALITIES = INVOKE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Location</b></em>' attribute.
@@ -8416,15 +8416,15 @@ public interface SofiaPackage extends EPackage {
 	EAttribute getGoalInvoke_InvokeGoal();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link eu.vicci.process.model.sofia.GoalInvoke#getQuality <em>Quality</em>}'.
+	 * Returns the meta object for the attribute list '{@link eu.vicci.process.model.sofia.GoalInvoke#getQualities <em>Qualities</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Quality</em>'.
-	 * @see eu.vicci.process.model.sofia.GoalInvoke#getQuality()
+	 * @return the meta object for the attribute list '<em>Qualities</em>'.
+	 * @see eu.vicci.process.model.sofia.GoalInvoke#getQualities()
 	 * @see #getGoalInvoke()
 	 * @generated
 	 */
-	EAttribute getGoalInvoke_Quality();
+	EAttribute getGoalInvoke_Qualities();
 
 	/**
 	 * Returns the meta object for the attribute '{@link eu.vicci.process.model.sofia.GoalInvoke#getLocation <em>Location</em>}'.
@@ -9750,12 +9750,12 @@ public interface SofiaPackage extends EPackage {
 		EAttribute GOAL_INVOKE__INVOKE_GOAL = eINSTANCE.getGoalInvoke_InvokeGoal();
 
 		/**
-		 * The meta object literal for the '<em><b>Quality</b></em>' attribute list feature.
+		 * The meta object literal for the '<em><b>Qualities</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GOAL_INVOKE__QUALITY = eINSTANCE.getGoalInvoke_Quality();
+		EAttribute GOAL_INVOKE__QUALITIES = eINSTANCE.getGoalInvoke_Qualities();
 
 		/**
 		 * The meta object literal for the '<em><b>Location</b></em>' attribute feature.

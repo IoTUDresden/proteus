@@ -21,7 +21,9 @@ Bundle-ClassPath: .,
  maven_libs/slf4j-api-1.7.13.jar,
  maven_libs/slf4j-log4j12-1.7.13.jar,
  maven_libs/jawampa-core-0.4.2.jar,
- maven_libs/jawampa-netty-0.4.2.jar
+ maven_libs/jawampa-netty-0.4.2.jar,
+ maven_libs/metrics-core-3.0.1.jar,
+ maven_libs/metrics-elasticsearch-reporter-2.0.jar
 Bundle-Vendor: TUD
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: eu.vicci.process.osgi,
