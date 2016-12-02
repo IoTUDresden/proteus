@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.Timer;
 
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
 import eu.vicci.process.model.sofiainstance.State;
@@ -19,6 +20,8 @@ public class LoggingManager {
 	private List<IStateChangeMessage> recentStateChanges = new CopyOnWriteArrayList<>();
 	
 	private Optional<MetricRegistry> registry = Optional.empty();
+	
+	private Map<String, Timer.Context> timerContexts = new ConcurrentHashMap<String, Timer.Context>();
 	
 	public static synchronized LoggingManager getInstance() {
 		if (lm == null) {
@@ -62,10 +65,11 @@ public class LoggingManager {
 		final String stepInstance  = step  + ".step-instance-"  + message.getInstanceId();
 		
 		if (State.EXECUTING == message.getState())
-			r.timer(stepInstance).time();
+			timerContexts.put(stepInstance, r.timer(stepInstance).time());
 		
-		if (State.EXECUTED == message.getState())
-			r.timer(stepInstance).time().stop();	
+		if (State.EXECUTED == message.getState()) {
+			timerContexts.remove(stepInstance).stop();
+		}
 	}
 	
 }

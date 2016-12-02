@@ -21,6 +21,8 @@ import javax.ws.rs.client.ClientBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toSet;
@@ -55,28 +57,35 @@ public class Compensation extends AbstractStep {
 
     private boolean hasBeenSatisfied = false;
 
-    private boolean hasBeenFinished = false;
+    private boolean hasBeenFinished = true;
+    
+    private CountDownLatch waitForEvent;
 
 
     @Override
     protected void work() {
+    	waitForEvent = new CountDownLatch(1);
+    	
         prepare();
         LOG.info("Start compensating feedback loop");
 
         createWorkflow();
         LOG.info(format("Workflow %s created", workflowUri));
-
+        
+        waitForEvent();
         createGoals();
         LOG.info("Goals created. Waiting for feedback loop");
-
-        waitForEvent();
-        LOG.info(format("Workflow done. Satisfaction is %s", hasBeenSatisfied));
-
-        publishExecutionFlags();
-        LOG.info("Finalizing");
-
-        deleteWorkflow();
-        finish();
+        
+        try {
+			waitForEvent.await();
+		    LOG.info(format("Workflow done. Satisfaction is %s", hasBeenSatisfied));
+		} catch (InterruptedException e) {
+			LOG.error("I'm interrupted...", e);
+		} finally {
+			publishExecutionFlags();
+	        deleteWorkflow();
+	        finish();			
+		}
     }
 
     private void createWorkflow() {
@@ -105,15 +114,19 @@ public class Compensation extends AbstractStep {
     }
 
     private void waitForEvent() {
-        EventInput eventInput = sseClient
-                .target(fromPath(serviceUri).path("events").path(fromPath(workflowUri).build().getPath()))
-                .request().get(EventInput.class);
+    	new Thread(() ->{
+            EventInput eventInput = sseClient
+                    .target(fromPath(serviceUri).path("events").path(fromPath(workflowUri).build().getPath()))
+                    .request().get(EventInput.class);
 
-        while (!eventInput.isClosed()) {
-            final InboundEvent event = eventInput.read();
-            if (workflowHasBeenDone(event.readData()))
-                break;
-        }
+            while (!eventInput.isClosed()) {
+                final InboundEvent event = eventInput.read();
+                if (workflowHasBeenDone(event.readData()))
+                    break;
+            }
+            
+            waitForEvent.countDown();    		
+    	}).start();    	
     }
 
     private boolean workflowHasBeenDone(String json) {
