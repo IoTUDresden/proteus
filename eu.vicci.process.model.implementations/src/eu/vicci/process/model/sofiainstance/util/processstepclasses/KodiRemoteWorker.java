@@ -10,6 +10,7 @@ import eu.vicci.process.kodi.util.KodiPlayer.PlayerOpenType;
 import eu.vicci.process.kodi.util.KodiRemote;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.StringTypeInstance;
+import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 /**
  * KodiRemote Worker for controling kodi over process steps
@@ -139,7 +140,7 @@ public class KodiRemoteWorker implements ProcessStepWorker{
 	}
 
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+	public List<DataTypeInstance> work(Context context) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,6 +3,7 @@ package eu.vicci.process.model.sofiainstance.util.processstepclasses;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import eu.vicci.process.model.sofia.StringType;
+
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
@@ -22,7 +23,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toSet;
@@ -90,7 +90,7 @@ public class Compensation extends AbstractStep {
 
     private void createWorkflow() {
         JsonObject workflow = new JsonObject();
-        workflow.addProperty("name", stringParameter(WORKFLOW_NAME));
+        workflow.addProperty("name", stringParameter(WORKFLOW_NAME) + "." + instanceId);
         workflow.addProperty("context", stringParameter(CONTEXT_URI));
 
         workflowUri = post("workflows", workflow.toString())

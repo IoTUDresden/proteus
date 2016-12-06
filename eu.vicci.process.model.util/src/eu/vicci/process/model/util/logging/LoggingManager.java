@@ -7,11 +7,15 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.Timer;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
 import eu.vicci.process.model.sofiainstance.State;
+import eu.vicci.process.model.util.configuration.ConfigProperties;
+import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
+import feign.Feign;
 
 public class LoggingManager {
 	
@@ -21,13 +25,23 @@ public class LoggingManager {
 	
 	private Optional<MetricRegistry> registry = Optional.empty();
 	
-	private Map<String, Timer.Context> timerContexts = new ConcurrentHashMap<String, Timer.Context>();
+	private Map<String, TimerWithStart> timerContexts = new ConcurrentHashMap<>();
+	private ElasticsearchClient esClient;
+	private ObjectMapper objectMapper;
 	
 	public static synchronized LoggingManager getInstance() {
 		if (lm == null) {
 			lm = new LoggingManager();
 		}		
 		return lm;
+	}
+	
+	private LoggingManager() {
+		String esHost = ConfigurationManager.getInstance()
+			.getConfigAsString(ConfigProperties.ELASTICSEARCH_HOST);
+		
+		objectMapper = new ObjectMapper();
+		esClient = Feign.builder().target(ElasticsearchClient.class, "http://" + esHost);
 	}
 	
 	public void setMetricsReporter(MetricRegistry registry) {
@@ -64,12 +78,25 @@ public class LoggingManager {
 		final String step  =  model   + ".step-" + message.getModelId();
 		final String stepInstance  = step  + ".step-instance-"  + message.getInstanceId();
 		
-		if (State.EXECUTING == message.getState())
-			timerContexts.put(stepInstance, r.timer(stepInstance).time());
+		if (State.EXECUTING == message.getState()) {
+			TimerWithStart timer = TimerWithStart.create(r.timer(stepInstance).time());
+			timer.model = message.getProcessId();
+			timer.step = message.getModelId();
+			timer.stepInstance = message.getInstanceId();
+			timer.name = "proteus." + timer.stepInstance;
+			timer.process = message.getProcessName();
+			timerContexts.put(stepInstance, timer);
+		}
 		
-		if (State.EXECUTED == message.getState()) {
-			timerContexts.remove(stepInstance).stop();
+		if (State.EXECUTED == message.getState()) { 
+			TimerWithStart timer = timerContexts.remove(stepInstance).stop();
+			
+			try {
+				esClient.postDecember2016(objectMapper.writeValueAsString(timer));
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
+
 }

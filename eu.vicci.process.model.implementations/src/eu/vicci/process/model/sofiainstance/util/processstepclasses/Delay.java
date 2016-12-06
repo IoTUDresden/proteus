@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import eu.vicci.process.model.sofia.IntegerType;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
+import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 /**
  * If this worker receives a datatype with the name of {@link #DELAY_TYPE_ID}, and an integer instance,
@@ -52,7 +53,7 @@ public class Delay implements ProcessStepWorker{
 	}
 
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+	public List<DataTypeInstance> work(Context context) {
 		// TODO Auto-generated method stub
 		return null;
 	}

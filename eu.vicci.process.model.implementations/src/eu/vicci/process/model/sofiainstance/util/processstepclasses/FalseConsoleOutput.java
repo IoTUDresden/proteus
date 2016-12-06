@@ -3,6 +3,7 @@ package eu.vicci.process.model.sofiainstance.util.processstepclasses;
 import java.util.List;
 
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
+import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 public class FalseConsoleOutput implements ProcessStepWorker {
 	
@@ -24,7 +25,7 @@ public class FalseConsoleOutput implements ProcessStepWorker {
 	}
 
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+	public List<DataTypeInstance> work(Context context) {
 		// TODO Auto-generated method stub
 		return null;
 	}

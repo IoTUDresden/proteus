@@ -13,6 +13,7 @@ import eu.vicci.process.model.sofia.impl.LoadClassStepImpl;
 import eu.vicci.process.model.sofiainstance.LoadClassStepInstance;
 import eu.vicci.process.model.sofiainstance.MappingUtil;
 import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker;
+import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 public class LoadClassStepInstanceImplCustom extends ProcessStepInstanceImplCustom implements LoadClassStepInstance {
 
@@ -48,7 +49,13 @@ public class LoadClassStepInstanceImplCustom extends ProcessStepInstanceImplCust
 	 */
 	@Override
 	public void work() {
-		returnValues = processStepWorker.work(startParameter,endParameter);
+		ProcessStepWorker.Context context = new Context();
+		
+		context.startParameter = startParameter;
+		context.endParameter = endParameter;
+		context.instanceId = getInstanceId();
+		
+		returnValues = processStepWorker.work(context);
 	}
 
 	private ClassLoader getClassLoader() {

@@ -9,6 +9,7 @@ import eu.vicci.process.model.sofiainstance.impl.custom.ComplexTypeInstanceImplC
 import eu.vicci.process.model.sofiainstance.impl.custom.DoubleTypeInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.impl.custom.IntegerTypeInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.impl.custom.StringTypeInstanceImplCustom;
+import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 public class RandomDummyDataGenerator implements ProcessStepWorker{
 
@@ -57,7 +58,7 @@ public class RandomDummyDataGenerator implements ProcessStepWorker{
 	}
 
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+	public List<DataTypeInstance> work(Context context) {
 		// TODO Auto-generated method stub
 		return null;
 	}

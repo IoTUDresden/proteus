@@ -16,6 +16,7 @@ import eu.vicci.process.devices.util.OpenHabEvent.OHItemStateEvent;
 import eu.vicci.process.devices.util.OpenHabEvent.OHItemStatePayload;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.IntegerTypeInstance;
+import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 import eu.vicci.process.openhab.util.OpenHabEventProvider;
 import eu.vicci.process.openhab.util.OpenHabEventProvider.OHEventItemStateListener;
 
@@ -137,7 +138,7 @@ public class OpenHabWaitForEvent implements ProcessStepWorker, OHEventItemStateL
 	}
 
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> inParameter, List<DataTypeInstance> outParameter) {
+	public List<DataTypeInstance> work(Context context) {
 		// TODO Auto-generated method stub
 		return null;
 	}

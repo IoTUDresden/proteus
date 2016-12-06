@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -80,10 +79,12 @@ public class VicciRuntime {
 			return Optional.empty();
 		MetricRegistry registry = new MetricRegistry();			
 		initializeElasticsearchReportingWith(registry, host);
+		
 		LoggingManager.getInstance().setMetricsReporter(registry);
+		
 		return Optional.ofNullable(registry.timer("startup").time());		
 	}
-	
+
 	private void initializeElasticsearchReportingWith(MetricRegistry registry, String host) {
 		try {
 			ElasticsearchReporter reporter = ElasticsearchReporter
@@ -93,7 +94,7 @@ public class VicciRuntime {
 					.prefixedWith("proteus")
 					.build();
 			
-			reporter.start(10, TimeUnit.SECONDS);
+			// reporter.start(10, TimeUnit.SECONDS);
 			LOG.debug("Using Elasticsearch for metrics reporting");
 			
 		} catch (IOException e) {

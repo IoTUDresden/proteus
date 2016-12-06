@@ -4,34 +4,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-import eu.vicci.process.model.sofia.BooleanType;
 import eu.vicci.process.model.sofia.DataType;
 import eu.vicci.process.model.sofia.StringType;
-import eu.vicci.process.model.sofia.impl.SofiaFactoryImpl;
 import eu.vicci.process.model.sofiainstance.BooleanTypeInstance;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
-import eu.vicci.process.model.sofiainstance.impl.custom.BooleanTypeInstanceImplCustom;
 
 public abstract class AbstractStep implements ProcessStepWorker {
 
     private List<DataTypeInstance> input;
-    private List<DataTypeInstance> outPorts;
-    
+    private List<DataTypeInstance> outPorts = new ArrayList<>();
     private List<DataTypeInstance> output = new ArrayList<>();
+	
+    protected String instanceId;
 
     @Override
-    public List<DataTypeInstance> work(List<DataTypeInstance> input) {
-        this.input = input;
+    public List<DataTypeInstance> work(Context context) {
+        input = context.startParameter;
+        outPorts = context.endParameter;
+        instanceId = context.instanceId;
+        
         work();
-        return this.output;
+        
+        return output;
     }
     
-    public List<DataTypeInstance> work(List<DataTypeInstance> input,List<DataTypeInstance> outPorts) {
-        this.input = input;
-        this.outPorts = outPorts;
-        work();
-        return this.output;
-    }
+	@Override
+	public List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
+		throw new RuntimeException("deprecated method");
+	}
 
     protected void addOutgoing(DataTypeInstance instance) {
         output.add(instance);
@@ -67,7 +67,7 @@ public abstract class AbstractStep implements ProcessStepWorker {
         	}
         }
         
-        return null;
+        throw new RuntimeException("No DataTypeInstance found for " + typeName);
     }
 
     @Override
