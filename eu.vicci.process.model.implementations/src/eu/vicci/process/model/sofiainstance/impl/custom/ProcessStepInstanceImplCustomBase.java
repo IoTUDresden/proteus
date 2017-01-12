@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import akka.actor.ActorRef;
 import eu.vicci.process.actors.ActorAssignable;
+import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.model.sofia.CompositeStep;
 import eu.vicci.process.model.sofiainstance.Configuration;
@@ -65,11 +66,23 @@ public abstract class ProcessStepInstanceImplCustomBase extends ProcessStepInsta
 
 	protected MessageQueue messageQueue;
 	protected IProcessManager processManager;
+	
+	/**
+	 * indicates if this process is executing on a peer
+	 */
+	protected final boolean runsOnPeer;
+	
+	/**
+	 * the peerId if this is not running on a SuperPeer
+	 */
+	protected final String peerId;
 
 	public ProcessStepInstanceImplCustomBase() {
 		currentState = new UndeployedState(this);
 		executionState = currentState.getSimpleState();
 		delay = 0;
+		peerId = DistributionManager.getInstance().getPeerId();
+		runsOnPeer = DistributionManager.getInstance().isSuperPeer();
 	}
 
 	@Override
@@ -613,6 +626,8 @@ public abstract class ProcessStepInstanceImplCustomBase extends ProcessStepInsta
 
 	private StateChangeMessage createStateChangeMessage() {
 		StateChangeMessage scm = new StateChangeMessage();
+		if(runsOnPeer)
+			scm.setPeerId(peerId);
 		scm.setProcessInstanceId(getProcessInstanceID());
 		scm.setProcessModelId(getProcessModelID());
 		scm.setInstanceId(getInstanceId());

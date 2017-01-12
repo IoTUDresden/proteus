@@ -97,11 +97,15 @@ public class SuperPeer {
 //		this.processManager.addPingListener(this);
 //		this.processManager.addMetricsListener(this);
 		this.processManager.setClientBuilderFactory(clientBuilderFactory);
-		peerProfile = PeerProfile.create();
+		peerProfile = createPeerProfile();
 	}
 	
 	public SuperPeer(IProcessManager processManager){
 		this(processManager, new ConfigurationReader(DEFAULT_CONFIG_PATH));
+	}
+	
+	protected PeerProfile createPeerProfile(){
+		return PeerProfile.create(true);
 	}
 	
 //	public String getServerName(){
@@ -128,6 +132,10 @@ public class SuperPeer {
 		subscripeToTopics(); //subscriped when client is opened and connected
 		registerPeer(); // register peer when client is opened and connected and this is only peer
 		serverClient.open();
+	}
+	
+	public PeerProfile getPeerProfile(){
+		return peerProfile;
 	}
 	
 	/**

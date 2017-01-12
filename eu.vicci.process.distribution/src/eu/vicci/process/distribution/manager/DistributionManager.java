@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import eu.vicci.process.client.ProcessEngineClientBuilder;
 import eu.vicci.process.client.core.AbstractClientBuilder;
 import eu.vicci.process.client.core.IProcessEngineClient;
+import eu.vicci.process.distribution.core.DistributedSession;
 import eu.vicci.process.distribution.core.DistributionManagerListener;
 import eu.vicci.process.distribution.core.IDistributionManager;
 import eu.vicci.process.distribution.core.PeerProfile;
@@ -38,9 +40,20 @@ public class DistributionManager implements IDistributionManager {
 	private volatile Map<String, List<String>> trackedProcessInstances = new HashMap<String, List<String>>();
 	
 	private List<DistributionManagerListener> distributionListeners = new ArrayList<>();
+	
+	//only present on peers
+	private Optional<PeerProfile> peerProfile;
 
-	public DistributionManager() {
+	private DistributionManager() {
 		pec = createSuperPeerClient();
+	}
+	
+	private static class LazyDistributionManagerHolder {
+		private static final DistributionManager INSTANCE = new DistributionManager();
+   }
+	
+	public static DistributionManager getInstance(){
+		return LazyDistributionManagerHolder.INSTANCE;
 	}
 
 	private StateChangeListener stateChangeListener = new StateChangeListener() {
@@ -51,17 +64,18 @@ public class DistributionManager implements IDistributionManager {
 	};
 
 	@Override
-	public String executeRemoteProcess(String peerId, Process process, Map<String, DataTypeInstance> inputParameters) {
-		LOG.info("<<<<<<<<<<<<<<<<<<<<<< Starte Remote >>>>>>>>>>>>>>>>>>>>>>>>>>>");
+	public DistributedSession executeRemoteProcess(String peerId, Process process, Map<String, DataTypeInstance> inputParameters) {
+		LOG.info("<<<<<<<<<<<<<<<<<<<<<< Start Remote >>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		
 		String pid = pec.deployProcessRemote(peerId, process);
 		String remoteProcessInstanceId = pec.deployProcessInstanceRemote(peerId, pid);
 		
-		trackProcessInstance(peerId, remoteProcessInstanceId);
+		DistributedSession session = new DistributedSession(remoteProcessInstanceId, peerId);		
+		trackProcessInstance(session);
 		
 		pec.startProcessInstanceRemote(peerId, remoteProcessInstanceId, inputParameters);
 		
-		return remoteProcessInstanceId;
+		return session;
 	}
 
 	@Override
@@ -84,9 +98,9 @@ public class DistributionManager implements IDistributionManager {
 	}
 
 	@Override
-	public String workRemote(String ip, Process process, Map<String, DataTypeInstance> inputParameters) {
+	public DistributedSession workRemote(String ip, Process process, Map<String, DataTypeInstance> inputParameters) {
 		String peerId = getPeerIdForIp(ip);		
-		return executeRemoteProcess(peerId, process, inputParameters);		
+		return executeRemoteProcess(peerId, process, inputParameters);
 	}
 	
 	private String getPeerIdForIp(String ip){
@@ -149,25 +163,29 @@ public class DistributionManager implements IDistributionManager {
 			return;
 		if(!processHasFinished(message))
 			return;
-		if(!removeTrackedInstance(message.getPeerId(), message.getProcessInstanceId()))
+		DistributedSession session = new DistributedSession(message.getProcessInstanceId(), message.getPeerId());
+		if(!removeTrackedInstance(session))
 			return;
 		
 		//at this point we know, that remote execution has finished and the instance on the peer was tracked
-		informDistributionListeners(message);
+		informDistributionListeners(message, session);
 	}
 	
-	private boolean removeTrackedInstance(String peerId, String instanceId){
+	/**
+	 * @return false, if the instanceId on the given peerId is NOT tracked
+	 */
+	private boolean removeTrackedInstance(DistributedSession session){
 		synchronized (trackedProcessInstances) {
-			List<String> instances = trackedProcessInstances.get(peerId);
-			if(instances == null || !instances.contains(instanceId))
+			List<String> instances = trackedProcessInstances.get(session.getPeerId());
+			if(instances == null || !instances.contains(session.getRemoteInstanceId()))
 				return false;
-			return instances.remove(instanceId);
+			return instances.remove(session.getRemoteInstanceId());
 		}		
 	}
 	
-	private void informDistributionListeners(IStateChangeMessage message){
+	private void informDistributionListeners(IStateChangeMessage message, DistributedSession session){
 		synchronized (distributionListeners) {
-			distributionListeners.stream().forEach(l -> l.processOnPeerHasFinished(message));			
+			distributionListeners.stream().forEach(l -> l.processOnPeerHasFinished(message, session));			
 		}		
 	}
 
@@ -208,14 +226,33 @@ public class DistributionManager implements IDistributionManager {
 		return tmp;
 	}
 	
-	private void trackProcessInstance(String peerId, String processInstanceId){
+	@Override
+	public boolean isSuperPeer(){
+		return peerProfile.isPresent() && peerProfile.get().isSuperPeer();		
+	}
+	
+	@Override
+	public String getPeerId(){
+		if(peerProfile.isPresent())
+			return peerProfile.get().getPeerId();
+		return null;
+	}
+	
+	public void setPeerProfile(PeerProfile profile){
+		if(profile == null || peerProfile.isPresent())
+			throw new RuntimeException("The PeerProfile can only be set once and cant be set to null");
+		peerProfile = Optional.of(profile);
+	}
+	
+	private void trackProcessInstance(DistributedSession session){
 		synchronized (trackedProcessInstances) {
-			List<String> instances = trackedProcessInstances.get(peerId);
+			String peerId = session.getPeerId();
+			List<String> instances = trackedProcessInstances.get(session.getPeerId());
 			if(instances == null){
 				instances = new ArrayList<>();
 				trackedProcessInstances.put(peerId, instances);
 			}
-			instances.add(processInstanceId);
+			instances.add(session.getRemoteInstanceId());
 		}		
 	}
 	

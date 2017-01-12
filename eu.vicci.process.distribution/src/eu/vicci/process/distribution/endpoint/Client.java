@@ -19,7 +19,6 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 
 import eu.vicci.process.distribution.logging.DistributionCommand;
 import eu.vicci.process.distribution.logging.LogEntry;
-import eu.vicci.process.distribution.manager.DistributionManagerOLD;
  
 public class Client implements MessageListener {
     private static int ackMode;
@@ -100,8 +99,8 @@ public class Client implements MessageListener {
             	if (objMessage.getObject() instanceof DistributionCommand){
             		DistributionCommand cmd = (DistributionCommand) objMessage.getObject(); 
             		System.out.println("Command received: "+cmd);
-            		DistributionManagerOLD mng = DistributionManagerOLD.getInstance();
-            		mng.switchPeerCommand(cmd.getPeerIp(), cmd.getPeerName(), cmd.getProcessName());
+//            		DistributionManagerOLD mng = DistributionManagerOLD.getInstance();
+//            		mng.switchPeerCommand(cmd.getPeerIp(), cmd.getPeerName(), cmd.getProcessName());
             	}
             }
             

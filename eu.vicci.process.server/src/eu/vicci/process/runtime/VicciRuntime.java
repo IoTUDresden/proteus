@@ -17,6 +17,7 @@ import com.codahale.metrics.Timer.Context;
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.devices.util.OpenHabListener;
 import eu.vicci.process.devices.util.SeMiWaListener;
+import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.engine.ProcessManagerPublic;
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.model.cep.EsperEngine;
@@ -69,6 +70,8 @@ public class VicciRuntime {
 		initializeSofiaModel();
 		registerListener(configReader);
 		boolean isWebSocketServerStarted = startWebSocketServer(configReader);
+		
+		DistributionManager.getInstance().setPeerProfile(server.getPeerProfile());
 		
 		timer.ifPresent(t -> t.stop());
 		return isWebSocketServerStarted;

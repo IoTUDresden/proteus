@@ -9,8 +9,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import eu.vicci.process.distribution.core.DistributedSession;
 import eu.vicci.process.distribution.core.DistributionManagerListener;
 import eu.vicci.process.distribution.core.IDistributionManager;
+import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.model.sofia.EndPort;
 import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
@@ -27,11 +29,11 @@ public class RemoteStepInvokeWorker {
 	public List<DataTypeInstance> returnedData = new LinkedList<DataTypeInstance>();
 
 	private CountDownLatch responseReceived;
-
-	private String remoteProcessInstanceId; // Stub Process Instance ID
+	
+	private DistributedSession remoteSession;
 
 	private DistributingProcessInstanceImplCustom processInstance;
-	private IDistributionManager distributionManager;
+	private IDistributionManager distributionManager = DistributionManager.getInstance();	
 	
 	private IStateChangeMessage finalMessage;
 	
@@ -88,7 +90,7 @@ public class RemoteStepInvokeWorker {
 		clearOutTransitions(remoteProcess);
 
 		distributionManager.addDistributionManagerListener(listener);
-		remoteProcessInstanceId = distributionManager.workRemote(ip, remoteProcess, null);
+		remoteSession = distributionManager.workRemote(ip, remoteProcess, null);
 
 		try {
 			// blocks till response was received
@@ -107,8 +109,8 @@ public class RemoteStepInvokeWorker {
 	
 	private DistributionManagerListener listener = new DistributionManagerListener() {		
 		@Override
-		public void processOnPeerHasFinished(IStateChangeMessage message) {
-			if(!remoteProcessInstanceId.equals(message.getProcessInstanceId()))
+		public void processOnPeerHasFinished(IStateChangeMessage message, DistributedSession session) {
+			if(remoteSession.equals(session))
 				return;
 			finalMessage = message;
 			responseReceived.countDown();		

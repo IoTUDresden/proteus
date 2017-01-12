@@ -1,6 +1,7 @@
 package eu.vicci.process.wampserver;
 
 import eu.vicci.process.client.core.IConfigurationReader;
+import eu.vicci.process.distribution.core.PeerProfile;
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.model.util.ConfigurationReader;
 import eu.vicci.process.model.util.configuration.RpcId;
@@ -17,6 +18,11 @@ public class Peer extends SuperPeer {
 	public Peer(IProcessManager processManager, IConfigurationReader configReader, String superPeerIp){
 		super(processManager, configReader);
 		this.superPeerIp = superPeerIp;
+	}
+	
+	@Override
+	protected PeerProfile createPeerProfile() {
+		return PeerProfile.create(false);
 	}
 	
 	@Override

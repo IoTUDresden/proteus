@@ -19,6 +19,9 @@ public class PeerProfile {
 	
 	@JsonProperty
 	private String hostName;
+	
+	@JsonProperty
+	private boolean isSuperPeer;
 
 	
 	public String getPeerId() {
@@ -33,9 +36,14 @@ public class PeerProfile {
 		return hostName;
 	}
 	
-	public static PeerProfile create(){
+	public boolean isSuperPeer(){
+		return isSuperPeer;
+	}
+	
+	public static PeerProfile create(boolean isSuperPeer){
 		PeerProfile profile = new PeerProfile();
 		profile.peerId = UUID.randomUUID().toString();
+		profile.isSuperPeer = isSuperPeer;
 		try {
 			profile.ip = Inet4Address.getLocalHost().getHostAddress();
 			profile.hostName = Inet4Address.getLocalHost().getHostName();
