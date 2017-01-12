@@ -173,6 +173,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 			builder.withConnectorProvider(connectorProvider).withUri("ws://" + ip + ":" + port + "/" + namespace)
 					.withRealm(realmName).withInfiniteReconnects().withReconnectInterval(3, TimeUnit.SECONDS)
 					.withConnectionConfiguration(getNettyWampConfig());
+
 			client = builder.build();
 			registerRpcHandlers(waitTillConnected);
 			client.open();
@@ -277,7 +278,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	public void publishHumanTask(IHumanTaskRequest payload) {
 		publish(TopicId.HUMAN_TASK_REQ, payload);
 	}
-
+	
 	/**
 	 * Upload a process model document (either *.sofia or *.diagram)
 	 * 
@@ -323,7 +324,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		try {
 			boolean isCountDown = receiver.await();
 			if (!isCountDown)
-				logger.error("Timeout while waiting for replay for rpc: '{}'", rpcId);
+				logger.error("Timeout while waiting for reply for rpc: '{}'", rpcId);
 		} catch (InterruptedException e) {
 			logger.error("Waiting for rpc was interrupted: '{}'", rpcId);
 		}
@@ -344,21 +345,50 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		callRpc(RpcId.UPLOAD_AND_DEPLOY, uadh, input);
 		return uadh.getState();
 	}
-
+	
 	@Override
 	public String deployProcess(String processid) {
 		DeployModelHandler dmh = new DeployModelHandler();
 		callRpc(RpcId.DEPLOY_MODEL, dmh, processid);
 		return dmh.getState();
 	}
+	
+	@Override
+	public String deployProcess(Process process) {
+		return deployProcessRemote(null, process);
+	}
+	
+	@Override
+	public String deployProcessRemote(String peerId, Process process) {
+		String text = getProcessAsString(process, null);
+		String processId = process.getId();
+
+		printModel(text);
+		byte[] compressed = Utility.compress(text);
+
+		UploadModelRequest input = new UploadModelRequest(processId, compressed, false);
+		DeployProcessHandler dmh = new DeployProcessHandler();
+		callRpc(createRpcId(peerId, RpcId.DEPLOY_PROCESS), dmh, input);
+		return processId;
+	}
 
 	@Override
 	public String deployProcessInstance(String processId) {
+		return deployProcessInstanceRemote(null, processId);
+	}
+	
+	@Override
+	public String deployProcessInstanceRemote(String peerId, String processId) {
 		DeployInstanceHandler dih = new DeployInstanceHandler();
-		callRpc(RpcId.DEPLOY_INSTANCE, dih, processId);
+		callRpc(createRpcId(peerId, RpcId.DEPLOY_INSTANCE), dih, processId);
 		System.out.println("Instance ID: " + dih.getInstanceId());
 		return dih.getInstanceId();
 	}
+	
+	private static String createRpcId(String peerId, String rpcId){
+		return peerId == null ? rpcId : rpcId + RpcId.ID_SEPERATOR + peerId;
+	}
+
 
 	@Override
 	public String configureProcessInstance(String processInstanceId, String configuration) {
@@ -376,7 +406,19 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	@Override
 	public String startProcessInstance(String processInstanceId, Map<String, DataTypeInstance> inputParameters,
 			boolean runInLoop) {
+		return internalStartProcessInstance(null, processInstanceId, inputParameters, runInLoop);
+	}
+	
+	@Override
+	public String startProcessInstanceRemote(String peerId, String processInstanceId,
+			Map<String, DataTypeInstance> inputParameters) {
+		return internalStartProcessInstance(peerId, processInstanceId, inputParameters, false);
+	}
+	
+	private String internalStartProcessInstance(String peerId, String processInstanceId, Map<String, DataTypeInstance> inputParameters,
+			boolean runInLoop) {
 		// TODO run in loop
+		
 		StartInstanceHandler sih = new StartInstanceHandler();
 		Map<String, IJSONTypeInstance> ports = new HashMap<String, IJSONTypeInstance>();
 
@@ -391,8 +433,8 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		}
 
 		ProcessStartRequest input = new ProcessStartRequest(processInstanceId, ports, runInLoop);
-		callRpc(RpcId.START_INSTANCE, sih, input);
-		return null;
+		callRpc(createRpcId(peerId, RpcId.START_INSTANCE), sih, input);
+		return null;		
 	}
 
 	@Override
@@ -486,20 +528,6 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		String text = getProcessAsString(model, null);
 		printModel(text);
 		return uploadProcessDefinition(modelId, text, false, overrideExisting);
-	}
-
-	@Override
-	public String deployProcess(Process process) {
-		String text = getProcessAsString(process, null);
-		String processId = process.getId();
-
-		printModel(text);
-		byte[] compressed = Utility.compress(text);
-
-		UploadModelRequest input = new UploadModelRequest(processId, compressed, false);
-		DeployProcessHandler dmh = new DeployProcessHandler();
-		callRpc(RpcId.DEPLOY_PROCESS, dmh, input);
-		return processId;
 	}
 
 	@Override
@@ -714,4 +742,9 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	private void printModel(String text) {
 		System.out.println("Text: \n" + text);
 	}
+
+
+
+
+
 }

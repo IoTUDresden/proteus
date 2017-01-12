@@ -1,8 +1,12 @@
 package eu.vicci.process.client.core;
 
+import java.util.Map;
+
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.engine.core.ReplyState;
+import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.util.messages.core.IHumanTaskRequest;
+import eu.vicci.process.model.sofia.Process;
 
 public interface IProcessEngineClient extends IProcessManager {
 
@@ -63,5 +67,40 @@ public interface IProcessEngineClient extends IProcessManager {
 	void publish(String topic, Object payload);
 
 	void publishHumanTask(IHumanTaskRequest payload);
+	
+	/**
+	 * Deploys the process on a peer with the given id. Same as
+	 * {@link #deployProcess(Process)} but the process is deployed on the peer
+	 * with the given id.
+	 * 
+	 * @param clientId
+	 * @param process
+	 * @return
+	 */
+	String deployProcessRemote(String peerId, Process process);
+
+	/**
+	 * Deploys an process instance for the given process on a peer. Same as
+	 * {@link #deployProcessInstance(String)} but the instance is deployed on
+	 * the peer with the given id.
+	 * 
+	 * @param peerId
+	 * @param processId
+	 * @return
+	 */
+	String deployProcessInstanceRemote(String peerId, String processId);
+
+	/**
+	 * Starts the instance on a peer. Same as
+	 * {@link #startProcessInstance(String, Map)} but the instance is started on
+	 * the peer with the given id.
+	 * 
+	 * @param peerId
+	 * @param processInstanceId
+	 * @param inputParameters
+	 * @return
+	 */
+	String startProcessInstanceRemote(String peerId, String processInstanceId,
+			Map<String, DataTypeInstance> inputParameters);
 
 }

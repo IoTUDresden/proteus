@@ -2,6 +2,8 @@ package eu.vicci.process.model.util.configuration;
 
 public final class RpcId {
 	private RpcId() {	}	
+	
+	public static final String ID_SEPERATOR = "_";
 		
 	public static final String DEPLOY_INSTANCE = "http://vicci.eu/processes/deployinstance";
 	
@@ -54,5 +56,9 @@ public final class RpcId {
 	public static final String CLOSED_HUMAN_TASK_RESPONSE_LIST = "http://vicci.eu/processes/closedhumantaskresponselist";
 	
 	public static final String SEMANTIC_PERSONS = "http://vicci.eu/semantic/persons";
+	
+	public static final String REGISTERED_PEERS = "http://vicci.eu/processes/registeredPeers";
+	
+	public static final String REGISTER_PEER = "http://vicci.eu/processes/registerPeer";
 
 }

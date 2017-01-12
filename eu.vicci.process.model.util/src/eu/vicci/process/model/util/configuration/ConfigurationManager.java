@@ -19,7 +19,7 @@ public final class ConfigurationManager {
 			+ "was found but is from wrong type.\n expected: '%s'\n current: '%s'";
 
 	private Map<String, Object> configurations = Collections.synchronizedMap(new HashMap<String, Object>());
-	
+
 	private IClientManager clientManager;
 
 	// singleton
@@ -37,16 +37,16 @@ public final class ConfigurationManager {
 	public Object getConfiguration(String key) {
 		return configurations.get(key);
 	}
-	
-	public void setClientManager(IClientManager clientManager){
+
+	public void setClientManager(IClientManager clientManager) {
 		this.clientManager = clientManager;
 	}
-	
-	public IClientManager getClientManager(){
+
+	public IClientManager getClientManager() {
 		return clientManager;
 	}
-	
-	public boolean hasClientManager(){
+
+	public boolean hasClientManager() {
 		return clientManager != null;
 	}
 
@@ -66,32 +66,44 @@ public final class ConfigurationManager {
 			return null;
 		if (value.getClass().equals(clazz))
 			return (T) value;
-		String msg = String
-				.format(msgWrongType, key, clazz.getSimpleName(), value.getClass().getSimpleName());
+		String msg = String.format(msgWrongType, key, clazz.getSimpleName(), value.getClass().getSimpleName());
 		logger.error(msg);
 		return null;
 	}
-	
+
 	/**
 	 * Gets the config value as String.
+	 * 
 	 * @param key
-	 * @return null if cant convert the value to String or a value for the given key does not exist.
+	 * @return null if cant convert the value to String or a value for the given
+	 *         key does not exist.
 	 */
-	public String getConfigAsString(String key){
+	public String getConfigAsString(String key) {
 		return getConfiguration(key, String.class);
 	}
-	
+
 	/**
-	 * Updates following values in the config:
-	 * - ConfigProperties.OPENHAB_URI
+	 * Updates following values in the config: <br>
+	 * - OPENHAB_URI, FEEDBACK_SERVICE_URI, ELASTICSEARCH_HOST, CONTEXT_URI,
+	 * NAMESPACE, REALMNAME, PORT, SUPER_PEER_IP
 	 * 
 	 * @param reader
 	 */
-	public void updateFromConfigReader(IConfigurationReader reader){
-		configurations.put(ConfigProperties.OPENHAB_URI, reader.getOpenHabUri());
-		configurations.put(ConfigProperties.FEEDBACK_SERVICE_URI, reader.getFeedbackServiceUri());
-		configurations.put(ConfigProperties.ELASTICSEARCH_HOST, reader.getElasticsearchHost());
-		configurations.put(ConfigProperties.CONTEXT_URI, reader.getContextUri());
+	public void updateFromConfigReader(IConfigurationReader reader) {
+		addIfNotNull(ConfigProperties.OPENHAB_URI, reader.getOpenHabUri());
+		addIfNotNull(ConfigProperties.FEEDBACK_SERVICE_URI, reader.getFeedbackServiceUri());
+		addIfNotNull(ConfigProperties.ELASTICSEARCH_HOST, reader.getElasticsearchHost());
+		addIfNotNull(ConfigProperties.CONTEXT_URI, reader.getContextUri());
+		addIfNotNull(ConfigProperties.NAMESPACE, reader.getNamespace());
+		addIfNotNull(ConfigProperties.REALMNAME, reader.getRealmName());
+		addIfNotNull(ConfigProperties.PORT, reader.getPort());
+		addIfNotNull(ConfigProperties.SUPER_PEER_IP, reader.getSuperPeerIp());
+	}
+
+	private void addIfNotNull(String key, String value) {
+		if (value == null)
+			return;
+		configurations.put(key, value);
 	}
 
 }

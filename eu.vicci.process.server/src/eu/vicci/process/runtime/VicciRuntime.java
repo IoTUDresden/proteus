@@ -28,7 +28,8 @@ import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.model.util.logging.LoggingManager;
 import eu.vicci.process.osgi.OSGiRuntime;
-import eu.vicci.process.wampserver.RuntimeServer;
+import eu.vicci.process.wampserver.Peer;
+import eu.vicci.process.wampserver.SuperPeer;
 import ws.wamp.jawampa.ApplicationError;
 
 public class VicciRuntime {
@@ -53,7 +54,7 @@ public class VicciRuntime {
 		runtime.stop();
 	}	
 
-	private RuntimeServer server;
+	private SuperPeer server;
 	private IProcessManager processManagerPublic;
 	
 	public VicciRuntime(){	
@@ -85,6 +86,7 @@ public class VicciRuntime {
 		return Optional.ofNullable(registry.timer("startup").time());		
 	}
 
+	//FIXME needed for logging? We manually post the logs?
 	private void initializeElasticsearchReportingWith(MetricRegistry registry, String host) {
 		try {
 			ElasticsearchReporter reporter = ElasticsearchReporter
@@ -142,9 +144,19 @@ public class VicciRuntime {
 			processManagerPublic.loadExistingModels();
 	}
 
+	/**
+	 * starts router and server client if this is a SuperPeer. otherwise only the server client is started, 
+	 * which connects to the router on the SuperPeer.
+	 * @param configReader
+	 * @return
+	 */
 	private boolean startWebSocketServer(IConfigurationReader configReader) {
 		try {
-			server = new RuntimeServer(processManagerPublic);
+			if(configReader.getSuperPeerIp() == null)
+				server = new SuperPeer(processManagerPublic, configReader);
+			else
+				server = new Peer(processManagerPublic, configReader, configReader.getSuperPeerIp());
+
 			server.start();
 			return true;
 		} catch (ApplicationError e) {

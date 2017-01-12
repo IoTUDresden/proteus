@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="maven_libs/activemq-broker-5.13.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/activemq-client-5.13.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/activemq-core-5.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/activemq-openwire-legacy-5.13.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/activemq-protobuf-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/aopalliance-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/commons-logging-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/commons-net-3.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/geronimo-j2ee-management_1.1_spec-1.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/geronimo-jms_1.1_spec-1.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/hawtbuf-1.11.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/hawtdispatch-1.11.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/hawtdispatch-transport-1.11.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/jackson-annotations-2.6.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/jackson-core-2.6.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/jackson-databind-2.6.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/jasypt-1.9.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/kahadb-5.7.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/log4j-1.2.17.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/mqtt-client-1.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/slf4j-api-1.7.21.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/slf4j-log4j12-1.7.21.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/spring-aop-3.0.7.RELEASE.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/spring-asm-3.0.7.RELEASE.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/spring-beans-3.0.7.RELEASE.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/spring-context-3.0.7.RELEASE.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/spring-core-3.0.7.RELEASE.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/spring-expression-3.0.7.RELEASE.jar"/>
+	<classpathentry exported="true" kind="lib" path="conf/"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" output="target/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

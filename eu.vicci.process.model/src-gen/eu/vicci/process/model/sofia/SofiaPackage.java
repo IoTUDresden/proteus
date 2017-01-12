@@ -1183,13 +1183,40 @@ public interface SofiaPackage extends EPackage {
 	int PROCESS__DATA_TYPE_DEFINITIONS = COMPOSITE_STEP_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Execution Peer</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__EXECUTION_PEER = COMPOSITE_STEP_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Distributed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__DISTRIBUTED = COMPOSITE_STEP_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Remote Executing</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__REMOTE_EXECUTING = COMPOSITE_STEP_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Process</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_FEATURE_COUNT = COMPOSITE_STEP_FEATURE_COUNT + 1;
+	int PROCESS_FEATURE_COUNT = COMPOSITE_STEP_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofia.impl.PortImpl <em>Port</em>}' class.
@@ -7053,6 +7080,39 @@ public interface SofiaPackage extends EPackage {
 	EReference getProcess_DataTypeDefinitions();
 
 	/**
+	 * Returns the meta object for the attribute '{@link eu.vicci.process.model.sofia.Process#getExecutionPeer <em>Execution Peer</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Execution Peer</em>'.
+	 * @see eu.vicci.process.model.sofia.Process#getExecutionPeer()
+	 * @see #getProcess()
+	 * @generated
+	 */
+	EAttribute getProcess_ExecutionPeer();
+
+	/**
+	 * Returns the meta object for the attribute '{@link eu.vicci.process.model.sofia.Process#isDistributed <em>Distributed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Distributed</em>'.
+	 * @see eu.vicci.process.model.sofia.Process#isDistributed()
+	 * @see #getProcess()
+	 * @generated
+	 */
+	EAttribute getProcess_Distributed();
+
+	/**
+	 * Returns the meta object for the attribute '{@link eu.vicci.process.model.sofia.Process#isRemoteExecuting <em>Remote Executing</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Remote Executing</em>'.
+	 * @see eu.vicci.process.model.sofia.Process#isRemoteExecuting()
+	 * @see #getProcess()
+	 * @generated
+	 */
+	EAttribute getProcess_RemoteExecuting();
+
+	/**
 	 * Returns the meta object for class '{@link eu.vicci.process.model.sofia.Port <em>Port</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8600,6 +8660,30 @@ public interface SofiaPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROCESS__DATA_TYPE_DEFINITIONS = eINSTANCE.getProcess_DataTypeDefinitions();
+
+		/**
+		 * The meta object literal for the '<em><b>Execution Peer</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS__EXECUTION_PEER = eINSTANCE.getProcess_ExecutionPeer();
+
+		/**
+		 * The meta object literal for the '<em><b>Distributed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS__DISTRIBUTED = eINSTANCE.getProcess_Distributed();
+
+		/**
+		 * The meta object literal for the '<em><b>Remote Executing</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS__REMOTE_EXECUTING = eINSTANCE.getProcess_RemoteExecuting();
 
 		/**
 		 * The meta object literal for the '{@link eu.vicci.process.model.sofia.impl.PortImpl <em>Port</em>}' class.

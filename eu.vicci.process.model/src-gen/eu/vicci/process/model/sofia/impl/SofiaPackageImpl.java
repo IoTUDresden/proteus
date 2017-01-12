@@ -728,6 +728,33 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getProcess_ExecutionPeer() {
+		return (EAttribute)processEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProcess_Distributed() {
+		return (EAttribute)processEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProcess_RemoteExecuting() {
+		return (EAttribute)processEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPort() {
 		return portEClass;
 	}
@@ -1990,6 +2017,9 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 
 		processEClass = createEClass(PROCESS);
 		createEReference(processEClass, PROCESS__DATA_TYPE_DEFINITIONS);
+		createEAttribute(processEClass, PROCESS__EXECUTION_PEER);
+		createEAttribute(processEClass, PROCESS__DISTRIBUTED);
+		createEAttribute(processEClass, PROCESS__REMOTE_EXECUTING);
 
 		portEClass = createEClass(PORT);
 		createEReference(portEClass, PORT__OUT_TRANSITIONS);
@@ -2300,6 +2330,9 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 
 		initEClass(processEClass, eu.vicci.process.model.sofia.Process.class, "Process", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProcess_DataTypeDefinitions(), this.getDataType(), null, "dataTypeDefinitions", null, 0, -1, eu.vicci.process.model.sofia.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProcess_ExecutionPeer(), ecorePackage.getEString(), "executionPeer", null, 0, 1, eu.vicci.process.model.sofia.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProcess_Distributed(), ecorePackage.getEBoolean(), "distributed", null, 0, 1, eu.vicci.process.model.sofia.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProcess_RemoteExecuting(), ecorePackage.getEBoolean(), "remoteExecuting", null, 0, 1, eu.vicci.process.model.sofia.Process.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(portEClass, Port.class, "Port", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPort_OutTransitions(), this.getTransition(), this.getTransition_SourcePort(), "outTransitions", null, 0, -1, Port.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
