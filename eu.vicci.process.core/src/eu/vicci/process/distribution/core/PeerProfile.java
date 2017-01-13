@@ -4,6 +4,7 @@ import java.net.Inet4Address;
 import java.net.UnknownHostException;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -23,19 +24,22 @@ public class PeerProfile {
 	@JsonProperty
 	private boolean isSuperPeer;
 
-	
+	@JsonIgnore
 	public String getPeerId() {
 		return peerId;
 	}
-
+	
+	@JsonIgnore
 	public String getIp() {
 		return ip;
 	}
 	
+	@JsonIgnore
 	public String getHostName() {
 		return hostName;
 	}
 	
+	@JsonIgnore
 	public boolean isSuperPeer(){
 		return isSuperPeer;
 	}
