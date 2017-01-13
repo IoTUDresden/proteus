@@ -42,7 +42,7 @@ public class DistributionManager implements IDistributionManager {
 	private List<DistributionManagerListener> distributionListeners = new ArrayList<>();
 	
 	//only present on peers
-	private Optional<PeerProfile> peerProfile;
+	private Optional<PeerProfile> peerProfile = Optional.empty();
 
 	private DistributionManager() {
 		pec = createSuperPeerClient();
