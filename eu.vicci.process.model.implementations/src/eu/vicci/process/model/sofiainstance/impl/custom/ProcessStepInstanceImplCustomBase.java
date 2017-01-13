@@ -82,7 +82,7 @@ public abstract class ProcessStepInstanceImplCustomBase extends ProcessStepInsta
 		executionState = currentState.getSimpleState();
 		delay = 0;
 		peerId = DistributionManager.getInstance().getPeerId();
-		runsOnPeer = DistributionManager.getInstance().isSuperPeer();
+		runsOnPeer = !DistributionManager.getInstance().isSuperPeer();
 	}
 
 	@Override
