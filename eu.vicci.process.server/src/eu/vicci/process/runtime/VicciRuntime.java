@@ -48,7 +48,8 @@ public class VicciRuntime {
 			printlnErr("\n\nfailed to start vicci runtime");
 			return;
 		}
-		println("\n\nvicci runtime started");
+		
+		println("\n\nvicci runtime started (" + runtime.getRuntimeType()  +")");
 		readLineTillStopIsEntered();
 		
 		println("\n\nstopping the runtime...");
@@ -75,6 +76,10 @@ public class VicciRuntime {
 		
 		timer.ifPresent(t -> t.stop());
 		return isWebSocketServerStarted;
+	}
+	
+	private String getRuntimeType(){
+		return server.getClass().getSimpleName();
 	}
 	
 	private Optional<Context> initReporting(){
