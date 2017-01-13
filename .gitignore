@@ -2,7 +2,7 @@ bin/
 target/
 src-gen/
 .metadata/
-process/server/processes/
+eu.vicci.process.server/processes/
 
 
 # Package Files #
