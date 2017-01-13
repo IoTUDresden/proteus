@@ -26,8 +26,14 @@ public class TrueConsoleOutput implements ProcessStepWorker {
 
 	@Override
 	public List<DataTypeInstance> work(Context context) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("#####################################");
+		System.out.println("#####################################");
+		System.out.println("##                                 ##");
+		System.out.println("## The True Process is working...  ##");
+		System.out.println("##                                 ##");
+		System.out.println("#####################################");
+		System.out.println("#####################################");
+		return context.startParameter;
 	}
 
 }

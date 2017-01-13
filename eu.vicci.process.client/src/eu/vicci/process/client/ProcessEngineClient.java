@@ -518,7 +518,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(org.eclipse.emf.common.util.URI.createURI(filepath), true);
 
-		if (filepath.endsWith(EXT_DIAGRAM)) {
+		if (filepath.endsWith(IProcessEngineClient.EXT_DIAGRAM)) {
 			model = (Process) resource.getContents().get(1);
 		} else {
 			model = (Process) resource.getContents().get(0);

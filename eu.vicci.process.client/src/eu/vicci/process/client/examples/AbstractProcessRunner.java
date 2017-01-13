@@ -1,7 +1,13 @@
 package eu.vicci.process.client.examples;
 
+import java.io.IOException;
+import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
+
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 import eu.vicci.process.client.ProcessEngineClientBuilder;
 import eu.vicci.process.client.core.IConfigurationReader;
@@ -51,7 +57,48 @@ public abstract class AbstractProcessRunner {
 		return null;
 	}
 	
+	/**
+	 * return true and {@link #doProcessChange(Process)} will be called.
+	 * @return
+	 */
+	protected boolean doProcessChangesBeforeUploading(){
+		return false;
+	}
+	
+	/**
+	 * Do an changes on the process model before uploading. 
+	 * Override {@link #doProcessChangesBeforeUploading()} in order to call this method.
+	 * @param process
+	 */
+	protected void doProcessChange(Process process){
+		
+	}
+	
+	private void changeProcessBeforeUploading(){
+		String path = getModelFilePath();
+		Process model = null;
+		ResourceSet resSet = new ResourceSetImpl();
+		Resource resource = resSet.getResource(org.eclipse.emf.common.util.URI.createURI(path), true);
+
+		if (path.endsWith(IProcessEngineClient.EXT_DIAGRAM)) {
+			model = (Process) resource.getContents().get(1);
+		} else {
+			model = (Process) resource.getContents().get(0);
+		}
+		doProcessChange(model);
+		try {
+			resource.save(Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	protected void loadAndStartProcess() {
+		if(doProcessChangesBeforeUploading()){
+			System.out.println("edit model before uploading...");
+			changeProcessBeforeUploading();			
+		}			
+		
 		System.out.println("upload model file...");		
 		String processId = pec.uploadModelFile(getModelFilePath());
 		System.out.println("model id: " + processId);
