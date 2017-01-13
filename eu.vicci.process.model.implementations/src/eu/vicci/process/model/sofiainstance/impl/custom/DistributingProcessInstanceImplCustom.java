@@ -1,8 +1,7 @@
 package eu.vicci.process.model.sofiainstance.impl.custom;
 
-import java.util.Optional;
-
 import eu.vicci.process.distribution.core.IDistributionManager;
+import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.model.sofiainstance.BooleanTypeInstance;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.DoubleTypeInstance;
@@ -19,15 +18,15 @@ import eu.vicci.process.model.util.serialization.jsontypeinstances.core.IJSONTyp
 
 public class DistributingProcessInstanceImplCustom extends ProcessInstanceImplCustom {
 	private RemoteStepInvokeWorker worker;
-	private Optional<IDistributionManager> distributionManager = Optional.empty();
+	private IDistributionManager distributionManager = DistributionManager.getInstance();
 
 	@Override
 	public boolean onExecute() {
 		LOGGER.debug("Distributed Process Step, start remote execution");
 
-		if (!distributionManager.isPresent())
+		if (distributionManager == null)
 			throw new IllegalArgumentException(ERR_NO_DIST_MGR);
-		worker = new RemoteStepInvokeWorker(this, distributionManager.get());
+		worker = new RemoteStepInvokeWorker(this, distributionManager);
 		worker.work(); // blocks till finished
 
 		// TODO check if this is working
@@ -50,7 +49,7 @@ public class DistributingProcessInstanceImplCustom extends ProcessInstanceImplCu
 	 * @param distributionManager
 	 */
 	public void setDistributionManager(IDistributionManager distributionManager) {
-		this.distributionManager = Optional.ofNullable(distributionManager);
+		this.distributionManager = distributionManager;
 	}
 
 	@Override

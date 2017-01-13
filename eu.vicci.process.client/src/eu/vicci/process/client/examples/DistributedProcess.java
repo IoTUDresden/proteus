@@ -6,7 +6,7 @@ public class DistributedProcess extends AbstractProcessRunner {
 	private static final String ID_DIST_1 = "_N62RQNl9EeaER9UBQCFXlQ";
 	
 	//IP for the peer
-	private static final String IP_DIST_1 = "192.168.2.12";
+	private static final String IP_DIST_1 = "192.168.2.105";
 	
 	public static void main(String[] args) {
 		new DistributedProcess().run();
