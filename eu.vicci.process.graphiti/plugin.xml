@@ -379,6 +379,13 @@
                     id="graphiti.main.tab.emfclass28"
                     tab="graphiti.main.tab">
               </propertySection>   
+              
+              <propertySection
+                    class="eu.vicci.process.graphiti.property.RemoteSection"
+                    filter="eu.vicci.process.graphiti.property.RemoteFilter"
+                    id="graphiti.main.tab.emfclass29"
+                    tab="graphiti.main.tab">
+              </propertySection>   
 	    
 	    </propertySections>	    
 	</extension>	
