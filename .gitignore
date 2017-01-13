@@ -2,6 +2,7 @@ bin/
 target/
 src-gen/
 .metadata/
+process/server/processes/
 
 
 # Package Files #

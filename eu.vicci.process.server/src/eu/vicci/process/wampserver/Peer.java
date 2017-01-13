@@ -37,7 +37,7 @@ public class Peer extends SuperPeer {
 	
 	@Override
 	protected void registerPeer() {
-		serverClient.call(RpcId.REGISTER_PEER, peerProfile);
+		serverClient.call(RpcId.REGISTER_PEER, peerProfile).subscribe();
 	}
 	
 	@Override
