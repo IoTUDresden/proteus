@@ -35,10 +35,7 @@ public class RemoteStepInvokeWorker {
 	private DistributingProcessInstanceImplCustom processInstance;
 	private IDistributionManager distributionManager = DistributionManager.getInstance();	
 	
-	private IStateChangeMessage finalMessage;
-	
-	private volatile Map<String, IJSONPortInstance> endControlPorts;
-	private volatile Map<String, IJSONDataPortInstance> endDataPorts;
+	private volatile IStateChangeMessage finalMessage;
 	
 	public RemoteStepInvokeWorker(DistributingProcessInstanceImplCustom processInstance, IDistributionManager distributionManager){
 		this.processInstance = processInstance;
@@ -51,8 +48,7 @@ public class RemoteStepInvokeWorker {
 	 * @return
 	 */
 	public Map<String, IJSONDataPortInstance> getEndDataPorts(){
-//		return finalMessage.getEndDataPorts();
-		return endDataPorts;
+		return finalMessage.getEndDataPorts();
 	}
 	
 	/**
@@ -60,8 +56,7 @@ public class RemoteStepInvokeWorker {
 	 * @return
 	 */
 	public Map<String, IJSONPortInstance> getEndControlPorts(){
-//		return finalMessage.getEndControlPorts();
-		return endControlPorts;
+		return finalMessage.getEndControlPorts();
 	}
 
 	private void checkArgs() {
@@ -118,8 +113,6 @@ public class RemoteStepInvokeWorker {
 			if(!remoteSession.equals(session))
 				return;
 			finalMessage = message;
-			endControlPorts = finalMessage.getEndControlPorts();
-			endDataPorts = finalMessage.getEndDataPorts();
 			responseReceived.countDown();		
 		}
 	};
