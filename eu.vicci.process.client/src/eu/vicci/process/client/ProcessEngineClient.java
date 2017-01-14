@@ -46,6 +46,7 @@ import eu.vicci.process.client.handlers.ResumeInstanceHandler;
 import eu.vicci.process.client.handlers.RetrieveInstanceLogHandler;
 import eu.vicci.process.client.handlers.RetrieveInstanceStateHandler;
 import eu.vicci.process.client.handlers.RetrieveRecentStateChangesHandler;
+import eu.vicci.process.client.handlers.RetrieveRegisteredPeersClientHandler;
 import eu.vicci.process.client.handlers.StartInstanceHandler;
 import eu.vicci.process.client.handlers.StopInstanceHandler;
 import eu.vicci.process.client.handlers.UploadAndDeployHandler;
@@ -54,6 +55,7 @@ import eu.vicci.process.client.subscribers.EngineUpdateSubscriber;
 import eu.vicci.process.client.subscribers.HumanTaskRequestSubscriber;
 import eu.vicci.process.client.subscribers.HumanTaskResponseSubscriber;
 import eu.vicci.process.client.subscribers.StateChangeMessageSubscriber;
+import eu.vicci.process.distribution.core.PeerProfile;
 import eu.vicci.process.engine.core.ClientBuilderFactory;
 import eu.vicci.process.engine.core.IProcessInfo;
 import eu.vicci.process.engine.core.IProcessInstanceInfo;
@@ -585,6 +587,13 @@ public class ProcessEngineClient implements IProcessEngineClient {
 				SofiaInstanceFactory.eINSTANCE);
 		return psiReturn;
 	}
+	
+	@Override
+	public List<PeerProfile> getRegisteredPeers() {
+		RetrieveRegisteredPeersClientHandler handler = new RetrieveRegisteredPeersClientHandler();
+		callRpc(RpcId.REGISTERED_PEERS, handler);
+		return handler.getPeers();
+	}
 
 	@Override
 	public void close() {
@@ -742,6 +751,8 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	private void printModel(String text) {
 		System.out.println("Text: \n" + text);
 	}
+
+
 
 
 

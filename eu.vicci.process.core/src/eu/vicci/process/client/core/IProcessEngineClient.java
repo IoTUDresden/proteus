@@ -1,7 +1,9 @@
 package eu.vicci.process.client.core;
 
+import java.util.List;
 import java.util.Map;
 
+import eu.vicci.process.distribution.core.PeerProfile;
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.engine.core.ReplyState;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
@@ -102,5 +104,11 @@ public interface IProcessEngineClient extends IProcessManager {
 	 */
 	String startProcessInstanceRemote(String peerId, String processInstanceId,
 			Map<String, DataTypeInstance> inputParameters);
+	
+	/**
+	 * Gets all registered {@link PeerProfile}s which are registered on the SuperPeer
+	 * @return
+	 */
+	List<PeerProfile> getRegisteredPeers();
 
 }

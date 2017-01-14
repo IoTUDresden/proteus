@@ -193,6 +193,12 @@ public class ProcessListViewController {
 			});
 		}
 	}
+	
+	public void showPeers(){
+		PeersDialog dialog = new PeersDialog(view.getViewShell(), client);
+		dialog.setBlockOnOpen(false);
+		dialog.open();
+	}
 		
 	private ExecuteProcessEditor openEditor(IFile file){
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
