@@ -163,7 +163,7 @@ public class DistributionManager implements IDistributionManager {
 			return;
 		if(!processHasFinished(message))
 			return;
-		DistributedSession session = new DistributedSession(message.getProcessInstanceId(), message.getPeerId());
+		DistributedSession session = new DistributedSession(message.getInstanceId(), message.getPeerId());
 		if(!removeTrackedInstance(session))
 			return;
 		
