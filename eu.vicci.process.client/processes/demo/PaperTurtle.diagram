@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" xmlns:sofia="http://vicci.eu/sofia/1.0">
-  <pi:Diagram visible="true" gridUnit="10" diagramTypeId="VICCIProcess" name="PaperTurtle" snapToGrid="true" pictogramLinks="/0/@children.0/@link /0/@children.0/@children.0/@link /0/@children.0/@children.1/@link /0/@children.0/@children.2/@link /0/@children.0/@children.3/@link /0/@children.0/@children.4/@link /0/@children.0/@children.5/@link /0/@children.0/@children.5/@children.0/@link /0/@children.0/@children.5/@children.1/@link /0/@children.0/@children.5/@children.2/@link /0/@children.0/@children.5/@children.3/@link /0/@children.0/@children.5/@children.4/@link /0/@children.0/@children.6/@link /0/@children.0/@children.6/@children.0/@link /0/@children.0/@children.6/@children.1/@link /0/@children.0/@children.6/@children.2/@link /0/@children.0/@children.6/@children.3/@link /0/@children.0/@children.6/@children.4/@link /0/@children.0/@children.7/@link /0/@children.0/@children.7/@children.0/@link /0/@children.0/@children.7/@children.1/@link /0/@children.0/@children.7/@children.2/@link /0/@children.0/@children.7/@children.3/@link /0/@children.0/@children.7/@children.4/@link /0/@children.0/@children.7/@children.5/@link /0/@children.0/@children.7/@children.6/@link /0/@children.0/@children.8/@link /0/@children.0/@children.8/@children.0/@link /0/@children.0/@children.8/@children.1/@link /0/@children.0/@children.8/@children.2/@link /0/@children.0/@children.8/@children.3/@link /0/@children.0/@children.8/@children.4/@link /0/@children.0/@children.8/@children.5/@link /0/@children.0/@children.9/@link /0/@children.0/@children.9/@children.0/@link /0/@children.0/@children.9/@children.1/@link /0/@children.0/@children.9/@children.2/@link /0/@children.0/@children.9/@children.3/@link /0/@children.0/@children.9/@children.4/@link /0/@children.0/@children.10/@link /0/@children.0/@children.10/@children.0/@link /0/@children.0/@children.10/@children.1/@link /0/@children.0/@children.10/@children.2/@link /0/@children.0/@children.10/@children.3/@link /0/@children.0/@children.10/@children.4/@link /0/@children.0/@children.10/@children.5/@link /0/@children.0/@children.10/@children.6/@link /0/@children.0/@children.11/@link /0/@children.0/@children.11/@children.0/@link /0/@children.0/@children.11/@children.1/@link /0/@children.0/@children.11/@children.2/@link /0/@children.0/@children.11/@children.3/@link /0/@children.0/@children.11/@children.4/@link /0/@children.0/@children.11/@children.5/@link /0/@children.0/@children.12/@link /0/@children.0/@children.12/@children.0/@link /0/@children.0/@children.12/@children.1/@link /0/@children.0/@children.12/@children.2/@link /0/@children.0/@children.12/@children.3/@link /0/@children.0/@children.12/@children.4/@link /0/@children.0/@children.12/@children.5/@link /0/@children.0/@children.12/@children.6/@link /0/@children.0/@children.13/@link /0/@children.0/@children.13/@children.0/@link /0/@children.0/@children.14/@link /0/@children.0/@children.14/@children.0/@link /0/@children.0/@children.5/@children.5/@link /0/@children.0/@children.5/@children.5/@children.0/@link /0/@children.0/@children.6/@children.5/@link /0/@children.0/@children.6/@children.5/@children.0/@link /0/@children.0/@children.5/@children.6/@link /0/@children.0/@children.5/@children.6/@children.0/@link /0/@children.0/@children.7/@children.7/@link /0/@children.0/@children.7/@children.7/@children.0/@link /0/@children.0/@children.5/@children.7/@link /0/@children.0/@children.5/@children.7/@children.0/@link /0/@children.0/@children.5/@children.7/@children.1/@link /0/@children.0/@children.8/@children.6/@link /0/@children.0/@children.8/@children.6/@children.0/@link /0/@connections.0/@link /0/@connections.1/@link /0/@connections.2/@link /0/@connections.3/@link /0/@children.0/@children.8/@children.7/@link /0/@children.0/@children.8/@children.7/@children.0/@link /0/@children.0/@children.8/@children.7/@children.1/@link /0/@children.0/@children.9/@children.5/@link /0/@children.0/@children.9/@children.5/@children.0/@link /0/@children.0/@children.9/@children.6/@link /0/@children.0/@children.9/@children.6/@children.0/@link /0/@children.0/@children.9/@children.6/@children.1/@link /0/@children.0/@children.9/@children.7/@link /0/@children.0/@children.9/@children.7/@children.0/@link /0/@children.0/@children.9/@children.7/@children.1/@link /0/@connections.4/@link /0/@children.0/@children.11/@children.6/@link /0/@children.0/@children.11/@children.6/@children.0/@link /0/@children.0/@children.10/@children.7/@link /0/@children.0/@children.10/@children.7/@children.0/@link /0/@children.0/@children.10/@children.8/@link /0/@children.0/@children.10/@children.8/@children.0/@link /0/@children.0/@children.6/@children.6/@link /0/@children.0/@children.6/@children.6/@children.0/@link /0/@connections.5/@link /0/@connections.6/@link /0/@connections.7/@link /0/@children.0/@children.11/@children.7/@link /0/@children.0/@children.11/@children.7/@children.0/@link /0/@children.0/@children.11/@children.7/@children.1/@link /0/@children.0/@children.12/@children.7/@link /0/@children.0/@children.12/@children.7/@children.0/@link /0/@connections.8/@link" version="0.12.0">
+  <pi:Diagram visible="true" gridUnit="10" diagramTypeId="VICCIProcess" name="PaperTurtle" snapToGrid="true" pictogramLinks="/0/@children.0/@link /0/@children.0/@children.0/@link /0/@children.0/@children.1/@link /0/@children.0/@children.2/@link /0/@children.0/@children.3/@link /0/@children.0/@children.4/@link /0/@children.0/@children.5/@link /0/@children.0/@children.5/@children.0/@link /0/@children.0/@children.5/@children.1/@link /0/@children.0/@children.5/@children.2/@link /0/@children.0/@children.5/@children.3/@link /0/@children.0/@children.5/@children.4/@link /0/@children.0/@children.6/@link /0/@children.0/@children.6/@children.0/@link /0/@children.0/@children.6/@children.1/@link /0/@children.0/@children.6/@children.2/@link /0/@children.0/@children.6/@children.3/@link /0/@children.0/@children.6/@children.4/@link /0/@children.0/@children.7/@link /0/@children.0/@children.7/@children.0/@link /0/@children.0/@children.7/@children.1/@link /0/@children.0/@children.7/@children.2/@link /0/@children.0/@children.7/@children.3/@link /0/@children.0/@children.7/@children.4/@link /0/@children.0/@children.7/@children.5/@link /0/@children.0/@children.7/@children.6/@link /0/@children.0/@children.8/@link /0/@children.0/@children.8/@children.0/@link /0/@children.0/@children.8/@children.1/@link /0/@children.0/@children.8/@children.2/@link /0/@children.0/@children.8/@children.3/@link /0/@children.0/@children.8/@children.4/@link /0/@children.0/@children.8/@children.5/@link /0/@children.0/@children.9/@link /0/@children.0/@children.9/@children.0/@link /0/@children.0/@children.9/@children.1/@link /0/@children.0/@children.9/@children.2/@link /0/@children.0/@children.9/@children.3/@link /0/@children.0/@children.9/@children.4/@link /0/@children.0/@children.10/@link /0/@children.0/@children.10/@children.0/@link /0/@children.0/@children.10/@children.1/@link /0/@children.0/@children.10/@children.2/@link /0/@children.0/@children.10/@children.3/@link /0/@children.0/@children.10/@children.4/@link /0/@children.0/@children.10/@children.5/@link /0/@children.0/@children.10/@children.6/@link /0/@children.0/@children.11/@link /0/@children.0/@children.11/@children.0/@link /0/@children.0/@children.11/@children.1/@link /0/@children.0/@children.11/@children.2/@link /0/@children.0/@children.11/@children.3/@link /0/@children.0/@children.11/@children.4/@link /0/@children.0/@children.11/@children.5/@link /0/@children.0/@children.12/@link /0/@children.0/@children.12/@children.0/@link /0/@children.0/@children.12/@children.1/@link /0/@children.0/@children.12/@children.2/@link /0/@children.0/@children.12/@children.3/@link /0/@children.0/@children.12/@children.4/@link /0/@children.0/@children.12/@children.5/@link /0/@children.0/@children.12/@children.6/@link /0/@children.0/@children.13/@link /0/@children.0/@children.13/@children.0/@link /0/@children.0/@children.14/@link /0/@children.0/@children.14/@children.0/@link /0/@children.0/@children.5/@children.5/@link /0/@children.0/@children.5/@children.5/@children.0/@link /0/@children.0/@children.6/@children.5/@link /0/@children.0/@children.6/@children.5/@children.0/@link /0/@children.0/@children.5/@children.6/@link /0/@children.0/@children.5/@children.6/@children.0/@link /0/@children.0/@children.7/@children.7/@link /0/@children.0/@children.7/@children.7/@children.0/@link /0/@children.0/@children.5/@children.7/@link /0/@children.0/@children.5/@children.7/@children.0/@link /0/@children.0/@children.5/@children.7/@children.1/@link /0/@children.0/@children.8/@children.6/@link /0/@children.0/@children.8/@children.6/@children.0/@link /0/@connections.0/@link /0/@connections.1/@link /0/@connections.2/@link /0/@connections.3/@link /0/@children.0/@children.8/@children.7/@link /0/@children.0/@children.8/@children.7/@children.0/@link /0/@children.0/@children.8/@children.7/@children.1/@link /0/@children.0/@children.9/@children.5/@link /0/@children.0/@children.9/@children.5/@children.0/@link /0/@children.0/@children.9/@children.6/@link /0/@children.0/@children.9/@children.6/@children.0/@link /0/@children.0/@children.9/@children.6/@children.1/@link /0/@children.0/@children.9/@children.7/@link /0/@children.0/@children.9/@children.7/@children.0/@link /0/@children.0/@children.9/@children.7/@children.1/@link /0/@connections.4/@link /0/@children.0/@children.11/@children.6/@link /0/@children.0/@children.11/@children.6/@children.0/@link /0/@children.0/@children.10/@children.7/@link /0/@children.0/@children.10/@children.7/@children.0/@link /0/@children.0/@children.10/@children.8/@link /0/@children.0/@children.10/@children.8/@children.0/@link /0/@children.0/@children.6/@children.6/@link /0/@children.0/@children.6/@children.6/@children.0/@link /0/@connections.5/@link /0/@connections.6/@link /0/@connections.7/@link /0/@children.0/@children.11/@children.7/@link /0/@children.0/@children.11/@children.7/@children.0/@link /0/@children.0/@children.11/@children.7/@children.1/@link /0/@children.0/@children.12/@children.7/@link /0/@children.0/@children.12/@children.7/@children.0/@link /0/@connections.8/@link /0/@children.0/@children.15/@link /0/@children.0/@children.15/@children.0/@link /0/@children.0/@children.15/@children.1/@link /0/@children.0/@children.16/@link /0/@children.0/@children.16/@children.0/@link /0/@children.0/@children.16/@children.1/@link /0/@children.0/@children.17/@link /0/@children.0/@children.17/@children.0/@link /0/@children.0/@children.17/@children.1/@link /0/@children.0/@children.18/@link /0/@children.0/@children.18/@children.0/@link /0/@children.0/@children.18/@children.1/@link /0/@children.0/@children.12/@children.8/@link /0/@children.0/@children.12/@children.8/@children.0/@link" version="0.12.0">
     <graphicsAlgorithm xsi:type="al:Rectangle" background="/0/@colors.1" foreground="/0/@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
     <children xsi:type="pi:ContainerShape" visible="true" active="true">
       <properties key="gesture" value="1"/>
@@ -822,6 +822,24 @@
             <link businessObjects="/1/@subSteps.7/@ports.0"/>
           </children>
         </children>
+        <children xsi:type="pi:ContainerShape" visible="true" active="true">
+          <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineWidth="2" width="12" height="12" y="40" cornerHeight="4" cornerWidth="4">
+            <background href="../../../plugin/eu.vicci.process.graphiti/model/startdataport.pictograms#//@colors.1"/>
+            <foreground href="../../../plugin/eu.vicci.process.graphiti/model/startdataport.pictograms#//@colors.0"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@subSteps.7/@ports.1"/>
+          <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
+          <children>
+            <properties key="gesture" value="0"/>
+            <graphicsAlgorithm xsi:type="al:Polyline">
+              <points/>
+              <points x="50"/>
+              <points x="50" y="50"/>
+              <points y="50"/>
+            </graphicsAlgorithm>
+            <link businessObjects="/1/@subSteps.7/@ports.1"/>
+          </children>
+        </children>
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineWidth="2" width="12" height="12" y="25" cornerHeight="4" cornerWidth="4">
@@ -857,6 +875,74 @@
             <points y="50"/>
           </graphicsAlgorithm>
           <link businessObjects="/1/@ports.1"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" background="/0/@colors.4" foreground="/0/@colors.3" lineWidth="2" lineStyle="UNSPECIFIED" filled="true" width="110" height="20" x="30" y="520"/>
+        <link businessObjects="/1/@dataTypeDefinitions.0"/>
+        <anchors xsi:type="pi:ChopboxAnchor"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0" width="100" height="12" x="4" y="4" font="/0/@fonts.1" value="String">
+            <properties key="name" value="title"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@dataTypeDefinitions.0"/>
+        </children>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0" width="100" height="12" x="4" y="4" font="/0/@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" value="PaperBoy">
+            <properties key="name" value="name"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@dataTypeDefinitions.0"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" background="/0/@colors.4" foreground="/0/@colors.3" lineWidth="2" lineStyle="UNSPECIFIED" filled="true" width="90" height="20" x="151" y="520"/>
+        <link businessObjects="/1/@dataTypeDefinitions.1"/>
+        <anchors xsi:type="pi:ChopboxAnchor"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="12" x="4" y="4" font="/0/@fonts.1" value="String">
+            <properties key="name" value="title"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@dataTypeDefinitions.1"/>
+        </children>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0" width="80" height="12" x="4" y="4" font="/0/@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" value="Reader">
+            <properties key="name" value="name"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@dataTypeDefinitions.1"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" background="/0/@colors.4" foreground="/0/@colors.3" lineWidth="2" lineStyle="UNSPECIFIED" filled="true" width="100" height="20" x="260" y="520"/>
+        <link businessObjects="/1/@dataTypeDefinitions.2"/>
+        <anchors xsi:type="pi:ChopboxAnchor"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0" width="90" height="12" x="4" y="4" font="/0/@fonts.1" value="String">
+            <properties key="name" value="title"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@dataTypeDefinitions.2"/>
+        </children>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0" width="90" height="12" x="4" y="4" font="/0/@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" value="position">
+            <properties key="name" value="name"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@dataTypeDefinitions.2"/>
+        </children>
+      </children>
+      <children xsi:type="pi:ContainerShape" visible="true" active="true">
+        <graphicsAlgorithm xsi:type="al:Rectangle" background="/0/@colors.4" foreground="/0/@colors.3" lineWidth="2" lineStyle="UNSPECIFIED" filled="true" width="140" height="20" x="410" y="520"/>
+        <link businessObjects="/1/@dataTypeDefinitions.3"/>
+        <anchors xsi:type="pi:ChopboxAnchor"/>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0" width="130" height="12" x="4" y="4" font="/0/@fonts.1" value="String">
+            <properties key="name" value="title"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@dataTypeDefinitions.3"/>
+        </children>
+        <children visible="true">
+          <graphicsAlgorithm xsi:type="al:Text" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0" width="130" height="12" x="4" y="4" font="/0/@fonts.1" horizontalAlignment="ALIGNMENT_RIGHT" value="LightCommand">
+            <properties key="name" value="name"/>
+          </graphicsAlgorithm>
+          <link businessObjects="/1/@dataTypeDefinitions.3"/>
         </children>
       </children>
     </children>
@@ -999,34 +1085,37 @@
     <colors red="227" green="238" blue="249"/>
     <colors red="255" green="255" blue="255"/>
     <colors/>
+    <colors red="102" green="102" blue="102"/>
+    <colors red="240" green="240" blue="200"/>
     <fonts name="Arial" size="8"/>
+    <fonts name="Arial" size="8" bold="true"/>
   </pi:Diagram>
   <sofia:Process id="_YVvn8NygEeaF85g_zjbrLQ" name="PaperTurtle" goal="" eplQuery="" type="" description="" resource="">
-    <ports xsi:type="sofia:StartDataPort" id="_3Y2BsNyiEeaF85g_zjbrLQ" name="start_0">
+    <ports xsi:type="sofia:StartDataPort" id="_3Y2BsNyiEeaF85g_zjbrLQ" name="start_0" value="Steffen" portDatatype="/1/@dataTypeDefinitions.0">
       <outTransitions id="__slZgNyiEeaF85g_zjbrLQ" name="transition" targetPort="/1/@subSteps.0/@ports.0"/>
     </ports>
-    <ports xsi:type="sofia:StartDataPort" id="_3vauoNyiEeaF85g_zjbrLQ" name="start_1">
+    <ports xsi:type="sofia:StartDataPort" id="_3vauoNyiEeaF85g_zjbrLQ" name="start_1" value="Ronny" portDatatype="/1/@dataTypeDefinitions.1">
       <outTransitions id="_AByNcNyjEeaF85g_zjbrLQ" name="transition" targetPort="/1/@subSteps.1/@ports.0"/>
     </ports>
-    <subSteps xsi:type="sofia:OpenHabSemanticSelectInvoke" id="_CrqEoNyhEeaF85g_zjbrLQ" name="GetPositionForPaperBoy" goal="" eplQuery="" type="" description="" resource="">
-      <ports xsi:type="sofia:StartDataPort" id="_4fGfINyiEeaF85g_zjbrLQ" name="start_0" inTransitions="/1/@ports.0/@outTransitions.0"/>
-      <ports xsi:type="sofia:EndDataPort" id="_6fvhMNyiEeaF85g_zjbrLQ" name="end_0">
+    <subSteps xsi:type="sofia:OpenHabSemanticSelectInvoke" id="_CrqEoNyhEeaF85g_zjbrLQ" name="GetPositionForPaperBoy" goal="" eplQuery="" type="" description="" resource="" query="PREFIX rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>&#xA;PREFIX rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#>&#xA;PREFIX dogont:&lt;http://elite.polito.it/ontologies/dogont.owl#>&#xA;PREFIX instance:&lt;http://openhab-semantic/0.1/instance#>&#xA;PREFIX vicci:&lt;http://openhab-semantic/0.1/dogont-vicci-extension#>&#xA;PREFIX xsd:&lt;http://www.w3.org/2001/XMLSchema#>&#xA;&#xA;SELECT ?position&#xA;WHERE {&#xA;&#x9;?personClass rdfs:subClassOf* vicci:Person .&#xA;&#x9;?person rdf:type ?personClass .&#xA;&#x9;?person vicci:hasRobotPosition ?rP .&#xA;&#x9;?person vicci:hasFirstname ?personName .&#xA;&#x9;?rP vicci:hasOrientation ?o .&#xA;&#x9;?rP vicci:hasPosition ?p .&#xA;&#x9;bind(concat('P:  ', str(?p), ' O: ', str(?o)) as ?position).&#xA;&#x9;FILTER(?personName = '&lt;{ PaperBoy}>' )&#xA;}" serverBaseAddress="not needed anymore (field only for backwards comp.)">
+      <ports xsi:type="sofia:StartDataPort" id="_4fGfINyiEeaF85g_zjbrLQ" name="start_0" inTransitions="/1/@ports.0/@outTransitions.0" value="" portDatatype="/1/@dataTypeDefinitions.0"/>
+      <ports xsi:type="sofia:EndDataPort" id="_6fvhMNyiEeaF85g_zjbrLQ" name="end_0" value="" portDatatype="/1/@dataTypeDefinitions.2">
         <outTransitions id="__YmGgNyiEeaF85g_zjbrLQ" name="transition" targetPort="/1/@subSteps.2/@ports.0"/>
       </ports>
       <ports xsi:type="sofia:EndControlPort" id="_76oK0NyiEeaF85g_zjbrLQ" name="end_1">
         <outTransitions id="_-wdvgNyiEeaF85g_zjbrLQ" name="transition" targetPort="/1/@subSteps.3/@ports.0"/>
       </ports>
     </subSteps>
-    <subSteps xsi:type="sofia:OpenHabSemanticSelectInvoke" id="_ODMkoNyhEeaF85g_zjbrLQ" name="GetPositionForReader" goal="" eplQuery="" type="" description="" resource="">
-      <ports xsi:type="sofia:StartDataPort" id="_4xQmINyiEeaF85g_zjbrLQ" name="start_0" inTransitions="/1/@ports.1/@outTransitions.0"/>
-      <ports xsi:type="sofia:EndDataPort" id="_LEJHoNyjEeaF85g_zjbrLQ" name="end_0">
+    <subSteps xsi:type="sofia:OpenHabSemanticSelectInvoke" id="_ODMkoNyhEeaF85g_zjbrLQ" name="GetPositionForReader" goal="" eplQuery="" type="" description="" resource="" query="PREFIX rdf:&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#>&#xA;PREFIX rdfs:&lt;http://www.w3.org/2000/01/rdf-schema#>&#xA;PREFIX dogont:&lt;http://elite.polito.it/ontologies/dogont.owl#>&#xA;PREFIX instance:&lt;http://openhab-semantic/0.1/instance#>&#xA;PREFIX vicci:&lt;http://openhab-semantic/0.1/dogont-vicci-extension#>&#xA;PREFIX xsd:&lt;http://www.w3.org/2001/XMLSchema#>&#xA;&#xA;SELECT ?position&#xA;WHERE {&#xA;&#x9;?personClass rdfs:subClassOf* vicci:Person .&#xA;&#x9;?person rdf:type ?personClass .&#xA;&#x9;?person vicci:hasRobotPosition ?rP .&#xA;&#x9;?person vicci:hasFirstname ?personName .&#xA;&#x9;?rP vicci:hasOrientation ?o .&#xA;&#x9;?rP vicci:hasPosition ?p .&#xA;&#x9;bind(concat('P:  ', str(?p), ' O: ', str(?o)) as ?position).&#xA;&#x9;FILTER(?personName = '&lt;{ Reader}>' )&#xA;}" serverBaseAddress="not needed anymore (field only for backwards comp.)">
+      <ports xsi:type="sofia:StartDataPort" id="_4xQmINyiEeaF85g_zjbrLQ" name="start_0" inTransitions="/1/@ports.1/@outTransitions.0" value="" portDatatype="/1/@dataTypeDefinitions.1"/>
+      <ports xsi:type="sofia:EndDataPort" id="_LEJHoNyjEeaF85g_zjbrLQ" name="end_0" value="" portDatatype="/1/@dataTypeDefinitions.2">
         <outTransitions id="_LoNeANyjEeaF85g_zjbrLQ" name="transition" targetPort="/1/@subSteps.5/@ports.1"/>
       </ports>
     </subSteps>
-    <subSteps xsi:type="sofia:RESTInvoke" id="_YA4VwNyhEeaF85g_zjbrLQ" name="MoveRobotToPaperBoy" goal="" eplQuery="" type="" description="" resource="" HTTPMethod="POST">
-      <ports xsi:type="sofia:StartDataPort" id="_69kFoNyiEeaF85g_zjbrLQ" name="start_0" inTransitions="/1/@subSteps.0/@ports.1/@outTransitions.0"/>
+    <subSteps xsi:type="sofia:RESTInvoke" id="_YA4VwNyhEeaF85g_zjbrLQ" name="MoveRobotToPaperBoy" goal="" eplQuery="" type="" description="" resource="" HTTPMethod="POST" ServerUri="http://localhost:8080/rest/items/proteus_turtle_move_1">
+      <ports xsi:type="sofia:StartDataPort" id="_69kFoNyiEeaF85g_zjbrLQ" name="start_0" inTransitions="/1/@subSteps.0/@ports.1/@outTransitions.0" value="" portDatatype="/1/@dataTypeDefinitions.2"/>
     </subSteps>
-    <subSteps xsi:type="sofia:TriggeredEvent" id="_k9v00NyhEeaF85g_zjbrLQ" name="WaitForRobotToArriveAtPaperBoy" goal="" eplQuery="">
+    <subSteps xsi:type="sofia:TriggeredEvent" id="_k9v00NyhEeaF85g_zjbrLQ" name="WaitForRobotToArriveAtPaperBoy" goal="" eplQuery="" EPLStatement="select * from SensorEvent where value like 'ARRIVED%' and deviceUid = 'proteus_turtle_movement_1'">
       <ports xsi:type="sofia:StartControlPort" id="_8zmaMNyiEeaF85g_zjbrLQ" name="start_0" inTransitions="/1/@subSteps.0/@ports.2/@outTransitions.0"/>
       <ports xsi:type="sofia:EndControlPort" id="_A8zEMNyjEeaF85g_zjbrLQ" name="end_0">
         <outTransitions id="_FAUkANyjEeaF85g_zjbrLQ" name="transition" targetPort="/1/@subSteps.4/@ports.0"/>
@@ -1041,18 +1130,23 @@
         <outTransitions id="_M6rLcNyjEeaF85g_zjbrLQ" name="transition" targetPort="/1/@subSteps.5/@ports.0"/>
       </ports>
     </subSteps>
-    <subSteps xsi:type="sofia:RESTInvoke" id="_7Ui3sNyhEeaF85g_zjbrLQ" name="MoveRobotToReader" goal="" eplQuery="" type="" description="" resource="" HTTPMethod="POST">
+    <subSteps xsi:type="sofia:RESTInvoke" id="_7Ui3sNyhEeaF85g_zjbrLQ" name="MoveRobotToReader" goal="" eplQuery="" type="" description="" resource="" HTTPMethod="POST" ServerUri="http://localhost:8080/rest/items/proteus_turtle_move_1">
       <ports xsi:type="sofia:StartControlPort" id="_HT5JINyjEeaF85g_zjbrLQ" name="start_0" inTransitions="/1/@subSteps.4/@ports.2/@outTransitions.0"/>
-      <ports xsi:type="sofia:StartDataPort" id="_KSfBMNyjEeaF85g_zjbrLQ" name="start_1" inTransitions="/1/@subSteps.1/@ports.1/@outTransitions.0"/>
+      <ports xsi:type="sofia:StartDataPort" id="_KSfBMNyjEeaF85g_zjbrLQ" name="start_1" inTransitions="/1/@subSteps.1/@ports.1/@outTransitions.0" value="" portDatatype="/1/@dataTypeDefinitions.2"/>
     </subSteps>
-    <subSteps xsi:type="sofia:TriggeredEvent" id="_jHm9INyiEeaF85g_zjbrLQ" name="WaitForRobotToArriveAtReader" goal="" eplQuery="" type="" description="" resource="">
+    <subSteps xsi:type="sofia:TriggeredEvent" id="_jHm9INyiEeaF85g_zjbrLQ" name="WaitForRobotToArriveAtReader" goal="" eplQuery="" type="" description="" resource="" EPLStatement="select * from SensorEvent where value like 'ARRIVED%' and deviceUid = 'proteus_turtle_movement_1'">
       <ports xsi:type="sofia:StartControlPort" id="_HBbgINyjEeaF85g_zjbrLQ" name="start_0" inTransitions="/1/@subSteps.4/@ports.1/@outTransitions.0"/>
       <ports xsi:type="sofia:EndControlPort" id="_O_m3oNyjEeaF85g_zjbrLQ" name="end_0">
         <outTransitions id="_P-wAcNyjEeaF85g_zjbrLQ" name="transition" targetPort="/1/@subSteps.7/@ports.0"/>
       </ports>
     </subSteps>
-    <subSteps xsi:type="sofia:RESTInvoke" id="_rvc8sNyiEeaF85g_zjbrLQ" name="SwitchOnLight" goal="" eplQuery="" type="" description="" resource="" HTTPMethod="POST">
+    <subSteps xsi:type="sofia:RESTInvoke" id="_rvc8sNyiEeaF85g_zjbrLQ" name="SwitchOnLight" goal="" eplQuery="" type="" description="" resource="" HTTPMethod="POST" ServerUri="http://localhost:8080/rest/items/homematic_dimmer_dimmer_1">
       <ports xsi:type="sofia:StartControlPort" id="_PWWjsNyjEeaF85g_zjbrLQ" name="start_0" inTransitions="/1/@subSteps.6/@ports.1/@outTransitions.0"/>
+      <ports xsi:type="sofia:StartDataPort" id="_bE9XgNyxEeaSzb9mumVMEg" name="start_1" optional="true" description="" value="ON" portDatatype="/1/@dataTypeDefinitions.3"/>
     </subSteps>
+    <dataTypeDefinitions xsi:type="sofia:StringType" name="PaperBoy" id="_HQ5XINyxEeaSzb9mumVMEg" portMembers="/1/@ports.0 /1/@subSteps.0/@ports.0"/>
+    <dataTypeDefinitions xsi:type="sofia:StringType" name="Reader" id="_JG8SwNyxEeaSzb9mumVMEg" portMembers="/1/@ports.1 /1/@subSteps.1/@ports.0"/>
+    <dataTypeDefinitions xsi:type="sofia:StringType" name="position" id="_QAkdANyxEeaSzb9mumVMEg" portMembers="/1/@subSteps.1/@ports.1 /1/@subSteps.5/@ports.1 /1/@subSteps.2/@ports.0 /1/@subSteps.0/@ports.1"/>
+    <dataTypeDefinitions xsi:type="sofia:StringType" name="LightCommand" id="_XJr0wNyxEeaSzb9mumVMEg" portMembers="/1/@subSteps.7/@ports.1"/>
   </sofia:Process>
 </xmi:XMI>
