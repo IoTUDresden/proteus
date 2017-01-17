@@ -10,7 +10,12 @@ import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 public class ConsoleInput implements ProcessStepWorker{
 
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
+	public void deploy() {
+		System.out.println("A ProcessStepWorker-Class was deployed by a generic ProcessStep and says: 'Hello, I am a CONSOLE-INPUT!'");		
+	}
+
+	@Override
+	public List<DataTypeInstance> work(Context context) {
 		System.out.println("ConsoleInput says: 'please enter something:'");
 		BufferedReader console = new BufferedReader(new InputStreamReader(System.in));
 		String zeile = null;
@@ -20,22 +25,11 @@ public class ConsoleInput implements ProcessStepWorker{
 			e.printStackTrace();
 		}
 		
-		for(DataTypeInstance s : parameter){
+		for(DataTypeInstance s : context.startParameter){
 			s.parse(zeile);
 		}
 		
-		return parameter;
-	}
-
-	@Override
-	public void deploy() {
-		System.out.println("A ProcessStepWorker-Class was deployed by a generic ProcessStep and says: 'Hello, I am a CONSOLE-INPUT!'");		
-	}
-
-	@Override
-	public List<DataTypeInstance> work(Context context) {
-		// TODO Auto-generated method stub
-		return null;
+		return context.startParameter;
 	}
 
 }

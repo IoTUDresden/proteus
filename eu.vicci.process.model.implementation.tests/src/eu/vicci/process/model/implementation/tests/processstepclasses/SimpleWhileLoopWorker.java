@@ -5,18 +5,17 @@ import java.util.List;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.StringTypeInstance;
 import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker;
-import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 public class SimpleWhileLoopWorker implements ProcessStepWorker {
 
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
+	public List<DataTypeInstance> work(Context context) {
 		print("############# simple while loop: working #############");
-		for (DataTypeInstance dataTypeInstance : parameter) {
+		for (DataTypeInstance dataTypeInstance : context.startParameter) {
 			printData(dataTypeInstance);
 			changeParameter(dataTypeInstance);						
 		}		
-		return parameter;
+		return context.startParameter;
 	}
 
 	@Override
@@ -42,9 +41,5 @@ public class SimpleWhileLoopWorker implements ProcessStepWorker {
 		System.out.println(text);
 	}
 
-	@Override
-	public List<DataTypeInstance> work(Context context) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }

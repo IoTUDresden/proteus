@@ -27,11 +27,6 @@ public abstract class AbstractStep implements ProcessStepWorker {
         
         return output;
     }
-    
-	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
-		throw new RuntimeException("deprecated method");
-	}
 
     protected void addOutgoing(DataTypeInstance instance) {
         output.add(instance);

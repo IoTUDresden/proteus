@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import eu.vicci.process.devices.util.OpenHabEvent.OHItemStateEvent;
 import eu.vicci.process.devices.util.OpenHabEvent.OHItemStatePayload;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
-import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 import eu.vicci.process.openhab.util.OpenHabEventProvider;
 import eu.vicci.process.openhab.util.OpenHabEventProvider.OHEventItemStateListener;
 
@@ -41,14 +40,14 @@ public class OpenHabWaitForEventWithResult implements ProcessStepWorker, OHEvent
 	@Override
 	public void deploy() {
 	}
-
+	
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
+	public List<DataTypeInstance> work(Context context) {
 		returnValues = new ArrayList<>();
 		eventSignal = new CountDownLatch(1);
 
-		setAllItemsToWaitForAndServerBasePath(parameter);
-		setResultParamter(parameter);
+		setAllItemsToWaitForAndServerBasePath(context.startParameter);
+		setResultParamter(context.startParameter);
 
 		if (uriBasePath == null || uriBasePath.isEmpty())
 			return returnValues;
@@ -109,12 +108,6 @@ public class OpenHabWaitForEventWithResult implements ProcessStepWorker, OHEvent
 			resultInstance = di.get();
 		else
 			resultInstance = null; //is necessary cause it is not possible to reset this step
-	}
-
-	@Override
-	public List<DataTypeInstance> work(Context context) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 

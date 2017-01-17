@@ -9,16 +9,20 @@ import eu.vicci.process.model.sofiainstance.impl.custom.ComplexTypeInstanceImplC
 import eu.vicci.process.model.sofiainstance.impl.custom.DoubleTypeInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.impl.custom.IntegerTypeInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.impl.custom.StringTypeInstanceImplCustom;
-import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 public class RandomDummyDataGenerator implements ProcessStepWorker{
 
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
+	public void deploy() {
+		System.out.println("A ProcessStepWorker-Class was deployed by a generic ProcessStep and says: 'Hello, I am a RandomDummyDataGenerator!'");		
+	}
+
+	@Override
+	public List<DataTypeInstance> work(Context context) {
 		System.out.println("RandomDummyDataGenerator workes");
 		List<DataTypeInstance> testinformation = new ArrayList<DataTypeInstance>();
 		
-		for(DataTypeInstance dti1 : parameter){
+		for(DataTypeInstance dti1 : context.startParameter){
 			System.out.println("����������");
 			DataTypeInstance dti = dti1.copy();
 			if(dti instanceof ComplexTypeInstanceImplCustom){
@@ -50,17 +54,6 @@ public class RandomDummyDataGenerator implements ProcessStepWorker{
 //		stringType.setValue("TestStringInformation");
 //		testinformation.add(stringType);
         return testinformation;
-	}
-
-	@Override
-	public void deploy() {
-		System.out.println("A ProcessStepWorker-Class was deployed by a generic ProcessStep and says: 'Hello, I am a RandomDummyDataGenerator!'");		
-	}
-
-	@Override
-	public List<DataTypeInstance> work(Context context) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

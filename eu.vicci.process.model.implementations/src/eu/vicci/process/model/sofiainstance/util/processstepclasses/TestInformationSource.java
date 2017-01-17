@@ -6,19 +6,8 @@ import java.util.List;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.impl.StringTypeInstanceImpl;
 import eu.vicci.process.model.sofiainstance.impl.custom.StringTypeInstanceImplCustom;
-import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 public class TestInformationSource implements ProcessStepWorker{
-
-	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
-		System.out.println("TestInformationSource workes");
-		List<DataTypeInstance> testinformation = new ArrayList<DataTypeInstance>();
-		StringTypeInstanceImpl stringType = new StringTypeInstanceImplCustom();
-		stringType.setValue("TestStringInformation");
-		testinformation.add(stringType);
-        return testinformation;
-	}
 
 	@Override
 	public void deploy() {
@@ -27,8 +16,12 @@ public class TestInformationSource implements ProcessStepWorker{
 
 	@Override
 	public List<DataTypeInstance> work(Context context) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("TestInformationSource workes");
+		List<DataTypeInstance> testinformation = new ArrayList<DataTypeInstance>();
+		StringTypeInstanceImpl stringType = new StringTypeInstanceImplCustom();
+		stringType.setValue("TestStringInformation");
+		testinformation.add(stringType);
+        return testinformation;
 	}
 
 }

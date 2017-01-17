@@ -10,7 +10,6 @@ import eu.vicci.process.kodi.util.KodiPlayer.PlayerOpenType;
 import eu.vicci.process.kodi.util.KodiRemote;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.StringTypeInstance;
-import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 /**
  * KodiRemote Worker for controling kodi over process steps
@@ -60,13 +59,13 @@ public class KodiRemoteWorker implements ProcessStepWorker{
 	
 	@Override
 	public void deploy() {	}
-
+	
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
-		setServerAndMethod(parameter);
+	public List<DataTypeInstance> work(Context context) {
+		setServerAndMethod(context.startParameter);
 		if(isMethodOrServerEmpty()){
 			logger.error("Method or server path is empty. No Kodi remote command is send");
-			return parameter;
+			return context.startParameter;
 		}
 		
 		KodiRemote remote = new KodiRemote(serverPath);
@@ -74,18 +73,18 @@ public class KodiRemoteWorker implements ProcessStepWorker{
 		//switch the kodi methods. they are listed in the json-rpc api documentation of kodi
 		switch (method) {
 		case "Player.Open":
-			playerOpen(parameter, remote);
+			playerOpen(context.startParameter, remote);
 			break;
 		case "Player.Stop":
 			remote.stop(0);//stops the first player
 			break;
 		case "GUI.ShowNotification":
-			guiNotification(parameter, remote);
+			guiNotification(context.startParameter, remote);
 			break;
 		default:
 			throw new UnsupportedOperationException(String.format("The kodi method %s is not implemented yet.", method));
 		}		
-		return parameter;
+		return context.startParameter;
 	}
 
 	private void playerOpen(List<DataTypeInstance> parameter, KodiRemote remote){
@@ -139,9 +138,5 @@ public class KodiRemoteWorker implements ProcessStepWorker{
 		return null;		
 	}
 
-	@Override
-	public List<DataTypeInstance> work(Context context) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 }

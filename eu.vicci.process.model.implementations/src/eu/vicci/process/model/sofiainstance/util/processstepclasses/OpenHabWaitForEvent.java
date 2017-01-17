@@ -16,7 +16,6 @@ import eu.vicci.process.devices.util.OpenHabEvent.OHItemStateEvent;
 import eu.vicci.process.devices.util.OpenHabEvent.OHItemStatePayload;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.IntegerTypeInstance;
-import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 import eu.vicci.process.openhab.util.OpenHabEventProvider;
 import eu.vicci.process.openhab.util.OpenHabEventProvider.OHEventItemStateListener;
 
@@ -55,20 +54,20 @@ public class OpenHabWaitForEvent implements ProcessStepWorker, OHEventItemStateL
 	@Override
 	public void deploy() {
 	}
-
+	
 	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
+	public List<DataTypeInstance> work(Context context) {
 		returnValues = new ArrayList<>();
 		eventSignal = new CountDownLatch(1);
 
-		setAllItemsToWaitForAndServerBasePath(parameter);
+		setAllItemsToWaitForAndServerBasePath(context.startParameter);
 		
 		if(uriBasePath == null || uriBasePath.isEmpty())
 			return returnValues;
 		
 		OpenHabEventProvider provider = new OpenHabEventProvider(uriBasePath);
 		provider.registerToItemState(this);
-		setTimeoutIfPresent(parameter);
+		setTimeoutIfPresent(context.startParameter);
 
 		try {
 			eventSignal.await(); //avoids busy waiting and blocks till event was processed
@@ -136,12 +135,5 @@ public class OpenHabWaitForEvent implements ProcessStepWorker, OHEventItemStateL
 			}
 		}, delay);
 	}
-
-	@Override
-	public List<DataTypeInstance> work(Context context) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 }

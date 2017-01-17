@@ -5,21 +5,8 @@ import java.util.List;
 
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker;
-import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 public class GetSystemTimeWorker implements ProcessStepWorker {
-
-	@Override
-	public List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
-		int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-		if(parameter.isEmpty()){
-			System.err.println("There should be a startparameter with type int and name 'hours_of_day'");
-			return parameter;
-		}		
-		DataTypeInstance instance = parameter.get(0);
-		instance.parse(Integer.toString(hour));
-		return parameter;
-	}
 
 	@Override
 	public void deploy() {
@@ -28,8 +15,14 @@ public class GetSystemTimeWorker implements ProcessStepWorker {
 
 	@Override
 	public List<DataTypeInstance> work(Context context) {
-		// TODO Auto-generated method stub
-		return null;
+		int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+		if(context.startParameter.isEmpty()){
+			System.err.println("There should be a startparameter with type int and name 'hours_of_day'");
+			return context.startParameter;
+		}		
+		DataTypeInstance instance = context.startParameter.get(0);
+		instance.parse(Integer.toString(hour));
+		return context.startParameter;
 	}
 
 }

@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 
 import eu.vicci.process.model.sofia.IntegerType;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
-import eu.vicci.process.model.sofiainstance.util.processstepclasses.ProcessStepWorker.Context;
 
 /**
  * If this worker receives a datatype with the name of {@link #DELAY_TYPE_ID}, and an integer instance,
@@ -24,11 +23,11 @@ public class Delay implements ProcessStepWorker{
 	
 	@Override
 	public void deploy() { }	
-	
+
 	@Override
-	public synchronized List<DataTypeInstance> work(List<DataTypeInstance> parameter) {
+	public List<DataTypeInstance> work(Context context) {
 		long delay = DEFAULT_DELAY;
-		Integer tmp = getCustomDelayFromStartPorts(parameter);
+		Integer tmp = getCustomDelayFromStartPorts(context.startParameter);
 		if(tmp != null)
 			delay = tmp.longValue();
 		
@@ -39,7 +38,7 @@ public class Delay implements ProcessStepWorker{
 			logger.error("ProcessStepWorker 'Delay' failed. The waiting was interrupted");
 			e.printStackTrace();
 		}
-		return parameter;
+		return context.startParameter;
 	}
 	
 	private Integer getCustomDelayFromStartPorts(List<DataTypeInstance> parameter){
@@ -50,11 +49,5 @@ public class Delay implements ProcessStepWorker{
 		if(instance.isPresent())
 			return (Integer)instance.get().getValueAsObject();		
 		return null;		
-	}
-
-	@Override
-	public List<DataTypeInstance> work(Context context) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
