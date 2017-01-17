@@ -2,8 +2,10 @@ bin/
 target/
 src-gen/
 .metadata/
-eu.vicci.process.server/processes/*
 eu.vicci.process.server/processes/
+eu.vicci.process.server/processes/*
+eu.vicci.process.server/processes/models/*.sofia
+
 
 
 # Package Files #
