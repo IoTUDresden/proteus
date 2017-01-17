@@ -1,6 +1,9 @@
 package eu.vicci.process.runtime;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Scanner;
@@ -34,6 +37,7 @@ import eu.vicci.process.wampserver.SuperPeer;
 import ws.wamp.jawampa.ApplicationError;
 
 public class VicciRuntime {
+	private static final String PATH_MODEL = "processes/models/";
 
 	private Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
 
@@ -68,6 +72,10 @@ public class VicciRuntime {
 		ConfigurationManager.getInstance().updateFromConfigReader(configReader);
 		
 		Optional<Context> timer = initReporting();		
+		
+		if(!configReader.deployExistingProcessModels())
+			deleteExistingModels();		
+		
 		initializeSofiaModel();
 		registerListener(configReader);
 		boolean isWebSocketServerStarted = startWebSocketServer(configReader);
@@ -171,6 +179,14 @@ public class VicciRuntime {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	private void deleteExistingModels(){
+		File file = new File(PATH_MODEL);
+		for (File tmpFile : file.listFiles()) {
+			if(tmpFile.isFile())
+				tmpFile.delete();
+		}		
 	}
 	
 	private static void readLineTillStopIsEntered() {

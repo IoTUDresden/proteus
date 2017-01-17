@@ -1,6 +1,7 @@
 package eu.vicci.process.model.sofiainstance.util;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ import eu.vicci.process.model.sofia.DataType;
 import eu.vicci.process.model.sofia.EndPort;
 import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
+import eu.vicci.process.model.sofiainstance.StartDataPortInstance;
 import eu.vicci.process.model.sofiainstance.impl.custom.DistributingProcessInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.states.StateBase;
 import eu.vicci.process.model.sofiainstance.states.WaitingState;
@@ -96,9 +98,10 @@ public class RemoteStepInvokeWorker {
 
 		Process remoteProcess = createRemoteProcess(process);
 		clearOutTransitions(remoteProcess);
+		Map<String, DataTypeInstance> inputParameters = getInputParameters();
 
 		distributionManager.addDistributionManagerListener(listener);
-		remoteSession = distributionManager.workRemote(ip, remoteProcess, null);
+		remoteSession = distributionManager.workRemote(ip, remoteProcess, inputParameters);
 
 		try {
 			// blocks till response was received
@@ -113,6 +116,20 @@ public class RemoteStepInvokeWorker {
 		processInstance.setCurrentState(oldState);
 
 		// createDataTypeInstancesFromResponse();
+	}
+
+	private Map<String, DataTypeInstance> getInputParameters() {
+		if(!processInstance.getPorts().stream().anyMatch(p -> p instanceof StartDataPortInstance))
+			return null;
+		Map<String, DataTypeInstance> result = new HashMap<>();
+		
+		processInstance.getPorts().stream()
+		.filter(p -> p instanceof StartDataPortInstance)
+		.map(StartDataPortInstance.class::cast)
+		.map(StartDataPortInstance::getDataInstance)
+		.forEach(dti -> result.put(dti.getDataTypeType().getId(), dti));		
+		
+		return result;
 	}
 
 	private DistributionManagerListener listener = new DistributionManagerListener() {
