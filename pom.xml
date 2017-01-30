@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>eu.vicci.process.proteus</groupId>
+	<artifactId>pom</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<name>PROtEUS Runtime With Custom Implementation</name>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>../model-core/eu.vicci.process.model</module>
+		<module>../model-core/eu.vicci.process.core</module>
+		<module>../model-core/eu.vicci.process.model.util</module>
+		
+		<module>../engine-client/eu.vicci.process.client</module>
+		<module>../openhab-utils/eu.vicci.openhab.util</module>
+	
+		<module>eu.vicci.process.distribution</module>
+		<module>eu.vicci.process.engine</module>
+		<module>eu.vicci.process.model.implementations</module>
+		<module>eu.vicci.process.osgi</module>
+		<module>eu.vicci.process.server</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<outputDirectory>maven_libs</outputDirectory>
+	</properties>	
+
+	<repositories>
+		<repository>
+			<id>eclipse-project-mars</id>
+			<layout>p2</layout>
+			<url>http://download.eclipse.org/releases/mars</url>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>0.26.0</version>
+				<extensions>true</extensions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.8</version>
+
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<overWriteReleases>false</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+							<overWriteIfNewer>true</overWriteIfNewer>
+							<stripVersion>true</stripVersion>
+							<excludeScope>provided</excludeScope>
+							<excludeGroupIds>p2.eclipse-plugin</excludeGroupIds>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${outputDirectory}</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+							<followSymlinks>false</followSymlinks>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>		
+
+		</plugins>
+	</build>
+
+</project>

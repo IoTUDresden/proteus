@@ -3,30 +3,33 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>eu.vicci.process.parent</groupId>
-		<artifactId>eu.vicci.process.projectset</artifactId>
-		<version>0.0.1a-SNAPSHOT</version>
-		<relativePath>../ProjectSet/</relativePath>
+		<groupId>eu.vicci.process.proteus</groupId>
+		<artifactId>pom</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>eu.vicci.process.server</groupId>
+	<groupId>eu.vicci.process.proteus</groupId>
 	<artifactId>eu.vicci.process.server</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<packaging>pom</packaging>
+	<name>PROtEUS Runtime</name>
+	<packaging>eclipse-plugin</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>ws.wamp.jawampa</groupId>
 			<artifactId>jawampa-netty</artifactId>
+			<version>0.4.2</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.13</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.elasticsearch</groupId>
@@ -39,23 +42,4 @@
 		    <version>3.1.2</version>
 		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>ws.wamp.jawampa</groupId>
-				<artifactId>jawampa-netty</artifactId>
-				<version>0.4.2</version>
-			</dependency>
-			<dependency>
-				<groupId>org.codehaus.jackson</groupId>
-				<artifactId>jackson-mapper-asl</artifactId>
-				<version>1.9.13</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.7.13</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 </project>

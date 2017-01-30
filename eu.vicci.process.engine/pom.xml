@@ -3,30 +3,23 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>eu.vicci.process.parent</groupId>
-		<artifactId>eu.vicci.process.projectset</artifactId>
-		<version>0.0.1a-SNAPSHOT</version>
-		<relativePath>../ProjectSet/</relativePath>
+		<groupId>eu.vicci.process.proteus</groupId>
+		<artifactId>pom</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>eu.vicci.process</groupId>
+	<groupId>eu.vicci.process.proteus</groupId>
 	<artifactId>eu.vicci.process.engine</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	
-	<packaging>pom</packaging>
+	<name>PROtEUS Engine</name>
+	<packaging>eclipse-plugin</packaging>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.13</version>
 		</dependency>
 	</dependencies>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.7.13</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 </project>

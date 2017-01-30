@@ -3,16 +3,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>eu.vicci.process.parent</groupId>
-		<artifactId>eu.vicci.process.projectset</artifactId>
-		<version>0.0.1a-SNAPSHOT</version>
-		<relativePath>../ProjectSet/</relativePath>
+		<groupId>eu.vicci.process.proteus</groupId>
+		<artifactId>pom</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>eu.vicci.process</groupId>
+	<groupId>eu.vicci.process.proteus</groupId>
 	<artifactId>eu.vicci.process.osgi</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<packaging>pom</packaging>
+	<name>PROtEUS OSGI</name>
+	<packaging>eclipse-plugin</packaging>
 
 </project>
