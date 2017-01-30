@@ -7,9 +7,6 @@ eu.vicci.process.server/processes/
 eu.vicci.process.server/processes/*
 eu.vicci.process.server/processes/models/*.sofia
 
-src-gen/*
-!eu.vicci.process.model/src-gen/
-
 
 # Package Files #
 
