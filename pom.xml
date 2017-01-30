@@ -2,26 +2,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>eu.vicci.process.proteus</groupId>
+	
+	<groupId>eu.vicci.proteus</groupId>
 	<artifactId>pom</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<name>PROtEUS Runtime With Custom Implementation</name>
+	<name>PROtEUS Runtime With Custom Implementation And Editor Plugins</name>
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>../model-core/eu.vicci.process.model</module>
-		<module>../model-core/eu.vicci.process.core</module>
-		<module>../model-core/eu.vicci.process.model.util</module>
-		
-		<module>../engine-client/eu.vicci.process.client</module>
-		<module>../openhab-utils/eu.vicci.openhab.util</module>
-	
-		<module>eu.vicci.process.distribution</module>
-		<module>eu.vicci.process.engine</module>
-		<module>eu.vicci.process.model.implementations</module>
-		<module>eu.vicci.process.osgi</module>
-		<module>eu.vicci.process.server</module>
+		<module>bundles</module>
+		<module>sites</module>
+		<module>products</module>
 	</modules>
 
 	<properties>
