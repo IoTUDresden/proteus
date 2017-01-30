@@ -19,6 +19,8 @@ public class ConfigurationReader implements IConfigurationReader {
 	private String namespace;
 	private String openHabUri;
 	
+	private String superPeerIp;
+	
 	private String contextUri;
 	private String feedbackServiceUri;
 	
@@ -127,6 +129,7 @@ public class ConfigurationReader implements IConfigurationReader {
 		contextUri = properties.getProperty(ConfigProperties.CONTEXT_URI);
 		feedbackServiceUri = properties.getProperty(ConfigProperties.FEEDBACK_SERVICE_URI);
 		elasticsearchHost = properties.getProperty(ConfigProperties.ELASTICSEARCH_HOST);
+		superPeerIp = properties.getProperty(ConfigProperties.SUPER_PEER_IP);
 	}
 
 	@Override
@@ -147,6 +150,10 @@ public class ConfigurationReader implements IConfigurationReader {
 	@Override
 	public String getElasticsearchHost() {
 		return elasticsearchHost;
+	}
+
+	public String getSuperPeerIp() {
+		return superPeerIp;
 	}
 	
 }

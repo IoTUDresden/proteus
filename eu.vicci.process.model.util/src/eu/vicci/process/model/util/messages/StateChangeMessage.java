@@ -15,6 +15,7 @@ import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.core.I
 
 public class StateChangeMessage extends WampMessage implements IStateChangeMessage {
 	
+	private String peerId;
 	private String instanceId;
 	private String modelId;
 	private String processInstanceId;
@@ -150,6 +151,15 @@ public class StateChangeMessage extends WampMessage implements IStateChangeMessa
 
 	public void setEndControlPorts(Map<String, IJSONPortInstance> endControlPorts) {
 		this.endControlPorts = endControlPorts;
+	}
+
+	@Override
+	public String getPeerId() {
+		return peerId;
+	}
+
+	public void setPeerId(String peerId) {
+		this.peerId = peerId;
 	}
 
 }

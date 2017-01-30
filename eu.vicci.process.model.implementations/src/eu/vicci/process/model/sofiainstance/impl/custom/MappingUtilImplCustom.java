@@ -43,6 +43,7 @@ import eu.vicci.process.model.sofiainstance.State;
 import eu.vicci.process.model.sofiainstance.TransitionInstance;
 import eu.vicci.process.model.sofiainstance.WhileLoopInstance;
 import eu.vicci.process.model.sofiainstance.impl.MappingUtilImpl;
+import eu.vicci.process.model.sofia.Process;
 
 /**
  * MappingUtilImplCustom is used to create instance versions of process elements
@@ -188,23 +189,9 @@ public class MappingUtilImplCustom extends MappingUtilImpl {
 		try {
 			for (ProcessStepInstance instance : processStepInstances) 
 				if (instance.getProcessStepType().getId().equals(processStep.getId())) 
-					return instance;			
-
-			String classname = processStep.getClass().getSimpleName(); // e.g. EndDataPortImpl
-			int pos = classname.lastIndexOf("Impl");
-			String tmp1 = classname.substring(0, pos);
-			String classinstancename = tmp1 + "Instance";
-			String factorymethod = "create" + classinstancename;
-
-			Method method = null;
-
-			// Create ProcessTypeInstance accordingly
-
-			method = SofiaInstanceFactoryImplCustom.getInstance().getClass().getMethod(
-					factorymethod);
-
-			psi = (ProcessStepInstance) method
-					.invoke(SofiaInstanceFactoryImplCustom.getInstance());
+					return instance;		
+			
+			psi = createProcessStepInstance(processStep);
 
 			psi.setProcessStepType(processStep);
 			psi.setPermission(ExecutionPermission.GRANTED);
@@ -225,12 +212,37 @@ public class MappingUtilImplCustom extends MappingUtilImpl {
 			
 			processStepInstances.add(psi);
 
-		} catch (NoSuchMethodException | SecurityException
-				| IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return psi;
+	}
+	
+	private ProcessStepInstance createProcessStepInstance(ProcessStep processStep) throws Exception{
+		if(processStep instanceof Process)
+			return createProcessInstance((Process)processStep);
+		
+		String classname = processStep.getClass().getSimpleName(); // e.g. EndDataPortImpl
+		int pos = classname.lastIndexOf("Impl");
+		String tmp1 = classname.substring(0, pos);
+		String classinstancename = tmp1 + "Instance";
+		String factorymethod = "create" + classinstancename;
+
+		Method method = SofiaInstanceFactoryImplCustom.getInstance().getClass().getMethod(
+				factorymethod);
+
+		return (ProcessStepInstance) method
+				.invoke(SofiaInstanceFactoryImplCustom.getInstance());		
+	}
+	
+	//special case for processes cause they can be distributed
+	private ProcessStepInstance createProcessInstance(Process process){
+		if(process.isRemoteExecuting())
+			return new DistributedProcessInstanceImplCustom();
+		if(process.isDistributed())
+			return new DistributingProcessInstanceImplCustom();
+		
+		return new ProcessInstanceImplCustom();
 	}
 	
 	private void mapWhileLoopInstance(ProcessStep processStep, ProcessStepInstance psi) {

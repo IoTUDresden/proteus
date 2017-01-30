@@ -1,5 +1,6 @@
 package eu.vicci.process.runtime;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
@@ -17,6 +18,7 @@ import com.codahale.metrics.Timer.Context;
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.devices.util.OpenHabListener;
 import eu.vicci.process.devices.util.SeMiWaListener;
+import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.engine.ProcessManagerPublic;
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.model.cep.EsperEngine;
@@ -28,10 +30,12 @@ import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.model.util.logging.LoggingManager;
 import eu.vicci.process.osgi.OSGiRuntime;
-import eu.vicci.process.wampserver.RuntimeServer;
+import eu.vicci.process.wampserver.Peer;
+import eu.vicci.process.wampserver.SuperPeer;
 import ws.wamp.jawampa.ApplicationError;
 
 public class VicciRuntime {
+	private static final String PATH_MODEL = "processes/models/";
 
 	private Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
 
@@ -46,14 +50,15 @@ public class VicciRuntime {
 			printlnErr("\n\nfailed to start vicci runtime");
 			return;
 		}
-		println("\n\nvicci runtime started");
+		
+		println("\n\nvicci runtime started (" + runtime.getRuntimeType()  +")");
 		readLineTillStopIsEntered();
 		
 		println("\n\nstopping the runtime...");
 		runtime.stop();
 	}	
 
-	private RuntimeServer server;
+	private SuperPeer server;
 	private IProcessManager processManagerPublic;
 	
 	public VicciRuntime(){	
@@ -65,12 +70,22 @@ public class VicciRuntime {
 		ConfigurationManager.getInstance().updateFromConfigReader(configReader);
 		
 		Optional<Context> timer = initReporting();		
+		
+		if(!configReader.deployExistingProcessModels())
+			deleteExistingModels();		
+		
 		initializeSofiaModel();
 		registerListener(configReader);
 		boolean isWebSocketServerStarted = startWebSocketServer(configReader);
 		
+		DistributionManager.getInstance().setPeerProfile(server.getPeerProfile());
+		
 		timer.ifPresent(t -> t.stop());
 		return isWebSocketServerStarted;
+	}
+	
+	private String getRuntimeType(){
+		return server.getClass().getSimpleName();
 	}
 	
 	private Optional<Context> initReporting(){
@@ -85,6 +100,7 @@ public class VicciRuntime {
 		return Optional.ofNullable(registry.timer("startup").time());		
 	}
 
+	//FIXME needed for logging? We manually post the logs?
 	private void initializeElasticsearchReportingWith(MetricRegistry registry, String host) {
 		try {
 			ElasticsearchReporter reporter = ElasticsearchReporter
@@ -142,15 +158,33 @@ public class VicciRuntime {
 			processManagerPublic.loadExistingModels();
 	}
 
+	/**
+	 * starts router and server client if this is a SuperPeer. otherwise only the server client is started, 
+	 * which connects to the router on the SuperPeer.
+	 * @param configReader
+	 * @return
+	 */
 	private boolean startWebSocketServer(IConfigurationReader configReader) {
 		try {
-			server = new RuntimeServer(processManagerPublic);
+			if(configReader.getSuperPeerIp() == null)
+				server = new SuperPeer(processManagerPublic, configReader);
+			else
+				server = new Peer(processManagerPublic, configReader, configReader.getSuperPeerIp());
+
 			server.start();
 			return true;
 		} catch (ApplicationError e) {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	private void deleteExistingModels(){
+		File file = new File(PATH_MODEL);
+		for (File tmpFile : file.listFiles()) {
+			if(tmpFile.isFile())
+				tmpFile.delete();
+		}		
 	}
 	
 	private static void readLineTillStopIsEntered() {

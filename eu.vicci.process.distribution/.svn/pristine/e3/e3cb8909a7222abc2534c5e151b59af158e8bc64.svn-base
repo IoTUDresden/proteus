@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Distribution
+Bundle-SymbolicName: eu.vicci.process.distribution
+Bundle-Version: 0.0.1.qualifier
+Bundle-Activator: eu.vicci.process.distribution.Activator
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: org.osgi.framework;version="1.3.0"
+Require-Bundle: eu.vicci.process.core,
+ eu.vicci.process.model.util,
+ eu.vicci.process.model,
+ eu.vicci.process.client
+Export-Package: eu.vicci.process.distribution,
+ eu.vicci.process.distribution.manager
+Bundle-ClassPath: conf/,
+ .

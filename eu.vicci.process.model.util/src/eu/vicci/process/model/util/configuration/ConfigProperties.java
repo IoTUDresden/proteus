@@ -14,6 +14,9 @@ public class ConfigProperties {
 	public static final String DEPLOY_EXISTING_PROCESSMODELS = "deployExistingProcessModels";
 	public static final String REALMNAME = "realmName";
 	public static final String NAMESPACE = "namespace";
+	public static final String PORT = "port";
+	
+	public static final String SUPER_PEER_IP = "superPeerIp";
 	
 	public static final String CONTEXT_URI = "contextUri";
 	public static final String FEEDBACK_SERVICE_URI = "feedbackServiceUri";

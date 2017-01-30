@@ -10,6 +10,12 @@ import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.core.I
  * Message for process state changes
  */
 public interface IStateChangeMessage extends IWampMessage {
+	
+	/**
+	 * The Id of the peer which sends this message. If null, the SuperPeer is sending this message.
+	 * @return
+	 */
+	String getPeerId();
 
 	/**
 	 * The instance id for this process

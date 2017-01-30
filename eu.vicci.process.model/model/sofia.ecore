@@ -17,6 +17,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="#//CompositeStep">
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataTypeDefinitions" upperBound="-1"
         eType="#//DataType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="executionPeer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distributed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="remoteExecuting" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Port" abstract="true" eSuperTypes="#//Identifiable #//Nameable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="outTransitions" upperBound="-1"
