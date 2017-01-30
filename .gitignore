@@ -1,11 +1,14 @@
 bin/
 target/
-src-gen/
 .metadata/
+.settings/
+maven_libs/
 eu.vicci.process.server/processes/
 eu.vicci.process.server/processes/*
 eu.vicci.process.server/processes/models/*.sofia
 
+src-gen/*
+!eu.vicci.process.model/src-gen/
 
 
 # Package Files #
