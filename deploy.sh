@@ -23,8 +23,8 @@ git checkout gh-pages
 rm -r $p2DeployPath
 rm -r $mavenDeployPath
 
-mkdir $p2DeployPath
-mkdir $mavenDeployPath
+mkdir -p $p2DeployPath
+mkdir -p $mavenDeployPath
 
 cp -r $travisBuildPath/$userName/$repoName/$p2TargetPath/. $travisBuildPath/$userName/$tmpRepoName/$p2DeployPath/
 cp -r $travisBuildPath/$userName/$repoName/$mavenTargetPath/. $travisBuildPath/$userName/$tmpRepoName/$mavenDeployPath/
