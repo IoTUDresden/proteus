@@ -20,11 +20,11 @@ git clone https://github.com/$userName/$repoName.git $travisBuildPath/$userName/
 cd $travisBuildPath/$userName/$tmpRepoName
 git checkout gh-pages
 
-rm -r $p2DeployPath
-rm -r $mavenDeployPath
+rm -r "$p2DeployPath"
+rm -r "$mavenDeployPath"
 
-mkdir -p $p2DeployPath
-mkdir -p $mavenDeployPath
+mkdir -p "$p2DeployPath"
+mkdir -p "$mavenDeployPath"
 
 cp -r $travisBuildPath/$userName/$repoName/$p2TargetPath/. $travisBuildPath/$userName/$tmpRepoName/$p2DeployPath/
 cp -r $travisBuildPath/$userName/$repoName/$mavenTargetPath/. $travisBuildPath/$userName/$tmpRepoName/$mavenDeployPath/
