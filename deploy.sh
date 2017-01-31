@@ -29,7 +29,7 @@ cp -r $travisBuildPath/$userName/$repoName/$p2TargetPath/. $travisBuildPath/$use
 cp -r $travisBuildPath/$userName/$repoName/$mavenTargetPath/. $travisBuildPath/$userName/$tmpRepoName/$mavenDeployPath/
 
 chmod a+x update-directory-index.sh
-source update-directory-index.sh
+./update-directory-index.sh
 
 git add -A
 git commit -m "deploy p2 and maven repo"
