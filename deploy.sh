@@ -8,13 +8,12 @@ travisBuildPath="/home/travis/build"
 p2TargetPath="sites/p2/target/repository"
 mavenTargetPath="target/repo"
 
-p2DeployPath ="repo/p2/latest"
+p2DeployPath="repo/p2/latest"
 mavenDeployPath="repo/maven/snapshot"
 
 userName="andiikaa"
 repoName="proteus"
 tmpRepoName="proteus-tmp"
-
 
 git clone https://github.com/$userName/$repoName.git $travisBuildPath/$userName/$tmpRepoName
 cd $travisBuildPath/$userName/$tmpRepoName
