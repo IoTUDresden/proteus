@@ -28,6 +28,9 @@ mkdir -p "$mavenDeployPath"
 cp -r $travisBuildPath/$userName/$repoName/$p2TargetPath/. $travisBuildPath/$userName/$tmpRepoName/$p2DeployPath/
 cp -r $travisBuildPath/$userName/$repoName/$mavenTargetPath/. $travisBuildPath/$userName/$tmpRepoName/$mavenDeployPath/
 
+chmod a+x update-directory-index.sh
+source update-directory-index.sh
+
 git add -A
 git commit -m "deploy p2 and maven repo"
 git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" gh-pages > /dev/null 2>&1
