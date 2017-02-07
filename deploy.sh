@@ -11,7 +11,7 @@ mavenTargetPath="target/repo"
 p2DeployPath="p2/latest"
 mavenDeployPath="maven/snapshot"
 
-userName="andiikaa"
+userName="IoTUDresden"
 ghUserName="IoTUDresden"
 repoName="proteus-repo"
 tmpRepoName="proteus-repo"
