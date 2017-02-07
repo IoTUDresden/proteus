@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/andiikaa/proteus.svg?branch=master)](https://travis-ci.org/andiikaa/proteus)
+
 # PROtEUS: A Process Execution System for Cyber-physical Systems
 
 See the following publications for more detail:

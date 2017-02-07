@@ -11,7 +11,7 @@
 <booleanAttribute key="clearwslog" value="false"/>
 <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/Vicci_Runtime"/>
 <booleanAttribute key="default" value="false"/>
-<stringAttribute key="deselected_workspace_plugins" value="com.db4o,com.microsoft.sqlserver.jdbc,com.mysql.jdbc,eu.vicci.process.client.tests,eu.vicci.process.gesture,eu.vicci.process.graphiti,eu.vicci.process.graphiti.adapter.client,eu.vicci.process.graphiti.adapter.engine,eu.vicci.process.graphiti.execution,eu.vicci.process.model.implementations.tests,eu.vicci.process.osgi,eu.vicci.process.repository,javax.persistence,org.apache.commons.logging,org.apache.log4j,org.dom4j,org.eclipse.emf.teneo,org.eclipse.emf.teneo.annotations,org.eclipse.emf.teneo.eclipse,org.eclipse.emf.teneo.hibernate,org.eclipse.emf.teneo.hibernate.eclipse,org.eclipse.emf.teneo.hibernate.mapper,org.hibernate,org.hsqldb,org.postgresql"/>
+<stringAttribute key="deselected_workspace_plugins" value="eu.vicci.process.client.tests,eu.vicci.process.gesture,eu.vicci.process.graphiti,eu.vicci.process.graphiti.execution,eu.vicci.process.model.implementations.tests,eu.vicci.process.osgi"/>
 <booleanAttribute key="includeOptional" value="true"/>
 <stringAttribute key="location" value="${workspace_loc}/../runtime-Vicci_Runtime"/>
 <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
@@ -22,7 +22,7 @@
 <stringAttribute key="pde.version" value="3.3"/>
 <stringAttribute key="product" value=""/>
 <stringAttribute key="selected_target_plugins" value="org.eclipse.emf.ecore.xmi@default:default,org.eclipse.ui.ide@default:default"/>
-<stringAttribute key="selected_workspace_plugins" value="eu.vicci.process.client@default:default,eu.vicci.process.core@default:default,eu.vicci.process.engine@default:default,eu.vicci.process.model.implementations@default:default,eu.vicci.process.model.util@default:default,eu.vicci.process.model@default:default,eu.vicci.process.server@default:default"/>
+<stringAttribute key="selected_workspace_plugins" value="eu.vicci.openhab.util@default:default,eu.vicci.process.client@default:default,eu.vicci.process.core@default:default,eu.vicci.process.distribution@default:default,eu.vicci.process.engine@default:default,eu.vicci.process.graphiti.adapter.view@default:default,eu.vicci.process.graphiti.adapter@default:default,eu.vicci.process.model.implementations@default:default,eu.vicci.process.model.util@default:default,eu.vicci.process.model@default:default,eu.vicci.process.server@default:default"/>
 <booleanAttribute key="show_selected_only" value="false"/>
 <stringAttribute key="templateConfig" value="${target_home}\configuration\config.ini"/>
 <booleanAttribute key="tracing" value="false"/>
