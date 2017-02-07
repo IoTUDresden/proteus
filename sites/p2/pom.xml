@@ -8,9 +8,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>eu.vicci.proteus.sites</groupId>
 	<artifactId>eu.vicci.proteus.p2</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	
 	<name>Update Site For Editor Plugins</name>
 	<packaging>eclipse-repository</packaging>

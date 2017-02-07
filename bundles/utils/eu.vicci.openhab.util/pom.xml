@@ -8,9 +8,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>eu.vicci.proteus.bundles.utils</groupId>
 	<artifactId>eu.vicci.openhab.util</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 
 	<name>OpenHAB Utils</name>
 	<packaging>eclipse-plugin</packaging>

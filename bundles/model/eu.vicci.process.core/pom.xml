@@ -8,9 +8,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>eu.vicci.proteus.bundles.model</groupId>
 	<artifactId>eu.vicci.process.core</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 
 	<name>Process Core</name>
 	<packaging>eclipse-plugin</packaging>

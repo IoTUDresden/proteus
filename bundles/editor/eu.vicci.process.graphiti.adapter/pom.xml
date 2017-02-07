@@ -8,9 +8,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>eu.vicci.proteus.bundles.editor</groupId>
 	<artifactId>eu.vicci.process.graphiti.adapter</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	
 	<name>Process Editor Adapter Core Plugin</name>
 	<packaging>eclipse-plugin</packaging>

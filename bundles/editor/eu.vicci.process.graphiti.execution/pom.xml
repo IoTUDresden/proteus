@@ -8,9 +8,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>eu.vicci.proteus.bundles.editor</groupId>
 	<artifactId>eu.vicci.process.graphiti.execution</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	
 	<name>Process Editor Process Execution Plugin</name>
 	<packaging>eclipse-plugin</packaging>
