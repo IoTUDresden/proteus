@@ -31,14 +31,17 @@ You can add <https://IoTUDresden.github.io/proteus/repo/p2/latest/> as update si
 
 ## maven / gradle
 
-If you want to add proteus dependencies to your project (e.g. model), add <https://andiikaa.github.io/proteus/repo/maven/snapshot/> as repo to your gradle/maven project.
+If you want to add proteus dependencies to your project (e.g. model), add <https://IoTUDresden.github.io/proteus/repo/maven/snapshot/> as repo to your gradle/maven project.
 
 ```
 repositories {
-  maven { url 'https://andiikaa.github.io/proteus/repo/maven/snapshot' }
+  maven { url 'https://IoTUDresden.github.io/proteus/repo/maven/snapshot' }
 }
 
-compile 'eu.vicci.proteus.bundles.model:eu.vicci.process.model:1.0.0-SNAPSHOT',
-	    'eu.vicci.proteus.bundles.model:eu.vicci.process.core:1.0.0-SNAPSHOT',
-	    'eu.vicci.proteus.bundles.model:eu.vicci.process.model.util:1.0.0-SNAPSHOT'
+dependencies {
+
+  compile 'eu.vicci.proteus.bundles.model:eu.vicci.process.model:1.0.0-SNAPSHOT',
+	      'eu.vicci.proteus.bundles.model:eu.vicci.process.core:1.0.0-SNAPSHOT',
+	      'eu.vicci.proteus.bundles.model:eu.vicci.process.model.util:1.0.0-SNAPSHOT'
+}
 ```
