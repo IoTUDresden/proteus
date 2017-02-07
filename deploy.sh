@@ -15,6 +15,7 @@ userName="andiikaa"
 ghUserName="IoTUDresden"
 repoName="proteus-repo"
 tmpRepoName="proteus-repo"
+proteusRepo="proteus"
 
 git clone https://github.com/$ghUserName/$repoName.git $travisBuildPath/$userName/$tmpRepoName
 cd $travisBuildPath/$userName/$tmpRepoName
@@ -26,8 +27,8 @@ rm -r "$mavenDeployPath"
 mkdir -p "$p2DeployPath"
 mkdir -p "$mavenDeployPath"
 
-cp -r $travisBuildPath/$userName/$repoName/$p2TargetPath/. $travisBuildPath/$userName/$tmpRepoName/$p2DeployPath/
-cp -r $travisBuildPath/$userName/$repoName/$mavenTargetPath/. $travisBuildPath/$userName/$tmpRepoName/$mavenDeployPath/
+cp -r $travisBuildPath/$userName/$proteusRepo/$p2TargetPath/. $travisBuildPath/$userName/$tmpRepoName/$p2DeployPath/
+cp -r $travisBuildPath/$userName/$proteusRepo/$mavenTargetPath/. $travisBuildPath/$userName/$tmpRepoName/$mavenDeployPath/
 
 chmod a+x update-directory-index.sh
 ./update-directory-index.sh
