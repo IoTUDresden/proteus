@@ -8,8 +8,8 @@ travisBuildPath="/home/travis/build"
 p2TargetPath="sites/p2/target/repository"
 mavenTargetPath="target/repo"
 
-p2DeployPath="repo/p2/latest"
-mavenDeployPath="repo/maven/snapshot"
+p2DeployPath="p2/latest"
+mavenDeployPath="maven/snapshot"
 
 userName="andiikaa"
 ghUserName="IoTUDresden"
