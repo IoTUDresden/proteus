@@ -13,4 +13,4 @@ deploy:
     
 env:
   global:
-    - GH_REF: github.com/andiikaa/proteus.git
+    - GH_REF: github.com/IoTUDresden/proteus-repo
