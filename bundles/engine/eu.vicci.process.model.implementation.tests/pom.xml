@@ -3,10 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>eu.vicci.process.parent</groupId>
-		<artifactId>eu.vicci.process.projectset</artifactId>
-		<version>0.0.1a-SNAPSHOT</version>
-		<relativePath>../ProjectSet/</relativePath>
+		<groupId>eu.vicci.proteus.bundles.engine</groupId>
+		<artifactId>pom</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 
