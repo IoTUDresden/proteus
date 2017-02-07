@@ -22,7 +22,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<outputDirectory>maven_libs</outputDirectory>
-	</properties>	
+	</properties>
 
 	<repositories>
 		<repository>
@@ -33,6 +33,7 @@
 	</repositories>
 
 	<build>
+
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
@@ -50,19 +51,9 @@
 			</plugin>
 
 			<!-- TODO Source within the plugins would be cool -->
-			<!--<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-source-plugin</artifactId>
-				<version>0.26.0</version>
-				<executions>
-					<execution>
-						<id>plugin-source</id>
-						<goals>
-							<goal>plugin-source</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>-->
+			<!--<plugin> <groupId>org.eclipse.tycho</groupId> <artifactId>tycho-source-plugin</artifactId> 
+				<version>0.26.0</version> <executions> <execution> <id>plugin-source</id> 
+				<goals> <goal>plugin-source</goal> </goals> </execution> </executions> </plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -106,6 +97,106 @@
 			</plugin>
 
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.tycho
+										</groupId>
+										<artifactId>
+											tycho-packaging-plugin
+										</artifactId>
+										<versionRange>
+											[0.26.0,)
+										</versionRange>
+										<goals>
+											<goal>build-qualifier</goal>
+											<goal>
+												validate-version
+											</goal>
+											<goal>
+												build-qualifier-aggregator
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-dependency-plugin
+										</artifactId>
+										<versionRange>
+											[2.8,)
+										</versionRange>
+										<goals>
+											<goal>
+												copy-dependencies
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute></execute>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.tycho
+										</groupId>
+										<artifactId>
+											tycho-compiler-plugin
+										</artifactId>
+										<versionRange>
+											[0.26.0,)
+										</versionRange>
+										<goals>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-clean-plugin
+										</artifactId>
+										<versionRange>
+											[2.4.1,)
+										</versionRange>
+										<goals>
+											<goal>clean</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 </project>
