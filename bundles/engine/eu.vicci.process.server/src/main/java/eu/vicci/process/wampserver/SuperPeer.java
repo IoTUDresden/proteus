@@ -12,6 +12,7 @@ import eu.vicci.process.client.core.AbstractClientBuilder;
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.client.subscribers.HumanTaskResponseSubscriber;
 import eu.vicci.process.distribution.core.PeerProfile;
+import eu.vicci.process.distribution.core.SuperPeerRequest;
 import eu.vicci.process.engine.core.ClientBuilderFactory;
 import eu.vicci.process.engine.core.IProcessInfo;
 import eu.vicci.process.engine.core.IProcessInstanceInfo;
@@ -30,6 +31,8 @@ import eu.vicci.process.model.util.messages.core.IProcessEngineUpdate.UpdateType
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import eu.vicci.process.model.util.messages.core.ProcessEngineListener;
 import eu.vicci.process.model.util.messages.core.StateChangeListener;
+import eu.vicci.process.server.util.FeedbackServiceMonitor;
+import eu.vicci.process.server.util.JacksonEncoder;
 import eu.vicci.process.wampserver.handlers.AbstractRpcHandler;
 import eu.vicci.process.wampserver.handlers.DeployInstanceServerHandler;
 import eu.vicci.process.wampserver.handlers.DeployModelServerHandler;
@@ -59,6 +62,8 @@ import eu.vicci.process.wampserver.handlers.StartInstanceServerHandler;
 import eu.vicci.process.wampserver.handlers.StopInstanceServerHandler;
 import eu.vicci.process.wampserver.handlers.UploadAndDeployServerHandler;
 import eu.vicci.process.wampserver.handlers.UploadModelServerHandler;
+import feign.Feign;
+import feign.RetryableException;
 import ws.wamp.jawampa.ApplicationError;
 import ws.wamp.jawampa.WampClient;
 import ws.wamp.jawampa.WampClientBuilder;
@@ -80,6 +85,8 @@ public class SuperPeer {
 	private WampRouter router;
 	private SimpleWampWebsocketListener server;
 	protected WampClient serverClient;
+	
+	private FeedbackServiceMonitor feedbackServiceMonitor;
 
 	// private String serverName;
 
@@ -139,6 +146,7 @@ public class SuperPeer {
 			registerRpcHandlers(); // registered when client is opened and connected
 			subscripeToTopics(); // subscriped when client is opened and connected
 			registerPeer(); // register peer when client is opened and connected and this is only peer
+			requestingFeedbackMonitor();
 		});
 	}
 
@@ -295,6 +303,28 @@ public class SuperPeer {
 		server = new SimpleWampWebsocketListener(router, serverUri, null);
 		server.start();
 	}
+	
+	private void requestingFeedbackMonitor(){
+		if(this instanceof Peer) return;
+		if(feedbackServiceMonitor == null) createFeedbackServiceMonitor();
+		
+		SuperPeerRequest request = new SuperPeerRequest();
+		request.profile = peerProfile;
+		request.port = configReader.getPort();
+		request.namespace = configReader.getNamespace();
+		request.realm = configReader.getRealmName();
+		
+		try {
+			feedbackServiceMonitor.requestingMonitoring(request);
+		} catch (RetryableException e) {
+			// TODO this exception is thrown if we cant connect to the fb service
+			// so retrying later would be an option
+			
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	protected void registerRpcHandlers() {
 		registerProcedure(RpcId.LIST_MODELS, new ModelListServerHandler(processManager));
@@ -331,5 +361,15 @@ public class SuperPeer {
 
 	protected void registerProcedure(String rpcId, AbstractRpcHandler handler) {
 		serverClient.registerProcedure(rpcId).subscribe(handler);
+	}
+	
+	protected void createFeedbackServiceMonitor(){
+		String feedbackHost = configReader.getFeedbackServiceUri();
+		if(feedbackHost == null || feedbackHost.isEmpty()) return;
+		if(!feedbackHost.startsWith("http://")) feedbackHost = "http://" + feedbackHost;
+		
+		feedbackServiceMonitor = Feign.builder()
+				.encoder(new JacksonEncoder())
+				.target(FeedbackServiceMonitor.class, feedbackHost);		
 	}
 }

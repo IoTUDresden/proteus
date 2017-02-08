@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="maven_libs/animal-sniffer-annotation.jar"/>
+	<classpathentry exported="true" kind="lib" path="maven_libs/feign-core.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src/main/java"/>
@@ -12,8 +14,6 @@
 	<classpathentry exported="true" kind="lib" path="maven_libs/jawampa-core.jar"/>
 	<classpathentry exported="true" kind="lib" path="maven_libs/jawampa-netty.jar"/>
 	<classpathentry exported="true" kind="lib" path="maven_libs/log4j.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/metrics-core.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/metrics-elasticsearch-reporter.jar"/>
 	<classpathentry exported="true" kind="lib" path="maven_libs/msgpack-core.jar"/>
 	<classpathentry exported="true" kind="lib" path="maven_libs/netty-buffer.jar"/>
 	<classpathentry exported="true" kind="lib" path="maven_libs/netty-codec-http.jar"/>

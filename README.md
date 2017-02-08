@@ -19,7 +19,7 @@ Seiger, R., Huber, S., Schlegel, T., (2016), Toward an execution system for self
 - run the installer and go to advanced mode
 - choose **Eclipse Modeling Tools – Mars** (newer Eclipse versions not tested)
 - drop the PROtEUS setup file in the *Projects* dialog and select *Vicci Process*
-- finish the installation and in eclipse right click on some project -> *Maven* -> *Update* *Project...* and select all projects to update
+- finish the installation and in Eclipse right click on some project -> *Maven* -> *Update* *Project...* and select all projects to update
 
 # repo
 
@@ -27,15 +27,15 @@ Artifacts which are build by Travis CI are published at <https://github.com/IoTU
 
 ## p2
 
-You can add <https://IoTUDresden.github.io/proteus/repo/p2/latest/> as update site in Eclipse, to download the latest process model editor plugins.
+You can add <https://IoTUDresden.github.io/proteus-repo/p2/latest/> as update site in Eclipse, to download the latest process model editor plugins.
 
 ## maven / gradle
 
-If you want to add proteus dependencies to your project (e.g. model), add <https://IoTUDresden.github.io/proteus/repo/maven/snapshot/> as repo to your gradle/maven project.
+If you want to add proteus dependencies to your project (e.g. model), add <https://IoTUDresden.github.io/proteus-repo/maven/snapshot/> as repo to your gradle/maven project.
 
 ```
 repositories {
-  maven { url 'https://IoTUDresden.github.io/proteus/repo/maven/snapshot' }
+  maven { url 'https://IoTUDresden.github.io/proteus-repo/maven/snapshot' }
 }
 
 dependencies {

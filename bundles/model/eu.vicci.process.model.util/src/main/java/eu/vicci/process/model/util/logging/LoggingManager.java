@@ -4,11 +4,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,8 +22,6 @@ public class LoggingManager {
 	private static LoggingManager lm;
 	private Map<String, InstanceLogger> loggers = new ConcurrentHashMap<>();
 	private List<IStateChangeMessage> recentStateChanges = new CopyOnWriteArrayList<>();
-
-	private Optional<MetricRegistry> registry = Optional.empty();
 
 	private Map<String, TimerWithStart> timerContexts = new ConcurrentHashMap<>();
 	private ElasticsearchClient esClient;
@@ -43,10 +39,6 @@ public class LoggingManager {
 
 		objectMapper = new ObjectMapper();
 		esClient = Feign.builder().target(ElasticsearchClient.class, "http://" + esHost);
-	}
-
-	public void setMetricsReporter(MetricRegistry registry) {
-		this.registry = Optional.ofNullable(registry);
 	}
 
 	public Map<String, InstanceLogger> getLoggers() {
@@ -67,8 +59,7 @@ public class LoggingManager {
 	}
 
 	public void logStateMessage(IStateChangeMessage message) {
-		if (registry.isPresent())
-			report(message);
+		report(message);
 		loggers.get(message.getProcessInstanceId()).logStateMessage(message);
 		recentStateChanges.add(message);
 	}
@@ -100,12 +91,10 @@ public class LoggingManager {
 
 	private void logExecutingIfNeeded(IStateChangeMessage message) {
 		final LogIdentifier logId = new LogIdentifier(message);
-		if (timerContexts.containsKey(logId.stepInstance)) // time already
-															// started
+		if (timerContexts.containsKey(logId.stepInstance)) // time already started
 			return;
 
-		final MetricRegistry r = registry.get();
-		TimerWithStart timer = TimerWithStart.create(r.timer(logId.stepInstance).time());
+		TimerWithStart timer = TimerWithStart.create();
 		timer.model = message.getProcessId();
 		timer.step = message.getModelId();
 		timer.stepInstance = message.getInstanceId();

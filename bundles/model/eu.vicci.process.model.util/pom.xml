@@ -39,21 +39,26 @@
 			<artifactId>xstream</artifactId>
 			<version>1.4.7</version>
 		</dependency>
+		
+		<!--
 		<dependency>
 			<groupId>io.dropwizard.metrics</groupId>
 			<artifactId>metrics-core</artifactId>
 			<version>3.1.2</version>
-		</dependency>
+		</dependency>  -->
+		
 		<dependency>
 			<groupId>com.netflix.feign</groupId>
 			<artifactId>feign-core</artifactId>
 			<version>8.18.0</version>
 		</dependency>
+		
+		<!-- 
 		<dependency>
 			<groupId>com.netflix.feign</groupId>
 			<artifactId>feign-jackson</artifactId>
 			<version>8.18.0</version>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 </project>

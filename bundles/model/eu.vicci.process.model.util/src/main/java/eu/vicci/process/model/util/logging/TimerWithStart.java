@@ -1,6 +1,5 @@
 package eu.vicci.process.model.util.logging;
 
-import com.codahale.metrics.Timer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,9 +23,6 @@ public class TimerWithStart {
 	@JsonProperty
 	Long startTime;
 
-	@JsonIgnore
-	Timer.Context context;
-
 	@JsonProperty
 	long duration;
 
@@ -36,10 +32,9 @@ public class TimerWithStart {
 	@JsonProperty
 	String process;
 	
-	static TimerWithStart create(Timer.Context context) {
+	static TimerWithStart create() {
 		TimerWithStart timer = new TimerWithStart();
 		timer.startTime = timer.timestamp = System.currentTimeMillis();
-		timer.context = context;
 		return timer;
 	}
 

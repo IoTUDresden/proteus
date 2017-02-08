@@ -1,19 +1,11 @@
 package eu.vicci.process.runtime;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Scanner;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.elasticsearch.metrics.ElasticsearchReporter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.Timer.Context;
 
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.devices.util.OpenHabListener;
@@ -26,9 +18,7 @@ import eu.vicci.process.model.sofia.SofiaPackage;
 import eu.vicci.process.model.sofiainstance.SofiaInstancePackage;
 import eu.vicci.process.model.sofiainstance.impl.custom.SofiaInstanceFactoryImplCustom;
 import eu.vicci.process.model.util.ConfigurationReader;
-import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
-import eu.vicci.process.model.util.logging.LoggingManager;
 import eu.vicci.process.osgi.OSGiRuntime;
 import eu.vicci.process.wampserver.Peer;
 import eu.vicci.process.wampserver.SuperPeer;
@@ -36,8 +26,6 @@ import ws.wamp.jawampa.ApplicationError;
 
 public class VicciRuntime {
 	private static final String PATH_MODEL = "processes/models/";
-
-	private Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
 
 	/**
 	 * @param args
@@ -69,8 +57,6 @@ public class VicciRuntime {
 		IConfigurationReader configReader = new ConfigurationReader("server.conf");
 		ConfigurationManager.getInstance().updateFromConfigReader(configReader);
 		
-		Optional<Context> timer = initReporting();		
-		
 		if(!configReader.deployExistingProcessModels())
 			deleteExistingModels();		
 		
@@ -80,42 +66,11 @@ public class VicciRuntime {
 		
 		DistributionManager.getInstance().setPeerProfile(server.getPeerProfile());
 		
-		timer.ifPresent(t -> t.stop());
 		return isWebSocketServerStarted;
 	}
 	
 	private String getRuntimeType(){
 		return server.getClass().getSimpleName();
-	}
-	
-	private Optional<Context> initReporting(){
-		String host = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.ELASTICSEARCH_HOST);
-		if(host == null)
-			return Optional.empty();
-		MetricRegistry registry = new MetricRegistry();			
-		initializeElasticsearchReportingWith(registry, host);
-		
-		LoggingManager.getInstance().setMetricsReporter(registry);
-		
-		return Optional.ofNullable(registry.timer("startup").time());		
-	}
-
-	//FIXME needed for logging? We manually post the logs?
-	private void initializeElasticsearchReportingWith(MetricRegistry registry, String host) {
-		try {
-			ElasticsearchReporter reporter = ElasticsearchReporter
-					.forRegistry(registry)
-					.hosts(host)
-					.index("mapek")
-					.prefixedWith("proteus")
-					.build();
-			
-			// reporter.start(10, TimeUnit.SECONDS);
-			LOG.debug("Using Elasticsearch for metrics reporting");
-			
-		} catch (IOException e) {
-			LOG.warn("Cannot connect to Elasticsearch due to {}", e.getMessage());
-		}
 	}
 
 	public void stop(){
