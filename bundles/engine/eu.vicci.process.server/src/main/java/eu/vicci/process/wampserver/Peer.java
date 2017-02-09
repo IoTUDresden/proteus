@@ -22,7 +22,9 @@ public class Peer extends SuperPeer {
 	
 	@Override
 	protected PeerProfile createPeerProfile() {
-		return PeerProfile.create(false);
+		PeerProfile profile = PeerProfile.create(false);
+		profile.setIp(getIpSafe());
+		return profile;
 	}
 	
 	@Override

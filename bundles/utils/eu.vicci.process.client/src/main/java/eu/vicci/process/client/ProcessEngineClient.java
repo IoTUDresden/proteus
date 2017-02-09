@@ -14,10 +14,10 @@ import java.util.concurrent.TimeUnit;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
-import org.eclipse.graphiti.mm.pictograms.PictogramsPackage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -153,13 +153,13 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		// Initialize the models
 		SofiaPackage.eINSTANCE.eClass();
 		SofiaInstancePackage.eINSTANCE.eClass();
-		PictogramsPackage.eINSTANCE.eClass();
 
 		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 		Map<String, Object> m = reg.getExtensionToFactoryMap();
 		m.put("diagram", new XMIResourceFactoryImpl());
 		m.put("sofia", new XMIResourceFactoryImpl());
 		m.put("sofiainstance", new XMIResourceFactoryImpl());
+		
 	}
 
 	/**
@@ -517,7 +517,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	@Override
 	public String uploadModelFile(String filepath, boolean overrideExisting) {
 		Process model = null;
-		ResourceSet resSet = new ResourceSetImpl();
+		ResourceSet resSet = getConfiguredResourceSet();
 		Resource resource = resSet.getResource(org.eclipse.emf.common.util.URI.createURI(filepath), true);
 
 		if (filepath.endsWith(IProcessEngineClient.EXT_DIAGRAM)) {
@@ -530,6 +530,15 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		String text = getProcessAsString(model, null);
 		printModel(text);
 		return uploadProcessDefinition(modelId, text, false, overrideExisting);
+	}
+	
+	private ResourceSet getConfiguredResourceSet(){
+		ResourceSet resSet = new ResourceSetImpl();
+		
+		//this option let us load a diagram file without to have graphiti stuff in the classpath
+		//otherwise an exception is thrown if the graphiti.mm package is not found
+		resSet.getLoadOptions().put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
+		return resSet;
 	}
 
 	@Override

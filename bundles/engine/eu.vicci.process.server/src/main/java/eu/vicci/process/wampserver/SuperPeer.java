@@ -33,6 +33,7 @@ import eu.vicci.process.model.util.messages.core.ProcessEngineListener;
 import eu.vicci.process.model.util.messages.core.StateChangeListener;
 import eu.vicci.process.server.util.FeedbackServiceMonitor;
 import eu.vicci.process.server.util.JacksonEncoder;
+import eu.vicci.process.server.util.Util;
 import eu.vicci.process.wampserver.handlers.AbstractRpcHandler;
 import eu.vicci.process.wampserver.handlers.DeployInstanceServerHandler;
 import eu.vicci.process.wampserver.handlers.DeployModelServerHandler;
@@ -112,7 +113,9 @@ public class SuperPeer {
 	}
 
 	protected PeerProfile createPeerProfile() {
-		return PeerProfile.create(true);
+		PeerProfile profile = PeerProfile.create(true);
+		profile.setIp(getIpSafe());
+		return profile;
 	}
 
 	// public String getServerName(){
@@ -371,5 +374,12 @@ public class SuperPeer {
 		feedbackServiceMonitor = Feign.builder()
 				.encoder(new JacksonEncoder())
 				.target(FeedbackServiceMonitor.class, feedbackHost);		
+	}
+	
+	protected String getIpSafe(){
+		String ip = Util.getLocalIpWithFilter();
+		if(ip == null || ip.isEmpty())
+			throw new RuntimeException("Cant find the ip of this host. Maybe check the ip filter in the config file.");
+		return ip;		
 	}
 }

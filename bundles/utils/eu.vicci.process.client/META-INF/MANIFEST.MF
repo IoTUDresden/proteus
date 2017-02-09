@@ -26,7 +26,6 @@ Export-Package: eu.vicci.process.client,
  ws.wamp.jawampa,
  ws.wamp.jawampa.transport.netty
 Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.11.1",
- org.eclipse.graphiti.mm;bundle-version="0.12.2",
  eu.vicci.process.model;bundle-version="1.0.0",
  eu.vicci.process.model.util;bundle-version="1.0.0",
  eu.vicci.process.core;bundle-version="1.0.0"

@@ -17,8 +17,11 @@ public class ConfigProperties {
 	public static final String PORT = "port";
 	
 	public static final String SUPER_PEER_IP = "superPeerIp";
+	public static final String IP_FILTER = "ipFilter";
 	
 	public static final String CONTEXT_URI = "contextUri";
 	public static final String FEEDBACK_SERVICE_URI = "feedbackServiceUri";
 	public static final String ELASTICSEARCH_HOST = "elasticsearchHost";
+	
+
 }

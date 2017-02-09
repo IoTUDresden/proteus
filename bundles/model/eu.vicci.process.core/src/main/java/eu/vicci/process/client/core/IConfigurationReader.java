@@ -110,12 +110,33 @@ public interface IConfigurationReader {
 	String getElasticsearchHost();
 
 	/**
-	 * The runtime will act as a peer if the ip to a SuperPeer is set. Comment
+	 * The runtime will act as a peer if the IP to a SuperPeer is set. Comment
 	 * out or delete to let the runtime act as SuperPeer. In case of a peer
 	 * usage, connection settings under "server settings" (above) are used.
 	 * 
 	 * @return null if not set
 	 */
 	String getSuperPeerIp();
+
+	/**
+	 * This is used to check for the correct (local) IP address,<br/>
+	 * since <code>Inet4Address.getLocalHost().getHostAddress()</code> may
+	 * return the wrong address, cause the host can have more than one network
+	 * interface.
+	 * 
+	 * The filter will be used like the following: <br/>
+	 * <br/>
+	 * <code>
+	 * String candidate = "10.5.x.x.x";
+	 * <br/>
+	 * candidate.startsWith(ipFilter);
+	 * </code> <br/>
+	 * <br/>
+	 * 
+	 * So example for a local address filter would be <code>192.168</code>
+	 * 
+	 * @return
+	 */
+	String getIpFilter();
 
 }

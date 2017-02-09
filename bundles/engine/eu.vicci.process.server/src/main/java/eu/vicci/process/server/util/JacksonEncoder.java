@@ -2,7 +2,6 @@ package eu.vicci.process.server.util;
 
 import java.lang.reflect.Type;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import feign.RequestTemplate;
@@ -22,9 +21,9 @@ public class JacksonEncoder implements Encoder {
 	public void encode(Object object, Type type, RequestTemplate template) throws EncodeException {
 		try {
 			template.body(mapper.writeValueAsString(object));
-		} catch (JsonProcessingException e) {
+		} catch (Exception e) {
 			throw new EncodeException(e.getMessage(), e);
-		}		
+		}
 	}
 
 }

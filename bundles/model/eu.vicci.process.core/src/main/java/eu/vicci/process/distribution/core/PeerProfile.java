@@ -44,15 +44,24 @@ public class PeerProfile {
 		return isSuperPeer;
 	}
 	
+	@JsonIgnore
+	public void setIp(String ip){
+		this.ip = ip;		
+	}
+	
+	/**
+	 * creates a new client profile. Attention: the IP must be set manually
+	 * @param isSuperPeer
+	 * @return
+	 */
 	public static PeerProfile create(boolean isSuperPeer){
 		PeerProfile profile = new PeerProfile();
 		profile.peerId = UUID.randomUUID().toString();
 		profile.isSuperPeer = isSuperPeer;
 		try {
-			profile.ip = Inet4Address.getLocalHost().getHostAddress();
 			profile.hostName = Inet4Address.getLocalHost().getHostName();
 		} catch (UnknownHostException e) {
-			throw new RuntimeException("cant create the client profile for the peer");
+			throw new RuntimeException("cant create the client profile for the peer", e);
 		}
 		return profile;		
 	}

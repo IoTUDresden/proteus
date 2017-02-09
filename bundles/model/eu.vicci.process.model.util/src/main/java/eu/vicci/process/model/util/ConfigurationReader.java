@@ -34,6 +34,8 @@ public class ConfigurationReader implements IConfigurationReader {
 
 	private String elasticsearchHost;	
 	
+	private String ipFilter;
+	
 	public ConfigurationReader(String path) {
 		this.path = path;
 		readProperties();
@@ -94,6 +96,11 @@ public class ConfigurationReader implements IConfigurationReader {
 		return deployExistingProcessModels;
 	}
 	
+	@Override
+	public String getIpFilter() {
+		return ipFilter;
+	}
+	
 	private void readProperties(){
 		Properties properties = new Properties();
 		BufferedInputStream stream = null;
@@ -130,6 +137,7 @@ public class ConfigurationReader implements IConfigurationReader {
 		feedbackServiceUri = properties.getProperty(ConfigProperties.FEEDBACK_SERVICE_URI);
 		elasticsearchHost = properties.getProperty(ConfigProperties.ELASTICSEARCH_HOST);
 		superPeerIp = properties.getProperty(ConfigProperties.SUPER_PEER_IP);
+		ipFilter = properties.getProperty(ConfigProperties.IP_FILTER);
 	}
 
 	@Override
@@ -154,6 +162,5 @@ public class ConfigurationReader implements IConfigurationReader {
 
 	public String getSuperPeerIp() {
 		return superPeerIp;
-	}
-	
+	}	
 }

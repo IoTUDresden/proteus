@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
@@ -18,6 +20,7 @@ import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import feign.Feign;
 
 public class LoggingManager {
+	private static final Logger log = LoggerFactory.getLogger(LoggingManager.class);
 
 	private static LoggingManager lm;
 	private Map<String, InstanceLogger> loggers = new ConcurrentHashMap<>();
@@ -36,9 +39,9 @@ public class LoggingManager {
 
 	private LoggingManager() {
 		String esHost = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.ELASTICSEARCH_HOST);
-
 		objectMapper = new ObjectMapper();
-		esClient = Feign.builder().target(ElasticsearchClient.class, "http://" + esHost);
+		if(esHost != null)
+			esClient = Feign.builder().target(ElasticsearchClient.class, "http://" + esHost);
 	}
 
 	public Map<String, InstanceLogger> getLoggers() {
@@ -65,6 +68,8 @@ public class LoggingManager {
 	}
 
 	private void report(IStateChangeMessage message) {
+		if(esClient == null) return; //no reporting needed
+		
 		if (State.EXECUTING == message.getState()) {
 			logExecutingIfNeeded(message);
 		} else if (isFinishedState(message)) {
@@ -84,8 +89,8 @@ public class LoggingManager {
 
 		try {
 			esClient.post(year, month, objectMapper.writeValueAsString(timer));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			log.error("failed to send the logging to elasticsearch: '{}'", e.getMessage());
 		}
 	}
 

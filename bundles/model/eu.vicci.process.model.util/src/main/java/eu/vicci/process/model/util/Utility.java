@@ -35,5 +35,4 @@ public class Utility {
             throw new AssertionError(e);
         }
     }
-
 }

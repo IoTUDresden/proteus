@@ -1,6 +1,7 @@
 package eu.vicci.process.server.util;
 
 import eu.vicci.process.distribution.core.SuperPeerRequest;
+import feign.Headers;
 import feign.RequestLine;
 
 public interface FeedbackServiceMonitor {
@@ -11,6 +12,7 @@ public interface FeedbackServiceMonitor {
 	 * @param request
 	 */
 	@RequestLine("POST /proteus/superPeerRequesting")
+	@Headers("Content-Type: application/json")
 	void requestingMonitoring(SuperPeerRequest request);
 
 }

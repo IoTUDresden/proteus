@@ -98,6 +98,7 @@ public final class ConfigurationManager {
 		addIfNotNull(ConfigProperties.REALMNAME, reader.getRealmName());
 		addIfNotNull(ConfigProperties.PORT, reader.getPort());
 		addIfNotNull(ConfigProperties.SUPER_PEER_IP, reader.getSuperPeerIp());
+		addIfNotNull(ConfigProperties.IP_FILTER, reader.getIpFilter());
 	}
 
 	private void addIfNotNull(String key, String value) {
