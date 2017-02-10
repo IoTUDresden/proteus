@@ -1,5 +1,6 @@
 package eu.vicci.process.client.handlers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import eu.vicci.process.distribution.core.PeerProfile;
@@ -15,6 +16,6 @@ public class RetrieveRegisteredPeersClientHandler extends AbstractClientHandler 
 	}
 
 	public List<PeerProfile> getPeers() {
-		return peers;
+		return peers != null ? peers : new ArrayList<>() ;
 	}
 }
