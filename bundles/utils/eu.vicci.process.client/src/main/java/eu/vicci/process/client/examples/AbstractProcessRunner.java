@@ -8,6 +8,7 @@ import java.util.concurrent.CountDownLatch;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 
 import eu.vicci.process.client.ProcessEngineClientBuilder;
 import eu.vicci.process.client.core.IConfigurationReader;
@@ -76,8 +77,12 @@ public abstract class AbstractProcessRunner {
 	
 	private void changeProcessBeforeUploading(){
 		String path = getModelFilePath();
-		Process model = null;
+		Process model = null;		
 		ResourceSet resSet = new ResourceSetImpl();
+		
+		//this option let us load a diagram file without to have graphiti stuff in the classpath
+		//otherwise an exception is thrown if the graphiti.mm package is not found
+		resSet.getLoadOptions().put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
 		Resource resource = resSet.getResource(org.eclipse.emf.common.util.URI.createURI(path), true);
 
 		if (path.endsWith(IProcessEngineClient.EXT_DIAGRAM)) {
