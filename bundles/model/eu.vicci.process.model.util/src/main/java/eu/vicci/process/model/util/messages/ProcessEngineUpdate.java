@@ -5,7 +5,6 @@ import java.io.IOException;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import eu.vicci.process.model.util.configuration.TopicId;
 import eu.vicci.process.model.util.messages.core.IProcessEngineUpdate;
 
 public class ProcessEngineUpdate extends WampMessage implements IProcessEngineUpdate {
@@ -15,12 +14,9 @@ public class ProcessEngineUpdate extends WampMessage implements IProcessEngineUp
 	@JsonIgnore
 	private Object typedObject;
 	
-	public ProcessEngineUpdate() {
-		super(TopicId.ENGINE_UPDATE);
-	}
+	public ProcessEngineUpdate() {	}
 	
 	public ProcessEngineUpdate(UpdateType updateType, String payload) {
-		super(TopicId.ENGINE_UPDATE);
 		this.updateType = updateType;
 		this.payload = payload;
 	}	

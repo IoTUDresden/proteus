@@ -6,7 +6,6 @@ public class WampRequest extends WampMessage implements IWampRequest {
 	private boolean responded = false;
 	
 	public WampRequest(String topic, boolean responded) {
-		super(topic);
 		this.responded = responded;		
 	}
 	

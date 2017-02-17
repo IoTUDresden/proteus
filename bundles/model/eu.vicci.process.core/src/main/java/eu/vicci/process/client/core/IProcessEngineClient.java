@@ -8,6 +8,8 @@ import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.engine.core.ReplyState;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.util.messages.core.IHumanTaskRequest;
+import eu.vicci.process.model.util.messages.core.IMessageReceiver;
+import eu.vicci.process.model.util.messages.core.IWampMessage;
 import eu.vicci.process.model.sofia.Process;
 
 public interface IProcessEngineClient extends IProcessManager {
@@ -110,5 +112,13 @@ public interface IProcessEngineClient extends IProcessManager {
 	 * @return
 	 */
 	List<PeerProfile> getRegisteredPeers();
+	
+	/**
+	 * Subscribe to a generic topic
+	 * @param topicId
+	 * @param receiver
+	 * @param paramClass
+	 */
+	public <T extends IWampMessage> void subscribeToTopic(String topicId, IMessageReceiver<T> receiver, Class<T> paramClass);
 
 }

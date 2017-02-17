@@ -98,7 +98,7 @@ public class ClientTest {
 	private StateChangeListener stateChangeListener = new StateChangeListener() {		
 		@Override
 		public void onMessage(IStateChangeMessage arg) {
-			System.out.println(arg.getTimeStamp() + " " + arg.getProcessName() + " to state " + arg.getState());			
+			System.out.println(System.currentTimeMillis() + " " + arg.getProcessName() + " to state " + arg.getState());			
 		}
 	};
 	

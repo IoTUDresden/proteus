@@ -52,6 +52,7 @@ import eu.vicci.process.client.handlers.StopInstanceHandler;
 import eu.vicci.process.client.handlers.UploadAndDeployHandler;
 import eu.vicci.process.client.handlers.UploadModelHandler;
 import eu.vicci.process.client.subscribers.EngineUpdateSubscriber;
+import eu.vicci.process.client.subscribers.GenericSubscriber;
 import eu.vicci.process.client.subscribers.HumanTaskRequestSubscriber;
 import eu.vicci.process.client.subscribers.HumanTaskResponseSubscriber;
 import eu.vicci.process.client.subscribers.StateChangeMessageSubscriber;
@@ -79,7 +80,9 @@ import eu.vicci.process.model.util.messages.core.HumanTaskRequestListener;
 import eu.vicci.process.model.util.messages.core.HumanTaskResponseListener;
 import eu.vicci.process.model.util.messages.core.IHumanTaskRequest;
 import eu.vicci.process.model.util.messages.core.IHumanTaskResponse;
+import eu.vicci.process.model.util.messages.core.IMessageReceiver;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
+import eu.vicci.process.model.util.messages.core.IWampMessage;
 import eu.vicci.process.model.util.messages.core.ProcessEngineListener;
 import eu.vicci.process.model.util.messages.core.StateChangeListener;
 import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.JSONProcessStepInstanceSerializer;
@@ -385,6 +388,12 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		callRpc(createRpcId(peerId, RpcId.DEPLOY_INSTANCE), dih, processId);
 		System.out.println("Instance ID: " + dih.getInstanceId());
 		return dih.getInstanceId();
+	}
+	
+	@Override
+	public <T extends IWampMessage> void subscribeToTopic(String topicId, IMessageReceiver<T> receiver, Class<T> paramClass){
+		GenericSubscriber<T> subscriber = new GenericSubscriber<T>(receiver, topicId, paramClass);		
+		client.makeSubscription(topicId).subscribe(subscriber);	
 	}
 	
 	private static String createRpcId(String peerId, String rpcId){

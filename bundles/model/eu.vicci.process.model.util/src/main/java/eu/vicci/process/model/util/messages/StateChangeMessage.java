@@ -6,7 +6,6 @@ import java.util.Map;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 
 import eu.vicci.process.model.sofiainstance.State;
-import eu.vicci.process.model.util.configuration.TopicId;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.JSONDataPortInstance;
 import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.JSONPortInstance;
@@ -37,14 +36,11 @@ public class StateChangeMessage extends WampMessage implements IStateChangeMessa
 	@JsonDeserialize(as=HashMap.class, keyAs=String.class, contentAs=JSONPortInstance.class)
 	private Map<String, IJSONPortInstance> endControlPorts = new HashMap<String, IJSONPortInstance>();
 	
-	public StateChangeMessage() {
-		super(TopicId.STATE_CHANGE);		
-	}
+	public StateChangeMessage() {	}
 	
 	public StateChangeMessage(String topic, String instanceId, String modelId,
 			String processInstanceId, String processModelId, State state,
 			Map<String, IJSONDataPortInstance> startDataPorts, Map<String, IJSONDataPortInstance> endDataPorts) {
-		super(topic);
 		this.instanceId = instanceId;
 		this.modelId = modelId;
 		this.processInstanceId = processInstanceId;

@@ -32,6 +32,7 @@ import eu.vicci.process.model.util.messages.core.IHumanTaskResponse;
 import eu.vicci.process.model.util.messages.core.IProcessEngineUpdate;
 import eu.vicci.process.model.util.messages.core.IProcessEngineUpdate.UpdateType;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
+import eu.vicci.process.model.util.messages.core.PeerMetrics;
 import eu.vicci.process.model.util.messages.core.ProcessEngineListener;
 import eu.vicci.process.model.util.messages.core.StateChangeListener;
 import eu.vicci.process.server.util.FeedbackServiceMonitor;
@@ -83,7 +84,7 @@ public class SuperPeer {
 	protected static final String DEFAULT_CONFIG_PATH = "server.conf";
 	
 	//also used for trying connect to feedback service
-	private static final int PUBLISH_STATUS_SECONDS = 4;
+	private static final int PUBLISH_STATUS_SECONDS = 3;
 
 	protected final PeerProfile peerProfile;
 
@@ -336,9 +337,7 @@ public class SuperPeer {
 		try {
 			feedbackServiceMonitor.requestingMonitoring(superPeerRequest);
 		} catch (RetryableException e) {
-			// TODO this exception is thrown if we cant connect to the fb service
-			// so retrying later would be an option
-			LOG.error("error while connecting feedback-service", e);
+			LOG.error("error while connecting feedback-service: {}", e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -399,9 +398,13 @@ public class SuperPeer {
 	}
 	
 	protected void publishPeerMetrics(){
-		//TODO publish metrics via wamp
+		PeerMetrics metrics = new PeerMetrics();
+		metrics.peerId = peerProfile.getPeerId();
+		metrics.hasBattery = Util.systemHasBattery();
+		metrics.batteryStatus = Util.getSystemBatteryStatus();
+		
 		if(serverClient != null)
-			serverClient.publish(TopicId.PEER_METRICS, ""); //TODO
+			serverClient.publish(TopicId.PEER_METRICS, metrics);
 	}
 	
 	protected void publishPeerStatus(){
