@@ -7,11 +7,12 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
+import org.apache.commons.lang3.SystemUtils;
+
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 
-public class Util {
-	
+public class Util {	
 	
 	/**
 	 * Tries to get the IP, with the Filter specified in the config.
@@ -31,6 +32,70 @@ public class Util {
 			e.printStackTrace(); //if no IP was found, the error is handled on an other point
 		}
 		return ip;
+	}
+	
+	/**
+	 * Tries to get the battery status. Returns null if no battery could be detected or the system not have any battery.
+	 * 
+	 * Tested on:
+	 * Win 10
+	 * @return
+	 */
+	public static Integer getSystemBatteryStatus(){
+		if(SystemUtils.IS_OS_WINDOWS)
+			return getWindowsBattery();
+		if (SystemUtils.IS_OS_UNIX)
+			return getUnixBattery();
+		if (SystemUtils.IS_OS_LINUX)
+			return getLinuxBattery();		
+		throw new RuntimeException("unsupported operating system");	
+	}
+	
+	/**
+	 * Checks if the given system has a battery.
+	 * @return
+	 */
+	public static boolean systemHasBattery(){
+		if(SystemUtils.IS_OS_WINDOWS)
+			return windowsHasBattery();
+		if (SystemUtils.IS_OS_LINUX)
+			return linuxHasBattery();	
+		if (SystemUtils.IS_OS_UNIX)
+			return unixHasBattery();	
+		throw new RuntimeException("unsupported operating system");	
+	}
+	
+	
+	private static boolean windowsHasBattery(){
+		Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
+		Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);	
+		return batteryStatus.hasBattery();		
+	}
+	
+	private static boolean linuxHasBattery(){
+		throw new UnsupportedOperationException("not implemented for current os");			
+	}
+	
+	private static boolean unixHasBattery(){
+		throw new UnsupportedOperationException("not implemented for current os");		
+	}
+	
+	private static Integer getWindowsBattery(){
+		Kernel32.SYSTEM_POWER_STATUS batteryStatus = new Kernel32.SYSTEM_POWER_STATUS();
+		Kernel32.INSTANCE.GetSystemPowerStatus(batteryStatus);	
+		System.out.println(batteryStatus);
+		
+		if(!batteryStatus.hasBattery())
+			return null;
+		return new Integer(batteryStatus.getBatteryLifePercentInt());
+	}
+	
+	private static Integer getLinuxBattery(){
+		throw new UnsupportedOperationException("not implemented for current os");		
+	}
+	
+	private static Integer getUnixBattery(){
+		throw new UnsupportedOperationException("not implemented for current os");			
 	}
 	
 	private static String loopIpAddresses(String filter) throws UnknownHostException, SocketException {

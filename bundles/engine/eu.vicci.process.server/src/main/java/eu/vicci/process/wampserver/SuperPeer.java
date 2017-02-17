@@ -3,6 +3,9 @@ package eu.vicci.process.wampserver;
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -76,7 +79,11 @@ import ws.wamp.jawampa.transport.netty.NettyWampConnectionConfig;
 import ws.wamp.jawampa.transport.netty.SimpleWampWebsocketListener;
 
 public class SuperPeer {
+	protected static final Logger LOG = LoggerFactory.getLogger(SuperPeer.class);
 	protected static final String DEFAULT_CONFIG_PATH = "server.conf";
+	
+	//also used for trying connect to feedback service
+	private static final int PUBLISH_STATUS_SECONDS = 4;
 
 	protected final PeerProfile peerProfile;
 
@@ -88,6 +95,7 @@ public class SuperPeer {
 	protected WampClient serverClient;
 	
 	private FeedbackServiceMonitor feedbackServiceMonitor;
+	private PeerStatusThread statusThread;
 
 	// private String serverName;
 
@@ -123,6 +131,7 @@ public class SuperPeer {
 	// }
 
 	public void stop() {
+		statusThread.stop();
 		processManager.removeStateChangeListener(stateChangeListener);
 		processManager.removeHumanTaskRequestListener(humanTaskRequestListener);
 		processManager.removeProcessEngineListener(processEngineListener);
@@ -140,6 +149,8 @@ public class SuperPeer {
 		startWampRouterAndClient(configReader);
 		operationsAfterConnection();
 		serverClient.open();
+		statusThread = new PeerStatusThread(PUBLISH_STATUS_SECONDS);
+		statusThread.start();
 	}
 
 	private void operationsAfterConnection() {
@@ -149,7 +160,7 @@ public class SuperPeer {
 			registerRpcHandlers(); // registered when client is opened and connected
 			subscripeToTopics(); // subscriped when client is opened and connected
 			registerPeer(); // register peer when client is opened and connected and this is only peer
-			requestingFeedbackMonitor();
+//			requestingFeedbackMonitor();
 		});
 	}
 
@@ -307,23 +318,27 @@ public class SuperPeer {
 		server.start();
 	}
 	
+	private SuperPeerRequest superPeerRequest;
+	
+	private void createSuperPeerRequest(){
+		superPeerRequest = new SuperPeerRequest();
+		superPeerRequest.profile = peerProfile;
+		superPeerRequest.port = configReader.getPort();
+		superPeerRequest.namespace = configReader.getNamespace();
+		superPeerRequest.realm = configReader.getRealmName();		
+	}
+	
 	private void requestingFeedbackMonitor(){
 		if(this instanceof Peer) return;
 		if(feedbackServiceMonitor == null) createFeedbackServiceMonitor();
-		
-		SuperPeerRequest request = new SuperPeerRequest();
-		request.profile = peerProfile;
-		request.port = configReader.getPort();
-		request.namespace = configReader.getNamespace();
-		request.realm = configReader.getRealmName();
+		if(superPeerRequest == null)createSuperPeerRequest();
 		
 		try {
-			feedbackServiceMonitor.requestingMonitoring(request);
+			feedbackServiceMonitor.requestingMonitoring(superPeerRequest);
 		} catch (RetryableException e) {
 			// TODO this exception is thrown if we cant connect to the fb service
 			// so retrying later would be an option
-			
-			e.printStackTrace();
+			LOG.error("error while connecting feedback-service", e);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -382,4 +397,49 @@ public class SuperPeer {
 			throw new RuntimeException("Cant find the ip of this host. Maybe check the ip filter in the config file.");
 		return ip;		
 	}
+	
+	protected void publishPeerMetrics(){
+		//TODO publish metrics via wamp
+		if(serverClient != null)
+			serverClient.publish(TopicId.PEER_METRICS, ""); //TODO
+	}
+	
+	protected void publishPeerStatus(){
+		requestingFeedbackMonitor();
+		publishPeerMetrics();
+	}
+	
+	private class PeerStatusThread implements Runnable {
+		private final int timeout;
+		private boolean terminate = false;
+		
+		private PeerStatusThread(int seconds){
+			timeout = 1000 * seconds;		
+		}
+		
+		private void start(){
+			Thread thread = new Thread(this);
+			thread.setName(PeerStatusThread.class.getSimpleName());
+			thread.setDaemon(true);
+			thread.start();		
+		}
+
+		@Override
+		public void run() {
+			while (!terminate) {
+				publishPeerStatus();
+				try {
+					Thread.sleep(timeout);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}		
+			}			
+		}
+		
+		private void stop(){
+			terminate = true;			
+		}	
+
+	}
+	
 }

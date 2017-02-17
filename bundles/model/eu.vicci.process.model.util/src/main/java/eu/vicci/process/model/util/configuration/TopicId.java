@@ -23,4 +23,9 @@ public final class TopicId {
 	 */
 	public static final String ENGINE_UPDATE = "http://vicci.eu/processes/engine/update";
 	
+	/**
+	 * Topic for receiving the peer metrics
+	 */
+	public static final String PEER_METRICS = "http://vicci.eu/processes/peer/metrics";
+	
 }

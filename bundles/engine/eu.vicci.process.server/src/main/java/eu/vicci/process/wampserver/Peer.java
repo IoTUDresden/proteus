@@ -51,5 +51,10 @@ public class Peer extends SuperPeer {
 	protected void startRouter(String port, String namespace, String realmName) throws ApplicationError {
 		//nothing to do. Router is on SuperPeer
 	}
+	
+	@Override
+	protected void publishPeerStatus() {
+		publishPeerMetrics();
+	}
 
 }
