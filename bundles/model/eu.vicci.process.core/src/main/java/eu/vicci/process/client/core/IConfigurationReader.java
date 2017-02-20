@@ -1,5 +1,7 @@
 package eu.vicci.process.client.core;
 
+import java.util.List;
+
 public interface IConfigurationReader {
 
 	/**
@@ -138,5 +140,11 @@ public interface IConfigurationReader {
 	 * @return
 	 */
 	String getIpFilter();
+	
+	/**
+	 * List devices, which are connected to the peer. 
+	 * @return
+	 */
+	List<String> getDevices();
 
 }

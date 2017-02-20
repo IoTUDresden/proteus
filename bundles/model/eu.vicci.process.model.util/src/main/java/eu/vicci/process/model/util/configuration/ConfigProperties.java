@@ -23,5 +23,7 @@ public class ConfigProperties {
 	public static final String FEEDBACK_SERVICE_URI = "feedbackServiceUri";
 	public static final String ELASTICSEARCH_HOST = "elasticsearchHost";
 	
+	public static final String DEVICES = "devices";
+	
 
 }

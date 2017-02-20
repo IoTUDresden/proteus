@@ -2,6 +2,7 @@ package eu.vicci.process.distribution.core;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
+import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -23,6 +24,9 @@ public class PeerProfile {
 	
 	@JsonProperty
 	private boolean isSuperPeer;
+	
+	@JsonProperty
+	private List<String> devices;
 
 	@JsonIgnore
 	public String getPeerId() {
@@ -64,6 +68,14 @@ public class PeerProfile {
 			throw new RuntimeException("cant create the client profile for the peer", e);
 		}
 		return profile;		
+	}
+
+	public List<String> getDevices() {
+		return devices;
+	}
+
+	public void setDevices(List<String> devices) {
+		this.devices = devices;
 	}
 
 }

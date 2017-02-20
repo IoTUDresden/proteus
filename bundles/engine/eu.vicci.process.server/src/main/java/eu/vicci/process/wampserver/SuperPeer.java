@@ -98,21 +98,14 @@ public class SuperPeer {
 	private FeedbackServiceMonitor feedbackServiceMonitor;
 	private PeerStatusThread statusThread;
 
-	// private String serverName;
-
 	public SuperPeer(IProcessManager processManager, IConfigurationReader configReader) {
 		if (configReader == null || processManager == null)
 			throw new IllegalArgumentException("args cant be null");
-		// serverName = configReader.getServerName();
 		this.configReader = configReader;
 		this.processManager = processManager;
 		this.processManager.addStateChangeListener(stateChangeListener);
 		this.processManager.addHumanTaskRequestListener(humanTaskRequestListener);
 		this.processManager.addProcessEngineListener(processEngineListener);
-		// this.processManager.addRemoteStepResponseListener(this);
-		// this.processManager.addPingRequestListener(this);
-		// this.processManager.addPingListener(this);
-		// this.processManager.addMetricsListener(this);
 		this.processManager.setClientBuilderFactory(clientBuilderFactory);
 		peerProfile = createPeerProfile();
 	}
@@ -123,13 +116,14 @@ public class SuperPeer {
 
 	protected PeerProfile createPeerProfile() {
 		PeerProfile profile = PeerProfile.create(true);
-		profile.setIp(getIpSafe());
+		addBaseInfosToPeerProfile(profile);
 		return profile;
 	}
-
-	// public String getServerName(){
-	// return serverName;
-	// }
+	
+	protected void addBaseInfosToPeerProfile(PeerProfile profile){
+		profile.setIp(getIpSafe());
+		profile.setDevices(configReader.getDevices());						
+	}
 
 	public void stop() {
 		statusThread.stop();
@@ -161,7 +155,6 @@ public class SuperPeer {
 			registerRpcHandlers(); // registered when client is opened and connected
 			subscripeToTopics(); // subscriped when client is opened and connected
 			registerPeer(); // register peer when client is opened and connected and this is only peer
-//			requestingFeedbackMonitor();
 		});
 	}
 
@@ -221,27 +214,6 @@ public class SuperPeer {
 		serverClient.publish(TopicId.ENGINE_UPDATE, update);
 	}
 
-	// @Override
-	// public void onRemoteStepResponse(IRemoteStepResponse remoteStepResponse)
-	// {
-	// //publish all RemoteStepResponses to subscribed clients
-	// remoteStepResponse.setClientName(serverName);
-	// remoteStepResponse.setClientId(getServerIdent());
-	// serverClient.publish(TopicId.REMOTE_STEP_RESP, remoteStepResponse);
-	// }
-	//
-	// @Override
-	// public void onPingRequest(IPingRequest pingRequestMessage) {
-	// PingResponse pr = new PingResponse();
-	// pr.setProcessInstanceId(pingRequestMessage.getProcessInstanceId());
-	// pr.setProcessName(pingRequestMessage.getProcessName());
-	// pr.setClientName(pingRequestMessage.getClientName());
-	// pr.setClientId(getServerIdent());
-	//
-	// System.out.println("Server: Received Ping, send response");
-	// serverClient.publish(TopicId.PING_RESPONSE, pr);
-	// }
-
 	private ClientBuilderFactory clientBuilderFactory = new ClientBuilderFactory() {
 		@Override
 		public AbstractClientBuilder createClientBuilder() {
@@ -249,33 +221,11 @@ public class SuperPeer {
 		}
 	};
 
-	// @Override
-	// public void onPing(IPingMessage message) {
-	// message.setClientId(getServerIdent());
-	// message.setClientName(getServerName());
-	// //TODO: Client Name is wichtig
-	// message.setProcessInstanceId("");
-	// message.setProcessName("");
-	// serverClient.publish(TopicId.PING, message);
-	// }
-
-	// @Override
-	// public void onMetric(IMetricsMessage metricsMessage) {
-	// metricsMessage.setClientId(getServerIdent());
-	// metricsMessage.setClientName(getServerName());
-	// //TODO: send usefull information
-	// serverClient.publish(TopicId.METRICS, metricsMessage);
-	// }
-
 	private void subscripeToTopics() {
 		// subscriptions goes here
 
 		serverClient.makeSubscription(TopicId.HUMAN_TASK_RESP)
 				.subscribe(new HumanTaskResponseSubscriber(humanTaskResponseListener));
-		// serverClient.makeSubscription(TopicId.REMOTE_STEP_RESP)
-		// .subscribe(new RemoteStepResponseSubscriber());
-		// serverClient.makeSubscription(TopicId.PING_REQUEST)
-		// .subscribe(new PingRequestSubscriber());
 	}
 
 	private void startWampRouterAndClient(IConfigurationReader configReader) throws ApplicationError {

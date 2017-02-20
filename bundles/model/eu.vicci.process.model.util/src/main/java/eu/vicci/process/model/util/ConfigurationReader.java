@@ -4,6 +4,9 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import eu.vicci.process.client.core.IConfigurationReader;
@@ -11,6 +14,7 @@ import eu.vicci.process.model.util.configuration.ConfigProperties;
 
 public class ConfigurationReader implements IConfigurationReader {
 	private static final String TRUE_STR = "true";
+	private static final String LIST_SEPARATOR = ",";
 	
 	private String ip;
 	private String port;
@@ -35,6 +39,7 @@ public class ConfigurationReader implements IConfigurationReader {
 	private String elasticsearchHost;	
 	
 	private String ipFilter;
+	private List<String> devices;
 	
 	public ConfigurationReader(String path) {
 		this.path = path;
@@ -138,6 +143,18 @@ public class ConfigurationReader implements IConfigurationReader {
 		elasticsearchHost = properties.getProperty(ConfigProperties.ELASTICSEARCH_HOST);
 		superPeerIp = properties.getProperty(ConfigProperties.SUPER_PEER_IP);
 		ipFilter = properties.getProperty(ConfigProperties.IP_FILTER);
+		devices = splitValue(properties.getProperty(ConfigProperties.DEVICES), LIST_SEPARATOR);
+	}
+	
+	private List<String> splitValue(String value, String separator){
+		List<String> tmp = new ArrayList<>();
+		if(value == null) return tmp;
+		String[] split = value.split(separator);
+		Arrays.asList(split).stream().forEach(v -> {
+			String out = v.trim();
+			tmp.add(out);
+		});
+		return tmp;
 	}
 
 	@Override
@@ -162,5 +179,10 @@ public class ConfigurationReader implements IConfigurationReader {
 
 	public String getSuperPeerIp() {
 		return superPeerIp;
+	}
+
+	@Override
+	public List<String> getDevices() {
+		return devices;
 	}	
 }

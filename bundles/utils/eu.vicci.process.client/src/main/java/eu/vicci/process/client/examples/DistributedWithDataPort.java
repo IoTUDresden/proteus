@@ -7,7 +7,7 @@ public class DistributedWithDataPort extends AbstractProcessRunner {
 	private static final String ID_DIST_1 = "_IjYsYNqFEeaDSKKLi9GpBA";
 	
 	//IP for the peer
-	private static final String IP_DIST_1 = "192.168.2.105";
+	private static final String IP_DIST_1 = "192.168.2.101";
 	
 	public static void main(String[] args) {
 		new DistributedWithDataPort().run();
