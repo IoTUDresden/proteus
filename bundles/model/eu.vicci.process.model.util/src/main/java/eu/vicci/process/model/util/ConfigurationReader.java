@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -150,10 +149,10 @@ public class ConfigurationReader implements IConfigurationReader {
 		List<String> tmp = new ArrayList<>();
 		if(value == null) return tmp;
 		String[] split = value.split(separator);
-		Arrays.asList(split).stream().forEach(v -> {
-			String out = v.trim();
-			tmp.add(out);
-		});
+		for (int i = 0; i < split.length; i++) {
+			String out = split[i].trim();
+			tmp.add(out);			
+		}
 		return tmp;
 	}
 
