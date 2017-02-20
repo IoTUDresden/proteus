@@ -73,11 +73,11 @@ public class Util {
 	}
 	
 	private static boolean linuxHasBattery(){
-		throw new UnsupportedOperationException("not implemented for current os");			
+		return new LinuxBattery().hasBattery();
 	}
 	
 	private static boolean unixHasBattery(){
-		throw new UnsupportedOperationException("not implemented for current os");		
+		return new LinuxBattery().hasBattery();
 	}
 	
 	private static Integer getWindowsBattery(){
@@ -90,11 +90,11 @@ public class Util {
 	}
 	
 	private static Integer getLinuxBattery(){
-		throw new UnsupportedOperationException("not implemented for current os");		
+		return new LinuxBattery().getBatteryLevel();
 	}
 	
 	private static Integer getUnixBattery(){
-		throw new UnsupportedOperationException("not implemented for current os");			
+		return new LinuxBattery().getBatteryLevel();
 	}
 	
 	private static String loopIpAddresses(String filter) throws UnknownHostException, SocketException {
