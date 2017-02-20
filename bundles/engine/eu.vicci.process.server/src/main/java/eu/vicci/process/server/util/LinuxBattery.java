@@ -53,7 +53,6 @@ public class LinuxBattery {
 	private String findFirstBat(){
 		File[] files = file.listFiles();
 		for (int i = 0; i < files.length; i++) {
-			System.out.println(files[i].getName());	
 			if(files[i].getName().startsWith(BAT_NAME))
 				return files[i].getName();
 		}
