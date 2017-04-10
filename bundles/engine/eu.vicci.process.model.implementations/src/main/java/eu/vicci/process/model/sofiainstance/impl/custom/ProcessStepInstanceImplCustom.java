@@ -5,12 +5,9 @@ import java.util.List;
 
 import akka.actor.ActorRef;
 import eu.vicci.process.actors.ActorAssignable;
-import eu.vicci.process.engine.core.IProcessManager;
-import eu.vicci.process.generator.ProcessGenerator;
 import eu.vicci.process.model.sofia.CompositeStep;
 import eu.vicci.process.model.sofia.EscalationPort;
 import eu.vicci.process.model.sofia.Port;
-import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofia.ProcessStep;
 import eu.vicci.process.model.sofiainstance.EndPortInstance;
 import eu.vicci.process.model.sofiainstance.EscalationPortInstance;
@@ -52,11 +49,6 @@ public class ProcessStepInstanceImplCustom extends ProcessStepInstanceImplCustom
 		startStateTimerIfNeeded();
 
 		work();
-		
-		if (this.isCyberPhysical()) {
-			executeMapeK();
-		}
-
 
 		if (allSubstepsHasFinishedExecution())
 			doingEndoperations();
@@ -266,32 +258,4 @@ public class ProcessStepInstanceImplCustom extends ProcessStepInstanceImplCustom
 		getPorts().stream().filter(port -> port instanceof StartPortInstance)
 				.forEach(port -> ((StartPortInstance) port).deactivateSubSteps());
 	}
-	
-	private void executeMapeK() {
-		System.out.println("Executing MAPE-K");
-		ProcessStep pm = this.getProcessStepType();
-		Process cp = pm.getControlProcess();
-		
-		IProcessManager pec = processManager;
-		
-		String controlId = null;
-		if (pm.getGoal()!=null && !pm.getGoal().isEmpty()) {
-			cp = ProcessGenerator.generateMapeKProcess(pm.getGoal(), this.getInstanceId(), this.getProcessStepType().getName());
-			controlId = pec.deployProcess(cp);
-
-		} else if (pm.getControlProcessId()!=null && !pm.getControlProcessId().isEmpty()) {
-			controlId = pm.getControlProcessId();		//Assuming engine knows this process already
-
-		} else if (pm.getControlProcess()!=null) {
-			controlId = pec.deployProcess(cp);
-		
-		} else if (pm.getEplQuery()!=null && !pm.getEplQuery().isEmpty()) {
-			//TODO generate process based on EPL statement
-		}
-					
-		String instId = pec.deployProcessInstance(controlId);
-		pec.startProcessInstance(instId, null);	
-
-		}
-
 }
