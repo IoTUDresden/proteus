@@ -1550,7 +1550,7 @@
     <fonts name="Arial" size="8"/>
     <fonts name="Arial" size="8" bold="true"/>
   </pi:Diagram>
-  <sofia:Process id="_YwH5cKGdEea1uIClBiD_zB" name="LightLoopWithInitialOn" goal="" eplQuery="" type="" description="" resource="">
+  <sofia:Process id="_YwH5cKGdEea1uIClBiD_zC" name="LightLoopWithInitialOn_WithoutLoadClass" goal="" eplQuery="" type="" description="" resource="">
     <ports xsi:type="sofia:StartControlPort" id="_PaL_4LcJEeacpJ-0PMMz4g" name="start_0">
       <outTransitions id="_Xap2YLcJEeacpJ-0PMMz4g" name="transition" targetPort="/1/@subSteps.1/@ports.0"/>
     </ports>
