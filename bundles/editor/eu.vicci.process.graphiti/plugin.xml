@@ -354,7 +354,7 @@
 	         filter="eu.vicci.process.graphiti.property.OpenHabSemanticCommandInvokeFilter"
 	         id="graphiti.main.tab.emfclass24">
 			</propertySection>
-			<propertySection
+			<!--<propertySection
                     class="eu.vicci.process.graphiti.property.CpsSection"
                     filter="eu.vicci.process.graphiti.property.ProcessStepFilter"
                     id="graphiti.main.tab.emfclass25"
@@ -365,7 +365,8 @@
                     filter="eu.vicci.process.graphiti.property.ProcessStepFilter"
                     id="graphiti.main.tab.emfclass26"
                     tab="graphiti.main.tab">
-			</propertySection>
+			</propertySection>-->			
+			
 			<propertySection
                     class="eu.vicci.process.graphiti.property.HumanTaskSection"
                     filter="eu.vicci.process.graphiti.property.HumanTaskFilter"
@@ -386,6 +387,13 @@
                     id="graphiti.main.tab.emfclass29"
                     tab="graphiti.main.tab">
 			</propertySection>   
+			
+			<propertySection
+                    class="eu.vicci.process.graphiti.property.FeedbackSection"
+                    filter="eu.vicci.process.graphiti.property.ProcessStepFilter"
+                    id="graphiti.main.tab.emfclass30"
+                    tab="graphiti.main.tab">
+			</propertySection>  
 
 		</propertySections>	    
 	</extension>	
