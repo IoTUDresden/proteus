@@ -17,9 +17,8 @@ public class FeedbackSection extends PropertySectionBase {
 	 * Position 0 is for no value on selection
 	 */	
 	private static final String[] templateNames = {"Custom", "LightValue-Template", "ProcessCompensation-Template"};	
-	private static final String[] compensationData = {"###lighttemplate", "###processcompensationtemplate"};
 	
-	private static final int GOAL_HEIGHT = 100;
+	private static final int GOAL_HEIGHT = 160;
 	private static final int TEMPLATE_WIDTH_PERCENTAGE = 40;
 	
 	private CCombo cTemplate;
@@ -89,5 +88,30 @@ public class FeedbackSection extends PropertySectionBase {
 	private void writeToModel(){
 		//TODO implement		
 	}
+	
+	private static final String tLight = ""
+		+ "{\n"
+		+ "	   \"name\":\"enough light for cooking2\",\n"
+		+ "	   \"objectives\":[\n"  
+		+ "	      {  \n"
+		+ "	         \"name\":\"kitchen light intensity > 700 lux within two seconds\",\n"
+		+ "	         \"satisfiedExpression\":\"#lightIntensity > 700\",\n"
+		+ "	         \"compensateExpression\":\"#objective.created.isBefore(#now.minusSeconds(5))\",\n"
+		+ "	         \"testNodeIdExpression\":\"#stateId\",\n"
+		+ "	         \"contextExpressions\":[  \n"
+		+ "	            \"MATCH (thing)-[:type]->(sensor {name: 'LightSensor'})\",\n"
+		+ "	            \"MATCH (thing)-[:isIn]->(room {name: 'Kitchen_Mueller'})\",\n"
+		+ "	            \"MATCH (thing)-[:hasState]->(state:LightIntensityState)\",\n"
+		+ "	            \"MATCH (state)-[:hasStateValue]->(value)\",\n"
+		+ "	            \"WHERE toFloat(value.realStateValue) > 0\",\n"
+		+ "	            \"RETURN avg(toFloat(value.realStateValue)) AS lightIntensity, head(collect(id(state))) AS stateId\"\n"
+		+ "	         ]\n"
+		+ "	      }\n"
+		+ "    ]\n"
+		+ "}";
+	
+	private static final String tProcess = "TODO";
+	
+	private static final String[] compensationData = {tLight, tProcess};
 
 }

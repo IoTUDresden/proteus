@@ -1,5 +1,6 @@
-package eu.vicci.process.client.examples;
+package eu.vicci.process.client.examples.distribution;
 
+import eu.vicci.process.client.examples.AbstractProcessRunner;
 import eu.vicci.process.model.sofia.Process;
 
 public class DistributedProcess extends AbstractProcessRunner {

@@ -42,6 +42,8 @@ public abstract class AbstractProcessRunner {
 		
 		try {
 			termination.await();
+			//wait 2 seconds till termination cause console is not so fast ;P
+			Thread.sleep(2000); 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

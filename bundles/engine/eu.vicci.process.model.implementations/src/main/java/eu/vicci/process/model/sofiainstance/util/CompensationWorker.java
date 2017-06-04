@@ -41,7 +41,7 @@ import eu.vicci.process.model.util.configuration.ConfigurationManager;
  */
 public class CompensationWorker implements Runnable {
     private static final Logger LOG = Logger.getLogger(Compensation.class);
-
+    
     public static final String GOAL = "Goal";
     public static final String CONTEXT_URI = "ContextUri";
     public static final String SERVICE_URI = "FeedbackServiceUri";
@@ -128,7 +128,7 @@ public class CompensationWorker implements Runnable {
     }
     
     private void addDefaultParameters(){
-    	addParameter("pid", instanceId);
+    	addParameter("piid", instanceId);
     }
     
     private void waitForEvent() {
