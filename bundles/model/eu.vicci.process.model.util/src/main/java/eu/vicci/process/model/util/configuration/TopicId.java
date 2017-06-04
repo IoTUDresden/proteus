@@ -28,4 +28,6 @@ public final class TopicId {
 	 */
 	public static final String PEER_METRICS = "http://vicci.eu/processes/peer/metrics";
 	
+	public static final String FEEDBACK_COMPENSATION = "http://vicci.eu/processes/feedback/compensation";
+	
 }

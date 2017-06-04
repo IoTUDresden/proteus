@@ -14,7 +14,6 @@ public class HumanTaskResponseSubscriber extends AbstractSubscriber<PubSubData, 
 
 	@Override
 	public void onNext(PubSubData t) {
-		HumanTaskResponse response = convertFromJson(t.arguments().get(0), HumanTaskResponse.class);
-		receiver.onMessage(response);		
+		receiver.onMessage(convertFromJson(t, HumanTaskResponse.class));		
 	}
 }

@@ -6,7 +6,9 @@ import static javax.ws.rs.core.UriBuilder.fromPath;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 import javax.ws.rs.client.Client;
@@ -26,13 +28,12 @@ import org.glassfish.jersey.media.sse.InboundEvent;
 import org.glassfish.jersey.media.sse.SseFeature;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import eu.vicci.process.model.sofiainstance.util.processstepclasses.Compensation;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
-
-//TODO add the instance id to the cypher query (best way should be as var + list with vars)
 
 /**
  * Add a {@link CompensationListener} to get the final state of the compensation.
@@ -63,12 +64,14 @@ public class CompensationWorker implements Runnable {
     private String workflowName;    
     private String contextUri;    
     private Collection<String> goals = new HashSet<>();
+    private Map<String, Object> parameters = new HashMap<>();
     private String instanceId;
 
 
 	@Override
 	public void run() {
 		checkSettings();
+		addDefaultParameters();
 		
     	waitForEvent = new CountDownLatch(1);
     	
@@ -109,6 +112,10 @@ public class CompensationWorker implements Runnable {
 		goals.add(goal);
 	}
 	
+	public void addParameter(String name, Object value){
+		parameters.put(name, value);
+	}
+	
 	public ExecutionFlags getExecutionFlags(){
 		return flags;
 	}
@@ -118,6 +125,10 @@ public class CompensationWorker implements Runnable {
         sseClient = ClientBuilder.newBuilder().register(SseFeature.class).build();
         serviceUri = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.FEEDBACK_SERVICE_URI);
         contextUri = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.CONTEXT_URI);
+    }
+    
+    private void addDefaultParameters(){
+    	addParameter("pid", instanceId);
     }
     
     private void waitForEvent() {
@@ -144,10 +155,13 @@ public class CompensationWorker implements Runnable {
     }
     
     private void createGoals() {
+    	JsonElement params = parser.toJsonTree(parameters);
+    	
         goals.stream()
                 .map(it -> parser.fromJson(it, JsonObject.class))
                 .forEach(it -> {
                     it.addProperty("workflow", fromPath(workflowUri).build().toString());
+                    it.add("parameters", params);
                     String goalUri = post("goals", it.toString())
                             .get("_links").getAsJsonObject()
                             .get("self").getAsJsonObject()

@@ -14,7 +14,7 @@ public class HumanTaskRequestSubscriber extends AbstractSubscriber<PubSubData, I
 
 	@Override
 	public void onNext(PubSubData t) {
-		IHumanTaskRequest request = convertFromJson(t.arguments().get(0), HumanTaskRequest.class);
+		IHumanTaskRequest request = convertFromJson(t, HumanTaskRequest.class);
 		receiver.onMessage(request);
 	}
 

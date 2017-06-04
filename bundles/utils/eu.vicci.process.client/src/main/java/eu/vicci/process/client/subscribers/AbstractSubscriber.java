@@ -67,6 +67,10 @@ public abstract class AbstractSubscriber<K extends PubSubData, S extends IWampMe
 		return null;
 	}
 	
+	protected <T> T convertFromJson(PubSubData data, Class<T> clazz){
+		return convertFromJson(data.arguments().get(0), clazz);
+	}
+	
 	protected <T> T convertFromJson(JsonNode json, TypeReference<T> reference){
 		try {
 			return mapper.readValue(json.toString(), reference);

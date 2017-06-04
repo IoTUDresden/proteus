@@ -14,7 +14,7 @@ public class StateChangeMessageSubscriber extends AbstractSubscriber<PubSubData,
 
 	@Override
 	public void onNext(PubSubData t) {
-		receiver.onMessage(convertFromJson(t.arguments().get(0), StateChangeMessage.class));		
+		receiver.onMessage(convertFromJson(t, StateChangeMessage.class));		
 	}
 
 }

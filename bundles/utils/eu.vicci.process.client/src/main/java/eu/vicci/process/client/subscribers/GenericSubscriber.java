@@ -14,7 +14,7 @@ public class GenericSubscriber<T extends IWampMessage> extends AbstractSubscribe
 
 	@Override
 	public void onNext(PubSubData arg0) {
-		receiver.onMessage(convertFromJson(arg0.arguments().get(0), paramClass));				
+		receiver.onMessage(convertFromJson(arg0, paramClass));				
 	}
 
 }

@@ -7,6 +7,7 @@ import eu.vicci.process.distribution.core.PeerProfile;
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.engine.core.ReplyState;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
+import eu.vicci.process.model.util.messages.core.FeedbackServiceListener;
 import eu.vicci.process.model.util.messages.core.IHumanTaskRequest;
 import eu.vicci.process.model.util.messages.core.IMessageReceiver;
 import eu.vicci.process.model.util.messages.core.IWampMessage;
@@ -28,6 +29,18 @@ public interface IProcessEngineClient extends IProcessManager {
 	 * @param listener
 	 */
 	void removeConnectionListener(ConnectionListener listener);
+	
+	/**
+	 * Adds a {@link FeedbackServiceListener} to receive updates for a feedback service (e.g. reexecution on an other peer)
+	 * @param request
+	 */
+	void addFeedbackServiceListener(FeedbackServiceListener listener);
+	
+	/**
+	 * Removes the {@link FeedbackServiceListener}
+	 * @param request
+	 */
+	void removeFeedbackServiceListener(FeedbackServiceListener listener);
 
 	/**
 	 * Connect to server

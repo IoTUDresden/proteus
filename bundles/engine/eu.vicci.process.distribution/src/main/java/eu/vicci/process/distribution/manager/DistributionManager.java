@@ -21,6 +21,8 @@ import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
+import eu.vicci.process.model.util.messages.core.CompensationRequest;
+import eu.vicci.process.model.util.messages.core.FeedbackServiceListener;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import eu.vicci.process.model.util.messages.core.StateChangeListener;
 
@@ -37,9 +39,17 @@ public class DistributionManager implements IDistributionManager {
 	private IProcessEngineClient pec;
 
 	private volatile Map<String, PeerProfile> registeredPeers = new HashMap<>();
+	
+	//tracked instances for each peer
 	private volatile Map<String, List<String>> trackedProcessInstances = new HashMap<String, List<String>>();
 	
 	private List<DistributionManagerListener> distributionListeners = new ArrayList<>();
+	
+	//runtime cache for remote processes (pid, p)
+	private Map<String, Process> remoteProcessesCache = new HashMap<>();
+	
+	//runtime cache for the input parameters
+	private Map<DistributedSession, Map<String, DataTypeInstance>> inputParametersCache = new HashMap<>();
 	
 	//only present on peers
 	private Optional<PeerProfile> peerProfile = Optional.empty();
@@ -62,16 +72,40 @@ public class DistributionManager implements IDistributionManager {
 			handleStateChange(arg);
 		}
 	};
+	
+	private FeedbackServiceListener feedbackServiceListener = new FeedbackServiceListener() {		
+		@Override
+		public void onMessage(CompensationRequest request) {
+			if(!checkArgs(request)){ 
+				LOG.error("CompensationRequest is missing required parameters");
+				return;
+			}
+			
+			DistributedSession session = new DistributedSession(request.oldInstanceId, request.oldPeerId);
+			Map<String, DataTypeInstance> inputParameters = inputParametersCache.remove(session);			
+			removeTrackedInstance(session);
+			Process process = remoteProcessesCache.get(request.processId);
+			if(process == null){
+				LOG.error("cant find remote process for id '{}'", request.processId);
+				return;
+			}
+			
+			executeRemoteProcess(request.newPeerId, process, inputParameters);
+		}
+	};
 
 	@Override
 	public DistributedSession executeRemoteProcess(String peerId, Process process, Map<String, DataTypeInstance> inputParameters) {
 		LOG.info("<<<<<<<<<<<<<<<<<<<<<< Start Remote >>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		
+		remoteProcessesCache.put(process.getId(), process);
+		
 		String pid = pec.deployProcessRemote(peerId, process);
 		String remoteProcessInstanceId = pec.deployProcessInstanceRemote(peerId, pid);
 		
-		DistributedSession session = new DistributedSession(remoteProcessInstanceId, peerId);		
+		DistributedSession session = new DistributedSession(remoteProcessInstanceId, peerId);
 		trackProcessInstance(session);
+		inputParametersCache.put(session, inputParameters);
 		
 		pec.startProcessInstanceRemote(peerId, remoteProcessInstanceId, inputParameters);
 		
@@ -141,6 +175,7 @@ public class DistributionManager implements IDistributionManager {
 
 		pec.connect();
 		pec.addStateChangeListener(stateChangeListener);
+		pec.addFeedbackServiceListener(feedbackServiceListener);
 
 		// TODO peer listener
 
@@ -266,6 +301,13 @@ public class DistributionManager implements IDistributionManager {
 			return false;
 		}
 		return true;
+	}
+	
+	private static boolean checkArgs(CompensationRequest request){
+		return request != null 
+				&& request.oldInstanceId != null 
+				&& !request.oldInstanceId.isEmpty();
+		//TODO complete
 	}
 
 }

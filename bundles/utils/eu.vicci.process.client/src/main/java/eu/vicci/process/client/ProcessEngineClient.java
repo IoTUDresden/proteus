@@ -52,6 +52,7 @@ import eu.vicci.process.client.handlers.StopInstanceHandler;
 import eu.vicci.process.client.handlers.UploadAndDeployHandler;
 import eu.vicci.process.client.handlers.UploadModelHandler;
 import eu.vicci.process.client.subscribers.EngineUpdateSubscriber;
+import eu.vicci.process.client.subscribers.FeedbackServiceSubscriber;
 import eu.vicci.process.client.subscribers.GenericSubscriber;
 import eu.vicci.process.client.subscribers.HumanTaskRequestSubscriber;
 import eu.vicci.process.client.subscribers.HumanTaskResponseSubscriber;
@@ -76,6 +77,8 @@ import eu.vicci.process.model.util.UploadModelRequest;
 import eu.vicci.process.model.util.Utility;
 import eu.vicci.process.model.util.configuration.RpcId;
 import eu.vicci.process.model.util.configuration.TopicId;
+import eu.vicci.process.model.util.messages.core.CompensationRequest;
+import eu.vicci.process.model.util.messages.core.FeedbackServiceListener;
 import eu.vicci.process.model.util.messages.core.HumanTaskRequestListener;
 import eu.vicci.process.model.util.messages.core.HumanTaskResponseListener;
 import eu.vicci.process.model.util.messages.core.IHumanTaskRequest;
@@ -129,6 +132,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	private List<HumanTaskRequestListener> humanTaskRequestListeners = new ArrayList<>();
 	private List<HumanTaskResponseListener> humanTaskResponseListeners = new ArrayList<>();
 	private List<ProcessEngineListener> processEngineListeners = new ArrayList<>();
+	private List<FeedbackServiceListener> feedbackServiceListeners = new ArrayList<>();
 
 	public static final String DEFAULT_REALM = "vicciRealm";
 	public static final String DEFAULT_NAMESPACE = "vicciWs";
@@ -202,6 +206,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		client.makeSubscription(TopicId.HUMAN_TASK_RESP)
 				.subscribe(new HumanTaskResponseSubscriber(humanTaskResponseListener));
 		client.makeSubscription(TopicId.ENGINE_UPDATE).subscribe(new EngineUpdateSubscriber(privateEngineListner));
+		client.makeSubscription(TopicId.FEEDBACK_COMPENSATION).subscribe(new FeedbackServiceSubscriber(feedbackServiceListener));		
 	}
 
 	private void registerRpcHandlers(final CountDownLatch waitTillConnected) {
@@ -429,6 +434,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	private String internalStartProcessInstance(String peerId, String processInstanceId, Map<String, DataTypeInstance> inputParameters,
 			boolean runInLoop) {
 		// TODO run in loop
+		if(runInLoop) logger.warn("running in loop not implemented yet");
 		
 		StartInstanceHandler sih = new StartInstanceHandler();
 		Map<String, IJSONTypeInstance> ports = new HashMap<String, IJSONTypeInstance>();
@@ -694,6 +700,16 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	public void removeHumanTaskResponseListener(HumanTaskResponseListener listener) {
 		humanTaskResponseListeners.remove(listener);
 	}
+	
+	@Override
+	public void addFeedbackServiceListener(FeedbackServiceListener listener) {
+		feedbackServiceListeners.add(listener);		
+	}
+
+	@Override
+	public void removeFeedbackServiceListener(FeedbackServiceListener listener) {
+		feedbackServiceListeners.remove(listener);		
+	}
 
 	private static String getProcessAsString(Process process, Map<?, ?> options) {
 		String text = "";
@@ -760,6 +776,12 @@ public class ProcessEngineClient implements IProcessEngineClient {
 			processEngineListeners.stream().forEach(l -> l.onProcessDeployed(processInfo));
 		}
 	};
+	
+	private FeedbackServiceListener feedbackServiceListener = new FeedbackServiceListener(){
+		public void onMessage(CompensationRequest compensationRequest) {
+			feedbackServiceListeners.forEach(l -> l.onMessage(compensationRequest));
+		};
+	};
 
 	@Override
 	public boolean isConnected() {
@@ -769,11 +791,5 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	private void printModel(String text) {
 		System.out.println("Text: \n" + text);
 	}
-
-
-
-
-
-
 
 }

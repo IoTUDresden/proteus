@@ -4,9 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 
-public class LinuxBattery {
-	//TODO linux bat func possible via terminal commands e.g. acpi
-	
+public class LinuxBattery {	
 	private static final String BAT_PATH = "/sys/class/power_supply";
 	private static final String BAT_NAME = "BAT";
 	private static final String BAT_CAP = "capacity";

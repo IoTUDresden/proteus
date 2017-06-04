@@ -13,7 +13,7 @@ public class PeerMetricSubscriber extends AbstractSubscriber<PubSubData, PeerMet
 
 	@Override
 	public void onNext(PubSubData arg0) {
-		receiver.onMessage(convertFromJson(arg0.arguments().get(0), PeerMetrics.class));		
+		receiver.onMessage(convertFromJson(arg0, PeerMetrics.class));		
 	}
 
 }
