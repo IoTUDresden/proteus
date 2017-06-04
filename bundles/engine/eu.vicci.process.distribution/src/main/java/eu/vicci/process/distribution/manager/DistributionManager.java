@@ -306,8 +306,11 @@ public class DistributionManager implements IDistributionManager {
 	private static boolean checkArgs(CompensationRequest request){
 		return request != null 
 				&& request.oldInstanceId != null 
-				&& !request.oldInstanceId.isEmpty();
-		//TODO complete
+				&& !request.oldInstanceId.isEmpty()
+				&& request.newPeerId != null
+				&& !request.newPeerId.isEmpty()
+				&& request.processId != null
+				&& !request.processId.isEmpty();
 	}
 
 }
