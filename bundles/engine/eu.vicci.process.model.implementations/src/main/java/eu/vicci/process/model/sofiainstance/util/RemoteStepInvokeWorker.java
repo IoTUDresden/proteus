@@ -1,14 +1,11 @@
 package eu.vicci.process.model.sofiainstance.util;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,9 +13,6 @@ import eu.vicci.process.distribution.core.DistributedSession;
 import eu.vicci.process.distribution.core.DistributionManagerListener;
 import eu.vicci.process.distribution.core.IDistributionManager;
 import eu.vicci.process.distribution.manager.DistributionManager;
-import eu.vicci.process.model.sofia.CompositeStep;
-import eu.vicci.process.model.sofia.DataType;
-import eu.vicci.process.model.sofia.EndPort;
 import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.StartDataPortInstance;
@@ -96,8 +90,7 @@ public class RemoteStepInvokeWorker {
 		StateBase oldState = processInstance.getCurrentState();
 		processInstance.setCurrentState(new WaitingState(processInstance));
 
-		Process remoteProcess = createRemoteProcess(process);
-		clearOutTransitions(remoteProcess);
+		Process remoteProcess = distributionManager.createRemoteProcess(process);
 		Map<String, DataTypeInstance> inputParameters = getInputParameters();
 
 		distributionManager.addDistributionManagerListener(listener);
@@ -141,38 +134,5 @@ public class RemoteStepInvokeWorker {
 			responseReceived.countDown();
 		}
 	};
-
-	private Process createRemoteProcess(Process original) {
-		Process remoteProcess = copy(original);
-
-		remoteProcess.setDistributed(false);
-		remoteProcess.setRemoteExecuting(true);
-		remoteProcess.setCyberPhysical(false);
-		remoteProcess.setGoal("");
-		return remoteProcess;
-	}
-
-	private Process copy(Process original) {
-		EList<DataType> dtDefs = ((Process)getRoot(original)).getDataTypeDefinitions();
-		
-		Copier copier = new Copier();
-		Process result = (Process) copier.copy(original);
-		Collection<DataType> types = copier.copyAll(dtDefs);
-		result.getDataTypeDefinitions().addAll(types);
-		copier.copyReferences();
-		return result;
-	}
-
-	private CompositeStep getRoot(CompositeStep step) {
-		if (step.getParentstep() == null)
-			return step;
-		return getRoot(step.getParentstep());
-	}
-
-	private void clearOutTransitions(Process remoteProcess) {
-		remoteProcess.getPorts().stream()
-		.filter(p -> p instanceof EndPort)
-		.forEach(p -> p.getOutTransitions().clear());
-	}
 
 }

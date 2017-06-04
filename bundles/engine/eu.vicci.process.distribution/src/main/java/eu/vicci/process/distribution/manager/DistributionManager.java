@@ -45,8 +45,7 @@ public class DistributionManager implements IDistributionManager {
 	
 	private List<DistributionManagerListener> distributionListeners = new ArrayList<>();
 	
-	//runtime cache for remote processes (pid, p)
-	private Map<String, Process> remoteProcessesCache = new HashMap<>();
+	private final RemoteProcessCache remoteProcessCache = new RemoteProcessCache();
 	
 	//runtime cache for the input parameters
 	private Map<DistributedSession, Map<String, DataTypeInstance>> inputParametersCache = new HashMap<>();
@@ -84,7 +83,8 @@ public class DistributionManager implements IDistributionManager {
 			DistributedSession session = new DistributedSession(request.oldInstanceId, request.oldPeerId);
 			Map<String, DataTypeInstance> inputParameters = inputParametersCache.remove(session);			
 			removeTrackedInstance(session);
-			Process process = remoteProcessesCache.get(request.processId);
+			Process process = remoteProcessCache.get(request.processId);
+			
 			if(process == null){
 				LOG.error("cant find remote process for id '{}'", request.processId);
 				return;
@@ -98,7 +98,7 @@ public class DistributionManager implements IDistributionManager {
 	public DistributedSession executeRemoteProcess(String peerId, Process process, Map<String, DataTypeInstance> inputParameters) {
 		LOG.info("<<<<<<<<<<<<<<<<<<<<<< Start Remote >>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		
-		remoteProcessesCache.put(process.getId(), process);
+		remoteProcessCache.put(process.getId(), process);
 		
 		String pid = pec.deployProcessRemote(peerId, process);
 		String remoteProcessInstanceId = pec.deployProcessInstanceRemote(peerId, pid);
@@ -135,6 +135,11 @@ public class DistributionManager implements IDistributionManager {
 	public DistributedSession workRemote(String ip, Process process, Map<String, DataTypeInstance> inputParameters) {
 		String peerId = getPeerIdForIp(ip);		
 		return executeRemoteProcess(peerId, process, inputParameters);
+	}
+	
+	@Override
+	public Process createRemoteProcess(Process original){
+		return remoteProcessCache.createRemoteProcess(original);
 	}
 	
 	private String getPeerIdForIp(String ip){
@@ -234,6 +239,7 @@ public class DistributionManager implements IDistributionManager {
 			return false;
 		}
 	}
+	
 
 	@Override
 	public void registerPeer(PeerProfile profile) {

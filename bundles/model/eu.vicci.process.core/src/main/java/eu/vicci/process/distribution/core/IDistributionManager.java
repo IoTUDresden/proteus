@@ -43,5 +43,12 @@ public interface IDistributionManager {
 	 * @return
 	 */
 	Map<String, PeerProfile> getRegisteredPeers();
+	
+	/**
+	 * Creates a new process copy or gets it from runtime cache.
+	 * @param original
+	 * @return copied process
+	 */
+	Process createRemoteProcess(Process original);
 
 }
