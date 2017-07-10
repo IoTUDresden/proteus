@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link eu.vicci.process.model.sofia.impl.ProcessStepImpl#getEplQuery <em>Epl Query</em>}</li>
  *   <li>{@link eu.vicci.process.model.sofia.impl.ProcessStepImpl#getControlProcessId <em>Control Process Id</em>}</li>
  *   <li>{@link eu.vicci.process.model.sofia.impl.ProcessStepImpl#getControlProcess <em>Control Process</em>}</li>
+ *   <li>{@link eu.vicci.process.model.sofia.impl.ProcessStepImpl#getContext <em>Context</em>}</li>
  *   <li>{@link eu.vicci.process.model.sofia.impl.ProcessStepImpl#getParentstep <em>Parentstep</em>}</li>
  *   <li>{@link eu.vicci.process.model.sofia.impl.ProcessStepImpl#getPorts <em>Ports</em>}</li>
  *   <li>{@link eu.vicci.process.model.sofia.impl.ProcessStepImpl#getType <em>Type</em>}</li>
@@ -158,6 +159,26 @@ public abstract class ProcessStepImpl extends IdentifiableImpl implements Proces
 	 * @ordered
 	 */
 	protected eu.vicci.process.model.sofia.Process controlProcess;
+
+	/**
+	 * The default value of the '{@link #getContext() <em>Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CONTEXT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContext() <em>Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContext()
+	 * @generated
+	 * @ordered
+	 */
+	protected String context = CONTEXT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getPorts() <em>Ports</em>}' containment reference list.
@@ -396,6 +417,27 @@ public abstract class ProcessStepImpl extends IdentifiableImpl implements Proces
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getContext() {
+		return context;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContext(String newContext) {
+		String oldContext = context;
+		context = newContext;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SofiaPackage.PROCESS_STEP__CONTEXT, oldContext, context));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public CompositeStep getParentstep() {
 		if (eContainerFeatureID() != SofiaPackage.PROCESS_STEP__PARENTSTEP) return null;
 		return (CompositeStep)eInternalContainer();
@@ -577,6 +619,8 @@ public abstract class ProcessStepImpl extends IdentifiableImpl implements Proces
 			case SofiaPackage.PROCESS_STEP__CONTROL_PROCESS:
 				if (resolve) return getControlProcess();
 				return basicGetControlProcess();
+			case SofiaPackage.PROCESS_STEP__CONTEXT:
+				return getContext();
 			case SofiaPackage.PROCESS_STEP__PARENTSTEP:
 				return getParentstep();
 			case SofiaPackage.PROCESS_STEP__PORTS:
@@ -617,6 +661,9 @@ public abstract class ProcessStepImpl extends IdentifiableImpl implements Proces
 				return;
 			case SofiaPackage.PROCESS_STEP__CONTROL_PROCESS:
 				setControlProcess((eu.vicci.process.model.sofia.Process)newValue);
+				return;
+			case SofiaPackage.PROCESS_STEP__CONTEXT:
+				setContext((String)newValue);
 				return;
 			case SofiaPackage.PROCESS_STEP__PARENTSTEP:
 				setParentstep((CompositeStep)newValue);
@@ -664,6 +711,9 @@ public abstract class ProcessStepImpl extends IdentifiableImpl implements Proces
 			case SofiaPackage.PROCESS_STEP__CONTROL_PROCESS:
 				setControlProcess((eu.vicci.process.model.sofia.Process)null);
 				return;
+			case SofiaPackage.PROCESS_STEP__CONTEXT:
+				setContext(CONTEXT_EDEFAULT);
+				return;
 			case SofiaPackage.PROCESS_STEP__PARENTSTEP:
 				setParentstep((CompositeStep)null);
 				return;
@@ -703,6 +753,8 @@ public abstract class ProcessStepImpl extends IdentifiableImpl implements Proces
 				return CONTROL_PROCESS_ID_EDEFAULT == null ? controlProcessId != null : !CONTROL_PROCESS_ID_EDEFAULT.equals(controlProcessId);
 			case SofiaPackage.PROCESS_STEP__CONTROL_PROCESS:
 				return controlProcess != null;
+			case SofiaPackage.PROCESS_STEP__CONTEXT:
+				return CONTEXT_EDEFAULT == null ? context != null : !CONTEXT_EDEFAULT.equals(context);
 			case SofiaPackage.PROCESS_STEP__PARENTSTEP:
 				return getParentstep() != null;
 			case SofiaPackage.PROCESS_STEP__PORTS:
@@ -737,6 +789,7 @@ public abstract class ProcessStepImpl extends IdentifiableImpl implements Proces
 				case SofiaPackage.PROCESS_STEP__EPL_QUERY: return SofiaPackage.CPS_STEP__EPL_QUERY;
 				case SofiaPackage.PROCESS_STEP__CONTROL_PROCESS_ID: return SofiaPackage.CPS_STEP__CONTROL_PROCESS_ID;
 				case SofiaPackage.PROCESS_STEP__CONTROL_PROCESS: return SofiaPackage.CPS_STEP__CONTROL_PROCESS;
+				case SofiaPackage.PROCESS_STEP__CONTEXT: return SofiaPackage.CPS_STEP__CONTEXT;
 				default: return -1;
 			}
 		}
@@ -763,6 +816,7 @@ public abstract class ProcessStepImpl extends IdentifiableImpl implements Proces
 				case SofiaPackage.CPS_STEP__EPL_QUERY: return SofiaPackage.PROCESS_STEP__EPL_QUERY;
 				case SofiaPackage.CPS_STEP__CONTROL_PROCESS_ID: return SofiaPackage.PROCESS_STEP__CONTROL_PROCESS_ID;
 				case SofiaPackage.CPS_STEP__CONTROL_PROCESS: return SofiaPackage.PROCESS_STEP__CONTROL_PROCESS;
+				case SofiaPackage.CPS_STEP__CONTEXT: return SofiaPackage.PROCESS_STEP__CONTEXT;
 				default: return -1;
 			}
 		}
@@ -789,6 +843,8 @@ public abstract class ProcessStepImpl extends IdentifiableImpl implements Proces
 		result.append(eplQuery);
 		result.append(", controlProcessId: ");
 		result.append(controlProcessId);
+		result.append(", context: ");
+		result.append(context);
 		result.append(", type: ");
 		result.append(type);
 		result.append(", description: ");

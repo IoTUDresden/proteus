@@ -213,13 +213,22 @@ public interface SofiaPackage extends EPackage {
 	int PROCESS_STEP__CONTROL_PROCESS = IDENTIFIABLE_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_STEP__CONTEXT = IDENTIFIABLE_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STEP__PARENTSTEP = IDENTIFIABLE_FEATURE_COUNT + 6;
+	int PROCESS_STEP__PARENTSTEP = IDENTIFIABLE_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Ports</b></em>' containment reference list.
@@ -228,7 +237,7 @@ public interface SofiaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STEP__PORTS = IDENTIFIABLE_FEATURE_COUNT + 7;
+	int PROCESS_STEP__PORTS = IDENTIFIABLE_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -237,7 +246,7 @@ public interface SofiaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STEP__TYPE = IDENTIFIABLE_FEATURE_COUNT + 8;
+	int PROCESS_STEP__TYPE = IDENTIFIABLE_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -246,7 +255,7 @@ public interface SofiaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STEP__DESCRIPTION = IDENTIFIABLE_FEATURE_COUNT + 9;
+	int PROCESS_STEP__DESCRIPTION = IDENTIFIABLE_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Resource</b></em>' attribute.
@@ -255,7 +264,7 @@ public interface SofiaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STEP__RESOURCE = IDENTIFIABLE_FEATURE_COUNT + 10;
+	int PROCESS_STEP__RESOURCE = IDENTIFIABLE_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Process Step</em>' class.
@@ -264,7 +273,7 @@ public interface SofiaPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_STEP_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 11;
+	int PROCESS_STEP_FEATURE_COUNT = IDENTIFIABLE_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofia.impl.AtomicStepImpl <em>Atomic Step</em>}' class.
@@ -338,6 +347,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int ATOMIC_STEP__CONTROL_PROCESS = PROCESS_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATOMIC_STEP__CONTEXT = PROCESS_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -465,6 +483,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int IF__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF__CONTEXT = ATOMIC_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -603,6 +630,15 @@ public interface SofiaPackage extends EPackage {
 	int OR__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OR__CONTEXT = ATOMIC_STEP__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -728,6 +764,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int INVOKE__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INVOKE__CONTEXT = ATOMIC_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -857,6 +902,15 @@ public interface SofiaPackage extends EPackage {
 	int EVENT__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__CONTEXT = ATOMIC_STEP__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -982,6 +1036,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_STEP__CONTROL_PROCESS = PROCESS_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_STEP__CONTEXT = PROCESS_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -1118,6 +1181,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int PROCESS__CONTROL_PROCESS = COMPOSITE_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS__CONTEXT = COMPOSITE_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -2187,6 +2259,15 @@ public interface SofiaPackage extends EPackage {
 	int LOOP__CONTROL_PROCESS = COMPOSITE_STEP__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP__CONTEXT = COMPOSITE_STEP__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2339,6 +2420,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int REPEAT_LOOP__CONTROL_PROCESS = LOOP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REPEAT_LOOP__CONTEXT = LOOP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -2495,6 +2585,15 @@ public interface SofiaPackage extends EPackage {
 	int WHILE_LOOP__CONTROL_PROCESS = LOOP__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHILE_LOOP__CONTEXT = LOOP__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2647,6 +2746,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int FOR_LOOP__CONTROL_PROCESS = LOOP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_LOOP__CONTEXT = LOOP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -2812,6 +2920,15 @@ public interface SofiaPackage extends EPackage {
 	int PROCESS_SLOT__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_SLOT__CONTEXT = ATOMIC_STEP__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2937,6 +3054,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int DATA_MAPPING_STEP__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_MAPPING_STEP__CONTEXT = ATOMIC_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -3495,6 +3621,15 @@ public interface SofiaPackage extends EPackage {
 	int TRIGGERED_EVENT__CONTROL_PROCESS = EVENT__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRIGGERED_EVENT__CONTEXT = EVENT__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3741,6 +3876,15 @@ public interface SofiaPackage extends EPackage {
 	int SOAP_INVOKE__CONTROL_PROCESS = INVOKE__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SOAP_INVOKE__CONTEXT = INVOKE__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3902,6 +4046,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int XMLRPC_INVOKE__CONTROL_PROCESS = INVOKE__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XMLRPC_INVOKE__CONTEXT = INVOKE__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -4067,6 +4220,15 @@ public interface SofiaPackage extends EPackage {
 	int LOAD_CLASS_STEP__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOAD_CLASS_STEP__CONTEXT = ATOMIC_STEP__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4201,6 +4363,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int SE_MI_WA_INVOKE__CONTROL_PROCESS = INVOKE__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SE_MI_WA_INVOKE__CONTEXT = INVOKE__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -4348,6 +4519,15 @@ public interface SofiaPackage extends EPackage {
 	int REST_INVOKE__CONTROL_PROCESS = INVOKE__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REST_INVOKE__CONTEXT = INVOKE__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4491,6 +4671,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int OS_GI_INVOKE__CONTROL_PROCESS = INVOKE__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OS_GI_INVOKE__CONTEXT = INVOKE__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -4654,6 +4843,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int SE_MI_WA_REQUEST__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SE_MI_WA_REQUEST__CONTEXT = ATOMIC_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -4847,6 +5045,15 @@ public interface SofiaPackage extends EPackage {
 	int DATA_DUPLICATION_STEP__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_DUPLICATION_STEP__CONTEXT = ATOMIC_STEP__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4972,6 +5179,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int ROS_INVOKE__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROS_INVOKE__CONTEXT = ATOMIC_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -5117,6 +5333,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int AND__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AND__CONTEXT = ATOMIC_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -5465,6 +5690,15 @@ public interface SofiaPackage extends EPackage {
 	int PUBLISH_MESSAGE__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PUBLISH_MESSAGE__CONTEXT = ATOMIC_STEP__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5610,6 +5844,15 @@ public interface SofiaPackage extends EPackage {
 	int PUBLISH_ROS_MESSAGE__CONTROL_PROCESS = PUBLISH_MESSAGE__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PUBLISH_ROS_MESSAGE__CONTEXT = PUBLISH_MESSAGE__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5753,6 +5996,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int HUMAN_TASK__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HUMAN_TASK__CONTEXT = ATOMIC_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -6028,6 +6280,15 @@ public interface SofiaPackage extends EPackage {
 	int OPEN_HAB_SEMANTIC_INVOKE__CONTROL_PROCESS = INVOKE__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPEN_HAB_SEMANTIC_INVOKE__CONTEXT = INVOKE__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6180,6 +6441,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPEN_HAB_SEMANTIC_SELECT_INVOKE__CONTROL_PROCESS = OPEN_HAB_SEMANTIC_INVOKE__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPEN_HAB_SEMANTIC_SELECT_INVOKE__CONTEXT = OPEN_HAB_SEMANTIC_INVOKE__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -6336,6 +6606,15 @@ public interface SofiaPackage extends EPackage {
 	int OPEN_HAB_SEMANTIC_ASK_INVOKE__CONTROL_PROCESS = OPEN_HAB_SEMANTIC_INVOKE__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPEN_HAB_SEMANTIC_ASK_INVOKE__CONTEXT = OPEN_HAB_SEMANTIC_INVOKE__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6490,6 +6769,15 @@ public interface SofiaPackage extends EPackage {
 	int OPEN_HAB_SEMANTIC_COMMAND_INVOKE__CONTROL_PROCESS = OPEN_HAB_SEMANTIC_INVOKE__CONTROL_PROCESS;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPEN_HAB_SEMANTIC_COMMAND_INVOKE__CONTEXT = OPEN_HAB_SEMANTIC_INVOKE__CONTEXT;
+
+	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6635,13 +6923,22 @@ public interface SofiaPackage extends EPackage {
 	int CPS_STEP__CONTROL_PROCESS = 4;
 
 	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CPS_STEP__CONTEXT = 5;
+
+	/**
 	 * The number of structural features of the '<em>Cps Step</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CPS_STEP_FEATURE_COUNT = 5;
+	int CPS_STEP_FEATURE_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofia.impl.MapeKImpl <em>Mape K</em>}' class.
@@ -6715,6 +7012,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPE_K__CONTROL_PROCESS = ATOMIC_STEP__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPE_K__CONTEXT = ATOMIC_STEP__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -6842,6 +7148,15 @@ public interface SofiaPackage extends EPackage {
 	 * @ordered
 	 */
 	int GOAL_INVOKE__CONTROL_PROCESS = INVOKE__CONTROL_PROCESS;
+
+	/**
+	 * The feature id for the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GOAL_INVOKE__CONTEXT = INVOKE__CONTEXT;
 
 	/**
 	 * The feature id for the '<em><b>Parentstep</b></em>' container reference.
@@ -8445,6 +8760,17 @@ public interface SofiaPackage extends EPackage {
 	EReference getCpsStep_ControlProcess();
 
 	/**
+	 * Returns the meta object for the attribute '{@link eu.vicci.process.model.sofia.CpsStep#getContext <em>Context</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Context</em>'.
+	 * @see eu.vicci.process.model.sofia.CpsStep#getContext()
+	 * @see #getCpsStep()
+	 * @generated
+	 */
+	EAttribute getCpsStep_Context();
+
+	/**
 	 * Returns the meta object for class '{@link eu.vicci.process.model.sofia.MapeK <em>Mape K</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9804,6 +10130,14 @@ public interface SofiaPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CPS_STEP__CONTROL_PROCESS = eINSTANCE.getCpsStep_ControlProcess();
+
+		/**
+		 * The meta object literal for the '<em><b>Context</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CPS_STEP__CONTEXT = eINSTANCE.getCpsStep_Context();
 
 		/**
 		 * The meta object literal for the '{@link eu.vicci.process.model.sofia.impl.MapeKImpl <em>Mape K</em>}' class.

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sofia:Process xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sofia="http://vicci.eu/sofia/1.0" id="_Lqo0gElPEeelBtkG3Ey9fQ" name="FailingProcess">
+  <ports xsi:type="sofia:StartDataPort" id="_Zw2hQElPEeelBtkG3Ey9fQ" name="start_0" value="true" portDatatype="//@dataTypeDefinitions.0">
+    <outTransitions id="_hcJZAElPEeelBtkG3Ey9fQ" name="transition" targetPort="//@subSteps.0/@ports.0"/>
+  </ports>
+  <subSteps xsi:type="sofia:Process" id="_T49g0ElPEeelBtkG3Ey9fQ" name="Process" goal="" context="http://localhost:9000/context/1450" type="" description="" resource="" executionPeer="192.168.2.101">
+    <ports xsi:type="sofia:StartDataPort" id="_aIXCUElPEeelBtkG3Ey9fQ" name="start_0" inTransitions="//@ports.0/@outTransitions.0" value="" portDatatype="//@dataTypeDefinitions.0">
+      <outTransitions id="_h6Mm8ElPEeelBtkG3Ey9fQ" name="transition" targetPort="//@subSteps.0/@subSteps.0/@ports.0"/>
+    </ports>
+    <subSteps xsi:type="sofia:LoadClassStep" id="_XhuXQElPEeelBtkG3Ey9fQ" name="LoadClassStep" delegateClassName="eu.vicci.process.model.sofiainstance.util.processstepclasses.FailingStep">
+      <ports xsi:type="sofia:StartDataPort" id="_asXHQElPEeelBtkG3Ey9fQ" name="start_0" inTransitions="//@subSteps.0/@ports.0/@outTransitions.0" value="" portDatatype="//@dataTypeDefinitions.0"/>
+    </subSteps>
+  </subSteps>
+  <dataTypeDefinitions xsi:type="sofia:BooleanType" name="Should_I_Crash" id="_bbSp0ElPEeelBtkG3Ey9fQ" portMembers="//@ports.0 //@subSteps.0/@ports.0 //@subSteps.0/@subSteps.0/@ports.0"/>
+</sofia:Process>

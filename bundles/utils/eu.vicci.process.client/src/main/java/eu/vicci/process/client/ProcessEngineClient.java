@@ -165,8 +165,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		Map<String, Object> m = reg.getExtensionToFactoryMap();
 		m.put("diagram", new XMIResourceFactoryImpl());
 		m.put("sofia", new XMIResourceFactoryImpl());
-		m.put("sofiainstance", new XMIResourceFactoryImpl());
-		
+		m.put("sofiainstance", new XMIResourceFactoryImpl());		
 	}
 
 	/**

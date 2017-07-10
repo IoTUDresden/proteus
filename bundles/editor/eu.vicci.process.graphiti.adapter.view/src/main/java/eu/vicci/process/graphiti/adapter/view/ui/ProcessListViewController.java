@@ -123,8 +123,7 @@ public class ProcessListViewController {
 		try {
 			Thread.sleep(2000); // give time to deploy instance
 		} catch (Exception e) {
-		}
-		
+		}	
 		
 		ProcessInstance instance = client.getProcessInstanceInfos(instanceId);
 		List<DataTypeInstance> dataTypeInstances = getDataTypeInstances(instance);

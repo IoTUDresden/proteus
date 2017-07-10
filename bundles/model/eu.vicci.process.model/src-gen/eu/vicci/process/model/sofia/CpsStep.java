@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link eu.vicci.process.model.sofia.CpsStep#getEplQuery <em>Epl Query</em>}</li>
  *   <li>{@link eu.vicci.process.model.sofia.CpsStep#getControlProcessId <em>Control Process Id</em>}</li>
  *   <li>{@link eu.vicci.process.model.sofia.CpsStep#getControlProcess <em>Control Process</em>}</li>
+ *   <li>{@link eu.vicci.process.model.sofia.CpsStep#getContext <em>Context</em>}</li>
  * </ul>
  *
  * @see eu.vicci.process.model.sofia.SofiaPackage#getCpsStep()
@@ -154,5 +155,31 @@ public interface CpsStep extends EObject {
 	 * @generated
 	 */
 	void setControlProcess(eu.vicci.process.model.sofia.Process value);
+
+	/**
+	 * Returns the value of the '<em><b>Context</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Context</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Context</em>' attribute.
+	 * @see #setContext(String)
+	 * @see eu.vicci.process.model.sofia.SofiaPackage#getCpsStep_Context()
+	 * @model
+	 * @generated
+	 */
+	String getContext();
+
+	/**
+	 * Sets the value of the '{@link eu.vicci.process.model.sofia.CpsStep#getContext <em>Context</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Context</em>' attribute.
+	 * @see #getContext()
+	 * @generated
+	 */
+	void setContext(String value);
 
 } // CpsStep

@@ -129,7 +129,7 @@ public class RemoteStepInvokeWorker {
 		@Override
 		public void processOnPeerHasFinished(IStateChangeMessage message, DistributedSession session) {
 			if (!remoteSession.equals(session))
-				return;
+				return;			
 			finalMessage = message;
 			responseReceived.countDown();
 		}

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import eu.vicci.process.client.ProcessEngineClientBuilder;
 import eu.vicci.process.client.core.AbstractClientBuilder;
+import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.client.core.IProcessEngineClient;
 import eu.vicci.process.distribution.core.DistributedSession;
 import eu.vicci.process.distribution.core.DistributionManagerListener;
@@ -19,6 +20,7 @@ import eu.vicci.process.distribution.core.PeerProfile;
 import eu.vicci.process.distribution.core.RemoteListener;
 import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
+import eu.vicci.process.model.util.ConfigurationReader;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.model.util.messages.core.CompensationRequest;
@@ -58,7 +60,7 @@ public class DistributionManager implements IDistributionManager {
 	}
 	
 	private static class LazyDistributionManagerHolder {
-		private static final DistributionManager INSTANCE = new DistributionManager();
+		static final DistributionManager INSTANCE = new DistributionManager();
    }
 	
 	public static DistributionManager getInstance(){
@@ -171,6 +173,12 @@ public class DistributionManager implements IDistributionManager {
 	 */
 	private IProcessEngineClient createSuperPeerClient() {
 		AbstractClientBuilder builder = new ProcessEngineClientBuilder();
+		
+		//TODO this is a workaround. prefs are not set, if we run this plugin in the editor
+		//this plugin should actually not be used in editor
+		//FIXME workaround wont work
+		updateConfigIfNeeded();
+		
 		IProcessEngineClient pec = builder.withIp("localhost")
 				.withPort(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PORT))
 				.withName(CLIENT_NAME)
@@ -194,6 +202,14 @@ public class DistributionManager implements IDistributionManager {
 		// pec.subscribeTo(TopicId.PING, MessageType.PING, this);
 		// pec.subscribeTo(TopicId.METRICS, MessageType.METRICS, this);
 		return pec;
+	}
+
+	private void updateConfigIfNeeded() {
+		if(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PORT) != null)
+			return;
+		IConfigurationReader configReader = new ConfigurationReader("server.conf");
+		ConfigurationManager.getInstance().updateFromConfigReader(configReader);
+		
 	}
 
 	// FIXME StateChanges are not correct, e.g. the instance id in the state change must not be the same as on the superpeer, 

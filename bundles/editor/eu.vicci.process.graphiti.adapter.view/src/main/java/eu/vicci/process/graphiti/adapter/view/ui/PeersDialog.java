@@ -23,6 +23,8 @@ import eu.vicci.process.distribution.core.PeerProfile;
 public class PeersDialog extends Dialog {
 	private final IProcessEngineClient client;
 	private TableViewer tableViewer;
+	
+	private Composite dialogComposite;
 
 	protected PeersDialog(Shell parentShell, IProcessEngineClient client) {
 		super(parentShell);
@@ -32,13 +34,15 @@ public class PeersDialog extends Dialog {
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite container = (Composite) super.createDialogArea(parent);
+		dialogComposite = parent.getParent();
+		
 		boolean viewEnabled = client != null && client.isConnected();
 		
-		tableViewer = new TableViewer(container, SWT.BORDER | SWT.FULL_SELECTION);
+		tableViewer = new TableViewer(container, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.BORDER);
 		tableViewer.getTable().setEnabled(viewEnabled);
 		tableViewer.setContentProvider(ArrayContentProvider.getInstance());
 		tableViewer.getTable().setHeaderVisible(true);
-
+		
 		createColumns();
 		
 		if(viewEnabled)
@@ -102,11 +106,13 @@ public class PeersDialog extends Dialog {
 		loadingPeers.schedule();
 	}
 	
+	
+	
 	private void updateUI(final List<PeerProfile> peers){
 		tableViewer.getTable().getDisplay().asyncExec(() -> {
 			tableViewer.setInput(peers);
 			tableViewer.refresh();
-			tableViewer.getTable().pack();
+			dialogComposite.pack();
 		});		
 	}
 

@@ -1889,6 +1889,15 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getCpsStep_Context() {
+		return (EAttribute)cpsStepEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getMapeK() {
 		return mapeKEClass;
 	}
@@ -2202,6 +2211,7 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 		createEAttribute(cpsStepEClass, CPS_STEP__EPL_QUERY);
 		createEAttribute(cpsStepEClass, CPS_STEP__CONTROL_PROCESS_ID);
 		createEReference(cpsStepEClass, CPS_STEP__CONTROL_PROCESS);
+		createEAttribute(cpsStepEClass, CPS_STEP__CONTEXT);
 
 		mapeKEClass = createEClass(MAPE_K);
 
@@ -2515,6 +2525,7 @@ public class SofiaPackageImpl extends EPackageImpl implements SofiaPackage {
 		initEAttribute(getCpsStep_EplQuery(), ecorePackage.getEString(), "eplQuery", null, 0, 1, CpsStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getCpsStep_ControlProcessId(), ecorePackage.getEString(), "controlProcessId", null, 0, 1, CpsStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCpsStep_ControlProcess(), this.getProcess(), null, "controlProcess", null, 0, 1, CpsStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCpsStep_Context(), ecorePackage.getEString(), "context", null, 0, 1, CpsStep.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mapeKEClass, MapeK.class, "MapeK", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
