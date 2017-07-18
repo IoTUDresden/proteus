@@ -10,7 +10,7 @@ public class FailingProcess extends AbstractProcessRunner {
 	private final String IP_DIST_1 = "192.168.2.101";
 	
 	//change this to true, if you want to distribute the process
-	private final boolean DISTRIBUTED = false;
+	private final boolean DISTRIBUTED = true;
 
 	public static void main(String[] args) {
 		new FailingProcess().run();		

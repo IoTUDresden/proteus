@@ -273,11 +273,11 @@
     <fonts name="Arial" size="8" bold="true"/>
     <fonts name="Arial" size="8"/>
   </pictograms:Diagram>
-  <sofia:Process id="_Lqo0gElPEeelBtkG3Ey9fQ" name="FailingProcess">
+  <sofia:Process id="_Lqo0gElPEeelBtkG3Ey9fQ" name="FailingProcess" goal="" context="">
     <ports xsi:type="sofia:StartDataPort" id="_Zw2hQElPEeelBtkG3Ey9fQ" name="start_0" value="true" portDatatype="/1/@dataTypeDefinitions.0">
       <outTransitions id="_hcJZAElPEeelBtkG3Ey9fQ" name="transition" targetPort="/1/@subSteps.0/@ports.0"/>
     </ports>
-    <subSteps xsi:type="sofia:Process" id="_T49g0ElPEeelBtkG3Ey9fQ" name="Process" goal="" context="http://localhost:9000/context/1450" type="" description="" resource="" executionPeer="192.168.2.101">
+    <subSteps xsi:type="sofia:Process" id="_T49g0ElPEeelBtkG3Ey9fQ" name="Process" goal="{&#xD;&#xA;&#x9;   &quot;name&quot;:&quot;process executed&quot;,&#xD;&#xA;&#x9;   &quot;objectives&quot;:[&#xD;&#xA;&#x9;      {  &#xD;&#xA;&#x9;         &quot;name&quot;:&quot;process executed within 5 seconds&quot;,&#xD;&#xA;&#x9;         &quot;satisfiedExpression&quot;:&quot;#state == 'executed'&quot;,&#xD;&#xA;&#x9;         &quot;compensateExpression&quot;:&quot;#objective.created.isBefore(#now.minusSeconds(5))&quot;,&#xD;&#xA;&#x9;         &quot;testNodeIdExpression&quot;: 0,&#xD;&#xA;&#x9;         &quot;contextExpressions&quot;:[  &#xD;&#xA;             &#x9;&#x9;&quot;OPTIONAL MATCH (n:NeoProcess {processId:{piid}})&quot;,&#xD;&#xA;&#x9;&#x9;&#x9;&quot;RETURN&quot;,   &#xD;&#xA;&#x9;&#x9;&#x9;&quot; CASE WHEN n IS NOT NULL THEN n.state ELSE 'unknown' END&quot;,&#xD;&#xA;&#x9;&#x9;&#x9;&quot; AS state&quot;&#xD;&#xA;&#x9;         ]&#xD;&#xA;&#x9;      }&#xD;&#xA;    ]&#xD;&#xA;}" context="http://localhost:9000/context/1450" type="" description="" resource="" executionPeer="192.168.2.101" distributed="true">
       <ports xsi:type="sofia:StartDataPort" id="_aIXCUElPEeelBtkG3Ey9fQ" name="start_0" inTransitions="/1/@ports.0/@outTransitions.0" value="" portDatatype="/1/@dataTypeDefinitions.0">
         <outTransitions id="_h6Mm8ElPEeelBtkG3Ey9fQ" name="transition" targetPort="/1/@subSteps.0/@subSteps.0/@ports.0"/>
       </ports>

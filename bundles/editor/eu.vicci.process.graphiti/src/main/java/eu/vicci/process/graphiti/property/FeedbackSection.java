@@ -70,6 +70,12 @@ public class FeedbackSection extends PropertySectionBase {
 	
 	private void createGoal(Composite parent){
 		cGoal = getWidgetFactory().createText(parent, "", SWT.MULTI | SWT.V_SCROLL | SWT.WRAP);
+		cGoal.addModifyListener(new ModifyListener() {			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				writeToModel();				
+			}
+		});
 
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, STANDARD_LABEL_WIDTH);
@@ -198,7 +204,7 @@ public class FeedbackSection extends PropertySectionBase {
 			+ "	         \"compensateExpression\":\"#objective.created.isBefore(#now.minusSeconds(5))\",\n"
 			+ "	         \"testNodeIdExpression\":\"#state\",\n"
 			+ "	         \"contextExpressions\":[  \n"
-			+ "             \"MATCH (n:NeoProcess {processId:'$piid'})\"\n"
+			+ "             \"MATCH (n:NeoProcess {processId:'$piid'})\",\n"
 			+ "             \"RETURN n.state AS state\"\n"
 			+ "	         ]\n"
 			+ "	      }\n"

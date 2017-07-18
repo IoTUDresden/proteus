@@ -88,7 +88,7 @@ public class RemoteStepInvokeWorker {
 			throw new RuntimeException("no remote peer defined in process");
 
 		StateBase oldState = processInstance.getCurrentState();
-		processInstance.setCurrentState(new WaitingState(processInstance));
+//		processInstance.setCurrentState(new WaitingState(processInstance));
 
 		Process remoteProcess = distributionManager.createRemoteProcess(process);
 		Map<String, DataTypeInstance> inputParameters = getInputParameters();
@@ -106,7 +106,7 @@ public class RemoteStepInvokeWorker {
 		LOGGER.debug("---- Remote Execution Returned");
 
 		distributionManager.removeDistributionManagerListener(listener);
-		processInstance.setCurrentState(oldState);
+//		processInstance.setCurrentState(oldState);
 
 		// createDataTypeInstancesFromResponse();
 	}

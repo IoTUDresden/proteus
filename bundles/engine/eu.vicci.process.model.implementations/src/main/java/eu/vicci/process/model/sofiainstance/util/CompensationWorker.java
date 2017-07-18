@@ -70,12 +70,12 @@ public class CompensationWorker implements Runnable {
 
 	@Override
 	public void run() {
-		checkSettings();
 		addDefaultParameters();
 		
     	waitForEvent = new CountDownLatch(1);
     	
         prepare();
+		checkSettings();
         LOG.info("Start compensating feedback loop");
 
         createWorkflow();

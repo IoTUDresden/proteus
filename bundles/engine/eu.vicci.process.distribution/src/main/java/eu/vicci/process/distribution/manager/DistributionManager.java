@@ -248,8 +248,8 @@ public class DistributionManager implements IDistributionManager {
 	private boolean processHasFinished(IStateChangeMessage message) {
 		switch (message.getState()) {
 		case EXECUTED:
-		case DEACTIVATED:
-		case FAILED:
+//		case DEACTIVATED:
+//		case FAILED:
 			return true;
 		default:
 			return false;
