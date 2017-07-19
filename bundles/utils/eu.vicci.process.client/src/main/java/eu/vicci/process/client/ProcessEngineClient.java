@@ -288,6 +288,11 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		publish(TopicId.HUMAN_TASK_REQ, payload);
 	}
 	
+	@Override
+	public void publishCompensationRequest(CompensationRequest request) {
+		publish(TopicId.FEEDBACK_COMPENSATION, request);		
+	}
+	
 	/**
 	 * Upload a process model document (either *.sofia or *.diagram)
 	 * 

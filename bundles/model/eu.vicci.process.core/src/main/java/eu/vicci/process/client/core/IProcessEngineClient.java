@@ -7,6 +7,7 @@ import eu.vicci.process.distribution.core.PeerProfile;
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.engine.core.ReplyState;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
+import eu.vicci.process.model.util.messages.core.CompensationRequest;
 import eu.vicci.process.model.util.messages.core.FeedbackServiceListener;
 import eu.vicci.process.model.util.messages.core.IHumanTaskRequest;
 import eu.vicci.process.model.util.messages.core.IMessageReceiver;
@@ -84,6 +85,12 @@ public interface IProcessEngineClient extends IProcessManager {
 	void publish(String topic, Object payload);
 
 	void publishHumanTask(IHumanTaskRequest payload);
+	
+	/**
+	 * Publish a {@link CompensationRequest}. Forces the engine to re-execute a process on an other peer.
+	 * @param request
+	 */
+	void publishCompensationRequest(CompensationRequest request);
 	
 	/**
 	 * Deploys the process on a peer with the given id. Same as
