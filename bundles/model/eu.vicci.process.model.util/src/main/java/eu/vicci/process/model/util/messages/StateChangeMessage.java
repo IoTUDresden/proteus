@@ -22,6 +22,7 @@ public class StateChangeMessage extends WampMessage implements IStateChangeMessa
 	private String processId;
 	private String processName;
 	private State state;
+	private String originalProcessInstanceId;
 	
 	//Map of PortID and DataInstance
 	@JsonDeserialize(as=HashMap.class, keyAs=String.class, contentAs=JSONDataPortInstance.class)
@@ -156,6 +157,15 @@ public class StateChangeMessage extends WampMessage implements IStateChangeMessa
 
 	public void setPeerId(String peerId) {
 		this.peerId = peerId;
+	}
+
+	@Override
+	public String getOriginalProcessInstanceId() {
+		return originalProcessInstanceId;
+	}
+	
+	public void setOriginalProcessInstanceId(String originalProcessInstanceId) {
+		this.originalProcessInstanceId = originalProcessInstanceId;
 	}
 
 }

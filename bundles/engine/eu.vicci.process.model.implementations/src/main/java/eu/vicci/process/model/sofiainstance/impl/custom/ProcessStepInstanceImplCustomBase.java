@@ -635,7 +635,16 @@ public abstract class ProcessStepInstanceImplCustomBase extends ProcessStepInsta
 		scm.setState(getExecutionState());
 		scm.setProcessId(getProcessStepType().getId());
 		scm.setProcessName(getProcessStepType().getName());
+		scm.setOriginalProcessInstanceId(getOriginalProcessInstanceId());
 		return scm;
+	}
+	
+	/**
+	 * gets the instance id of the original process (on the super peer), if this is a remote executing copy.
+	 * @return
+	 */
+	protected String getOriginalProcessInstanceId(){ 
+		return null;
 	}
 
 	private void addSerializedPortsToMessage(StateChangeMessage message) {

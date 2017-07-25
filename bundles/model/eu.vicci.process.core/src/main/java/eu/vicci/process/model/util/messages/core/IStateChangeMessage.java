@@ -16,6 +16,13 @@ public interface IStateChangeMessage extends IWampMessage {
 	 * @return
 	 */
 	String getPeerId();
+	
+	
+	/**
+	 * Gets the instance of the original process, if this process is a remote executing copy
+	 * @return
+	 */
+	String getOriginalProcessInstanceId();
 
 	/**
 	 * The instance id for this process
