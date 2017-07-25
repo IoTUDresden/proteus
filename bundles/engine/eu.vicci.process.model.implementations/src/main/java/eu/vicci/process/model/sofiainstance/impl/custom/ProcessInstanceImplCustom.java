@@ -11,7 +11,7 @@ import eu.vicci.process.model.sofiainstance.State;
 import eu.vicci.process.model.sofiainstance.util.LifeCycleManager;
 
 public class ProcessInstanceImplCustom extends ProcessStepInstanceImplCustom implements ProcessInstance {
-	private String runningForInstanceId;
+	private volatile String runningForInstanceId;
 
 	@Override
 	public boolean start(Map<String, DataTypeInstance> parameters) {

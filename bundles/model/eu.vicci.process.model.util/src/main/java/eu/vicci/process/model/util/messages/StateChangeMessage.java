@@ -38,18 +38,6 @@ public class StateChangeMessage extends WampMessage implements IStateChangeMessa
 	private Map<String, IJSONPortInstance> endControlPorts = new HashMap<String, IJSONPortInstance>();
 	
 	public StateChangeMessage() {	}
-	
-	public StateChangeMessage(String topic, String instanceId, String modelId,
-			String processInstanceId, String processModelId, State state,
-			Map<String, IJSONDataPortInstance> startDataPorts, Map<String, IJSONDataPortInstance> endDataPorts) {
-		this.instanceId = instanceId;
-		this.modelId = modelId;
-		this.processInstanceId = processInstanceId;
-		this.processModelId = processModelId;
-		this.state = state;
-		this.startDataPorts = startDataPorts;
-		this.endDataPorts = endDataPorts;
-	}
 
 	@Override
 	public String getInstanceId() {

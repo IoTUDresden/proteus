@@ -20,10 +20,11 @@ public class StartInstanceServerHandler extends AbstractRpcHandlerManageable {
 	public void onNext(Request t) {
 		ProcessStartRequest request = convertFromJson(t.arguments().get(0), ProcessStartRequest.class);
 		String processInstanceId = request.getProcessInstanceId();
+		String originalProcessInstanceId = request.getRunningForInstanceId();
 		Map<String, IJSONTypeInstance> ports = request.getPorts();
 		Map<String, DataTypeInstance> inputParameters = deserializePorts(ports);
 		boolean runInLoop = request.getRunInLoop();
-		String state = processManager.startProcessInstance(processInstanceId, inputParameters, runInLoop);
+		String state = processManager.startProcessInstance(processInstanceId, originalProcessInstanceId, inputParameters, runInLoop);
 		t.reply(state);		
 	}
 	
