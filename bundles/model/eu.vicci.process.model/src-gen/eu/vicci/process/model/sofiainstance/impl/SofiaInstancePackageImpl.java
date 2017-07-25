@@ -583,6 +583,15 @@ public class SofiaInstancePackageImpl extends EPackageImpl implements SofiaInsta
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getProcessInstance_RunningForInstanceId() {
+		return (EAttribute)processInstanceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getProcessStepInstance() {
 		return processStepInstanceEClass;
 	}
@@ -1624,6 +1633,7 @@ public class SofiaInstancePackageImpl extends EPackageImpl implements SofiaInsta
 
 		// Create classes and their features
 		processInstanceEClass = createEClass(PROCESS_INSTANCE);
+		createEAttribute(processInstanceEClass, PROCESS_INSTANCE__RUNNING_FOR_INSTANCE_ID);
 
 		processStepInstanceEClass = createEClass(PROCESS_STEP_INSTANCE);
 		createEReference(processStepInstanceEClass, PROCESS_STEP_INSTANCE__PROCESS_STEP_TYPE);
@@ -1888,6 +1898,7 @@ public class SofiaInstancePackageImpl extends EPackageImpl implements SofiaInsta
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(processInstanceEClass, ProcessInstance.class, "ProcessInstance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getProcessInstance_RunningForInstanceId(), ecorePackage.getEString(), "runningForInstanceId", null, 0, 1, ProcessInstance.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = addEOperation(processInstanceEClass, ecorePackage.getEBoolean(), "start", 0, 1, IS_UNIQUE, IS_ORDERED);
 		EGenericType g1 = createEGenericType(ecorePackage.getEMap());

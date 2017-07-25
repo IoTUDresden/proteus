@@ -86,14 +86,16 @@ public class ProcessInstanceExecutor {
 		return ReplyState.SUCCESS;
 	}
 	
-	public String execute(String processinstanceid, Map<String,DataTypeInstance> inputParameters) {
+	public String execute(String processinstanceid, String runningForInstanceId, Map<String,DataTypeInstance> inputParameters) {
 		System.out.println("ProcessInstanceExecutor: processinstanceid: " + processinstanceid);
 		ProcessInstance processinstance = processManager.getProcessInstance(processinstanceid);
+		
 		if(processinstance == null){
 			logger.error("cant get process instance with instance id: {}", processinstanceid);
 			return ReplyState.ERROR;
 		}
-
+		
+		processinstance.setRunningForInstanceId(runningForInstanceId);
 		Thread pit = new ProcessInstanceThread(processinstance, inputParameters);
 		pit.start();
 		

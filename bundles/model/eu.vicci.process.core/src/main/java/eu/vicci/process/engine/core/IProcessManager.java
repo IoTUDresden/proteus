@@ -115,6 +115,22 @@ public interface IProcessManager {
 	 */
 	String startProcessInstance(String processInstanceId, Map<String, DataTypeInstance> inputParameters, 
 			boolean runInLoop);
+	
+	/**
+	 * Starts a process instance and runs the given process in a loop. This
+	 * means, if the process reaches the state 'executed', the process is
+	 * started in a new process instance. While a process is running, the
+	 * follower is deployed. (not implemented yet)
+	 * 
+	 * @param processInstanceId
+	 * @param runningForInstanceId Optional (can be null). The instance id for the root process on the super peer. 
+	 * Important for the feedback service.
+	 * @param inputParameters
+	 * @param runInLoop
+	 * @return
+	 */
+	String startProcessInstance(String processInstanceId, String runningForInstanceId, Map<String, DataTypeInstance> inputParameters, 
+			boolean runInLoop);
 
 	String stopProcessInstance(String processInstanceId);
 

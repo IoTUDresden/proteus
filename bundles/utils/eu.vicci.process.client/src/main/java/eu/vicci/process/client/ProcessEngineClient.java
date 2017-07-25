@@ -426,16 +426,22 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	@Override
 	public String startProcessInstance(String processInstanceId, Map<String, DataTypeInstance> inputParameters,
 			boolean runInLoop) {
-		return internalStartProcessInstance(null, processInstanceId, inputParameters, runInLoop);
+		return startProcessInstance(processInstanceId, null, inputParameters, runInLoop);
 	}
 	
 	@Override
-	public String startProcessInstanceRemote(String peerId, String processInstanceId,
-			Map<String, DataTypeInstance> inputParameters) {
-		return internalStartProcessInstance(peerId, processInstanceId, inputParameters, false);
+	public String startProcessInstance(String processInstanceId, String runningForInstanceId,
+			Map<String, DataTypeInstance> inputParameters, boolean runInLoop) {
+		return internalStartProcessInstance(null, processInstanceId, runningForInstanceId, inputParameters, runInLoop);
 	}
 	
-	private String internalStartProcessInstance(String peerId, String processInstanceId, Map<String, DataTypeInstance> inputParameters,
+	@Override
+	public String startProcessInstanceRemote(String peerId, String processInstanceId, String runningForInstanceId,
+			Map<String, DataTypeInstance> inputParameters) {
+		return internalStartProcessInstance(peerId, processInstanceId, runningForInstanceId, inputParameters, false);
+	}
+	
+	private String internalStartProcessInstance(String peerId, String processInstanceId, String runningForInstanceId, Map<String, DataTypeInstance> inputParameters,
 			boolean runInLoop) {
 		// TODO run in loop
 		if(runInLoop) logger.warn("running in loop not implemented yet");
@@ -453,7 +459,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 			ports = null;
 		}
 
-		ProcessStartRequest input = new ProcessStartRequest(processInstanceId, ports, runInLoop);
+		ProcessStartRequest input = new ProcessStartRequest(processInstanceId, runningForInstanceId, ports, runInLoop);
 		callRpc(createRpcId(peerId, RpcId.START_INSTANCE), sih, input);
 		return null;		
 	}
@@ -795,5 +801,7 @@ public class ProcessEngineClient implements IProcessEngineClient {
 	private void printModel(String text) {
 		System.out.println("Text: \n" + text);
 	}
+
+
 
 }

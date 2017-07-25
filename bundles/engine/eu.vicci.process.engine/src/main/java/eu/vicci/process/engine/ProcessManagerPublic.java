@@ -181,9 +181,15 @@ public class ProcessManagerPublic implements IProcessManager {
 	@Override
 	public String startProcessInstance(String processInstanceId, Map<String, DataTypeInstance> inputParameters, 
 			boolean runInLoop) {
+		return startProcessInstance(processInstanceId, null, inputParameters, runInLoop);
+	}
+	
+	@Override
+	public String startProcessInstance(String processInstanceId, String runningForInstanceId,
+			Map<String, DataTypeInstance> inputParameters, boolean runInLoop) {
 		// TODO RUN IN LOOP
 		System.out.println("ProcessManager.startProcessInstance()");
-		processInstanceExecutor.execute(processInstanceId, inputParameters);
+		processInstanceExecutor.execute(processInstanceId, runningForInstanceId, inputParameters);
 		return ReplyState.SUCCESS;
 	}
 
@@ -555,5 +561,4 @@ public class ProcessManagerPublic implements IProcessManager {
 	private void printUploadedDoc(String doc){
 		System.out.println("uploaded document: \n" + doc);		
 	}
-
 }

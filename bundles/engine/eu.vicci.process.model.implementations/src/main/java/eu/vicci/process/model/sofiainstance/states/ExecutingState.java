@@ -19,6 +19,13 @@ public class ExecutingState extends StateBase {
 
 	private CompensationWorker compensationWorker;
 	private CountDownLatch mWait;
+	
+	private ExecutionFlags executionFlags;
+
+	/**
+	 * true if the compensation is currently running
+	 */
+	private boolean compensationIsRunning = false;
 
 	public ExecutingState(ProcessStepInstanceImplCustomBase processStep) {
 		super(processStep);
@@ -153,13 +160,6 @@ public class ExecutingState extends StateBase {
 		workerThread.setName("Compensation_" + processStep.getInstanceId());
 		workerThread.start();
 	}
-
-	private ExecutionFlags executionFlags;
-
-	/**
-	 * true if the compensation is currently running
-	 */
-	private boolean compensationIsRunning = false;
 
 	private CompensationListener compensationListener = new CompensationListener() {
 		@Override

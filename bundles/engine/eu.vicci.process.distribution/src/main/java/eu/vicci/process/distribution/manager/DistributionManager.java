@@ -28,7 +28,7 @@ import eu.vicci.process.model.util.messages.core.FeedbackServiceListener;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import eu.vicci.process.model.util.messages.core.StateChangeListener;
 
-// TODO ping, one client, extend state change message for peerId
+// FIXME processId on remote is wrong (because query contains piid from superpeer)
 /**
  * Current design allows only one peer per ip.
  * <br>
@@ -38,6 +38,7 @@ import eu.vicci.process.model.util.messages.core.StateChangeListener;
 public class DistributionManager implements IDistributionManager {
 	private static final Logger LOG = LoggerFactory.getLogger(DistributionManager.class);
 	private static final String CLIENT_NAME = "SuperPeerDistributionManager";
+	private static final String TEMP_CLIENT_NAME = "SuperPeerRemoteExecutingClient";
 	private IProcessEngineClient pec;
 
 	private volatile Map<String, PeerProfile> registeredPeers = new HashMap<>();
@@ -56,7 +57,9 @@ public class DistributionManager implements IDistributionManager {
 	private Optional<PeerProfile> peerProfile = Optional.empty();
 
 	private DistributionManager() {
-		pec = createSuperPeerClient();
+		pec = createSuperPeerClient(CLIENT_NAME);
+		pec.addStateChangeListener(stateChangeListener);
+		pec.addFeedbackServiceListener(feedbackServiceListener);
 	}
 	
 	private static class LazyDistributionManagerHolder {
@@ -81,35 +84,38 @@ public class DistributionManager implements IDistributionManager {
 				LOG.error("CompensationRequest is missing required parameters");
 				return;
 			}
-			
 			DistributedSession session = new DistributedSession(request.oldInstanceId, request.oldPeerId);
 			Map<String, DataTypeInstance> inputParameters = inputParametersCache.remove(session);			
 			removeTrackedInstance(session);
 			Process process = remoteProcessCache.get(request.processId);
-			
+				
 			if(process == null){
 				LOG.error("cant find remote process for id '{}'", request.processId);
 				return;
 			}
-			
-			executeRemoteProcess(request.newPeerId, process, inputParameters);
+				
+			executeRemoteProcess(request.newPeerId, request.originalInstanceId, process, inputParameters);
 		}
 	};
 
 	@Override
-	public DistributedSession executeRemoteProcess(String peerId, Process process, Map<String, DataTypeInstance> inputParameters) {
+	public DistributedSession executeRemoteProcess(String peerId, String runningForInstanceId, Process process, 
+			Map<String, DataTypeInstance> inputParameters) {
 		LOG.info("<<<<<<<<<<<<<<<<<<<<<< Start Remote >>>>>>>>>>>>>>>>>>>>>>>>>>>");
 		
 		remoteProcessCache.put(process.getId(), process);
+		//we use a new client here, because existing client will block, if the call comes from 
+		//feedback listener 
+		IProcessEngineClient tmpPec = createSuperPeerClient(TEMP_CLIENT_NAME);
 		
-		String pid = pec.deployProcessRemote(peerId, process);
-		String remoteProcessInstanceId = pec.deployProcessInstanceRemote(peerId, pid);
+		String pid = tmpPec.deployProcessRemote(peerId, process);
+		String remoteProcessInstanceId = tmpPec.deployProcessInstanceRemote(peerId, pid);
 		
 		DistributedSession session = new DistributedSession(remoteProcessInstanceId, peerId);
 		trackProcessInstance(session);
 		inputParametersCache.put(session, inputParameters);
 		
-		pec.startProcessInstanceRemote(peerId, remoteProcessInstanceId, inputParameters);
+		tmpPec.startProcessInstanceRemote(peerId, runningForInstanceId, remoteProcessInstanceId, inputParameters);
 		
 		return session;
 	}
@@ -134,9 +140,10 @@ public class DistributionManager implements IDistributionManager {
 	}
 
 	@Override
-	public DistributedSession workRemote(String ip, Process process, Map<String, DataTypeInstance> inputParameters) {
+	public DistributedSession workRemote(String ip, String runningForInstanceId, Process process, 
+			Map<String, DataTypeInstance> inputParameters) {
 		String peerId = getPeerIdForIp(ip);		
-		return executeRemoteProcess(peerId, process, inputParameters);
+		return executeRemoteProcess(peerId, runningForInstanceId, process, inputParameters);
 	}
 	
 	@Override
@@ -171,7 +178,7 @@ public class DistributionManager implements IDistributionManager {
 	 * <ul>
 	 * The peer id is used to identify the peer.
 	 */
-	private IProcessEngineClient createSuperPeerClient() {
+	private IProcessEngineClient createSuperPeerClient(String name) {
 		AbstractClientBuilder builder = new ProcessEngineClientBuilder();
 		
 		//TODO this is a workaround. prefs are not set, if we run this plugin in the editor
@@ -187,8 +194,6 @@ public class DistributionManager implements IDistributionManager {
 				.build();
 
 		pec.connect();
-		pec.addStateChangeListener(stateChangeListener);
-		pec.addFeedbackServiceListener(feedbackServiceListener);
 
 		// TODO peer listener
 

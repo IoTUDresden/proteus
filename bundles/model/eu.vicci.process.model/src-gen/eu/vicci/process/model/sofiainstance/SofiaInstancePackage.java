@@ -357,13 +357,22 @@ public interface SofiaInstancePackage extends EPackage {
 	int PROCESS_INSTANCE__CYBER_PHYSICAL = PROCESS_STEP_INSTANCE__CYBER_PHYSICAL;
 
 	/**
+	 * The feature id for the '<em><b>Running For Instance Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROCESS_INSTANCE__RUNNING_FOR_INSTANCE_ID = PROCESS_STEP_INSTANCE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Process Instance</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROCESS_INSTANCE_FEATURE_COUNT = PROCESS_STEP_INSTANCE_FEATURE_COUNT + 0;
+	int PROCESS_INSTANCE_FEATURE_COUNT = PROCESS_STEP_INSTANCE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link eu.vicci.process.model.sofiainstance.impl.PortInstanceImpl <em>Port Instance</em>}' class.
@@ -6356,6 +6365,17 @@ public interface SofiaInstancePackage extends EPackage {
 	EClass getProcessInstance();
 
 	/**
+	 * Returns the meta object for the attribute '{@link eu.vicci.process.model.sofiainstance.ProcessInstance#getRunningForInstanceId <em>Running For Instance Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Running For Instance Id</em>'.
+	 * @see eu.vicci.process.model.sofiainstance.ProcessInstance#getRunningForInstanceId()
+	 * @see #getProcessInstance()
+	 * @generated
+	 */
+	EAttribute getProcessInstance_RunningForInstanceId();
+
+	/**
 	 * Returns the meta object for class '{@link eu.vicci.process.model.sofiainstance.ProcessStepInstance <em>Process Step Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7573,6 +7593,14 @@ public interface SofiaInstancePackage extends EPackage {
 		 * @generated
 		 */
 		EClass PROCESS_INSTANCE = eINSTANCE.getProcessInstance();
+
+		/**
+		 * The meta object literal for the '<em><b>Running For Instance Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROCESS_INSTANCE__RUNNING_FOR_INSTANCE_ID = eINSTANCE.getProcessInstance_RunningForInstanceId();
 
 		/**
 		 * The meta object literal for the '{@link eu.vicci.process.model.sofiainstance.impl.ProcessStepInstanceImpl <em>Process Step Instance</em>}' class.

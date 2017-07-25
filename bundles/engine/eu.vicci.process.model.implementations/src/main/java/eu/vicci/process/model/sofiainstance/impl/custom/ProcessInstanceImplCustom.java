@@ -11,6 +11,7 @@ import eu.vicci.process.model.sofiainstance.State;
 import eu.vicci.process.model.sofiainstance.util.LifeCycleManager;
 
 public class ProcessInstanceImplCustom extends ProcessStepInstanceImplCustom implements ProcessInstance {
+	private String runningForInstanceId;
 
 	@Override
 	public boolean start(Map<String, DataTypeInstance> parameters) {
@@ -62,5 +63,15 @@ public class ProcessInstanceImplCustom extends ProcessStepInstanceImplCustom imp
 					"At least one of the start parameters is not configured properly. The DataType is missing for "
 							+ dataTypeInstance.getName());
 
+	}
+
+	@Override
+	public String getRunningForInstanceId() {
+		return runningForInstanceId;
+	}
+
+	@Override
+	public void setRunningForInstanceId(String value) {
+		runningForInstanceId = value;		
 	}
 }

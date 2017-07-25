@@ -10,6 +10,7 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="runningForInstanceId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProcessStepInstance" eSuperTypes="#//Stateful #//InstanceIdentifiable">
     <eOperations name="execute" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

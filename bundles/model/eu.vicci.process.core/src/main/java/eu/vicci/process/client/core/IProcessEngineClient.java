@@ -121,10 +121,12 @@ public interface IProcessEngineClient extends IProcessManager {
 	 * 
 	 * @param peerId
 	 * @param processInstanceId
+	 * @param runningForInstanceId Optional (can be null). The instance id for the root process on the super peer. 
+	 * Important for the feedback service.
 	 * @param inputParameters
 	 * @return
 	 */
-	String startProcessInstanceRemote(String peerId, String processInstanceId,
+	String startProcessInstanceRemote(String peerId, String processInstanceId, String runningForInstanceId,
 			Map<String, DataTypeInstance> inputParameters);
 	
 	/**

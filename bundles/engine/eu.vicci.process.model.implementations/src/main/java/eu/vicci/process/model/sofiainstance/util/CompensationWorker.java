@@ -13,6 +13,7 @@ import java.util.concurrent.CountDownLatch;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.core.UriBuilder;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
@@ -133,8 +134,9 @@ public class CompensationWorker implements Runnable {
     
     private void waitForEvent() {
     	new Thread(() ->{
+    		UriBuilder target = fromPath(serviceUri).path("events").path(fromPath(workflowUri).build().getPath());
             EventInput eventInput = sseClient
-                    .target(fromPath(serviceUri).path("events").path(fromPath(workflowUri).build().getPath()))
+                    .target(target)
                     .request().get(EventInput.class);
 
             while (!eventInput.isClosed()) {
@@ -197,6 +199,8 @@ public class CompensationWorker implements Runnable {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        if(listener != null)
+        	listener.compensationFinished(flags);
     }
     
     private JsonObject post(String path, String json) {

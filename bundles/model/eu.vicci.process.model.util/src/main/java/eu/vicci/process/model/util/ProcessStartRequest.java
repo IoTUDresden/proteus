@@ -9,15 +9,22 @@ public class ProcessStartRequest {
 	private String processInstanceId;
 	private boolean runInLoop;
 	private Map<String, IJSONTypeInstance> ports;
+	private String runningForInstanceId;
 
 	public ProcessStartRequest() {
 	}
 	
 	public ProcessStartRequest(String processInstanceId, Map<String, IJSONTypeInstance> ports, boolean runInLoop) {
+		this(processInstanceId, null, ports, runInLoop);
+	}
+	
+	public ProcessStartRequest(String processInstanceId, String runningForInstance, 
+			Map<String, IJSONTypeInstance> ports, boolean runInLoop){
 		super();
 		this.processInstanceId = processInstanceId;
 		this.ports = ports;
 		this.runInLoop = runInLoop;
+		this.runningForInstanceId = runningForInstance;		
 	}
 
 	public String getProcessInstanceId() {
@@ -31,4 +38,9 @@ public class ProcessStartRequest {
 	public boolean getRunInLoop() {
 		return runInLoop;
 	}
+
+	public String getRunningForInstanceId() {
+		return runningForInstanceId;
+	}
+
 }

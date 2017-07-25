@@ -10,5 +10,12 @@ public interface DistributionManagerListener {
 	 * @param session
 	 */
 	void processOnPeerHasFinished(IStateChangeMessage message, DistributedSession session);
+	
+	/**
+	 * Gets called if the remote session changes (e.g. on compensation)
+	 * @param oldSession
+	 * @param newSession
+	 */
+	void remoteSessionChanged(DistributedSession oldSession, DistributedSession newSession);
 
 }

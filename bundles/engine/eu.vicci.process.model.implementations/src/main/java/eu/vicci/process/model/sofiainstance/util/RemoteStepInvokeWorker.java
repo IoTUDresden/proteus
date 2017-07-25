@@ -94,7 +94,7 @@ public class RemoteStepInvokeWorker {
 		Map<String, DataTypeInstance> inputParameters = getInputParameters();
 
 		distributionManager.addDistributionManagerListener(listener);
-		remoteSession = distributionManager.workRemote(ip, remoteProcess, inputParameters);
+		remoteSession = distributionManager.workRemote(ip, processInstance.getInstanceId(), remoteProcess, inputParameters);
 
 		try {
 			// blocks till response was received
@@ -132,6 +132,14 @@ public class RemoteStepInvokeWorker {
 				return;			
 			finalMessage = message;
 			responseReceived.countDown();
+		}
+		
+		@Override
+		public void remoteSessionChanged(DistributedSession oldSession, DistributedSession newSession) {
+			if(!remoteSession.equals(oldSession))
+				return;
+			remoteSession = newSession;
+			//TODO inform process step?
 		}
 	};
 
