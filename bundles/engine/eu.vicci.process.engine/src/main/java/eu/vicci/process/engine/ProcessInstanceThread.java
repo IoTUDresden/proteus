@@ -13,6 +13,7 @@ public class ProcessInstanceThread extends Thread implements Runnable {
 	public ProcessInstanceThread(ProcessInstance processinstance,Map<String,DataTypeInstance> inputParameters) {
 		this.pinstance = processinstance;
 		this.inputParameters = inputParameters;
+		setName("ProcessInstanceThread_" + processinstance.getInstanceId());
 	}
 	
 	@Override

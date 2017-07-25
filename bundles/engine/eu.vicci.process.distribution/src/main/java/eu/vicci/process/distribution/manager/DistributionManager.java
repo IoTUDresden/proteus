@@ -115,7 +115,7 @@ public class DistributionManager implements IDistributionManager {
 		trackProcessInstance(session);
 		inputParametersCache.put(session, inputParameters);
 		
-		tmpPec.startProcessInstanceRemote(peerId, runningForInstanceId, remoteProcessInstanceId, inputParameters);
+		tmpPec.startProcessInstanceRemote(peerId, remoteProcessInstanceId, runningForInstanceId, inputParameters);
 		
 		return session;
 	}
