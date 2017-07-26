@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +29,6 @@ import eu.vicci.process.model.util.messages.core.FeedbackServiceListener;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import eu.vicci.process.model.util.messages.core.StateChangeListener;
 
-// FIXME processId on remote is wrong (because query contains piid from superpeer)
 /**
  * Current design allows only one peer per ip.
  * <br>
@@ -50,8 +50,11 @@ public class DistributionManager implements IDistributionManager {
 	
 	private final RemoteProcessCache remoteProcessCache = new RemoteProcessCache();
 	
-	//runtime cache for the input parameters
-	private Map<DistributedSession, Map<String, DataTypeInstance>> inputParametersCache = new HashMap<>();
+	/**
+	 * Runtime cache for the input parameters.
+	 * Maps the instance id of the super-peer process-instance, to its start-parameters.
+	 */	
+	private Map<String, Map<String, DataTypeInstance>> inputParametersCache = new ConcurrentHashMap<>();
 	
 	//only present on peers
 	private Optional<PeerProfile> peerProfile = Optional.empty();
@@ -84,9 +87,10 @@ public class DistributionManager implements IDistributionManager {
 				LOG.error("CompensationRequest is missing required parameters");
 				return;
 			}
-			DistributedSession session = new DistributedSession(request.oldInstanceId, request.oldPeerId);
-			Map<String, DataTypeInstance> inputParameters = inputParametersCache.remove(session);			
-			removeTrackedInstance(session);
+			
+			DistributedSession session = remoteProcessCache.getSessionFor(request.originalInstanceId);
+			removeTrackedInstance(session);			
+			Map<String, DataTypeInstance> inputParameters = inputParametersCache.remove(request.originalInstanceId);	
 			Process process = remoteProcessCache.get(request.processId);
 				
 			if(process == null){
@@ -101,7 +105,9 @@ public class DistributionManager implements IDistributionManager {
 	@Override
 	public DistributedSession executeRemoteProcess(String peerId, String runningForInstanceId, Process process, 
 			Map<String, DataTypeInstance> inputParameters) {
-		LOG.info("<<<<<<<<<<<<<<<<<<<<<< Start Remote >>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		checkExecutionArgs(peerId, runningForInstanceId);
+		
+		LOG.info("Execute process '{}' on remote peer '{}'", process.getName(), peerId);
 		
 		remoteProcessCache.put(process.getId(), process);
 		//we use a new client here, because existing client will block, if the call comes from 
@@ -113,11 +119,20 @@ public class DistributionManager implements IDistributionManager {
 		
 		DistributedSession session = new DistributedSession(remoteProcessInstanceId, peerId);
 		trackProcessInstance(session);
-		inputParametersCache.put(session, inputParameters);
+		
+		remoteProcessCache.putSessionFor(runningForInstanceId, session);		
+		inputParametersCache.put(runningForInstanceId, inputParameters);
 		
 		tmpPec.startProcessInstanceRemote(peerId, remoteProcessInstanceId, runningForInstanceId, inputParameters);
 		
 		return session;
+	}
+	
+	private void checkExecutionArgs(String peerId, String runningForInstanceId){
+		if(runningForInstanceId == null || runningForInstanceId.isEmpty())
+			throw new RuntimeException("runningForInstanceId cant be null for remote execution");
+		if(peerId == null || peerId.isEmpty())
+			throw new RuntimeException("peerId cant be null for remote execution");
 	}
 
 	@Override
@@ -194,18 +209,6 @@ public class DistributionManager implements IDistributionManager {
 				.build();
 
 		pec.connect();
-
-		// TODO peer listener
-
-		// pec.subscribeTo(TopicId.STATE_CHANGE, MessageType.WAMPMESSAGE, this);
-		// pec.subscribeTo(TopicId.REMOTE_STEP_RESP,
-		// MessageType.REMOTESTEPRESPONSE, this);
-		// pec.subscribeTo(TopicId.PING_RESPONSE, MessageType.PINGRESPONSE,
-		// this);
-		// pec.subscribeTo(TopicId.PING_RESPONSE, MessageType.PINGRESPONSE,
-		// this);
-		// pec.subscribeTo(TopicId.PING, MessageType.PING, this);
-		// pec.subscribeTo(TopicId.METRICS, MessageType.METRICS, this);
 		return pec;
 	}
 
@@ -236,6 +239,11 @@ public class DistributionManager implements IDistributionManager {
 	 * @return false, if the instanceId on the given peerId is NOT tracked
 	 */
 	private boolean removeTrackedInstance(DistributedSession session){
+		if(session == null){
+			LOG.error("Cant remove a NULL Session from tracked instances");
+			return false;
+		}
+		
 		synchronized (trackedProcessInstances) {
 			List<String> instances = trackedProcessInstances.get(session.getPeerId());
 			if(instances == null || !instances.contains(session.getRemoteInstanceId()))
@@ -332,12 +340,12 @@ public class DistributionManager implements IDistributionManager {
 	
 	private static boolean checkArgs(CompensationRequest request){
 		return request != null 
-				&& request.oldInstanceId != null 
-				&& !request.oldInstanceId.isEmpty()
 				&& request.newPeerId != null
 				&& !request.newPeerId.isEmpty()
 				&& request.processId != null
-				&& !request.processId.isEmpty();
+				&& !request.processId.isEmpty()
+				&& request.originalInstanceId != null
+				&& !request.originalInstanceId.isEmpty();
 	}
 
 }

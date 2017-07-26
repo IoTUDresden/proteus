@@ -7,6 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
+import eu.vicci.process.distribution.core.DistributedSession;
 import eu.vicci.process.model.sofia.CompositeStep;
 import eu.vicci.process.model.sofia.DataType;
 import eu.vicci.process.model.sofia.EndPort;
@@ -18,6 +19,7 @@ import eu.vicci.process.model.sofia.Process;
 public class RemoteProcessCache {
 	
 	private final Map<String, Process> processes = new ConcurrentHashMap<>();
+	private final Map<String, DistributedSession> remoteMapping = new ConcurrentHashMap<>();
 	
 	/**
 	 * 
@@ -71,6 +73,41 @@ public class RemoteProcessCache {
 	 */
 	public Process get(String id){
 		return processes.get(id);
+	}
+	
+	/**
+	 * Gets the {@link DistributedSession} for the given instanceId. 
+	 * Use the instanceId from the superpeer process!
+	 * @param instanceId
+	 * @return the value to which the specified key is mapped, 
+	 * or null if this map contains no mapping for the key
+	 */
+	public DistributedSession getSessionFor(String instanceId){
+		return remoteMapping.get(instanceId);
+	}
+	
+	/**
+	 * Removes the {@link DistributedSession} for the given instance id.
+	 * Use the instanceId from the superpeer process!
+	 * @param instanceId
+	 * @return the previous value associated with key, or null if there was no mapping for key.
+	 */
+	public DistributedSession removeSessionFor(String instanceId){
+		return remoteMapping.remove(instanceId);
+	}
+	
+	/**
+	 * Adds a {@link DistributedSession} for the given instance id.
+	 * Use the instanceId from the superpeer process!
+	 * @param instanceId
+	 * @param session
+	 * @return
+	 * the previous value associated with key, or null if there was no mapping for key. 
+	 * (A null return can also indicate that the map previously associated null with key, 
+	 * if the implementation supports null values.)
+	 */
+	public DistributedSession putSessionFor(String instanceId, DistributedSession session){
+		return remoteMapping.put(instanceId, session);
 	}
 	
 	/**
