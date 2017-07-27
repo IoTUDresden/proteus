@@ -23,10 +23,11 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
 import org.glassfish.jersey.media.sse.EventInput;
 import org.glassfish.jersey.media.sse.InboundEvent;
 import org.glassfish.jersey.media.sse.SseFeature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -41,7 +42,7 @@ import eu.vicci.process.model.util.configuration.ConfigurationManager;
  * 
  */
 public class CompensationWorker implements Runnable {
-    private static final Logger LOG = Logger.getLogger(Compensation.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Compensation.class);
     
     public static final String GOAL = "Goal";
     public static final String CONTEXT_URI = "ContextUri";
@@ -133,20 +134,26 @@ public class CompensationWorker implements Runnable {
     }
     
     private void waitForEvent() {
-    	new Thread(() ->{
-    		UriBuilder target = fromPath(serviceUri).path("events").path(fromPath(workflowUri).build().getPath());
-            EventInput eventInput = sseClient
-                    .target(target)
-                    .request().get(EventInput.class);
+		new Thread(() -> {
+			try {
+				UriBuilder target = fromPath(serviceUri).path("events").path(fromPath(workflowUri).build().getPath());
+				EventInput eventInput = sseClient.target(target).request().get(EventInput.class);
 
-            while (!eventInput.isClosed()) {
-                final InboundEvent event = eventInput.read();
-                if (workflowHasBeenDone(event.readData()))
-                    break;
-            }
-            
-            waitForEvent.countDown();    		
-    	}).start();    	
+				while (!eventInput.isClosed()) {
+					final InboundEvent event = eventInput.read();
+					if (workflowHasBeenDone(event.readData()))
+						break;
+				}
+			} catch (Exception e) {
+				LOG.error("Error while waiting for the result of the Workflow '{}'", workflowUri);
+				e.printStackTrace();
+				flags = new ExecutionFlags();
+				flags.hasBeenFinished = false;
+				flags.hasBeenSatisfied = false;
+			} finally {
+				waitForEvent.countDown();
+			}
+		}).start(); 	
     }
     
     private boolean workflowHasBeenDone(String json) {
@@ -188,7 +195,7 @@ public class CompensationWorker implements Runnable {
         try {
             httpClient.execute(new HttpDelete(fromPath(workflowUri).build()));
         } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            LOG.error("cant delete workflow from fbs: {}", workflowUri);
         }
     }
     
@@ -197,10 +204,12 @@ public class CompensationWorker implements Runnable {
             httpClient.close();
             sseClient.close();
         } catch (IOException exception) {
-            throw new RuntimeException(exception);
+        	LOG.error("error closing connection to fbs");
+        } finally{
+            if(listener != null)
+            	listener.compensationFinished(flags);        	
         }
-        if(listener != null)
-        	listener.compensationFinished(flags);
+
     }
     
     private JsonObject post(String path, String json) {

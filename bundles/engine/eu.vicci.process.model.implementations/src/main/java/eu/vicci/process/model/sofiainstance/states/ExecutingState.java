@@ -6,6 +6,7 @@ import java.util.concurrent.CountDownLatch;
 import eu.vicci.process.model.sofiainstance.BooleanTypeInstance;
 import eu.vicci.process.model.sofiainstance.PortInstance;
 import eu.vicci.process.model.sofiainstance.State;
+import eu.vicci.process.model.sofiainstance.impl.custom.DistributingProcessInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.impl.custom.ProcessStepInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.impl.custom.ProcessStepInstanceImplCustomBase;
 import eu.vicci.process.model.sofiainstance.util.CompensationWorker;
@@ -167,6 +168,8 @@ public class ExecutingState extends StateBase {
 			executionFlags = flags;
 			compensationIsRunning = false;
 			mWait.countDown();
+			if(processStep instanceof DistributingProcessInstanceImplCustom)
+				((DistributingProcessInstanceImplCustom)processStep).finishDistribution();
 		}
 	};
 }

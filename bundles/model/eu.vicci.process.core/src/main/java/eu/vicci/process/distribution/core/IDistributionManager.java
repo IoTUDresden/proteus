@@ -7,7 +7,7 @@ import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 
 public interface IDistributionManager {
 	
-	DistributedSession executeRemoteProcess(String peerId, String runningForInstanceId, Process process, Map<String, DataTypeInstance> inputParameters);
+	DistributedSession executeRemoteProcess(String peerId, String runningForInstanceId, RemoteProcess process, Map<String, DataTypeInstance> inputParameters);
 	
 	void addDistributionManagerListener(DistributionManagerListener listener);
 	
@@ -33,7 +33,7 @@ public interface IDistributionManager {
 	 * @param inputParameters
 	 * @return returns a distributed session
 	 */
-	DistributedSession workRemote(String ip, String runningForInstanceId, Process ps, Map<String, DataTypeInstance> inputParameters);
+	DistributedSession workRemote(String ip, String runningForInstanceId, RemoteProcess ps, Map<String, DataTypeInstance> inputParameters);
 	
 	void registerPeer(PeerProfile profile);
 	
@@ -50,6 +50,6 @@ public interface IDistributionManager {
 	 * @param original
 	 * @return copied process
 	 */
-	Process createRemoteProcess(Process original);
+	RemoteProcess createRemoteProcess(Process original);
 
 }

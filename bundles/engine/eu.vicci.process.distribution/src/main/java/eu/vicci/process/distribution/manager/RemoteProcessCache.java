@@ -8,6 +8,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
 import eu.vicci.process.distribution.core.DistributedSession;
+import eu.vicci.process.distribution.core.RemoteProcess;
 import eu.vicci.process.model.sofia.CompositeStep;
 import eu.vicci.process.model.sofia.DataType;
 import eu.vicci.process.model.sofia.EndPort;
@@ -18,7 +19,7 @@ import eu.vicci.process.model.sofia.Process;
  */
 public class RemoteProcessCache {
 	
-	private final Map<String, Process> processes = new ConcurrentHashMap<>();
+	private final Map<String, RemoteProcess> processes = new ConcurrentHashMap<>();
 	private final Map<String, DistributedSession> remoteMapping = new ConcurrentHashMap<>();
 	
 	/**
@@ -28,7 +29,7 @@ public class RemoteProcessCache {
 	 * or null if there was no mapping for key. 
 	 * (A null return can also indicate that the map previously associated null with key.)
 	 */
-	public Process remove(String id){
+	public RemoteProcess remove(String id){
 		return processes.remove(id);		
 	}
 	
@@ -39,7 +40,7 @@ public class RemoteProcessCache {
 	 * or null if there was no mapping for key. 
 	 * (A null return can also indicate that the map previously associated null with key.)
 	 */
-	public Process remove(Process process){
+	public RemoteProcess remove(RemoteProcess process){
 		return remove(process.getId());
 	}
 	
@@ -51,7 +52,7 @@ public class RemoteProcessCache {
 	 * or null if there was no mapping for key. 
 	 * (A null return can also indicate that the map previously associated null with key.)
 	 */
-	public Process put(String id, Process process){
+	public RemoteProcess put(String id, RemoteProcess process){
 		return processes.put(id, process);		
 	}
 	
@@ -62,7 +63,7 @@ public class RemoteProcessCache {
 	 * or null if there was no mapping for key. 
 	 * (A null return can also indicate that the map previously associated null with key.)
 	 */
-	public Process put(Process process){
+	public RemoteProcess put(RemoteProcess process){
 		return put(process.getId(), process);
 	}
 	
@@ -71,7 +72,7 @@ public class RemoteProcessCache {
 	 * @param id
 	 * @return
 	 */
-	public Process get(String id){
+	public RemoteProcess get(String id){
 		return processes.get(id);
 	}
 	
@@ -115,8 +116,8 @@ public class RemoteProcessCache {
 	 * @param original
 	 * @return
 	 */
-	public Process createRemoteProcess(Process original){
-		Process  remote = processes.get(original.getId());	
+	public RemoteProcess createRemoteProcess(Process original){
+		RemoteProcess remote = processes.get(original.getId());	
 		if(remote != null)
 			return remote;
 		remote = internalCreateRemoteProcess(original);
@@ -125,13 +126,17 @@ public class RemoteProcessCache {
 		return remote;
 	}
 	
-	private Process internalCreateRemoteProcess(Process original) {
+	private RemoteProcess internalCreateRemoteProcess(Process original) {
 		Process remoteProcess = copy(original);
 		remoteProcess.setDistributed(false);
 		remoteProcess.setRemoteExecuting(true);
 		remoteProcess.setCyberPhysical(false);
+		boolean runCompensation = original.getGoal() != null && !original.getGoal().isEmpty();		
 		remoteProcess.setGoal("");
-		return remoteProcess;
+		
+		return new RemoteProcess()
+				.setProcess(remoteProcess)
+				.setRunCompensation(runCompensation);
 	}
 	
 	private Process copy(Process original) {
@@ -150,8 +155,8 @@ public class RemoteProcessCache {
 		return getRoot(step.getParentstep());
 	}
 	
-	private void clearOutTransitions(Process remoteProcess) {
-		remoteProcess.getPorts().stream()
+	private void clearOutTransitions(RemoteProcess remoteProcess) {
+		remoteProcess.getProcess().getPorts().stream()
 		.filter(p -> p instanceof EndPort)
 		.forEach(p -> p.getOutTransitions().clear());
 	}

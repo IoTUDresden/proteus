@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import eu.vicci.process.distribution.core.DistributedSession;
 import eu.vicci.process.distribution.core.DistributionManagerListener;
 import eu.vicci.process.distribution.core.IDistributionManager;
+import eu.vicci.process.distribution.core.RemoteProcess;
 import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
@@ -52,6 +53,15 @@ public class RemoteStepInvokeWorker {
 	public Map<String, IJSONDataPortInstance> getEndDataPorts() {
 		return finalMessage.getEndDataPorts();
 	}
+	
+	/**
+	 * Check if the final Message was received. 
+	 * If the process was maybe compensation and compensation was failing.
+	 * @return
+	 */
+	public boolean receivedFinalMessage(){
+		return finalMessage != null;
+	}
 
 	/**
 	 * Gets the Control End Ports with state.
@@ -90,7 +100,7 @@ public class RemoteStepInvokeWorker {
 		StateBase oldState = processInstance.getCurrentState();
 //		processInstance.setCurrentState(new WaitingState(processInstance));
 
-		Process remoteProcess = distributionManager.createRemoteProcess(process);
+		RemoteProcess remoteProcess = distributionManager.createRemoteProcess(process);
 		Map<String, DataTypeInstance> inputParameters = getInputParameters();
 
 		distributionManager.addDistributionManagerListener(listener);
@@ -108,7 +118,11 @@ public class RemoteStepInvokeWorker {
 		distributionManager.removeDistributionManagerListener(listener);
 //		processInstance.setCurrentState(oldState);
 
-		// createDataTypeInstancesFromResponse();
+//		 createDataTypeInstancesFromResponse();
+	}
+	
+	public void forceFinish(){
+		responseReceived.countDown();
 	}
 
 	private Map<String, DataTypeInstance> getInputParameters() {
@@ -139,7 +153,6 @@ public class RemoteStepInvokeWorker {
 			if(!remoteSession.equals(oldSession))
 				return;
 			remoteSession = newSession;
-			//TODO inform process step?
 		}
 	};
 

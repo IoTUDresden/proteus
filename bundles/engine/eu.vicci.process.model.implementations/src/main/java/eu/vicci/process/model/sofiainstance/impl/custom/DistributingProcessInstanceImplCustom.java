@@ -35,7 +35,7 @@ public class DistributingProcessInstanceImplCustom extends ProcessInstanceImplCu
 		// - what is done with the state change messages? we must delegate them
 		// to the super peer
 		doingEndoperations();
-		return true;
+		return worker.receivedFinalMessage();
 	}
 	
 	@Override
@@ -51,15 +51,27 @@ public class DistributingProcessInstanceImplCustom extends ProcessInstanceImplCu
 	public void setDistributionManager(IDistributionManager distributionManager) {
 		this.distributionManager = distributionManager;
 	}
+	
+	/**
+	 * forces this processstep to finish the execution. Used to tell, if the compensation has finished and 
+	 * this step can proceed.
+	 */
+	public void finishDistribution(){
+		worker.forceFinish();		
+	}
 
 	@Override
 	public void activateDataEndPorts() {
+		if(!worker.receivedFinalMessage()) 
+			return;
 		getPorts().stream().filter(p -> p instanceof EndDataPortInstance)
 				.forEach(p -> activateEndDataPort((EndDataPortInstance) p));
 	}
 
 	@Override
 	public void activateControlEndPorts() {
+		if(!worker.receivedFinalMessage()) 
+			return;
 		getPorts().stream().filter(p -> p instanceof EndControlPortInstance)
 				.forEach(p -> activateEndControlPort((EndControlPortInstance) p));
 	}

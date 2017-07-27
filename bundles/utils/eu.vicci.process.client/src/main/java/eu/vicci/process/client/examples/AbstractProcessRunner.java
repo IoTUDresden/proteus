@@ -145,12 +145,16 @@ public abstract class AbstractProcessRunner {
 	 * @param arg
 	 */
 	protected void onStateChange(IStateChangeMessage arg){
+		if(!arg.getProcessInstanceId().equals(rootInstanceId))
+			return; //only listen to messages for this process
+		
 		println("");
 		println((arg.getProcessName() + 
 				" changed to " + arg.getState().toString()));
 		
 		//finished
-		if(arg.getProcessInstanceId().equals(rootInstanceId) && State.EXECUTED == arg.getState())
+		if(arg.getInstanceId().equals(rootInstanceId) 
+				&& (State.EXECUTED == arg.getState() || State.FAILED == arg.getState()))
 			termination.countDown();				
 	}
 	

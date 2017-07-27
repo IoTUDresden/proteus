@@ -19,6 +19,7 @@ import eu.vicci.process.distribution.core.DistributionManagerListener;
 import eu.vicci.process.distribution.core.IDistributionManager;
 import eu.vicci.process.distribution.core.PeerProfile;
 import eu.vicci.process.distribution.core.RemoteListener;
+import eu.vicci.process.distribution.core.RemoteProcess;
 import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.util.ConfigurationReader;
@@ -88,10 +89,10 @@ public class DistributionManager implements IDistributionManager {
 				return;
 			}
 			
-			DistributedSession session = remoteProcessCache.getSessionFor(request.originalInstanceId);
-			removeTrackedInstance(session);			
+			DistributedSession oldSession = remoteProcessCache.getSessionFor(request.originalInstanceId);
+			removeTrackedInstance(oldSession);			
 			Map<String, DataTypeInstance> inputParameters = inputParametersCache.remove(request.originalInstanceId);	
-			Process process = remoteProcessCache.get(request.processId);
+			RemoteProcess process = remoteProcessCache.get(request.processId);
 				
 			if(process == null){
 				LOG.error("cant find remote process for id '{}'", request.processId);
@@ -103,7 +104,7 @@ public class DistributionManager implements IDistributionManager {
 	};
 
 	@Override
-	public DistributedSession executeRemoteProcess(String peerId, String runningForInstanceId, Process process, 
+	public DistributedSession executeRemoteProcess(String peerId, String runningForInstanceId, RemoteProcess process, 
 			Map<String, DataTypeInstance> inputParameters) {
 		checkExecutionArgs(peerId, runningForInstanceId);
 		
@@ -114,18 +115,20 @@ public class DistributionManager implements IDistributionManager {
 		//feedback listener 
 		IProcessEngineClient tmpPec = createSuperPeerClient(TEMP_CLIENT_NAME);
 		
-		String pid = tmpPec.deployProcessRemote(peerId, process);
+		String pid = tmpPec.deployProcessRemote(peerId, process.getProcess());
 		String remoteProcessInstanceId = tmpPec.deployProcessInstanceRemote(peerId, pid);
 		
-		DistributedSession session = new DistributedSession(remoteProcessInstanceId, peerId);
-		trackProcessInstance(session);
+		DistributedSession newSession = new DistributedSession(remoteProcessInstanceId, peerId);		
+		trackProcessInstance(newSession);
 		
-		remoteProcessCache.putSessionFor(runningForInstanceId, session);		
-		inputParametersCache.put(runningForInstanceId, inputParameters);
+		DistributedSession oldSession = remoteProcessCache.putSessionFor(runningForInstanceId, newSession);		
+		informListenersAboutSessionChange(oldSession, newSession);
+		
+		inputParametersCache.put(runningForInstanceId, inputParameters);	
 		
 		tmpPec.startProcessInstanceRemote(peerId, remoteProcessInstanceId, runningForInstanceId, inputParameters);
 		
-		return session;
+		return newSession;
 	}
 	
 	private void checkExecutionArgs(String peerId, String runningForInstanceId){
@@ -155,14 +158,14 @@ public class DistributionManager implements IDistributionManager {
 	}
 
 	@Override
-	public DistributedSession workRemote(String ip, String runningForInstanceId, Process process, 
+	public DistributedSession workRemote(String ip, String runningForInstanceId, RemoteProcess process, 
 			Map<String, DataTypeInstance> inputParameters) {
 		String peerId = getPeerIdForIp(ip);		
 		return executeRemoteProcess(peerId, runningForInstanceId, process, inputParameters);
 	}
 	
 	@Override
-	public Process createRemoteProcess(Process original){
+	public RemoteProcess createRemoteProcess(Process original){
 		return remoteProcessCache.createRemoteProcess(original);
 	}
 	
@@ -223,13 +226,18 @@ public class DistributionManager implements IDistributionManager {
 	// FIXME StateChanges are not correct, e.g. the instance id in the state change must not be the same as on the superpeer, 
 	// so we need additional infos (the peer id, instance id on peer and instance id on superpeer ar enough)
 	private void handleStateChange(IStateChangeMessage message) {
-		if(message.getPeerId() == null || message.getPeerId().isEmpty())
+		if(message.getPeerId() == null 
+				|| message.getPeerId().isEmpty()
+				|| message.getOriginalProcessInstanceId() == null
+				|| message.getOriginalProcessInstanceId().isEmpty())
 			return;
+		
 		if(!processHasFinished(message))
 			return;
-		DistributedSession session = new DistributedSession(message.getInstanceId(), message.getPeerId());
+		
+		DistributedSession session = remoteProcessCache.getSessionFor(message.getOriginalProcessInstanceId());		
 		if(!removeTrackedInstance(session))
-			return;
+			return;		
 		
 		//at this point we know, that remote execution has finished and the instance on the peer was tracked
 		informDistributionListeners(message, session);
@@ -257,12 +265,21 @@ public class DistributionManager implements IDistributionManager {
 			distributionListeners.stream().forEach(l -> l.processOnPeerHasFinished(message, session));			
 		}		
 	}
+	
+	private void informListenersAboutSessionChange(DistributedSession oldSession, DistributedSession newSession){
+		if(oldSession == null || newSession == null)
+			return;
+		
+		synchronized (distributionListeners) {
+			distributionListeners.stream().forEach(l -> l.remoteSessionChanged(oldSession, newSession));			
+		}			
+	}
 
-	private boolean processHasFinished(IStateChangeMessage message) {
+	private boolean processHasFinished(IStateChangeMessage message) {		
 		switch (message.getState()) {
 		case EXECUTED:
-//		case DEACTIVATED:
-//		case FAILED:
+		case DEACTIVATED:
+		case FAILED:
 			return true;
 		default:
 			return false;
