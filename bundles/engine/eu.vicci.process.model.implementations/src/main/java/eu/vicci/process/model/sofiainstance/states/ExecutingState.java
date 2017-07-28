@@ -68,6 +68,14 @@ public class ExecutingState extends StateBase {
 	private void waitForCompensation() {
 		if (!compensationIsRunning)
 			return;
+		
+		if(executionSuccess){
+			compensationWorker.setListener(null);
+			executionFlags = new ExecutionFlags();
+			executionFlags.hasBeenFinished = false;
+			executionFlags.hasBeenSatisfied = true;
+			mWait.countDown();
+		}
 
 		try {
 			mWait.await();

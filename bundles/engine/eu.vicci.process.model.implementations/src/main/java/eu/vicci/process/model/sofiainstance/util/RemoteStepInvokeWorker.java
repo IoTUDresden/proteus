@@ -17,6 +17,7 @@ import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.StartDataPortInstance;
+import eu.vicci.process.model.sofiainstance.State;
 import eu.vicci.process.model.sofiainstance.impl.custom.DistributingProcessInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.states.StateBase;
 import eu.vicci.process.model.sofiainstance.states.WaitingState;
@@ -144,7 +145,12 @@ public class RemoteStepInvokeWorker {
 		public void processOnPeerHasFinished(IStateChangeMessage message, DistributedSession session) {
 			if (!remoteSession.equals(session))
 				return;			
-			finalMessage = message;
+			State messageState = message.getState();
+			
+			//if final message is null, process will go to failed state
+			if(messageState != State.FAILED && messageState != State.DEACTIVATED)
+				finalMessage = message;
+			
 			responseReceived.countDown();
 		}
 		

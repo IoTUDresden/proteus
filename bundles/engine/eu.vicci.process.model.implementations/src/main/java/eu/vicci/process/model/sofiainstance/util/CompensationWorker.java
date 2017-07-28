@@ -68,6 +68,8 @@ public class CompensationWorker implements Runnable {
     private Collection<String> goals = new HashSet<>();
     private Map<String, Object> parameters = new HashMap<>();
     private String instanceId;
+    
+    private Object lock = new Object();
 
 
 	@Override
@@ -99,7 +101,9 @@ public class CompensationWorker implements Runnable {
 	}
 	
 	public void setListener(CompensationListener listener){
-		this.listener = listener;		
+		synchronized(lock){
+			this.listener = listener;		
+		}
 	}
 	
 	public void setWorkflowName(String workflowName){
@@ -206,10 +210,11 @@ public class CompensationWorker implements Runnable {
         } catch (IOException exception) {
         	LOG.error("error closing connection to fbs");
         } finally{
-            if(listener != null)
-            	listener.compensationFinished(flags);        	
+        	synchronized(lock){
+        		if(listener != null)
+        			listener.compensationFinished(flags);    
+        	}
         }
-
     }
     
     private JsonObject post(String path, String json) {

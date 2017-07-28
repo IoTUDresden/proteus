@@ -277,10 +277,21 @@ public class DistributionManager implements IDistributionManager {
 
 	private boolean processHasFinished(IStateChangeMessage message) {		
 		switch (message.getState()) {
-		case EXECUTED:
+		case EXECUTED: 
+			return true;
+		
 		case DEACTIVATED:
 		case FAILED:
-			return true;
+			String orgInstanceId = message.getOriginalProcessInstanceId();
+			String modelId = message.getProcessModelId();
+			RemoteProcess r = remoteProcessCache.get(modelId);
+			if(orgInstanceId == null || modelId == null || r == null){
+				LOG.error("received corrupt state change message");
+				return false;
+			}
+
+			return !r.isRunCompensation();
+		
 		default:
 			return false;
 		}
