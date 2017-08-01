@@ -91,7 +91,8 @@ public class DistributionManager implements IDistributionManager {
 			
 			DistributedSession oldSession = remoteProcessCache.getSessionFor(request.originalInstanceId);
 			removeTrackedInstance(oldSession);			
-			Map<String, DataTypeInstance> inputParameters = inputParametersCache.remove(request.originalInstanceId);	
+			Map<String, DataTypeInstance> inputParameters = inputParametersCache.containsKey(request.originalInstanceId) ? 
+					inputParametersCache.remove(request.originalInstanceId) : null;	
 			RemoteProcess process = remoteProcessCache.get(request.processId);
 				
 			if(process == null){
@@ -124,7 +125,8 @@ public class DistributionManager implements IDistributionManager {
 		DistributedSession oldSession = remoteProcessCache.putSessionFor(runningForInstanceId, newSession);		
 		informListenersAboutSessionChange(oldSession, newSession);
 		
-		inputParametersCache.put(runningForInstanceId, inputParameters);	
+		if(inputParameters != null)
+			inputParametersCache.put(runningForInstanceId, inputParameters);	
 		
 		tmpPec.startProcessInstanceRemote(peerId, remoteProcessInstanceId, runningForInstanceId, inputParameters);
 		

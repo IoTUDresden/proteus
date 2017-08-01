@@ -12,6 +12,13 @@
 
 	<name>PROtEUS Custom Implementation</name>
 	<packaging>eclipse-plugin</packaging>
+	
+	 <repositories>
+    	<repository>
+      		<id>DROiTAPI-Repo</id>
+      		<url>https://IoTUDresden.github.io/DROiTAPI/repo</url>
+    	</repository>
+  	</repositories>
 
 	<dependencies>
 		<dependency>
@@ -53,6 +60,11 @@
 			<groupId>ws.wamp.jawampa</groupId>
 			<artifactId>jawampa-netty</artifactId>
 			<version>0.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.vicci.driver.turtlebot</groupId>
+			<artifactId>eu.vicci.driver.turtlebot</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
