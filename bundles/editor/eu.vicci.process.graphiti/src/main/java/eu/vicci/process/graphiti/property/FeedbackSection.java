@@ -21,7 +21,6 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 
 import eu.vicci.process.graphiti.ProcessFeatureProvider;
 import eu.vicci.process.model.sofia.CpsStep;
-import eu.vicci.process.model.sofia.ProcessStep;
 
 public class FeedbackSection extends PropertySectionBase {
 	/**
@@ -70,12 +69,7 @@ public class FeedbackSection extends PropertySectionBase {
 	
 	private void createGoal(Composite parent){
 		cGoal = getWidgetFactory().createText(parent, "", SWT.MULTI | SWT.V_SCROLL | SWT.WRAP);
-		cGoal.addModifyListener(new ModifyListener() {			
-			@Override
-			public void modifyText(ModifyEvent e) {
-				writeToModel();				
-			}
-		});
+		cGoal.addModifyListener(simpleModifyListener);
 
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, STANDARD_LABEL_WIDTH);
@@ -94,12 +88,7 @@ public class FeedbackSection extends PropertySectionBase {
 	
 	private void createContext(Composite parent) {
 		cContext = getWidgetFactory().createText(parent, "", SWT.SINGLE);
-		cContext.addModifyListener(new ModifyListener() {			
-			@Override
-			public void modifyText(ModifyEvent e) {
-				writeToModel();				
-			}
-		});
+		cContext.addModifyListener(simpleModifyListener);
 		
 		FormData data = new FormData();
 		data.left = new FormAttachment(0, STANDARD_LABEL_WIDTH);
@@ -136,6 +125,13 @@ public class FeedbackSection extends PropertySectionBase {
 		return null;
 	}
 	
+	private ModifyListener simpleModifyListener = new ModifyListener() {		
+		@Override
+		public void modifyText(ModifyEvent e) {
+			writeToModel();			
+		}
+	};
+	
 	
 	@Override
 	public void refresh() {
@@ -146,8 +142,15 @@ public class FeedbackSection extends PropertySectionBase {
 		String sGoal = processStep.getGoal() == null ? "" : processStep.getGoal();
 		String sContext = processStep.getContext() == null ? "" : processStep.getContext();
 		
+		//removing and adding the listener should prevent, that the write to model is called after refreshing
+		cContext.removeModifyListener(simpleModifyListener);
+		cGoal.removeModifyListener(simpleModifyListener);
+		
 		cContext.setText(sContext);
 		cGoal.setText(sGoal);		
+		
+		cContext.addModifyListener(simpleModifyListener);
+		cGoal.addModifyListener(simpleModifyListener);
 	}
 	
 	private void writeToModel() {
