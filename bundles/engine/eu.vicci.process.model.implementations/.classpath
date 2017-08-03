@@ -17,7 +17,6 @@
 	<classpathentry exported="true" kind="lib" path="libs/fluent-hc-4.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/httpclient-cache-4.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/httpmime-4.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/java_websocket.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/javassist-3.18.1-GA.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/javax.servlet-3.0.0.v201112011016.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/jaxb-api-2.2.7.jar"/>
