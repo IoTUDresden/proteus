@@ -32,6 +32,9 @@ public class TimerWithStart {
 	@JsonProperty
 	String process;
 	
+	@JsonProperty
+	String peer;
+	
 	static TimerWithStart create() {
 		TimerWithStart timer = new TimerWithStart();
 		timer.startTime = timer.timestamp = System.currentTimeMillis();

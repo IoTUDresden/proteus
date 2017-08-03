@@ -105,6 +105,7 @@ public class LoggingManager {
 		timer.stepInstance = message.getInstanceId();
 		timer.name = "proteus." + timer.stepInstance;
 		timer.process = message.getProcessName();
+		timer.peer = message.getPeerId() == null ? "" : message.getPeerId();
 		timerContexts.put(logId.stepInstance, timer);
 	}
 
@@ -129,11 +130,13 @@ public class LoggingManager {
 		private final String model;
 		private final String step;
 		private final String stepInstance;
+		private final String peerId;
 
 		public LogIdentifier(IStateChangeMessage message) {
 			model = "model-" + message.getProcessId();
 			step = model + ".step-" + message.getModelId();
-			stepInstance = step + ".step-instance-" + message.getInstanceId();
+			peerId = message.getPeerId() == null || message.getPeerId().equals("") ? "" : message.getPeerId() + "_";			
+			stepInstance = step + ".step-instance-" + peerId + message.getInstanceId();
 		}
 	}
 
