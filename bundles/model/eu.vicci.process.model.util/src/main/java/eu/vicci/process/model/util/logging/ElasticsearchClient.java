@@ -14,7 +14,7 @@ public interface ElasticsearchClient {
 	 *            the month e.g. 06 as string
 	 * @param timer
 	 */
-	@RequestLine("POST /mapek-{year}-{month}/timer/")
+	@RequestLine("POST /proteus-{year}-{month}/timer/")
 	void post(@Param("year") String year, @Param("month") String month, String timer);
 
 }
