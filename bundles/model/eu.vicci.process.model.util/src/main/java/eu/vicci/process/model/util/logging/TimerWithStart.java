@@ -1,5 +1,8 @@
 package eu.vicci.process.model.util.logging;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,16 +21,19 @@ public class TimerWithStart {
 	String model;
 
 	@JsonProperty("@timestamp")
-	Long timestamp;
+	Date timestamp;
 	
 	@JsonProperty
-	Long startTime;
+	Date startTime;
+	
+	@JsonProperty
+	Date endTime;
 
+	/**
+	 * Duration in ms
+	 */
 	@JsonProperty
 	long duration;
-
-	@JsonProperty
-	long endTime;
 
 	@JsonProperty
 	String process;
@@ -37,14 +43,14 @@ public class TimerWithStart {
 	
 	static TimerWithStart create() {
 		TimerWithStart timer = new TimerWithStart();
-		timer.startTime = timer.timestamp = System.currentTimeMillis();
+		timer.startTime = timer.timestamp = Calendar.getInstance().getTime();			
 		return timer;
 	}
 
 	@JsonIgnore
 	TimerWithStart stop() {
-		endTime = System.currentTimeMillis();
-		duration = endTime - startTime;
+		endTime = Calendar.getInstance().getTime();
+		duration = endTime.getTime() - startTime.getTime();
 		return this;
 	}
 	
