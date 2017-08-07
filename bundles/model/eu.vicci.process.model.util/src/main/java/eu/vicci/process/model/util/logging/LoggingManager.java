@@ -1,5 +1,6 @@
 package eu.vicci.process.model.util.logging;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
 import eu.vicci.process.model.sofiainstance.State;
@@ -39,7 +42,12 @@ public class LoggingManager {
 
 	private LoggingManager() {
 		String esHost = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.ELASTICSEARCH_HOST);
+		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+		dateformat.setTimeZone(Calendar.getInstance().getTimeZone());
 		objectMapper = new ObjectMapper();
+		objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		objectMapper.setDateFormat(dateformat);
+		
 		if(esHost != null)
 			esClient = Feign.builder().target(ElasticsearchClient.class, "http://" + esHost);
 	}
