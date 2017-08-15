@@ -13,8 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
-
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
 import eu.vicci.process.model.sofiainstance.State;
 import eu.vicci.process.model.util.configuration.ConfigProperties;

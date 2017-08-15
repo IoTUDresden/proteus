@@ -95,7 +95,10 @@ public class RESTInvokeInstanceImplCustom extends ProcessStepInstanceImplCustom 
 	}
 
 	//TODO small hack to receive correct data from openhab rest. the default implementation causes errors
-	private void deserializeAndActivatePort(EndDataPortInstance port, DataTypeInstance dataInstance) {		
+	private void deserializeAndActivatePort(EndDataPortInstance port, DataTypeInstance dataInstance) {	
+		if(isCompensatingPort(port))
+			return;
+		
 		if ((serverUri.contains("rest/items") || serverUri.contains("rest/things"))) {
 			
 			String typeName = port.getDataInstance().getDataTypeType().getName();

@@ -1,9 +1,10 @@
 package eu.vicci.process.model.sofiainstance.states;
 
-import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 
+import eu.vicci.process.model.sofia.EndDataPort;
 import eu.vicci.process.model.sofiainstance.BooleanTypeInstance;
+import eu.vicci.process.model.sofiainstance.EndDataPortInstance;
 import eu.vicci.process.model.sofiainstance.PortInstance;
 import eu.vicci.process.model.sofiainstance.State;
 import eu.vicci.process.model.sofiainstance.impl.custom.DistributingProcessInstanceImplCustom;
@@ -12,6 +13,7 @@ import eu.vicci.process.model.sofiainstance.impl.custom.ProcessStepInstanceImplC
 import eu.vicci.process.model.sofiainstance.util.CompensationWorker;
 import eu.vicci.process.model.sofiainstance.util.CompensationWorker.CompensationListener;
 import eu.vicci.process.model.sofiainstance.util.CompensationWorker.ExecutionFlags;
+import eu.vicci.process.model.sofiainstance.util.LifeCycleManager;
 
 public class ExecutingState extends StateBase {
 	private boolean allreadyExecuted = false;
@@ -69,13 +71,13 @@ public class ExecutingState extends StateBase {
 		if (!compensationIsRunning)
 			return;
 		
-		if(executionSuccess){
-			compensationWorker.setListener(null);
-			executionFlags = new ExecutionFlags();
-			executionFlags.hasBeenFinished = false;
-			executionFlags.hasBeenSatisfied = true;
-			mWait.countDown();
-		}
+//		if(executionSuccess){
+//			compensationWorker.setListener(null);
+//			executionFlags = new ExecutionFlags();
+//			executionFlags.hasBeenFinished = false;
+//			executionFlags.hasBeenSatisfied = true;
+//			mWait.countDown();
+//		}
 
 		try {
 			mWait.await();
@@ -96,18 +98,29 @@ public class ExecutingState extends StateBase {
 	}
 
 	private void setOutValue(String dtName, boolean dtValue) {
-		Optional<BooleanTypeInstance> dt = processStep.getEndParameter().stream()
-				.filter(ep -> dtName.equals(ep.getName()))
-				.filter(ep -> ep instanceof BooleanTypeInstance)
-				.map(ep -> (BooleanTypeInstance) ep).findFirst();
+//		Optional<BooleanTypeInstance> dt = processStep.getEndParameter().stream()
+//				.filter(ep -> dtName.equals(ep.getName()))
+//				.filter(ep -> ep instanceof BooleanTypeInstance)
+//				.map(ep -> (BooleanTypeInstance) ep).findFirst();
 		
-		if (!dt.isPresent())
-			return;
+		processStep.getPorts().stream()
+		.filter(p -> p instanceof EndDataPortInstance)
+		.map(p -> (EndDataPortInstance)p)
+		.filter(p -> p.getDataInstance() instanceof BooleanTypeInstance)
+		.filter(p -> dtName.equals(p.getDataInstance().getName()))
+		.forEach(p -> {
+			BooleanTypeInstance dti = (BooleanTypeInstance)p.getDataInstance();
+			dti.setValue(dtValue);
+			LifeCycleManager.INSTANCE.activatePort(p, dti);
+		});
 		
-		BooleanTypeInstance bdt = dt.get();
-		bdt.setValue(dtValue);
-		if (!processStep.getReturnValues().contains(bdt))
-			processStep.getReturnValues().add(bdt);
+//		if (!dt.isPresent())
+//			return;
+		
+//		BooleanTypeInstance bdt = dt.get();
+//		bdt.setValue(dtValue);
+//		processStep.getReturnValues().remove(bdt);
+//		processStep.getReturnValues().add(bdt);
 	}
 
 	@Override
@@ -170,7 +183,7 @@ public class ExecutingState extends StateBase {
 		workerThread.start();
 	}
 
-	private CompensationListener compensationListener = new CompensationListener() {
+	private final CompensationListener compensationListener = new CompensationListener() {
 		@Override
 		public void compensationFinished(ExecutionFlags flags) {
 			executionFlags = flags;

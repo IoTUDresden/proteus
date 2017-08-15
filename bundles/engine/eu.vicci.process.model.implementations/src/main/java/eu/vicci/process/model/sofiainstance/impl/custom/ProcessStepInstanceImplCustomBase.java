@@ -15,6 +15,7 @@ import eu.vicci.process.actors.ActorAssignable;
 import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.model.sofia.CompositeStep;
+import eu.vicci.process.model.sofiainstance.BooleanTypeInstance;
 import eu.vicci.process.model.sofiainstance.Configuration;
 import eu.vicci.process.model.sofiainstance.DataPortInstance;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
@@ -36,6 +37,7 @@ import eu.vicci.process.model.sofiainstance.states.ProcessResetListener;
 import eu.vicci.process.model.sofiainstance.states.StateBase;
 import eu.vicci.process.model.sofiainstance.states.StateChangable;
 import eu.vicci.process.model.sofiainstance.states.UndeployedState;
+import eu.vicci.process.model.sofiainstance.util.CompensationWorker;
 import eu.vicci.process.model.sofiainstance.util.InternalProcessStepInterface;
 import eu.vicci.process.model.sofiainstance.util.LifeCycleManager;
 import eu.vicci.process.model.sofiainstance.util.ProcessStepTimerTask;
@@ -622,6 +624,34 @@ public abstract class ProcessStepInstanceImplCustomBase extends ProcessStepInsta
 	public List<StartPortInstance> getStartPorts() {
 		return getPorts().stream().filter(p -> p instanceof StartPortInstance).map(StartPortInstance.class::cast)
 				.collect(Collectors.toList());
+	}
+	
+	protected boolean runsCompensation(){
+		if(getProcessStepType().getGoal() == null || getProcessStepType().getGoal().trim().isEmpty()) 
+			return false;
+		return true;
+	}
+	
+	/**
+	 * Checks if the given port is used for the compensation. 
+	 * Compensating steps should not activated on other procedures than the compensation worker.
+	 * 
+	 * @param port
+	 * @return
+	 */
+	protected boolean isCompensatingPort(PortInstance port){
+		if(!runsCompensation())
+			return false;
+		if(!(port instanceof DataPortInstance))
+			return false;
+		DataPortInstance dpi = (DataPortInstance)port;
+		DataTypeInstance dti = dpi.getDataInstance();
+		if(!(dti instanceof BooleanTypeInstance))
+			return false;
+		
+		return CompensationWorker.HAS_BEEN_FINISHED.equals(dti.getName()) ||
+				CompensationWorker.HAS_BEEN_SATISFIED.equals(dti.getName());
+				
 	}
 
 	private StateChangeMessage createStateChangeMessage() {
