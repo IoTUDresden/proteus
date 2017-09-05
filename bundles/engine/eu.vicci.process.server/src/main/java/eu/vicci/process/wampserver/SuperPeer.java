@@ -379,6 +379,10 @@ public class SuperPeer {
 
 		@Override
 		public void run() {
+			if(feedbackServiceMonitor == null){
+				LOG.info("No feedback-service configuration found. Terminating status thread.");
+				return;
+			}
 			while (!terminate) {
 				publishPeerStatus();
 				try {
