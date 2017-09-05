@@ -1,5 +1,6 @@
 package eu.vicci.process.model.util.messages.core;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CompensationRequest implements IWampMessage {
@@ -19,6 +20,26 @@ public class CompensationRequest implements IWampMessage {
 	 * Instance Id for the process instance on the super peer.
 	 */
 	@JsonProperty public String originalInstanceId;
+	
+	@JsonIgnore
+	public long getTimestamp() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@JsonIgnore
+	public void setTimestamp(long timestamp) {
+		throw new UnsupportedOperationException();
+	}
+	
+	@JsonIgnore
+	public String getMessageId() {
+		throw new UnsupportedOperationException();
+	}
+	
+	@JsonIgnore
+	public void setMessageId(String messageId) {
+		throw new UnsupportedOperationException();
+	}
 	
 	
 }
