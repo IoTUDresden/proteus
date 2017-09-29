@@ -4,10 +4,18 @@
 <log4j:configuration>
 	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern"
-				value="[%t] %-5p %c{2} %x - %m%n" />
+			<param name="ConversionPattern" value="%d{ISO8601} [%t] %-5p %c{2} %x - %m%n" />
 		</layout>
 	</appender>
+	
+	<appender name="file" class="org.apache.log4j.FileAppender">
+		<param name="file" value="vicci-runtime.log"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"	value="%d{ISO8601} [%t] %-5p %c{2} %x - %m%n" />
+		</layout>
+	</appender>
+	
+	
 	<logger name="io.netty">
 		<level value="error"/>
 	</logger>
@@ -23,5 +31,6 @@
 	<root>
 		<priority value="debug"></priority>
 		<appender-ref ref="stdout" />
+		<appender-ref ref="file" />
 	</root>
 </log4j:configuration>

@@ -22,7 +22,7 @@
 <stringAttribute key="pde.version" value="3.3"/>
 <stringAttribute key="product" value=""/>
 <stringAttribute key="selected_target_plugins" value="org.eclipse.emf.ecore.xmi@default:default,org.eclipse.ui.ide@default:default"/>
-<stringAttribute key="selected_workspace_plugins" value="eu.vicci.openhab.util@default:default,eu.vicci.process.client@default:default,eu.vicci.process.core@default:default,eu.vicci.process.distribution@default:default,eu.vicci.process.engine@default:default,eu.vicci.process.graphiti.adapter.view@default:default,eu.vicci.process.graphiti.adapter@default:default,eu.vicci.process.model.implementations@default:default,eu.vicci.process.model.util@default:default,eu.vicci.process.model@default:default,eu.vicci.process.server@default:default"/>
+<stringAttribute key="selected_workspace_plugins" value="eu.vicci.openhab.util@default:default,eu.vicci.process.client@default:default,eu.vicci.process.core@default:default,eu.vicci.process.distribution@default:default,eu.vicci.process.engine@default:default,eu.vicci.process.graphiti.adapter.view@default:default,eu.vicci.process.graphiti.adapter@default:default,eu.vicci.process.model.implementations@default:default,eu.vicci.process.model.util@default:default,eu.vicci.process.model@default:default,eu.vicci.process.server.tests@default:false,eu.vicci.process.server@default:default"/>
 <booleanAttribute key="show_selected_only" value="false"/>
 <stringAttribute key="templateConfig" value="${target_home}\configuration\config.ini"/>
 <booleanAttribute key="tracing" value="false"/>
