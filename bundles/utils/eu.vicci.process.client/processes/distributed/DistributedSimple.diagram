@@ -356,7 +356,7 @@
     <ports xsi:type="sofia:StartControlPort" id="_RWSdYNl9EeaER9UBQCFXlQ" name="start_0">
       <outTransitions id="_SJLS4Nl9EeaER9UBQCFXlQ" name="transition" targetPort="/1/@subSteps.0/@ports.0"/>
     </ports>
-    <subSteps xsi:type="sofia:Process" id="_N62RQNl9EeaER9UBQCFXlQ" name="ProcessOnPeer" goal="" eplQuery="" executionPeer="192.168.2.101" distributed="true">
+    <subSteps xsi:type="sofia:Process" id="_N62RQNl9EeaER9UBQCFXlQ" name="ProcessOnPeer" goal="" eplQuery="" executionPeer="192.168.1.56" distributed="true">
       <ports xsi:type="sofia:StartControlPort" id="_Q0KAsNl9EeaER9UBQCFXlQ" name="start_0" inTransitions="/1/@ports.0/@outTransitions.0">
         <outTransitions id="_SepzoNl9EeaER9UBQCFXlQ" name="transition" targetPort="/1/@subSteps.0/@subSteps.0/@ports.0"/>
       </ports>

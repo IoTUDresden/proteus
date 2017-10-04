@@ -13,6 +13,30 @@ import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 
 public class Util {	
+	private static volatile boolean returnStaticBatteryLevel = false;
+	private static volatile Integer staticBatteryLevel = 100;
+	
+	/**
+	 * Allows to manipulate the returned battery level which can be received by {@link #getSystemBatteryStatus()}.
+	 * If set to true, a static value is returned by {@link #getSystemBatteryStatus()}. The static value can be set via 
+	 * {@link #setStaticBatteryLevel()}.
+	 *</br> 
+	 * If set to true, it also affects the value received by {@link #systemHasBattery()}, so always true is returned.
+	 * </br>
+	 * Default static battery level is {@link #staticBatteryLevel}.
+	 * @param returnStatic
+	 */
+	public static void returnStaticBatteryLevel(boolean returnStatic){
+		returnStaticBatteryLevel = returnStatic;				
+	}
+	
+	/**
+	 * Sets a static battery value. {@link #returnStaticBatteryLevel(boolean)} must be set to true, to return the static value.
+	 * @param level
+	 */
+	public static void setStaticBatteryLevel(Integer level){
+		staticBatteryLevel = level;		
+	}
 	
 	/**
 	 * Tries to get the IP, with the Filter specified in the config.
@@ -42,6 +66,8 @@ public class Util {
 	 * @return
 	 */
 	public static Integer getSystemBatteryStatus(){
+		if(returnStaticBatteryLevel)
+			return staticBatteryLevel;
 		if(SystemUtils.IS_OS_WINDOWS)
 			return getWindowsBattery();
 		if (SystemUtils.IS_OS_UNIX)
@@ -56,6 +82,8 @@ public class Util {
 	 * @return
 	 */
 	public static boolean systemHasBattery(){
+		if(returnStaticBatteryLevel)
+			return true;
 		if(SystemUtils.IS_OS_WINDOWS)
 			return windowsHasBattery();
 		if (SystemUtils.IS_OS_LINUX)

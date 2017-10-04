@@ -286,6 +286,9 @@ public class SuperPeer {
 		
 		try {
 			feedbackServiceMonitor.requestingMonitoring(superPeerRequest);
+		} catch (NullPointerException e) {
+			//we terminate the status thread on an other point, if the 	
+			//feedbackServiceMonitor is null
 		} catch (RetryableException e) {
 			LOG.error("error while connecting feedback-service: {}", e.getMessage());
 		} catch (Exception e) {
@@ -379,12 +382,12 @@ public class SuperPeer {
 
 		@Override
 		public void run() {
-			if(feedbackServiceMonitor == null){
-				LOG.info("No feedback-service configuration found. Terminating status thread.");
-				return;
-			}
 			while (!terminate) {
 				publishPeerStatus();
+				if(feedbackServiceMonitor == null){
+					LOG.info("No feedback-service configuration found. Terminating status thread.");
+					return;
+				}
 				try {
 					Thread.sleep(timeout);
 				} catch (InterruptedException e) {
