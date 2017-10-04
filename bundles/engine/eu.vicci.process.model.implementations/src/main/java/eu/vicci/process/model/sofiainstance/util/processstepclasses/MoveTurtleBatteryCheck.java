@@ -21,6 +21,10 @@ public class MoveTurtleBatteryCheck  implements ProcessStepWorker {
 	private static final double curveRadius = 0;
 	private static final int waitTime = 800;
 	
+	
+	//change this to true and the process will fail
+	private static final boolean isFailing = false;
+	
 	//to fake the bat level
 	private static final boolean fakeBattery = false;
 	private static final Integer normalBatLevel = 52;
@@ -36,6 +40,52 @@ public class MoveTurtleBatteryCheck  implements ProcessStepWorker {
 
 	@Override
 	public List<DataTypeInstance> work(Context context) {
+		if(isFailing)
+			executeFailing();
+		else
+			executeWorking();
+		
+		return context.endParameter;
+	}
+
+	@Override
+	public void deploy() {
+		if(!fakeBattery)
+			return;
+		try {
+			Class<?> utilClazz = Class.forName(utilClassName);
+			returnStaticBatteryLevelMethod = utilClazz.getDeclaredMethod(setStaticMethodName, boolean.class);
+			setStaticBatteryLevelMethod = utilClazz.getDeclaredMethod(setStaticLevelMethodName, Integer.class);
+			
+			returnStaticBatteryLevelMethod.invoke(null, true);
+			setStaticBatteryLevelMethod.invoke(null, normalBatLevel);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	private void executeFailing(){
+		try {
+			LOG.debug("run failing turtle");
+			Thread.sleep(3000);
+			LOG.debug("not enough battery to execute the process");	
+			
+			if(fakeBattery)	
+				setStaticBatteryLevelMethod.invoke(null, lowBatteryLevel);
+			
+			Thread.sleep(10000);
+			
+			if(fakeBattery)	
+				setStaticBatteryLevelMethod.invoke(null, normalBatLevel);
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		throw new RuntimeException("this process should fail");
+	}
+	
+	private void executeWorking(){
 		TurtleBot robot = new TurtleBot(host, port);
 		try {			
 			robot.connect();
@@ -57,32 +107,8 @@ public class MoveTurtleBatteryCheck  implements ProcessStepWorker {
 			
 			LOG.debug("moving the turtle finished");			
 		} catch (Exception e) {
-			try {
-				if(fakeBattery) 
-					setStaticBatteryLevelMethod.invoke(null, normalBatLevel);
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			} 		
 			throw new RuntimeException(e);
 		}		
-		
-		return context.endParameter;
-	}
-
-	@Override
-	public void deploy() {
-		if(!fakeBattery)
-			return;
-		try {
-			Class<?> utilClazz = Class.forName(utilClassName);
-			returnStaticBatteryLevelMethod = utilClazz.getDeclaredMethod(setStaticMethodName, boolean.class);
-			setStaticBatteryLevelMethod = utilClazz.getDeclaredMethod(setStaticLevelMethodName, Integer.class);
-			
-			returnStaticBatteryLevelMethod.invoke(null, true);
-			setStaticBatteryLevelMethod.invoke(null, normalBatLevel);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 }

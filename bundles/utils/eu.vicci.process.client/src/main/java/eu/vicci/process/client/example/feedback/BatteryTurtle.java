@@ -4,7 +4,7 @@ import eu.vicci.process.client.examples.AbstractProcessRunner;
 import eu.vicci.process.model.sofia.Process;
 
 public class BatteryTurtle extends AbstractProcessRunner {
-	private static final String EXEC_PEER = "192.168.1.56";
+	private static final String EXEC_PEER = "192.168.1.58";
 	private static final String REMOTE_NAME = "MoveRemote";
 	
 	public static void main(String[] args) {
