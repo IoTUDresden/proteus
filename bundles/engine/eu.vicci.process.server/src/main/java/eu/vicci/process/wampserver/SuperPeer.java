@@ -97,6 +97,10 @@ public class SuperPeer {
 	
 	private FeedbackServiceMonitor feedbackServiceMonitor;
 	private PeerStatusThread statusThread;
+	
+	//If feedbackservice is used.
+	//Will change to false, if not configured in server.conf.
+	private boolean fbsIsUsed = true;
 
 	public SuperPeer(IProcessManager processManager, IConfigurationReader configReader) {
 		if (configReader == null || processManager == null)
@@ -284,11 +288,10 @@ public class SuperPeer {
 		if(feedbackServiceMonitor == null) createFeedbackServiceMonitor();
 		if(superPeerRequest == null)createSuperPeerRequest();
 		
-		try {
+		try { 
 			feedbackServiceMonitor.requestingMonitoring(superPeerRequest);
 		} catch (NullPointerException e) {
-			//we terminate the status thread on an other point, if the 	
-			//feedbackServiceMonitor is null
+			LOG.info("Feedback Service Client not initialized. SuperPeer will not request the FBS.");
 		} catch (RetryableException e) {
 			LOG.error("error while connecting feedback-service: {}", e.getMessage());
 		} catch (Exception e) {
@@ -335,7 +338,8 @@ public class SuperPeer {
 	
 	protected void createFeedbackServiceMonitor(){
 		String feedbackHost = configReader.getFeedbackServiceUri();
-		if(feedbackHost == null || feedbackHost.isEmpty()) return;
+		fbsIsUsed = feedbackHost != null && !feedbackHost.isEmpty();
+		if(!fbsIsUsed) return;
 		if(!feedbackHost.startsWith("http://")) feedbackHost = "http://" + feedbackHost;
 		
 		feedbackServiceMonitor = Feign.builder()
@@ -361,7 +365,8 @@ public class SuperPeer {
 	}
 	
 	protected void publishPeerStatus(){
-		requestingFeedbackMonitor();
+		if(fbsIsUsed)
+			requestingFeedbackMonitor();
 		publishPeerMetrics();
 	}
 	
@@ -384,10 +389,6 @@ public class SuperPeer {
 		public void run() {
 			while (!terminate) {
 				publishPeerStatus();
-				if(feedbackServiceMonitor == null){
-					LOG.info("No feedback-service configuration found. Terminating status thread.");
-					return;
-				}
 				try {
 					Thread.sleep(timeout);
 				} catch (InterruptedException e) {
