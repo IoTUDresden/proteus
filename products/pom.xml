@@ -17,7 +17,7 @@
 
 	<modules>
 		<!--<module>process-editor</module>-->
-		<!--<module>proteus</module>-->
+		<module>proteus</module>
 	</modules>
 
 </project>
