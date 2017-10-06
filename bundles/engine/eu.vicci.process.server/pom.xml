@@ -11,7 +11,6 @@
 	<artifactId>eu.vicci.process.server</artifactId>
 
 	<name>PROtEUS Runtime</name>
-	<packaging>eclipse-plugin</packaging>
 
 	<dependencies>
 		<dependency>
@@ -29,10 +28,6 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.13</version>
 		</dependency>
-
-		<!-- <dependency> <groupId>org.elasticsearch</groupId> <artifactId>metrics-elasticsearch-reporter</artifactId> 
-			<version>2.0</version> </dependency> <dependency> <groupId>io.dropwizard.metrics</groupId> 
-			<artifactId>metrics-core</artifactId> <version>3.1.2</version> </dependency> -->
 
 		<dependency>
 			<groupId>com.netflix.feign</groupId>
@@ -52,7 +47,5 @@
 			<version>4.3.0</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>com.netflix.feign</groupId> <artifactId>feign-jackson</artifactId> 
-			<version>8.18.0</version> </dependency> -->
 	</dependencies>
 </project>
