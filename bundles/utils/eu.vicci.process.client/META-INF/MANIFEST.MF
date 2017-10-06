@@ -3,28 +3,9 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Client
 Bundle-SymbolicName: eu.vicci.process.client
 Bundle-Version: 1.0.0.qualifier
-Bundle-ClassPath: .,
- maven_libs/jackson-annotations.jar,
- maven_libs/jackson-core.jar,
- maven_libs/jackson-databind.jar,
- maven_libs/jackson-dataformat-msgpack.jar,
- maven_libs/jawampa-core.jar,
- maven_libs/jawampa-netty.jar,
- maven_libs/log4j.jar,
- maven_libs/msgpack-core.jar,
- maven_libs/netty-buffer.jar,
- maven_libs/netty-codec.jar,
- maven_libs/netty-codec-http.jar,
- maven_libs/netty-common.jar,
- maven_libs/netty-handler.jar,
- maven_libs/netty-transport.jar,
- maven_libs/rxjava.jar,
- maven_libs/slf4j-api.jar,
- maven_libs/slf4j-log4j12.jar
+Bundle-ClassPath: .
 Export-Package: eu.vicci.process.client,
- eu.vicci.process.client.subscribers,
- ws.wamp.jawampa,
- ws.wamp.jawampa.transport.netty
+ eu.vicci.process.client.subscribers
 Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.11.1",
  eu.vicci.process.model;bundle-version="1.0.0",
  eu.vicci.process.model.util;bundle-version="1.0.0",

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target includeMode="feature" name="Process Engine Platform" sequenceNumber="80">
+<?pde version="3.8"?><target includeMode="feature" name="Process Engine Platform" sequenceNumber="89">
 <locations>
-<location path="${project_loc:/eu.vicci.process.repository}/required plugins" type="Directory"/>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.graphiti.feature.feature.group" version="0.12.1.v20150916-0905"/>
 <unit id="org.eclipse.license.feature.group" version="1.0.1.v20140414-1359"/>
@@ -16,7 +15,7 @@
 <unit id="org.eclipse.graphiti.feature.tools.source.feature.group" version="0.12.1.v20150916-0905"/>
 <unit id="org.eclipse.graphiti.sdk.plus.source.feature.feature.group" version="0.12.1.v20150916-0905"/>
 <unit id="org.eclipse.graphiti.export.source.feature.feature.group" version="0.12.1.v20150916-0905"/>
-<repository location="http://download.eclipse.org/graphiti/updates/0.12.1/"/>
+<repository location="http://archive.eclipse.org/graphiti/updates/0.12.1/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.rcp.sdk.id" version="4.5.1.M20150904-0015"/>
@@ -28,8 +27,10 @@
 <unit id="org.eclipse.equinox.executable.feature.group" version="3.6.200.v20150602-1417"/>
 <unit id="epp.package.modeling" version="4.5.1.20150917-1200"/>
 <unit id="org.eclipse.equinox.p2.user.ui.feature.group" version="2.2.101.v20150826-1318"/>
+<unit id="org.eclipse.debug.ui" version="3.11.100.v20150731-1137"/>
 <repository location="http://download.eclipse.org/releases/mars/"/>
 </location>
+<location path="${project_loc:TargetPlatform}/target/repository" type="Directory"/>
 </locations>
 <environment>
 <nl>de_DE</nl>

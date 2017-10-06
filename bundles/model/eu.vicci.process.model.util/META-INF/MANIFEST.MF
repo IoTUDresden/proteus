@@ -3,8 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Util
 Bundle-SymbolicName: eu.vicci.process.model.util;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Export-Package: com.google.gson,
- eu.vicci.process.model.util,
+Export-Package: eu.vicci.process.model.util,
  eu.vicci.process.model.util.client,
  eu.vicci.process.model.util.configuration,
  eu.vicci.process.model.util.logging,
@@ -18,19 +17,5 @@ Require-Bundle: eu.vicci.process.core;bundle-version="1.0.0",
  eu.vicci.process.model;bundle-version="1.0.0"
 Bundle-Vendor: TUD
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Bundle-ClassPath: .,
- maven_libs/animal-sniffer-annotation.jar,
- maven_libs/feign-core.jar,
- maven_libs/gson.jar,
- maven_libs/jackson-annotations.jar,
- maven_libs/jackson-core.jar,
- maven_libs/jackson-core-asl.jar,
- maven_libs/jackson-databind.jar,
- maven_libs/jackson-mapper-asl.jar,
- maven_libs/log4j.jar,
- maven_libs/slf4j-api.jar,
- maven_libs/slf4j-log4j12.jar,
- maven_libs/xmlpull.jar,
- maven_libs/xpp3_min.jar,
- maven_libs/xstream.jar
+Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy

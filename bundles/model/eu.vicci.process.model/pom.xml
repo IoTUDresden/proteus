@@ -10,7 +10,6 @@
 	<artifactId>eu.vicci.process.model</artifactId>  
 
 	<name>Process Model</name>
-	<packaging>eclipse-plugin</packaging>
 
 	<build>
 		<sourceDirectory>src-gen/</sourceDirectory>

@@ -3,12 +3,10 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Core
 Bundle-SymbolicName: eu.vicci.process.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Require-Bundle: org.eclipse.core.runtime,
- eu.vicci.process.model;bundle-version="1.0.0"
+Require-Bundle: eu.vicci.process.model;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Export-Package: com.fasterxml.jackson.annotation,
- eu.vicci.process.client.core,
+Export-Package: eu.vicci.process.client.core,
  eu.vicci.process.devices.core,
  eu.vicci.process.devices.events.core,
  eu.vicci.process.distribution.core,
@@ -19,5 +17,4 @@ Export-Package: com.fasterxml.jackson.annotation,
  eu.vicci.process.model.util.serialization.jsonprocesssteps.core,
  eu.vicci.process.model.util.serialization.jsontypeinstances.core,
  eu.vicci.process.model.util.serialization.jsontypes.core
-Bundle-ClassPath: .,
- maven_libs/jackson-annotations.jar
+Bundle-ClassPath: .

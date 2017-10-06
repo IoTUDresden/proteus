@@ -21,25 +21,16 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.debug.ui;bundle-version="3.9.0",
  eu.vicci.process.model,
  eu.vicci.process.core;bundle-version="1.0.0",
- eu.vicci.process.model.util;bundle-version="1.0.0"
+ eu.vicci.process.model.util;bundle-version="1.0.0",
+ groovy;bundle-version="2.3.9"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .,
- maven_libs/commons-codec.jar,
- maven_libs/groovy-json.jar,
- maven_libs/groovy-xml.jar,
- maven_libs/groovy.jar,
- maven_libs/httpclient.jar,
- maven_libs/httpcore.jar,
- maven_libs/jcl-over-slf4j.jar,
- maven_libs/log4j.jar,
- maven_libs/slf4j-api.jar,
- maven_libs/slf4j-log4j12.jar,
- maven_libs/soa-model-core.jar,
- META-INF/
+Bundle-ClassPath: .
 Bundle-Vendor: TU Dresden
 Bundle-Localization: plugin
-Import-Package: eu.vicci.openhab.util,
+Import-Package: com.predic8.schema,
+ com.predic8.wsdl,
+ eu.vicci.openhab.util,
  eu.vicci.openhab.util.beans,
  eu.vicci.process.adapter,
  eu.vicci.process.client,

@@ -4,31 +4,11 @@ Bundle-Name: OpenHAB Utils
 Bundle-SymbolicName: eu.vicci.openhab.util;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: eu.vicci.process.core;bundle-version="1.0.0",
- org.eclipse.osgi;bundle-version="3.10.102",
  eu.vicci.process.model;bundle-version="1.0.0",
  eu.vicci.process.model.util;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath:  .,
- maven_libs/commons-codec.jar,
- maven_libs/commons-logging.jar,
- maven_libs/httpclient.jar,
- maven_libs/httpcore.jar,
- maven_libs/log4j.jar,
- maven_libs/slf4j-api.jar,
- maven_libs/slf4j-log4j12.jar,
- maven_libs/gson.jar,
- maven_libs/javax.ws.rs-api.jar,
- maven_libs/aopalliance-repackaged.jar,
- maven_libs/hk2-api.jar,
- maven_libs/hk2-locator.jar,
- maven_libs/hk2-utils.jar,
- maven_libs/javassist.jar,
- maven_libs/javax.annotation-api.jar,
- maven_libs/javax.inject.jar,
- maven_libs/jersey-common.jar,
- maven_libs/jersey-guava.jar,
- maven_libs/osgi-resource-locator.jar
+Bundle-ClassPath: .
 Bundle-Vendor: TUD
 Export-Package: eu.vicci.openhab.util,
  eu.vicci.openhab.util.beans
