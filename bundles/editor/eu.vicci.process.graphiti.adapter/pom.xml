@@ -13,4 +13,6 @@
 	<name>Process Editor Adapter Core Plugin</name>
 	<packaging>eclipse-plugin</packaging>
 	
+	<!-- Dont put any dependency here. Add them to the target platform and import via manifest.mf -->
+	
 </project>

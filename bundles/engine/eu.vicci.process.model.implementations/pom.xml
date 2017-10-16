@@ -11,7 +11,7 @@
 	<artifactId>eu.vicci.process.model.implementations</artifactId>
 
 	<name>PROtEUS Custom Implementation</name>
-	<packaging>eclipse-plugin</packaging>
+	<packaging>jar</packaging>
 	
 	 <repositories>
     	<repository>
@@ -61,6 +61,13 @@
 			<artifactId>jawampa-netty</artifactId>
 			<version>0.4.1</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.engine</groupId>
+			<artifactId>eu.vicci.process.distribution</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>eu.vicci.driver</groupId>
 			<artifactId>eu.vicci.driver.turtlebot</artifactId>
