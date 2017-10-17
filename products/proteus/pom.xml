@@ -39,6 +39,20 @@
 									<mainClass>eu.vicci.process.runtime.VicciRuntime</mainClass>
 								</transformer>
 							</transformers>
+							
+							<!-- prevents from 'Invalid Signature File' exception -->
+							<!-- https://stackoverflow.com/questions/999489/invalid-signature-file-when-attempting-to-run-a-jar -->
+							<filters>
+								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+							</filters>
+
 						</configuration>
 
 					</execution>

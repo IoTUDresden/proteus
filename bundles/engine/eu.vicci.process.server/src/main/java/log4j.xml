@@ -28,6 +28,10 @@
 		<level value="error"/>
 	</logger>
 	
+	<logger name="com.espertech.esper">
+		<level value="warn"/>
+	</logger>
+	
 	<root>
 		<priority value="debug"></priority>
 		<appender-ref ref="stdout" />

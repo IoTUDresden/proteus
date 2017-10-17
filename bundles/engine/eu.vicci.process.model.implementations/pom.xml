@@ -101,12 +101,30 @@
 			</exclusions>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.eclipse/osgi -->
+		<dependency>
+			<groupId>org.eclipse</groupId>
+			<artifactId>osgi</artifactId>
+			<version>3.10.0-v20140606-1445</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<version>2.0.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.utils</groupId>
+			<artifactId>eu.vicci.openhab.util</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.engine</groupId>
+			<artifactId>eu.vicci.process.osgi</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<type>eclipse-plugin</type>
+		</dependency>
 	</dependencies>
 
 </project>

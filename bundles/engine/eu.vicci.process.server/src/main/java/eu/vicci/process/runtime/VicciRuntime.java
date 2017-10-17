@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.devices.util.OpenHabListener;
@@ -25,24 +27,26 @@ import eu.vicci.process.wampserver.SuperPeer;
 import ws.wamp.jawampa.ApplicationError;
 
 public class VicciRuntime {
+	private static final Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
 	private static final String PATH_MODEL = "processes/models/";
+	
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		VicciRuntime runtime = new VicciRuntime();
-		println("starting vicci runtime...\n");
+		LOG.info("starting vicci runtime...");
 		boolean started = runtime.start();
 		if(!started){
-			printlnErr("\n\nfailed to start vicci runtime");
+			LOG.error("failed to start vicci runtime");
 			return;
 		}
 		
-		println("\n\nvicci runtime started (" + runtime.getRuntimeType()  +")");
+		LOG.info("vicci runtime started as {}", runtime.getRuntimeType());
 		readLineTillStopIsEntered();
 		
-		println("\n\nstopping the runtime...");
+		LOG.info("stopping the runtime...");
 		runtime.stop();
 	}	
 
@@ -160,10 +164,6 @@ public class VicciRuntime {
 	private static void printUsage(){
 		println("######## VICCI RUNTIME ########");
 		println("type 'stop' for stopping the runtime");
-	}
-	
-	private static void printlnErr(Object txt){
-		System.err.print(txt);
 	}
 	
 	private static void println(Object txt){
