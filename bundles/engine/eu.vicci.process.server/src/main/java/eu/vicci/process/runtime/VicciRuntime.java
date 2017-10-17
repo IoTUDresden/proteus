@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.devices.util.OpenHabListener;
-import eu.vicci.process.devices.util.SeMiWaListener;
 import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.engine.ProcessManagerPublic;
 import eu.vicci.process.engine.core.IProcessManager;
@@ -99,10 +98,6 @@ public class VicciRuntime {
 		// Start OSGi Runtime
 		if (configReader.startOsgiRuntime())
 			OSGiRuntime.getInstance().start();
-
-		// Start SeMiWaListener
-		if (configReader.startSemiwaListener())
-			SeMiWaListener.getInstance().start();
 
 		// Start OpenHabListener
 		if(configReader.startOpenHabListener())
