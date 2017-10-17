@@ -3,7 +3,6 @@ package eu.vicci.process.devices.util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import eu.vicci.process.devices.DeviceManager;
 import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.devices.events.EventManager;
 import eu.vicci.process.devices.events.SensorEvent;
@@ -15,43 +14,12 @@ import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.DoubleTypeInstance;
 import eu.vicci.process.model.sofiainstance.IntegerTypeInstance;
 import eu.vicci.process.model.sofiainstance.StringTypeInstance;
-import eu.vicci.semiwa.common.messages.Event;
 
 public class Eventifier {
 
 	private SensorEvent event;
 	private EventType et;
 	private Sensor thisSens;
-
-	/**
-	 * Constructor for events from value messages
-	 * 
-	 * @param eventinfo
-	 */
-	@SuppressWarnings("rawtypes")
-	public Eventifier(Event eventinfo) {
-		int temp = eventinfo.getTopic().lastIndexOf("/");
-		String uid = eventinfo.getTopic().substring(temp + 1);
-		String sensing = "";
-
-		Sensor sensor = DeviceManager.getInstance().getDeviceIfRegistered(uid, Sensor.class);
-		if (sensor != null) {
-			sensing = sensor.getSensing();
-			thisSens = sensor;
-		}
-
-		et = EventManager.getInstance().addEventTypeIfNotExists(sensing, eventinfo.getPayload().getClass());
-
-		long timestamp = eventinfo.getTimestamp();
-		Object payload = eventinfo.getPayload();
-
-		if (!sensing.equals("")) {
-			thisSens.setEventType(et);
-			SensorEvent event = createEvent(thisSens.getSensing(), payload, thisSens, timestamp);
-			addEventTypeToEsper(event, thisSens);
-			this.event = event;
-		}
-	}
 
 	/**
 	 * Constructor for events from Data Port instances
