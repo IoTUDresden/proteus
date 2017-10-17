@@ -9,8 +9,10 @@
 	</parent>
 
 	<artifactId>eu.vicci.process.core</artifactId>
-
 	<name>Process Core</name>
+	<packaging>eclipse-plugin</packaging>
+	
+	<!-- Dependencies listed here must also be included in the target platform -->
 
 	<dependencies>
 		<dependency>

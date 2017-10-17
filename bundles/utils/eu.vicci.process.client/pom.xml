@@ -8,10 +8,9 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>eu.vicci.process.client</artifactId>
-	
+	<artifactId>eu.vicci.process.client</artifactId>	
 	<name>PROtEUS Process Engine Client</name>
-
+	<packaging>eclipse-plugin</packaging>
 
 	<dependencies>
 		<dependency>
@@ -29,13 +28,11 @@
 			<groupId>eu.vicci.proteus.bundles.model</groupId>
 			<artifactId>eu.vicci.process.model.util</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<type>eclipse-plugin</type>
 		</dependency>
 		<dependency>
 			<groupId>eu.vicci.proteus.bundles.model</groupId>
 			<artifactId>eu.vicci.process.model</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<type>eclipse-plugin</type>
 		</dependency>
 		<dependency>
 			<groupId>eu.vicci.proteus.bundles.model</groupId>

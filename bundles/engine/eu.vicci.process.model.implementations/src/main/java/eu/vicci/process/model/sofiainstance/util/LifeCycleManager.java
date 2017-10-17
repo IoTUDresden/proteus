@@ -81,7 +81,9 @@ public enum LifeCycleManager {
 		logger = LoggerFactory.getLogger("LifeCycleManager");
 		logger.debug("setting up the process execution system");
 		processExecutionSystem = ActorSystem.create(EXECUTION_SYSTEM_NAME);
+		logger.debug("created actorsystem");
 		executionMaster = ProcessExecutionMasterActor.create(processExecutionSystem, EXECUTION_MASTER_NAME);
+		logger.debug("created master");
 	}
 
 	/**

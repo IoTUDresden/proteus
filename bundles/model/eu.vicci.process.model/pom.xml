@@ -8,12 +8,14 @@
 	</parent>
 
 	<artifactId>eu.vicci.process.model</artifactId>  
-
 	<name>Process Model</name>
+	<packaging>eclipse-plugin</packaging>
 
 	<build>
 		<sourceDirectory>src-gen/</sourceDirectory>
 	</build>
+	
+	<!-- Dependencies listed here must also be included in the target platform -->
 	
 	<dependencies>
 		<dependency>

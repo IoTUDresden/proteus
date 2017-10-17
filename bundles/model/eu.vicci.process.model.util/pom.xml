@@ -9,8 +9,8 @@
 	</parent>
 
 	<artifactId>eu.vicci.process.model.util</artifactId>
-
 	<name>Process Model Util</name>
+	<packaging>eclipse-plugin</packaging>
 
 	<dependencies>
 		<dependency>
