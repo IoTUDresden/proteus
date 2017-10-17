@@ -18,6 +18,7 @@ import eu.vicci.process.model.cep.EsperEngine;
 import eu.vicci.process.model.sofia.SofiaPackage;
 import eu.vicci.process.model.sofiainstance.SofiaInstancePackage;
 import eu.vicci.process.model.sofiainstance.impl.custom.SofiaInstanceFactoryImplCustom;
+import eu.vicci.process.model.sofiainstance.util.LifeCycleManager;
 import eu.vicci.process.model.util.ConfigurationReader;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.osgi.OSGiRuntime;
@@ -68,6 +69,9 @@ public class VicciRuntime {
 		boolean isWebSocketServerStarted = startWebSocketServer(configReader);
 		
 		DistributionManager.getInstance().setPeerProfile(server.getPeerProfile());
+		
+		//init process execution system
+		LifeCycleManager.INSTANCE.getClass();
 		
 		return isWebSocketServerStarted;
 	}

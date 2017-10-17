@@ -9,8 +9,8 @@
 	</parent>
 
 	<artifactId>eu.vicci.openhab.util</artifactId>
-
 	<name>OpenHAB Utils</name>
+	<packaging>eclipse-plugin</packaging>
 
 	<dependencies>
 		<dependency>
@@ -56,5 +56,4 @@
 			<type>eclipse-plugin</type>
 		</dependency>
 	</dependencies>
-
 </project>

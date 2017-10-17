@@ -22,6 +22,9 @@
             <configuration>
               <transformers>
                 <transformer>
+                  <resource>reference.conf</resource>
+                </transformer>
+                <transformer>
                   <mainClass>eu.vicci.process.runtime.VicciRuntime</mainClass>
                 </transformer>
               </transformers>
