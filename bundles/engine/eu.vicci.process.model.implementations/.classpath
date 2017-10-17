@@ -12,9 +12,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="lib" path="libs/antlr-runtime-3.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/cglib-nodep-2.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/com.google.common_1.0.0.201004262004.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/commons-beanutils-1.8.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/commons-cli-1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/commons-codec-1.7.jar"/>
@@ -32,17 +30,7 @@
 	<classpathentry exported="true" kind="lib" path="libs/jce-jdk13-148.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/kxml2-2.3.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/netty-3.5.8.Final.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/org.eclipse.emf.common_2.8.0.v20120911-0500.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/org.eclipse.emf.ecore_2.8.1.v20120911-0500.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/org.eclipse.emf.ecore.xmi_2.8.0.v20120911-0500.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/org.eclipse.graphiti.mm_0.10.0.v20130612-0936.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/org.eclipse.graphiti.mm_0.9.1.v20120919-0732.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/rsyntaxtextarea-1.5.2.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/soap-builder-1.0.0-SNAPSHOT.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/soap-client-1.0.0-SNAPSHOT.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/soap-common-1.0.0-SNAPSHOT.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/soap-legacy-1.0.0-SNAPSHOT.jar"/>
-	<classpathentry exported="true" kind="lib" path="libs/sqlite-jdbc-3.7.15-M1.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/wsdl4j-1.6.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/xbean.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/xercesImpl.jar"/>
