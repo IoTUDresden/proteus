@@ -3,9 +3,6 @@
    <bundle id="eu.vicci.process.graphiti.adapter.view" version="1.0.0.qualifier">
       <category name="processeditor.plugins"/>
    </bundle>
-   <bundle id="eu.vicci.process.gesture" version="1.0.0.qualifier">
-      <category name="processeditor.plugins"/>
-   </bundle>
    <bundle id="eu.vicci.process.graphiti" version="1.0.0.qualifier">
       <category name="processeditor.plugins"/>
    </bundle>

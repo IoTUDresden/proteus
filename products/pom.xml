@@ -16,7 +16,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>editor</module>
+		<!-- dont include editor at the moment -->
+		<!--<module>editor</module> -->
 		<module>proteus</module>
 	</modules>
 
