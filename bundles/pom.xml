@@ -16,10 +16,10 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>editor</module>
-		<module>engine</module>
 		<module>model</module>
 		<module>utils</module>
+		<module>editor</module>
+		<module>engine</module>
 	</modules>
 
 </project>

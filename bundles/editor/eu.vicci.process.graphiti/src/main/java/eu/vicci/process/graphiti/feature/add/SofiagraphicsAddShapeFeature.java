@@ -22,7 +22,6 @@ import org.eclipse.graphiti.services.IGaService;
 import org.eclipse.graphiti.services.IPeCreateService;
 import org.eclipse.graphiti.util.ColorConstant;
 
-import eu.vicci.process.gesture.XMLGesture;
 import eu.vicci.process.graphiti.AttributeMap;
 import eu.vicci.process.graphiti.sofiagraphics.Alignment;
 import eu.vicci.process.graphiti.sofiagraphics.Color;
@@ -39,7 +38,7 @@ import eu.vicci.process.graphiti.sofiagraphics.Style;
 import eu.vicci.process.graphiti.sofiagraphics.Text;
 import eu.vicci.process.graphiti.sofiagraphics.Widget;
 
-public abstract class SofiagraphicsAddShapeFeature extends AbstractAddShapeFeature implements XMLGesture {
+public abstract class SofiagraphicsAddShapeFeature extends AbstractAddShapeFeature {
 
     protected Scene scene = null;
     private Vector<String> xmlGesture = new Vector<String>();
@@ -282,10 +281,11 @@ public abstract class SofiagraphicsAddShapeFeature extends AbstractAddShapeFeatu
         return element;
     }
 
-    @Override
-    public Vector<String> getXMLGestures() {
-
-        return null;
-        // return xmlGesture;
-    }
+    //FIXME update or drop support for gestures
+//    @Override
+//    public Vector<String> getXMLGestures() {
+//
+//        return null;
+//        // return xmlGesture;
+//    }
 }

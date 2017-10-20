@@ -18,3 +18,4 @@ Export-Package: eu.vicci.process.client.core,
  eu.vicci.process.model.util.serialization.jsontypeinstances.core,
  eu.vicci.process.model.util.serialization.jsontypes.core
 Bundle-ClassPath: .
+Import-Package: com.fasterxml.jackson.annotation;version="2.4.0"

@@ -67,6 +67,23 @@
 								<artifact>
 									<id>ws.wamp.jawampa:jawampa-netty:0.4.2</id>
 								</artifact>
+								<artifact>
+									<id>org.apache.httpcomponents:httpclient:4.4.1</id>
+								</artifact>
+								<artifact>
+									<id>javax.ws.rs:javax.ws.rs-api:2.0.1</id>
+								</artifact>
+								<artifact>
+									<id>org.glassfish.jersey.core:jersey-common:2.18</id>
+								</artifact>
+
+
+								<!-- this prevents from the 'package sun.misc 0.0.0 could not be 
+									found'-Exception, when resolving the target platform -->
+								<!-- https://github.com/diffplug/osgiX -->
+								<artifact>
+									<id>com.diffplug.osgi:com.diffplug.osgi.extension.sun.misc:0.0.0</id>
+								</artifact>
 
 							</artifacts>
 						</configuration>

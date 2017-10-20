@@ -19,10 +19,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.gef;bundle-version="3.10.1",
  org.eclipse.debug.core;bundle-version="3.8.0",
  org.eclipse.debug.ui;bundle-version="3.9.0",
- eu.vicci.process.model,
+ groovy;bundle-version="2.3.9",
  eu.vicci.process.core;bundle-version="1.0.0",
+ eu.vicci.process.model;bundle-version="1.0.0",
  eu.vicci.process.model.util;bundle-version="1.0.0",
- groovy;bundle-version="2.3.9"
+ eu.vicci.openhab.util;bundle-version="1.0.0",
+ eu.vicci.process.client;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
@@ -30,13 +32,7 @@ Bundle-Vendor: TU Dresden
 Bundle-Localization: plugin
 Import-Package: com.predic8.schema,
  com.predic8.wsdl,
- eu.vicci.openhab.util,
- eu.vicci.openhab.util.beans,
- eu.vicci.process.adapter,
- eu.vicci.process.client,
- eu.vicci.process.gesture,
- eu.vicci.process.gesture.recognizer.ndollar,
- eu.vicci.process.model.util.serialization.jsontypeinstances
+ eu.vicci.process.adapter
 Export-Package: eu.vicci.process.graphiti,
  eu.vicci.process.graphiti.feature,
  eu.vicci.process.graphiti.sofiagraphics,

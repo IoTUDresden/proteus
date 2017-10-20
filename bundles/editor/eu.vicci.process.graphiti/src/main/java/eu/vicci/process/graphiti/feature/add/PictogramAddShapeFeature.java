@@ -26,10 +26,11 @@ import org.eclipse.graphiti.mm.pictograms.Shape;
 import org.eclipse.graphiti.services.Graphiti;
 import org.eclipse.graphiti.services.IGaService;
 
-import eu.vicci.process.gesture.XMLGesture;
 import eu.vicci.process.graphiti.AttributeMap;
 
-public abstract class PictogramAddShapeFeature extends AbstractAddShapeFeature implements XMLGesture {
+//FIXME update or drop support for gestures
+//implements XMLGesture!!
+public abstract class PictogramAddShapeFeature extends AbstractAddShapeFeature {
 
     private class Point {
 

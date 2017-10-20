@@ -4,20 +4,15 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>eu.vicci.proteus</groupId>
+		<groupId>eu.vicci.proteus.products</groupId>
 		<artifactId>pom</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	
-	<groupId>eu.vicci.proteus.products</groupId>
-	<artifactId>pom</artifactId>
 
-	<name>PROtEUS Products</name>
-	<packaging>pom</packaging>
+	<artifactId>eu.vicci.process.rcp</artifactId>
+	<name>PROtEUS Process Editor</name>
+	<packaging>eclipse-repository</packaging>
 
-	<modules>
-		<module>editor</module>
-		<module>proteus</module>
-	</modules>
+	<!-- http://www.vogella.com/tutorials/EclipseTycho/article.html#exercise-tycho-build-for-products -->
 
 </project>

@@ -16,7 +16,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.3</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -47,13 +47,11 @@
 			<groupId>eu.vicci.proteus.bundles.model</groupId>
 			<artifactId>eu.vicci.process.model.util</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<type>eclipse-plugin</type>
 		</dependency>
 		<dependency>
 			<groupId>eu.vicci.proteus.bundles.model</groupId>
 			<artifactId>eu.vicci.process.model</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<type>eclipse-plugin</type>
 		</dependency>
 	</dependencies>
 </project>
