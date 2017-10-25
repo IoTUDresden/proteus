@@ -21,7 +21,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		
+		<tycho-version>1.0.0</tycho-version>
+		<mvn-deploy-version>2.7</mvn-deploy-version>
+
 		<!-- output dir for copy dependencies -->
 		<outputDirectory>maven_libs</outputDirectory>
 	</properties>
@@ -32,64 +34,58 @@
 			<layout>p2</layout>
 			<url>http://download.eclipse.org/releases/mars</url>
 		</repository>
-		
-        <repository>
-            <id>proteus-editor-deps</id>
+
+		<repository>
+			<id>proteus-editor-deps</id>
 			<layout>p2</layout>
-            <url>https://iotudresden.github.io/proteus-deps/</url>
-        </repository>		
+			<url>https://iotudresden.github.io/proteus-deps/</url>
+		</repository>		
 	</repositories>
 
 	<build>
 
 		<plugins>
+			<!-- for eclipse plugins -->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
-				<version>1.0.0</version>
+				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
 
+			<!-- mvn local deploy -->
 			<plugin>
 				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.7</version>
+				<version>${mvn-deploy-version}</version>
 				<configuration>
 					<altDeploymentRepository>internal.repo::default::file://${built.repo.dir}</altDeploymentRepository>
 				</configuration>
 			</plugin>
-			
-			<!-- Attach source -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 
-			<!-- Attach javadoc -->
+			<!-- specifying the target platforms environment-->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.0.0-M1</version>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
 				<configuration>
-					<!-- no checks for javadoc -->
-					<additionalparam>-Xdoclint:none</additionalparam>
+					<environments>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
 				</configuration>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 
 		</plugins>
