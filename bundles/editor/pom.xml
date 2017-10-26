@@ -66,6 +66,7 @@
 		<module>eu.vicci.process.graphiti.adapter</module>
 		<module>eu.vicci.process.graphiti.adapter.view</module>
 		<module>eu.vicci.process.graphiti.execution</module>
+		<module>eu.vicci.process.graphiti.app</module>
 	</modules>
 
 </project>

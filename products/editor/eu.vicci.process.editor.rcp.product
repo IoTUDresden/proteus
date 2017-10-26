@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="eu.vicci.process.editor.rcp" uid="eu.vicci.process.editor.rcp.configuration" id="eu.vicci.process.editor.rcp.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+<product name="PROtEUS Process Editor" uid="eu.vicci.process.editor.rcp.configuration" id="eu.vicci.process.editor.application.product" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/eu.vicci.process.graphiti.app/icons/about_logo.png"/>
+      <text>
+         PROtEUS Process Editor
+
+(c) Copyright IoTUDresden.
+
+This product includes software developed by other open source projects including the Apache Software Foundation, https://www.apache.org/.
+
+For more information contact us at https://github.com/IoTUDresden/.
+      </text>
+   </aboutInfo>
 
    <configIni use="default">
    </configIni>
@@ -13,14 +26,18 @@
       </vmArgsMac>
    </launcherArgs>
 
-   <windowImages/>
+   <windowImages i16="/eu.vicci.process.graphiti.app/icons/window_image_16.png" i32="/eu.vicci.process.graphiti.app/icons/window_image_32.png" i48="/eu.vicci.process.graphiti.app/icons/window_image_48.png" i64="/eu.vicci.process.graphiti.app/icons/window_image_64.png" i128="/eu.vicci.process.graphiti.app/icons/window_image_128.png" i256="/eu.vicci.process.graphiti.app/icons/window_image_256.png"/>
 
    <launcher name="proteus-designer">
+      <linux icon="icons/launcher-linux.xpm"/>
+      <macosx icon="icons/launcher-mac.icns"/>
       <solaris/>
-      <win useIco="false">
+      <win useIco="true">
+         <ico path="icons/launcher-win.ico"/>
          <bmp/>
       </win>
    </launcher>
+
 
    <vm>
       <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</linux>
@@ -28,6 +45,13 @@
       <solaris include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</solaris>
       <windows include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</windows>
    </vm>
+
+   <license>
+        <url>https://github.com/IoTUDresden/</url>
+        <text>
+   No license agreement at the moment. Please contact us at https://github.com/IoTUDresden/.
+         </text>
+   </license>
 
    <plugins>
       <plugin id="com.diffplug.osgi.extension.sun.misc" fragment="true"/>
@@ -40,14 +64,21 @@
       <plugin id="com.predic8.soa-model-core"/>
       <plugin id="eu.vicci.openhab.util"/>
       <plugin id="eu.vicci.process.client"/>
-      <plugin id="eu.vicci.process.client.tests" fragment="true"/>
       <plugin id="eu.vicci.process.core"/>
-      <plugin id="eu.vicci.process.editor.rcp"/>
+      <plugin id="eu.vicci.process.editor.application"/>
       <plugin id="eu.vicci.process.graphiti"/>
       <plugin id="eu.vicci.process.graphiti.adapter"/>
+      <plugin id="eu.vicci.process.graphiti.adapter.view"/>
+      <plugin id="eu.vicci.process.graphiti.execution"/>
       <plugin id="eu.vicci.process.model"/>
       <plugin id="eu.vicci.process.model.util"/>
       <plugin id="groovy"/>
+      <plugin id="io.netty.buffer"/>
+      <plugin id="io.netty.codec"/>
+      <plugin id="io.netty.codec-http"/>
+      <plugin id="io.netty.common"/>
+      <plugin id="io.netty.handler"/>
+      <plugin id="io.netty.transport"/>
       <plugin id="io.reactivex.rxjava"/>
       <plugin id="jackson-core-asl"/>
       <plugin id="jackson-mapper-asl"/>
@@ -63,6 +94,7 @@
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.httpcomponents.httpclient"/>
       <plugin id="org.apache.httpcomponents.httpcore"/>
+      <plugin id="org.eclipse.compare"/>
       <plugin id="org.eclipse.compare.core"/>
       <plugin id="org.eclipse.core.commands"/>
       <plugin id="org.eclipse.core.contenttype"/>
@@ -73,19 +105,14 @@
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filebuffers"/>
       <plugin id="org.eclipse.core.filesystem"/>
-      <plugin id="org.eclipse.core.filesystem.aix.ppc" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.hpux.ia64_32" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.java7" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.ppc" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.net"/>
+      <plugin id="org.eclipse.core.net.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.resources"/>
-      <plugin id="org.eclipse.core.resources.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.resources.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
@@ -118,20 +145,45 @@
       <plugin id="org.eclipse.emf.common"/>
       <plugin id="org.eclipse.emf.common.ui"/>
       <plugin id="org.eclipse.emf.databinding"/>
+      <plugin id="org.eclipse.emf.databinding.edit"/>
       <plugin id="org.eclipse.emf.ecore"/>
       <plugin id="org.eclipse.emf.ecore.change"/>
       <plugin id="org.eclipse.emf.ecore.xmi"/>
+      <plugin id="org.eclipse.emf.ecp.application.e3"/>
+      <plugin id="org.eclipse.emf.ecp.application.e4"/>
+      <plugin id="org.eclipse.emf.ecp.common"/>
+      <plugin id="org.eclipse.emf.ecp.common.ui"/>
+      <plugin id="org.eclipse.emf.ecp.core"/>
+      <plugin id="org.eclipse.emf.ecp.edit"/>
+      <plugin id="org.eclipse.emf.ecp.edit.swt"/>
+      <plugin id="org.eclipse.emf.ecp.ui"/>
+      <plugin id="org.eclipse.emf.ecp.ui.e3"/>
+      <plugin id="org.eclipse.emf.ecp.ui.e4"/>
+      <plugin id="org.eclipse.emf.ecp.ui.view"/>
+      <plugin id="org.eclipse.emf.ecp.ui.view.swt"/>
+      <plugin id="org.eclipse.emf.ecp.view.context"/>
+      <plugin id="org.eclipse.emf.ecp.view.model"/>
+      <plugin id="org.eclipse.emf.ecp.view.model.common"/>
+      <plugin id="org.eclipse.emf.ecp.view.template.model"/>
+      <plugin id="org.eclipse.emf.ecp.view.util.swt"/>
       <plugin id="org.eclipse.emf.edit"/>
       <plugin id="org.eclipse.emf.edit.ui"/>
       <plugin id="org.eclipse.emf.transaction"/>
       <plugin id="org.eclipse.emf.validation"/>
       <plugin id="org.eclipse.emf.workspace"/>
+      <plugin id="org.eclipse.emfforms.common"/>
+      <plugin id="org.eclipse.emfforms.core.services"/>
+      <plugin id="org.eclipse.emfforms.core.services.editsupport"/>
+      <plugin id="org.eclipse.emfforms.core.services.emfspecificservice"/>
+      <plugin id="org.eclipse.emfforms.localization"/>
+      <plugin id="org.eclipse.emfforms.swt.core"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.bidi"/>
       <plugin id="org.eclipse.equinox.common"/>
       <plugin id="org.eclipse.equinox.concurrent"/>
       <plugin id="org.eclipse.equinox.ds"/>
       <plugin id="org.eclipse.equinox.event"/>
+      <plugin id="org.eclipse.equinox.launcher"/>
       <plugin id="org.eclipse.equinox.p2.core"/>
       <plugin id="org.eclipse.equinox.p2.engine"/>
       <plugin id="org.eclipse.equinox.p2.metadata"/>
@@ -151,22 +203,16 @@
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
       <plugin id="org.eclipse.jface.text"/>
+      <plugin id="org.eclipse.ltk.core.refactoring"/>
+      <plugin id="org.eclipse.ltk.ui.refactoring"/>
+      <plugin id="org.eclipse.net4j.util"/>
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.compatibility.state" fragment="true"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.swt"/>
-      <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
-      <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.ppc64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.s390" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.s390x" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.team.core"/>
+      <plugin id="org.eclipse.team.ui"/>
       <plugin id="org.eclipse.text"/>
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.cheatsheets"/>
@@ -174,8 +220,10 @@
       <plugin id="org.eclipse.ui.editors"/>
       <plugin id="org.eclipse.ui.forms"/>
       <plugin id="org.eclipse.ui.ide"/>
+      <plugin id="org.eclipse.ui.ide.application"/>
       <plugin id="org.eclipse.ui.intro"/>
       <plugin id="org.eclipse.ui.navigator"/>
+      <plugin id="org.eclipse.ui.navigator.resources"/>
       <plugin id="org.eclipse.ui.views"/>
       <plugin id="org.eclipse.ui.views.properties.tabbed"/>
       <plugin id="org.eclipse.ui.win32" fragment="true"/>
@@ -183,6 +231,8 @@
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
       <plugin id="org.hamcrest.core"/>
       <plugin id="org.junit"/>
+      <plugin id="org.msgpack.core"/>
+      <plugin id="org.msgpack.jackson-dataformat-msgpack"/>
       <plugin id="org.tukaani.xz"/>
       <plugin id="org.w3c.css.sac"/>
       <plugin id="org.w3c.dom.events"/>
@@ -194,6 +244,16 @@
       <plugin id="ws.wamp.jawampa.netty"/>
    </plugins>
 
+   <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.app" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="0" />
+   </configurations>
+
+   <repositories>
+      <repository location="https://iotudresden.github.io/proteus-deps/" enabled="true" />
+      <repository location="https://IoTUDresden.github.io/proteus-repo/p2/latest/" enabled="true" />
+   </repositories>
 
    <preferencesInfo>
       <targetfile overwrite="false"/>

@@ -14,7 +14,15 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;bundle-version="2.11.1",
  ws.wamp.jawampa.core;bundle-version="0.4.2",
  io.reactivex.rxjava;bundle-version="1.0.8",
  com.fasterxml.jackson.core.jackson-core;bundle-version="2.4.4",
- com.fasterxml.jackson.core.jackson-databind;bundle-version="2.4.4"
+ com.fasterxml.jackson.core.jackson-databind;bundle-version="2.4.4",
+ org.msgpack.core;bundle-version="0.7.0",
+ org.msgpack.jackson-dataformat-msgpack;bundle-version="0.7.0",
+ io.netty.buffer;bundle-version="4.0.24",
+ io.netty.codec;bundle-version="4.0.24",
+ io.netty.codec-http;bundle-version="4.0.24",
+ io.netty.common;bundle-version="4.0.24",
+ io.netty.handler;bundle-version="4.0.24",
+ io.netty.transport;bundle-version="4.0.24"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.slf4j;version="1.7.13"
