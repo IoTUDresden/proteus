@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Core
+Bundle-Name: Process Model Core
 Bundle-SymbolicName: eu.vicci.process.core;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: eu.vicci.process.model;bundle-version="1.0.0"
@@ -19,3 +19,4 @@ Export-Package: eu.vicci.process.client.core,
  eu.vicci.process.model.util.serialization.jsontypes.core
 Bundle-ClassPath: .
 Import-Package: com.fasterxml.jackson.annotation;version="2.4.0"
+Bundle-Vendor: IoTUDresden

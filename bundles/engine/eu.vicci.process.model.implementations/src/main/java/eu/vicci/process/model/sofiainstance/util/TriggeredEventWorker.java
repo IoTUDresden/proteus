@@ -1,6 +1,5 @@
 package eu.vicci.process.model.sofiainstance.util;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,8 +13,6 @@ import com.espertech.esper.client.EPStatement;
 import com.espertech.esper.client.EventBean;
 
 import eu.vicci.process.model.cep.EsperManager;
-import eu.vicci.process.model.sofia.DataPort;
-import eu.vicci.process.model.sofia.DataType;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.EndDataPortInstance;
 

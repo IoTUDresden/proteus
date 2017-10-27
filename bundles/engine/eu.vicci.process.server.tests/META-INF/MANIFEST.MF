@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Process Server Tests
 Bundle-SymbolicName: eu.vicci.process.server.tests
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: TUD
+Bundle-Vendor: IoTUDresden
 Fragment-Host: eu.vicci.process.server;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.junit;bundle-version="4.12.0"

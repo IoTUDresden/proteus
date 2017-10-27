@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Vicci Process Editor
+Bundle-Name: Vicci Process Modelling
 Bundle-SymbolicName: eu.vicci.process.graphiti;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: eu.vicci.process.graphiti.Activator
@@ -28,7 +28,7 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
-Bundle-Vendor: TU Dresden
+Bundle-Vendor: IoTUDresden
 Bundle-Localization: plugin
 Import-Package: com.predic8.schema,
  com.predic8.wsdl,

@@ -1,9 +1,9 @@
 Bundle-ManifestVersion: 2
-Bundle-Name: Process Server
+Bundle-Name: Vicci Runtime
 Bundle-SymbolicName: eu.vicci.process.server;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: TUD
+Bundle-Vendor: IoTUDresden
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: eu.vicci.process.osgi,
  eu.vicci.process.model,

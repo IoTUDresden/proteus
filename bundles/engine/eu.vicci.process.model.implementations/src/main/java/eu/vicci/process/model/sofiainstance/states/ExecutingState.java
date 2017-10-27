@@ -2,7 +2,6 @@ package eu.vicci.process.model.sofiainstance.states;
 
 import java.util.concurrent.CountDownLatch;
 
-import eu.vicci.process.model.sofia.EndDataPort;
 import eu.vicci.process.model.sofiainstance.BooleanTypeInstance;
 import eu.vicci.process.model.sofiainstance.EndDataPortInstance;
 import eu.vicci.process.model.sofiainstance.PortInstance;

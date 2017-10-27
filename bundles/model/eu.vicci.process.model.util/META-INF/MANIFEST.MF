@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Util
+Bundle-Name: Process Model Util
 Bundle-SymbolicName: eu.vicci.process.model.util;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Export-Package: eu.vicci.process.model.util,
@@ -22,7 +22,7 @@ Require-Bundle: eu.vicci.process.core;bundle-version="1.0.0",
  jackson-mapper-asl;bundle-version="1.9.13",
  com.fasterxml.jackson.core.jackson-core;bundle-version="2.4.4",
  jackson-core-asl;bundle-version="1.9.13"
-Bundle-Vendor: TUD
+Bundle-Vendor: IoTUDresden
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy

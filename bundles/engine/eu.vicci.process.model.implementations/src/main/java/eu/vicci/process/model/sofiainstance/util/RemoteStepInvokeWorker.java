@@ -20,7 +20,6 @@ import eu.vicci.process.model.sofiainstance.StartDataPortInstance;
 import eu.vicci.process.model.sofiainstance.State;
 import eu.vicci.process.model.sofiainstance.impl.custom.DistributingProcessInstanceImplCustom;
 import eu.vicci.process.model.sofiainstance.states.StateBase;
-import eu.vicci.process.model.sofiainstance.states.WaitingState;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.core.IJSONDataPortInstance;
 import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.core.IJSONPortInstance;

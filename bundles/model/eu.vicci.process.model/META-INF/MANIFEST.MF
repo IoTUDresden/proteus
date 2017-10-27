@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: eu.vicci.process.model
+Bundle-Name: Process Model
 Bundle-SymbolicName: eu.vicci.process.model;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: TUD
+Bundle-Vendor: IoTUDresden
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: eu.vicci.process.model.sofia,

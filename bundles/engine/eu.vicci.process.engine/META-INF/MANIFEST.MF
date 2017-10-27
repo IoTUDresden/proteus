@@ -4,7 +4,7 @@ Bundle-Name: Process Engine
 Bundle-SymbolicName: eu.vicci.process.engine;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: TUD
+Bundle-Vendor: IoTUDresden
 Export-Package: eu.vicci.process.engine
 Require-Bundle: eu.vicci.process.model.implementations;visibility:=reexport,
  eu.vicci.process.model.util,
@@ -13,4 +13,3 @@ Require-Bundle: eu.vicci.process.model.implementations;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="2.11.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: eu.vicci.process.engine.internal.Activator

@@ -3,7 +3,7 @@ Bundle-Name: Process Osgi
 Bundle-SymbolicName: eu.vicci.process.osgi
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: TUD
+Bundle-Vendor: IoTUDresden
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: 
  org.eclipse.osgi;bundle-version="3.9.0"

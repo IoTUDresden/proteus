@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Adapter Core
+Bundle-Name: Engine Adapter
 Bundle-SymbolicName: eu.vicci.process.graphiti.adapter;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: eu.vicci.process.adapter.EngineAdapter
@@ -17,3 +17,4 @@ Export-Package: eu.vicci.process.adapter,
  eu.vicci.process.adapter.control,
  eu.vicci.process.adapter.util,
  eu.vicci.process.adapter.wizard
+Bundle-Vendor: IoTUDresden

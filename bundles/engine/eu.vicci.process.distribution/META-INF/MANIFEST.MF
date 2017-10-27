@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Distribution
+Bundle-Name: Process Distribution
 Bundle-SymbolicName: eu.vicci.process.distribution
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
@@ -10,3 +10,4 @@ Require-Bundle: eu.vicci.process.core,
  eu.vicci.process.client
 Export-Package: eu.vicci.process.distribution.manager
 Bundle-ClassPath: .
+Bundle-Vendor: IoTUDresden

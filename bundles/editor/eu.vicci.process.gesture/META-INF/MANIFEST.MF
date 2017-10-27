@@ -21,4 +21,4 @@ Import-Package: org.eclipse.graphiti.ui.editor
 Export-Package: eu.vicci.process.gesture,
  eu.vicci.process.gesture.recognizer.ndollar
 Bundle-ClassPath: .
-Bundle-Vendor: TUD
+Bundle-Vendor: IoTUDresden
