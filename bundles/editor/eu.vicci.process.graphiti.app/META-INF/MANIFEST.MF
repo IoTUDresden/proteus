@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Vicci Process Editor
-Bundle-SymbolicName: eu.vicci.process.editor.application;singleton:=true
+Bundle-SymbolicName: eu.vicci.process.editor.app;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: eu.vicci.process.editor.rcp.Activator
 Bundle-Vendor: IoTUDresden
