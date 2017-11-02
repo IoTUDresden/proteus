@@ -57,5 +57,9 @@ public class Activator extends AbstractUIPlugin {
 
         return plugin;
     }
+    
+    public static String getID(){
+    	return getDefault().getBundle().getSymbolicName();
+    }
 
 }

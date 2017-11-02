@@ -433,5 +433,47 @@
          name="Upload to Engine"/> 
 
 	</extension>	
+	
+		<extension
+		point = "org.eclipse.ui.newWizards">
+		<wizard
+        category="eu.vicci.process.graphiti.category.proteus"
+        class="eu.vicci.process.graphiti.wizard.CreateDiagramWizard"
+        icon="media/pid16.gif"
+        id="eu.vicci.process.graphiti.wizard.CreateDiagramWizard"
+        name="%wizard.name.0">
+     <description>
+        %wizard.description.0
+     </description>
+     <selection
+           class="org.eclipse.core.resources.IContainer">
+     </selection>
+		</wizard>
+  <category
+        id="eu.vicci.process.graphiti.category.proteus"
+        name="PROtEUS">
+  </category>
+	</extension>
+  <extension point="org.eclipse.ui.perspectiveExtensions">
+     <perspectiveExtension
+           targetID="org.eclipse.ui.resourcePerspective">
+        <newWizardShortcut
+              id="eu.vicci.process.graphiti.wizard.CreateDiagramWizard">
+        </newWizardShortcut>
+     </perspectiveExtension>
+  </extension>
+  
+  <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <commonWizard
+            type="new"
+            wizardId="eu.vicci.process.graphiti.wizard.CreateDiagramWizard">
+         <enablement>
+            <adapt
+                  type="org.eclipse.core.resources.IResource">
+            </adapt>
+         </enablement>
+      </commonWizard>
+   </extension>
 
 </plugin>
