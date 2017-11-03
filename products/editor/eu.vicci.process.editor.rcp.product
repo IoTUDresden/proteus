@@ -28,7 +28,6 @@ For more information contact us at https://github.com/IoTUDresden/.
 
    <windowImages i16="/eu.vicci.process.graphiti.app/icons/window_image_16.png" i32="/eu.vicci.process.graphiti.app/icons/window_image_32.png" i48="/eu.vicci.process.graphiti.app/icons/window_image_48.png" i64="/eu.vicci.process.graphiti.app/icons/window_image_64.png" i128="/eu.vicci.process.graphiti.app/icons/window_image_128.png" i256="/eu.vicci.process.graphiti.app/icons/window_image_256.png"/>
 
-
    <launcher name="proteus-designer">
       <linux icon="icons/launcher-linux.xpm"/>
       <macosx icon="icons/launcher-mac.icns"/>
@@ -38,7 +37,6 @@ For more information contact us at https://github.com/IoTUDresden/.
          <bmp/>
       </win>
    </launcher>
-
 
    <vm>
       <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</linux>

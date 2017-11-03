@@ -33,15 +33,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import eu.vicci.process.graphiti.Activator;
+import eu.vicci.process.graphiti.Messages;
 
 public class DiagramTypeWizardPage extends AbstractWizardPage implements ITextProvider {
-
-//	private static final String PAGE_DESC = Messages.DiagramTypeWizardPage_PageDescription;
-//	private static final String PAGE_TITLE = Messages.DiagramTypeWizardPage_PageTitle;
-	
-	private static final String PAGE_DESC = "TODO PAGE_DESC";
-	private static final String PAGE_TITLE = "TODO PAGE_TITLE";
-	private static final String DiagramTypeWizardPage_DiagramTypeField = "TODO DiagramTypeWizardPage_DiagramTypeField";
 
 	private static final String DEFAULT_TYPE = "tutorial"; //$NON-NLS-1$
 	private static final String SELECTED_TYPE = "selectedtype"; //$NON-NLS-1$
@@ -54,8 +48,8 @@ public class DiagramTypeWizardPage extends AbstractWizardPage implements ITextPr
 
 	protected DiagramTypeWizardPage(String pageName) {
 		super(pageName);
-		setTitle(PAGE_TITLE);
-		setDescription(PAGE_DESC);
+		setTitle(Messages.PAGE_TEMPLATE_TITLE);
+		setDescription(Messages.PAGE_TEMPLATE_DESC);
 	}
 
 	@Override
@@ -70,7 +64,7 @@ public class DiagramTypeWizardPage extends AbstractWizardPage implements ITextPr
 		// new project label
 		Label projectLabel = new Label(projectGroup, SWT.NONE);
 		projectLabel.setFont(parent.getFont());
-		projectLabel.setText(DiagramTypeWizardPage_DiagramTypeField);
+		projectLabel.setText(Messages.DiagramTypeWizardPage_DiagramTypeField);
 
 		// new project name entry field
 		comboBox = new Combo(projectGroup, SWT.READ_ONLY | SWT.BORDER);

@@ -24,7 +24,9 @@ Require-Bundle: org.eclipse.ui,
  eu.vicci.process.model;bundle-version="1.0.0",
  eu.vicci.process.model.util;bundle-version="1.0.0",
  eu.vicci.openhab.util;bundle-version="1.0.0",
- eu.vicci.process.client;bundle-version="1.0.0"
+ eu.vicci.process.client;bundle-version="1.0.0",
+ org.eclipse.e4.core.services;bundle-version="2.0.0",
+ org.eclipse.e4.core.di;bundle-version="1.5.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
@@ -32,7 +34,8 @@ Bundle-Vendor: IoTUDresden
 Bundle-Localization: plugin
 Import-Package: com.predic8.schema,
  com.predic8.wsdl,
- eu.vicci.process.adapter
+ eu.vicci.process.adapter,
+ javax.inject
 Export-Package: eu.vicci.process.graphiti,
  eu.vicci.process.graphiti.feature,
  eu.vicci.process.graphiti.sofiagraphics,

@@ -29,16 +29,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
-public class DiagramNameWizardPage extends AbstractWizardPage {
+import eu.vicci.process.graphiti.Messages;
 
-//	private static final String PAGE_DESC = Messages.DiagramNameWizardPage_PageDescription;
-//	private static final String PAGE_TITLE = Messages.DiagramNameWizardPage_PageTitle;
-	
-	private static final String PAGE_DESC = "TODO PAGE_DESC";
-	private static final String PAGE_TITLE = "TODO PAGE_DESC";
-	
-	private static final String DiagramNameWizardPage_Message = "TODO DiagramNameWizardPage_Message";
-	private static final String DiagramNameWizardPage_Label = "TODO DiagramNameWizardPage_Label";
+public class DiagramNameWizardPage extends AbstractWizardPage {
 
 	private static final int SIZING_TEXT_FIELD_WIDTH = 250;
 
@@ -59,8 +52,8 @@ public class DiagramNameWizardPage extends AbstractWizardPage {
 
 	protected DiagramNameWizardPage(String pageName) {
 		super(pageName);
-		setTitle(PAGE_TITLE);
-		setDescription(PAGE_DESC);
+		setTitle(Messages.PAGE_NAME_TITLE);
+		setDescription(Messages.PAGE_NAME_DESC);
 	}
 
 	@Override
@@ -95,7 +88,7 @@ public class DiagramNameWizardPage extends AbstractWizardPage {
 		String text = getTextFieldValue();
 		if (text.equals("")) { //$NON-NLS-1$
 			setErrorMessage(null);
-			setMessage(DiagramNameWizardPage_Message);
+			setMessage(Messages.DiagramNameWizardPage_Message);
 			return false;
 		}
 
@@ -126,7 +119,7 @@ public class DiagramNameWizardPage extends AbstractWizardPage {
 
 		// new project label
 		Label projectLabel = new Label(projectGroup, SWT.NONE);
-		projectLabel.setText(DiagramNameWizardPage_Label);
+		projectLabel.setText(Messages.DiagramNameWizardPage_Label);
 		projectLabel.setFont(parent.getFont());
 
 		// new project name entry field

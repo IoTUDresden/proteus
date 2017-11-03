@@ -15,12 +15,21 @@
  *******************************************************************************/
 package eu.vicci.process.graphiti.wizard;
 
+import java.net.URL;
+
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.PlatformUI;
+
+import eu.vicci.process.graphiti.Activator;
+import eu.vicci.process.graphiti.Messages;
 
 /**
  * The Class AbstractWizardPage.
@@ -52,5 +61,16 @@ public abstract class AbstractWizardPage extends WizardPage implements ITextProv
 	}
 
 	abstract protected void createWizardContents(Composite parent);
+	
+	@Override
+	public void performHelp() {
+		try {
+			PlatformUI.getWorkbench().getBrowserSupport().getExternalBrowser().openURL(new URL(Messages.PROTEUS_GH_PAGE));
+		} catch (Exception e) {
+			String error = e.getLocalizedMessage();
+			IStatus status = new Status(IStatus.ERROR, Activator.getID(), error);
+			ErrorDialog.openError(getShell(), Messages.ERROR_OPENING_HELP, null, status);
+		} 
+	}
 
 }

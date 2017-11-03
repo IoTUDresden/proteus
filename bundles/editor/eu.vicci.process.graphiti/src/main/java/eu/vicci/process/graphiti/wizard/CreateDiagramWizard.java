@@ -42,6 +42,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 
 import eu.vicci.process.graphiti.Activator;
+import eu.vicci.process.graphiti.Messages;
 import eu.vicci.process.graphiti.navigator.nodes.AbstractInstancesOfTypeContainerNode;
 
 /**
@@ -49,26 +50,13 @@ import eu.vicci.process.graphiti.navigator.nodes.AbstractInstancesOfTypeContaine
  */
 public class CreateDiagramWizard extends BasicNewResourceWizard {
 
-//	private static final String PAGE_NAME_DIAGRAM_TYPE = Messages.CreateDiagramWizard_DiagramTypeField;
-//	private static final String PAGE_NAME_DIAGRAM_NAME = Messages.CreateDiagramWizard_DiagramNameField;
-//	private static final String WIZARD_WINDOW_TITLE = Messages.CreateDiagramWizard_WizardTitle;
-	
-	private static final String PAGE_NAME_DIAGRAM_TYPE = "TODO PAGE_NAME_DIAGRAM_TYPE";
-	private static final String PAGE_NAME_DIAGRAM_NAME = "TODO PAGE_NAME_DIAGRAM_NAME";
-	private static final String WIZARD_WINDOW_TITLE = "TODO WIZARD_WINDOW_TITLE";
-	
-	private static final String CreateDiagramWizard_NoProjectFoundError = "TODO CreateDiagramWizard_NoProjectFoundError";
-	private static final String CreateDiagramWizard_NoProjectFoundErrorTitle = "TODO CreateDiagramWizard_NoProjectFoundErrorTitle";
-	private static final String CreateDiagramWizard_OpeningEditorError = "TODO CreateDiagramWizard_OpeningEditorError";
-	private static final String CreateDiagramWizard_ErrorOccuredTitle = "TODO CreateDiagramWizard_ErrorOccuredTitle";
-
 	private Diagram diagram;
 
 	@Override
 	public void addPages() {
 		super.addPages();
-		addPage(new DiagramTypeWizardPage(PAGE_NAME_DIAGRAM_TYPE));
-		addPage(new DiagramNameWizardPage(PAGE_NAME_DIAGRAM_NAME));
+		addPage(new DiagramTypeWizardPage(Messages.PAGE_NAME_DIAGRAM_TYPE));
+		addPage(new DiagramNameWizardPage(Messages.PAGE_NAME_DIAGRAM_NAME));
 	}
 
 	@Override
@@ -79,15 +67,15 @@ public class CreateDiagramWizard extends BasicNewResourceWizard {
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection currentSelection) {
 		super.init(workbench, currentSelection);
-		setWindowTitle(WIZARD_WINDOW_TITLE);
-	}
+		setWindowTitle(Messages.WIZARD_WINDOW_TITLE);
+	}	
 
 	@Override
 	public boolean performFinish() {
-		ITextProvider typePage = (ITextProvider) getPage(PAGE_NAME_DIAGRAM_TYPE);
+		ITextProvider typePage = (ITextProvider) getPage(Messages.PAGE_NAME_DIAGRAM_TYPE);
 		final String diagramTypeId = typePage.getText();
 
-		ITextProvider namePage = (ITextProvider) getPage(PAGE_NAME_DIAGRAM_NAME);
+		ITextProvider namePage = (ITextProvider) getPage(Messages.PAGE_NAME_DIAGRAM_NAME);
 		final String diagramName = namePage.getText();
 
 		IProject project = null;
@@ -105,9 +93,9 @@ public class CreateDiagramWizard extends BasicNewResourceWizard {
 		}
 
 		if (project == null || !project.isAccessible()) {
-			String error = CreateDiagramWizard_NoProjectFoundError;
+			String error = Messages.CreateDiagramWizard_NoProjectFoundError;
 			IStatus status = new Status(IStatus.ERROR, Activator.getID(), error);
-			ErrorDialog.openError(getShell(), CreateDiagramWizard_NoProjectFoundErrorTitle, null, status);
+			ErrorDialog.openError(getShell(), Messages.CreateDiagramWizard_NoProjectFoundErrorTitle, null, status);
 			return false;
 		}
 
@@ -155,9 +143,9 @@ public class CreateDiagramWizard extends BasicNewResourceWizard {
 		try {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(editorInput, editorID);
 		} catch (PartInitException e) {
-			String error = CreateDiagramWizard_OpeningEditorError;
+			String error = Messages.CreateDiagramWizard_OpeningEditorError;
 			IStatus status = new Status(IStatus.ERROR, Activator.getID(), error, e);
-			ErrorDialog.openError(getShell(), CreateDiagramWizard_ErrorOccuredTitle, null, status);
+			ErrorDialog.openError(getShell(), Messages.CreateDiagramWizard_ErrorOccuredTitle, null, status);
 			return false;
 		}
 
