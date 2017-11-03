@@ -27,7 +27,7 @@
    <bundle id="eu.vicci.process.model.util" version="1.0.0.qualifier">
       <category name="processeditor.plugins"/>
    </bundle>
-   <bundle id="eu.vicci.process.editor.application" version="1.0.0.qualifier">
+   <bundle id="eu.vicci.process.editor.app" version="1.0.0.qualifier">
       <category name="processeditor.plugins"/>
    </bundle>
    <category-def name="processeditor.plugins" label="Process Editor Plugins">
