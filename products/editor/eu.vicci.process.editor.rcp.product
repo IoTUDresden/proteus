@@ -64,6 +64,7 @@ For more information contact us at https://github.com/IoTUDresden/.
       <plugin id="com.predic8.soa-model-core"/>
       <plugin id="eu.vicci.openhab.util"/>
       <plugin id="eu.vicci.process.client"/>
+      <plugin id="eu.vicci.process.client.tests" fragment="true"/>
       <plugin id="eu.vicci.process.core"/>
       <plugin id="eu.vicci.process.editor.app"/>
       <plugin id="eu.vicci.process.graphiti"/>
@@ -87,7 +88,6 @@ For more information contact us at https://github.com/IoTUDresden/.
       <plugin id="javax.ws.rs-api"/>
       <plugin id="javax.xml"/>
       <plugin id="log4j"/>
-      <plugin id="org.apache.ant"/>
       <plugin id="org.apache.batik.css"/>
       <plugin id="org.apache.batik.util"/>
       <plugin id="org.apache.batik.util.gui"/>
