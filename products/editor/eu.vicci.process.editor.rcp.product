@@ -64,7 +64,6 @@ For more information contact us at https://github.com/IoTUDresden/.
       <plugin id="com.predic8.soa-model-core"/>
       <plugin id="eu.vicci.openhab.util"/>
       <plugin id="eu.vicci.process.client"/>
-      <plugin id="eu.vicci.process.client.tests" fragment="true"/>
       <plugin id="eu.vicci.process.core"/>
       <plugin id="eu.vicci.process.editor.app"/>
       <plugin id="eu.vicci.process.graphiti"/>
