@@ -9,7 +9,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>eu.vicci.process.editor.application</artifactId>
+	<artifactId>eu.vicci.process.editor.app</artifactId>
 	<name>PROtEUS Process Editor</name>
 	<packaging>eclipse-plugin</packaging>
 
