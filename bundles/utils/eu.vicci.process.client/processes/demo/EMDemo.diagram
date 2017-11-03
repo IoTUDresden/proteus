@@ -12,7 +12,7 @@
       <link businessObjects="/1"/>
       <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="1111" height="20">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="1111" height="20">
           <properties key="resizable" value="width"/>
           <background href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.2"/>
           <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.0"/>
@@ -55,14 +55,14 @@
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="portYPosition" value="25"/>
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" filled="true" transparency="80.0" width="181" height="101" x="70" y="70">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" filled="true" transparency="0.8" width="181" height="101" x="70" y="70">
           <background href="../../../../plugin/eu.vicci.process.graphiti/model/triggeredevent.pictograms#//@colors.2"/>
           <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/triggeredevent.pictograms#//@colors.0"/>
         </graphicsAlgorithm>
         <link businessObjects="/1/@subSteps.0"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="181" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="181" height="20">
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/triggeredevent.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/triggeredevent.pictograms#//@colors.0"/>
           </graphicsAlgorithm>
@@ -180,7 +180,7 @@
         <link businessObjects="/1/@subSteps.1"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="151" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="151" height="20">
             <properties key="resizable" value="width"/>
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.0"/>
@@ -283,7 +283,7 @@
         <link businessObjects="/1/@subSteps.2"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="151" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="151" height="20">
             <properties key="resizable" value="width"/>
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/humantask.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/humantask.pictograms#//@colors.0"/>
@@ -409,7 +409,7 @@
         </graphicsAlgorithm>
         <link businessObjects="/1/@subSteps.3"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Ellipse" lineWidth="2" filled="true" transparency="80.0" width="20" height="20" x="10" y="10">
+          <graphicsAlgorithm xsi:type="al:Ellipse" lineWidth="2" filled="true" transparency="0.8" width="20" height="20" x="10" y="10">
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/if.pictograms#//@colors.0"/>
           </graphicsAlgorithm>
           <link businessObjects="/1/@subSteps.3"/>
@@ -507,14 +507,14 @@
       </children>
       <children xsi:type="pi:ContainerShape" visible="true" active="true">
         <properties key="portYPosition" value="25"/>
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" filled="true" transparency="80.0" width="271" height="98" x="480" y="509">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" filled="true" transparency="0.8" width="271" height="98" x="480" y="509">
           <background href="../../../../plugin/eu.vicci.process.graphiti/model/triggeredevent.pictograms#//@colors.2"/>
           <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/triggeredevent.pictograms#//@colors.0"/>
         </graphicsAlgorithm>
         <link businessObjects="/1/@subSteps.4"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="271" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="271" height="20">
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/triggeredevent.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/triggeredevent.pictograms#//@colors.0"/>
           </graphicsAlgorithm>
@@ -609,7 +609,7 @@
         <link businessObjects="/1/@subSteps.5"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="241" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="241" height="20">
             <properties key="resizable" value="width"/>
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/restinvoke.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/restinvoke.pictograms#//@colors.0"/>
@@ -727,7 +727,7 @@
         <link businessObjects="/1/@subSteps.6"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="181" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="181" height="20">
             <properties key="resizable" value="width"/>
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.0"/>
@@ -838,7 +838,7 @@
         <link businessObjects="/1/@subSteps.7"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="221" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="221" height="20">
             <properties key="resizable" value="width"/>
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.0"/>
@@ -903,7 +903,7 @@
         <link businessObjects="/1/@subSteps.8"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="221" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="221" height="20">
             <properties key="resizable" value="width"/>
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.0"/>
@@ -1002,7 +1002,7 @@
         <link businessObjects="/1/@subSteps.9"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="201" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="201" height="20">
             <properties key="resizable" value="width"/>
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.0"/>
@@ -1090,7 +1090,7 @@
         <link businessObjects="/1/@subSteps.10"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="231" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="231" height="20">
             <properties key="resizable" value="width"/>
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/openhabsemanticinvoke.pictograms#//@colors.0"/>

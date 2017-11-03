@@ -8,7 +8,7 @@
     </graphicsAlgorithm>
     <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
     <children visible="true">
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.0" lineWidth="2" transparency="50.0" width="100" height="20">
+      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.0" lineWidth="2" transparency="0.5" width="100" height="20">
         <properties key="resizable" value="width"/>
       </graphicsAlgorithm>
     </children>

@@ -5,7 +5,7 @@
     <graphicsAlgorithm xsi:type="al:Rectangle" foreground="//@colors.0" lineWidth="2" filled="false" width="170" height="82"/>
     <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
     <children visible="true">
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.0" lineWidth="2" transparency="50.0" width="170" height="20"/>
+      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.0" lineWidth="2" transparency="0.5" width="170" height="20"/>
     </children>
     <children visible="true">
       <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.1" filled="false" width="170" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="DataduplicationStep"/>

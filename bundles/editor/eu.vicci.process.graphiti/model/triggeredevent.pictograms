@@ -2,7 +2,7 @@
 <pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" active="true" name="">
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="portYPosition" value="25"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.0" lineWidth="2" filled="true" transparency="80.0" width="140" height="98"/>
+    <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.0" lineWidth="2" filled="true" transparency="0.8" width="140" height="98"/>
     <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
     <children visible="true">
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" foreground="//@colors.0" lineWidth="2" transparency="50.0" width="140" height="20"/>

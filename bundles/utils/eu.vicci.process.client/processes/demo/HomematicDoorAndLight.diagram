@@ -12,7 +12,7 @@
       <link businessObjects="/1"/>
       <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
       <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="931" height="20">
+        <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="931" height="20">
           <properties key="resizable" value="width"/>
           <background href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.2"/>
           <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.0"/>
@@ -62,7 +62,7 @@
         <link businessObjects="/1/@subSteps.0"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="291" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="291" height="20">
             <properties key="resizable" value="width"/>
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/restinvoke.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/restinvoke.pictograms#//@colors.0"/>
@@ -172,7 +172,7 @@
         <link businessObjects="/1/@subSteps.1"/>
         <anchors xsi:type="pi:ChopboxAnchor" active="true"/>
         <children visible="true">
-          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="50.0" width="291" height="20">
+          <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="2" transparency="0.5" width="291" height="20">
             <properties key="resizable" value="width"/>
             <background href="../../../../plugin/eu.vicci.process.graphiti/model/restinvoke.pictograms#//@colors.2"/>
             <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/restinvoke.pictograms#//@colors.0"/>
