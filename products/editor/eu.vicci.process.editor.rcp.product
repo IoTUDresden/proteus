@@ -88,8 +88,12 @@ For more information contact us at https://github.com/IoTUDresden/.
       <plugin id="javax.xml"/>
       <plugin id="log4j"/>
       <plugin id="org.apache.batik.css"/>
+      <plugin id="org.apache.batik.dom"/>
+      <plugin id="org.apache.batik.ext.awt"/>
+      <plugin id="org.apache.batik.svggen"/>
       <plugin id="org.apache.batik.util"/>
       <plugin id="org.apache.batik.util.gui"/>
+      <plugin id="org.apache.batik.xml"/>
       <plugin id="org.apache.commons.jxpath"/>
       <plugin id="org.apache.commons.logging"/>
       <plugin id="org.apache.httpcomponents.httpclient"/>
@@ -231,6 +235,7 @@ For more information contact us at https://github.com/IoTUDresden/.
       <plugin id="org.eclipse.gmf.runtime.gef.ui"/>
       <plugin id="org.eclipse.gmf.runtime.notation"/>
       <plugin id="org.eclipse.graphiti"/>
+      <plugin id="org.eclipse.graphiti.export.batik"/>
       <plugin id="org.eclipse.graphiti.mm"/>
       <plugin id="org.eclipse.graphiti.pattern"/>
       <plugin id="org.eclipse.graphiti.ui"/>
