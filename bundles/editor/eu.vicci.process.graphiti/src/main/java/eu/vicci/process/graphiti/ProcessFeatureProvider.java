@@ -96,6 +96,7 @@ import eu.vicci.process.graphiti.feature.create.WhileLoopCreateFeature;
 import eu.vicci.process.graphiti.feature.create.XMLRPCInvokeCreateFeature;
 import eu.vicci.process.graphiti.feature.resize.PictogramResizeShapeFeature;
 import eu.vicci.process.graphiti.feature.resize.ProcessResizeShapeFeature;
+import eu.vicci.process.graphiti.sofiagraphics.SofiagraphicsPackage;
 import eu.vicci.process.graphiti.types.BooleanTypeAddFeature;
 import eu.vicci.process.graphiti.types.BooleanTypeCreateFeature;
 import eu.vicci.process.graphiti.types.ComplexTypeAddFeature;
@@ -132,7 +133,7 @@ public class ProcessFeatureProvider extends DefaultFeatureProvider {
     public ProcessFeatureProvider(IDiagramTypeProvider dtp) {
 
         super(dtp);
-        // SofiagraphicsPackage.eINSTANCE.eClass();
+        SofiagraphicsPackage.eINSTANCE.eClass();
         Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
         reg.getExtensionToFactoryMap().put("sofiagraphics", new XMIResourceFactoryImpl());
 

@@ -19,6 +19,7 @@ import org.eclipse.graphiti.mm.algorithms.Ellipse;
 import org.eclipse.graphiti.mm.algorithms.Polyline;
 import org.eclipse.graphiti.mm.algorithms.Rectangle;
 import org.eclipse.graphiti.mm.algorithms.Text;
+import org.eclipse.graphiti.mm.algorithms.styles.Color;
 import org.eclipse.graphiti.mm.pictograms.ContainerShape;
 import org.eclipse.graphiti.mm.pictograms.Diagram;
 import org.eclipse.graphiti.mm.pictograms.PictogramElement;
@@ -89,27 +90,45 @@ public abstract class PictogramAddShapeFeature extends AbstractAddShapeFeature {
             for (Shape child : ((ContainerShape) shape).getChildren())
                 addAttributes(child, object);
     }
-
+    
+    /**
+     * This will copy the colors to the diagram. 
+     * This fixes that colors get lost, 
+     * if process diagram is stored in different location (relative path to plugin is used).
+     */
+    private void manageChildColors(Shape shape){
+    	Color foreground = shape.getGraphicsAlgorithm().getForeground();
+    	Color background = shape.getGraphicsAlgorithm().getBackground();
+    	if(foreground != null) 
+    		shape.getGraphicsAlgorithm()
+    		.setForeground(manageColor(foreground.getRed(), foreground.getGreen(), foreground.getBlue()));    	
+    	if(background != null) 
+    		shape.getGraphicsAlgorithm()
+    		.setBackground(manageColor(background.getRed(), background.getGreen(), background.getBlue())); 
+    	
+    	if(shape instanceof ContainerShape)
+    		for (Shape child : ((ContainerShape)shape).getChildren())
+    			manageChildColors(child);		
+    }
+    
     @Override
     public PictogramElement add(IAddContext context) {
-
         IGaService ga = Graphiti.getGaService();
-
         ContainerShape parent = context.getTargetContainer();
         ResourceSet set = new ResourceSetImpl();
         Resource resource = set.getResource(URI.createPlatformPluginURI(sceneUri, true), true);
         Diagram dia = (Diagram) resource.getContents().get(0);
-
         Shape child = dia.getChildren().get(0);
+        
         ga.setLocation(child.getGraphicsAlgorithm(), context.getX(), context.getY());
         if (context.getWidth() != -1 && context.getHeight() != -1)
             setSize(child, context.getWidth(), context.getHeight());
 
         linkRecursive(child, context.getNewObject());
         addAttributes(child, context.getNewObject());
+        manageChildColors(child);
         child.setContainer(parent);
         parent.eResource().getResourceSet().getResources().add(resource);
-
         return child;
     }
 
