@@ -23,6 +23,11 @@
               <transformers>
                 <transformer>
                   <resource>reference.conf</resource>
+                </transformer>
+                <transformer>
+                  <resource>application.conf</resource>
+                </transformer>
+                <transformer>
                   <resource>log4j.xml</resource>
                 </transformer>
                 <transformer>
