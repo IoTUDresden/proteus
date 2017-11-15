@@ -23,6 +23,7 @@
               <transformers>
                 <transformer>
                   <resource>reference.conf</resource>
+                  <resource>log4j.xml</resource>
                 </transformer>
                 <transformer>
                   <mainClass>eu.vicci.process.runtime.VicciRuntime</mainClass>
