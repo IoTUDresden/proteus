@@ -38,6 +38,8 @@
 								<!-- reference.conf needed for akka -->
 								<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
 									<resource>reference.conf</resource>
+								</transformer>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
 									<resource>log4j.xml</resource>
 								</transformer>
 
