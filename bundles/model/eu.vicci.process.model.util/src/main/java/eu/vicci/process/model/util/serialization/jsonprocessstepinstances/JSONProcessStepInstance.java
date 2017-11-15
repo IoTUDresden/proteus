@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -24,6 +27,10 @@ import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.core.I
 @JsonSubTypes({ @Type(value = JSONEventInstance.class, name = "JSONEventInstance"),
 	@Type(value = JSONIfInstance.class, name = "JSONIfInstance")})
 public class JSONProcessStepInstance implements IJSONProcessStepInstance {
+	private static final Logger LOG = LoggerFactory.getLogger(JSONProcessStepInstance.class);
+	@JsonIgnore
+	private static final String ERROR_MSG = "ERROR: Cant completely deserialize the JSONProcessStepInstance - FIXME\n";
+	
 	private long delay;
 	private int executionState;
 	private int instanceNumber;
@@ -108,8 +115,12 @@ public class JSONProcessStepInstance implements IJSONProcessStepInstance {
 				if(tmp != null)
 					result.getSubSteps().add(tmp);
 			}
+		}
+		catch (NoSuchMethodException e) {
+			LOG.error("Cant find method on SofiaFactory: {}", e.getMessage());
+			LOG.error(ERROR_MSG);
 		}catch(Exception e){
-			System.out.println("ERROR: Cant completely deserialize the JSONProcessStepInstance - FIXME\n");
+			LOG.error(ERROR_MSG);
 			e.printStackTrace();
 		}
 		

@@ -11,17 +11,17 @@ import ws.wamp.jawampa.Reply;
 public class ProcessInstanceInfosHandler extends AbstractClientHandler {
 	private static final SofiaInstanceFactory FACTORY = SofiaInstanceFactoryImpl.eINSTANCE;
 	private ProcessInstance processInstance;
-	
+
 	@Override
 	public void onNext(Reply t) {
 		IJSONProcessStepInstance processInstanceInfos = convertFromJson(t.arguments().get(0), JSONProcessStepInstance.class);
-		processInstance = (ProcessInstance)processInstanceInfos.makeProcessStepInstance(FACTORY);
+		processInstance = (ProcessInstance) processInstanceInfos.makeProcessStepInstance(FACTORY);
 	}
-	
+
 	@Override
 	public void onCompleted() {
 		state = ReplyState.SUCCESS;
-		super.onCompleted();		
+		super.onCompleted();
 	}
 
 	public ProcessInstance getProcessInstance() {

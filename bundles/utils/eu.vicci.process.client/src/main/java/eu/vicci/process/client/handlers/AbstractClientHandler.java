@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import eu.vicci.process.engine.core.ReplyState;
+import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.JSONProcessStepInstance;
 import rx.Subscriber;
 import ws.wamp.jawampa.Reply;
 
@@ -108,10 +109,19 @@ public abstract class AbstractClientHandler extends Subscriber<Reply> {
 	}
 
 	protected final <T> T convertFromJson(JsonNode json, Class<T> clazz) {
+		//classloader stuff is a dirty fix, cause jackson tries to load from this classloader
+		//https://stackoverflow.com/questions/19724312/jackson-deserializing-custom-classes-in-an-osgi-environment
+		ClassLoader oldLoader = Thread.currentThread().getContextClassLoader();
 		try {
-			return mapper.readValue(json.toString(), clazz);
+			ClassLoader tmpLoader = JSONProcessStepInstance.class.getClassLoader();
+			Thread.currentThread().setContextClassLoader(tmpLoader);
+			return mapper.readValue(json.toString(), clazz);			
 		} catch (IOException e) {
+			LOGGER.error(e.getMessage());
 			e.printStackTrace();
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(oldLoader);			
 		}
 		return null;
 	}
@@ -136,11 +146,20 @@ public abstract class AbstractClientHandler extends Subscriber<Reply> {
 
 	protected final <T extends Collection<?>> T convertFromJsonToCollectionType(JsonNode json, Class<T> collectionClass,
 			Class<?> elementClass) {
+		//classloader stuff is a dirty fix, cause jackson tries to load from this classloader
+		//https://stackoverflow.com/questions/19724312/jackson-deserializing-custom-classes-in-an-osgi-environment
+		ClassLoader oldLoader = Thread.currentThread().getContextClassLoader();
 		try {
+			ClassLoader tmpLoader = JSONProcessStepInstance.class.getClassLoader();
+			Thread.currentThread().setContextClassLoader(tmpLoader);
 			JavaType type = mapper.getTypeFactory().constructCollectionType(collectionClass, elementClass);
 			return mapper.readValue(json.toString(), type);
 		} catch (IOException e) {
+			LOGGER.error(e.getMessage());
 			e.printStackTrace();
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(oldLoader);			
 		}
 		return null;
 	}

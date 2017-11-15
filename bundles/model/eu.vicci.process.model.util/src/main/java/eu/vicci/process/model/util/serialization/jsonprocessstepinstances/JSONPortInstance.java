@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
@@ -29,6 +31,7 @@ import eu.vicci.process.model.util.serialization.jsonprocesssteps.core.IJSONPort
 @JsonSubTypes({ @Type(value = JSONDataPortInstance.class, name = "JSONDataPortInstance"),
 		@Type(value = JSONEscalationPortInstance.class, name = "JSONEscalationPortInstance") })
 public class JSONPortInstance implements IJSONPortInstance {
+	private static final Logger LOG = LoggerFactory.getLogger(JSONPortInstance.class);
 	private String type;
 	private State executionState;
 	private String instanceId;
@@ -215,10 +218,11 @@ public class JSONPortInstance implements IJSONPortInstance {
 	protected void addBaseInformationsToPortInstance(PortInstance portInstance, SofiaInstanceFactory factory) {
 		
 		// FIXME UnsupportedOperationException is thrown for the default factory
+		// Model needs complete refactoring for a nice serialization
 		try {
 			portInstance.setExecutionState(executionState);			
 		} catch (UnsupportedOperationException e) {
-			System.out.println("ERROR: Cant set Execution State to Port on default Factory - FIXME");
+			LOG.error("ERROR: Cant set Execution State to Port on default Factory - FIXME");
 		}
 
 		portInstance.setInstanceId(instanceId);
