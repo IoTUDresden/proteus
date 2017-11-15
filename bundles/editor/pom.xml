@@ -61,6 +61,7 @@
 	</build>-->
 
 	<modules>
+		<module>eu.vicci.process.editor.logging</module>
 		<module>eu.vicci.process.gesture</module>
 		<module>eu.vicci.process.graphiti</module>
 		<module>eu.vicci.process.graphiti.adapter</module>

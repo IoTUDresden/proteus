@@ -43,7 +43,6 @@ For more information contact us at https://github.com/IoTUDresden/.
       </win>
    </launcher>
 
-
    <vm>
       <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</linux>
       <macos include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8</macos>
@@ -72,6 +71,7 @@ For more information contact us at https://github.com/IoTUDresden/.
       <plugin id="eu.vicci.process.client"/>
       <plugin id="eu.vicci.process.core"/>
       <plugin id="eu.vicci.process.editor.app"/>
+      <plugin id="eu.vicci.process.editor.logging" fragment="true"/>
       <plugin id="eu.vicci.process.graphiti"/>
       <plugin id="eu.vicci.process.graphiti.adapter"/>
       <plugin id="eu.vicci.process.graphiti.adapter.view"/>
