@@ -81,7 +81,9 @@ public enum LifeCycleManager {
 		logger = LoggerFactory.getLogger("LifeCycleManager");
 		logger.debug("setting up the process execution system");
 		processExecutionSystem = ActorSystem.create(EXECUTION_SYSTEM_NAME);
+		logger.debug("created actorsystem");
 		executionMaster = ProcessExecutionMasterActor.create(processExecutionSystem, EXECUTION_MASTER_NAME);
+		logger.debug("created master");
 	}
 
 	/**
@@ -91,7 +93,7 @@ public enum LifeCycleManager {
 	 * @param parameter
 	 */
 	public void activatePort(PortInstance port, DataTypeInstance parameter) {
-		logger.info("activate port: {}", port.getName());
+		logger.debug("activate port: {}", port.getName());
 		ActivatePortMessage message = new ActivatePortMessage(parameter);
 		ActorRef receiver = ((ActorAssignable) port).getActorReference();
 		executionMaster.sendSimpleMessage(receiver, message);
@@ -123,7 +125,7 @@ public enum LifeCycleManager {
 	 * @return
 	 */
 	public boolean activatePortSync(PortInstance port, DataTypeInstance parameter) {
-		logger.info("activate port: {}", port.getName());
+		logger.debug("activate port: {}", port.getName());
 		ActivatePortMessage message = new ActivatePortMessage(parameter, true);
 		ActorRef receiver = ((ActorAssignable) port).getActorReference();
 		Future<Object> result = executionMaster.sendMessageAndReceiveFuture(receiver, message, timeout);
@@ -195,7 +197,7 @@ public enum LifeCycleManager {
 	 * @param processStep
 	 */
 	public boolean executeProcessStep(ProcessStepInstance processStep) {
-		logger.info("executing process step: {}", processStep.getInstanceId());
+		logger.debug("executing process step: {}", processStep.getInstanceId());
 		ExecuteProcessStepMessage message = new ExecuteProcessStepMessage();
 		ActorRef receiver = ((ActorAssignable) processStep).getActorReference();
 		executionMaster.sendSimpleMessage(receiver, message);
@@ -208,7 +210,7 @@ public enum LifeCycleManager {
 	 * @param processStep
 	 */
 	public void stopProcessStep(ActorAssignable processStep) {
-		logger.info("stopping process step: {}", processStep.getActorReference().path());
+		logger.debug("stopping process step: {}", processStep.getActorReference().path());
 		ActorRef receiver = processStep.getActorReference();
 		executionMaster.sendSimpleMessage(receiver, new StopProcessStepMessage());
 	}
@@ -219,7 +221,7 @@ public enum LifeCycleManager {
 	 * @param processStep
 	 */
 	public void resumeProcessStep(ActorAssignable processStep) {
-		logger.info("resume process step: {}", processStep.getActorReference().path());
+		logger.debug("resume process step: {}", processStep.getActorReference().path());
 		ActorRef receiver = processStep.getActorReference();
 		executionMaster.sendSimpleMessage(receiver, new ResumeProcessStepMessage());
 	}
@@ -230,7 +232,7 @@ public enum LifeCycleManager {
 	 * @param processStep
 	 */
 	public void killProcessStep(ActorAssignable processStep) {
-		logger.info("kill process step: {}", processStep.getActorReference().path());
+		logger.debug("kill process step: {}", processStep.getActorReference().path());
 		ActorRef receiver = processStep.getActorReference();
 		executionMaster.sendSimpleMessage(receiver, new KillProcessStepMessage());
 		//TODO to kill or to stop a process step by the hard way, simply the actors for the
@@ -243,7 +245,7 @@ public enum LifeCycleManager {
 	 * @param processStep
 	 */
 	public void pauseProcessStep(ActorAssignable processStep) {
-		logger.info("pause process step: {}", processStep.getActorReference().path());
+		logger.debug("pause process step: {}", processStep.getActorReference().path());
 		ActorRef receiver = processStep.getActorReference();
 		executionMaster.sendSimpleMessage(receiver, new PauseProcessStepMessage());
 	}
@@ -257,7 +259,7 @@ public enum LifeCycleManager {
 	 * @return
 	 */
 	public ActorRef createActorForEndPortSync(PortInstance endPort, ActorRef parent) {
-		logger.info("create actor for endport: {}", endPort.getInstanceId());
+		logger.debug("create actor for endport: {}", endPort.getInstanceId());
 		Creator<UntypedActor> factory = new EndPortActorFactory(endPort);
 		CreateChildActorMessage message = new CreateChildActorMessage(factory,
 				endPort.getInstanceId());
@@ -274,7 +276,7 @@ public enum LifeCycleManager {
 	 */
 	public ActorRef createActorForProcessSync(ProcessStepInstanceImplCustom processStepInstance,
 			ActorRef parent) {
-		logger.info("create actor for process: {}", processStepInstance.getInstanceId());
+		logger.debug("create actor for process: {}", processStepInstance.getInstanceId());
 		Creator<UntypedActor> factory = new ProcessStepActorFactory(processStepInstance);
 		CreateChildActorMessage message = new CreateChildActorMessage(factory,
 				processStepInstance.getInstanceId());
@@ -291,7 +293,7 @@ public enum LifeCycleManager {
 	 */
 	public ActorRef createActorForStartControlPortSync(StartControlPortInstance portInstance,
 			ActorRef parent) {
-		logger.info("create actor for startcontrolport: {}", portInstance.getInstanceId());
+		logger.debug("create actor for startcontrolport: {}", portInstance.getInstanceId());
 		Creator<UntypedActor> factory = new StartControlPortActorFactory(portInstance);
 		CreateChildActorMessage message = new CreateChildActorMessage(factory,
 				portInstance.getInstanceId());
@@ -308,7 +310,7 @@ public enum LifeCycleManager {
 	 */
 	public ActorRef createActorForStartDataPortSync(StartDataPortInstance portInstance,
 			ActorRef parent) {
-		logger.info("create actor for startdataport: {}", portInstance.getInstanceId());
+		logger.debug("create actor for startdataport: {}", portInstance.getInstanceId());
 		Creator<UntypedActor> factory = new StartDataPortActorFactory(portInstance);
 		CreateChildActorMessage message = new CreateChildActorMessage(factory,
 				portInstance.getInstanceId());
@@ -324,7 +326,7 @@ public enum LifeCycleManager {
 	 * @return
 	 */
 	public ActorRef createActorForTransitionSync(TransitionInstance instance, ActorRef parent) {
-		logger.info("create actor for transition: {}", instance.getInstanceId());
+		logger.debug("create actor for transition: {}", instance.getInstanceId());
 		Creator<UntypedActor> factory = new TransitionActorFactory(instance);
 		CreateChildActorMessage message = new CreateChildActorMessage(factory,	instance.getInstanceId());
 		return executionMaster.createChildActor(parent, message);
@@ -383,7 +385,7 @@ public enum LifeCycleManager {
 	 * @param instance
 	 */
 	public void deactivateTransition(TransitionInstance instance) {
-		logger.info("deactivating transition: {}", instance.getInstanceId());
+		logger.debug("deactivating transition: {}", instance.getInstanceId());
 		DeactivateTransitionMessage message = new DeactivateTransitionMessage();
 		ActorRef receiver = ((ActorAssignable) instance).getActorReference();
 		executionMaster.sendSimpleMessage(receiver, message);
@@ -395,14 +397,14 @@ public enum LifeCycleManager {
 	 * @param processStep
 	 */
 	public void deactivateProcessStep(ProcessStepInstance processStep) {
-		logger.info("deactivating process step: {}", processStep.getInstanceId());
+		logger.debug("deactivating process step: {}", processStep.getInstanceId());
 		DeactivateProcessStepMessage message = new DeactivateProcessStepMessage();
 		ActorRef receiver = ((ActorAssignable) processStep).getActorReference();
 		executionMaster.sendSimpleMessage(receiver, message);
 	}
 	
 	public void escalateProcessStep(ProcessStepInstance processStep){
-		logger.info("escalate process step {}", processStep.getInstanceId());
+		logger.debug("escalate process step {}", processStep.getInstanceId());
 		EscalateProcessStepMessage message = new EscalateProcessStepMessage();
 		ActorRef receiver = ((ActorAssignable) processStep).getActorReference();
 		executionMaster.sendSimpleMessage(receiver, message);
@@ -414,7 +416,7 @@ public enum LifeCycleManager {
 	 * @param port
 	 */
 	public void deactivatePort(PortInstance port) {
-		logger.info("deactivating port: {}", port.getPortType().getName());
+		logger.debug("deactivating port: {}", port.getPortType().getName());
 		DeactivatePortMessage message = new DeactivatePortMessage();
 		ActorRef receiver = ((ActorAssignable) port).getActorReference();
 		executionMaster.sendSimpleMessage(receiver, message);
@@ -426,7 +428,7 @@ public enum LifeCycleManager {
 	 * @param process
 	 */
 	public void resetProcess(ProcessStepInstance process) {
-		logger.info("reset process step: {}", process.getInstanceId());
+		logger.debug("reset process step: {}", process.getInstanceId());
 		ResetProcessMessage message = new ResetProcessMessage();
 		ActorRef receiver = ((ActorAssignable) process).getActorReference();
 		executionMaster.sendSimpleMessage(receiver, message);
@@ -439,7 +441,7 @@ public enum LifeCycleManager {
 	 * @param newExecutionstate
 	 */
 	public void changePortExecutionState(PortInstance port, State newExecutionstate) {
-		logger.info("change port execution state: {}", port.getPortType().getName());
+		logger.debug("change port execution state: {}", port.getPortType().getName());
 		ChangePortExecutionStateMessage message = new ChangePortExecutionStateMessage(
 				newExecutionstate);
 		ActorRef receiver = ((ActorAssignable) port).getActorReference();
@@ -503,7 +505,7 @@ public enum LifeCycleManager {
 	private void logTransition(TransitionInstance transition){
 		String source = transition.getSourcePortInstance().getName();
 		String target = transition.getTargetPortInstance().getName();
-		logger.info("execute transition: {} --> {}", source, target);
+		logger.debug("execute transition: {} --> {}", source, target);
 	}
 	
 	private void logTimeoutTransitionActivation(TransitionInstance transition){

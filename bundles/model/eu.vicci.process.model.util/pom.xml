@@ -9,7 +9,6 @@
 	</parent>
 
 	<artifactId>eu.vicci.process.model.util</artifactId>
-
 	<name>Process Model Util</name>
 	<packaging>eclipse-plugin</packaging>
 
@@ -35,30 +34,22 @@
 			<version>2.4.4</version>
 		</dependency>
 		<dependency>
-			<groupId>com.thoughtworks.xstream</groupId>
-			<artifactId>xstream</artifactId>
-			<version>1.4.7</version>
-		</dependency>
-		
-		<!--
-		<dependency>
-			<groupId>io.dropwizard.metrics</groupId>
-			<artifactId>metrics-core</artifactId>
-			<version>3.1.2</version>
-		</dependency>  -->
-		
-		<dependency>
 			<groupId>com.netflix.feign</groupId>
 			<artifactId>feign-core</artifactId>
 			<version>8.18.0</version>
 		</dependency>
-		
-		<!-- 
+
 		<dependency>
-			<groupId>com.netflix.feign</groupId>
-			<artifactId>feign-jackson</artifactId>
-			<version>8.18.0</version>
-		</dependency> -->
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.model</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<type>eclipse-plugin</type>
+		</dependency>
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.core</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 </project>

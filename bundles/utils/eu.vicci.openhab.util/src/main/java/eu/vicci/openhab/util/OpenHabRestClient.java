@@ -48,6 +48,7 @@ public class OpenHabRestClient implements IOpenHabRestClient {
 	private static final Logger logger = LoggerFactory.getLogger(OpenHabRestClient.class);
 	private final String serverBaseUri;
 
+	//FIXME Access restriction
 	private CloseableHttpClient client;
 
 	/**

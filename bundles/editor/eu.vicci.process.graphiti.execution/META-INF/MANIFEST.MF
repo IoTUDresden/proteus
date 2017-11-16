@@ -21,14 +21,12 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide;bundle-version="3.9.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .,
- maven_libs/log4j.jar,
- maven_libs/slf4j-api.jar,
- maven_libs/slf4j-log4j12.jar
-Bundle-Vendor: TUD
+Bundle-ClassPath: .
+Bundle-Vendor: IoTUDresden
 Export-Package: eu.vicci.process.graphiti.execution.interpreter,
  eu.vicci.process.graphiti.execution.ui
 Import-Package: eu.vicci.process.adapter.util,
  eu.vicci.process.adapter.wizard,
  eu.vicci.process.graphiti,
- eu.vicci.process.graphiti.feature
+ eu.vicci.process.graphiti.feature,
+ org.slf4j;version="1.7.13"

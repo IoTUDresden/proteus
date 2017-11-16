@@ -1,32 +1,9 @@
 Bundle-ManifestVersion: 2
-Bundle-Name: Process Server
+Bundle-Name: Vicci Runtime
 Bundle-SymbolicName: eu.vicci.process.server;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-ClassPath: .,
- maven_libs/jackson-annotations.jar,
- maven_libs/jackson-core-asl.jar,
- maven_libs/jackson-core.jar,
- maven_libs/jackson-databind.jar,
- maven_libs/jackson-dataformat-msgpack.jar,
- maven_libs/jackson-mapper-asl.jar,
- maven_libs/jawampa-core.jar,
- maven_libs/jawampa-netty.jar,
- maven_libs/log4j.jar,
- maven_libs/msgpack-core.jar,
- maven_libs/netty-buffer.jar,
- maven_libs/netty-codec-http.jar,
- maven_libs/netty-codec.jar,
- maven_libs/netty-common.jar,
- maven_libs/netty-handler.jar,
- maven_libs/netty-transport.jar,
- maven_libs/rxjava.jar,
- maven_libs/slf4j-api.jar,
- maven_libs/slf4j-log4j12.jar,
- maven_libs/animal-sniffer-annotation.jar,
- maven_libs/feign-core.jar,
- maven_libs/commons-lang3.jar,
- maven_libs/jna.jar
-Bundle-Vendor: TUD
+Bundle-ClassPath: .
+Bundle-Vendor: IoTUDresden
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: eu.vicci.process.osgi,
  eu.vicci.process.model,
@@ -35,7 +12,7 @@ Require-Bundle: eu.vicci.process.osgi,
  eu.vicci.process.core;bundle-version="1.0.0",
  eu.vicci.process.client;bundle-version="1.0.0",
  org.eclipse.emf.ecore.xmi;bundle-version="2.11.1",
- org.eclipse.osgi;bundle-version="3.10.102",
+ org.eclipse.osgi;bundle-version="3.10.101",
  eu.vicci.openhab.util;bundle-version="1.0.0",
  eu.vicci.process.distribution;bundle-version="0.0.1"
 Export-Package: eu.vicci.process.runtime,

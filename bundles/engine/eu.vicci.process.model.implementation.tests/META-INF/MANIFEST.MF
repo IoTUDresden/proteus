@@ -2,7 +2,7 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: eu.vicci.process.model.implementations.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Name: Process Tests
-Bundle-Vendor: TUD
+Bundle-Vendor: IoTUDresden
 Bundle-ClassPath: .
 Bundle-Activator: eu.vicci.process.model.implementation.tests.internal.TestBundleActivator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

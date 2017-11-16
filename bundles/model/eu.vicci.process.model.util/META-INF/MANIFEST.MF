@@ -1,10 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Util
+Bundle-Name: Process Model Util
 Bundle-SymbolicName: eu.vicci.process.model.util;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Export-Package: com.google.gson,
- eu.vicci.process.model.util,
+Export-Package: eu.vicci.process.model.util,
  eu.vicci.process.model.util.client,
  eu.vicci.process.model.util.configuration,
  eu.vicci.process.model.util.logging,
@@ -15,22 +14,16 @@ Export-Package: com.google.gson,
  eu.vicci.process.model.util.serialization.jsontypeinstances,
  eu.vicci.process.model.util.serialization.jsontypes
 Require-Bundle: eu.vicci.process.core;bundle-version="1.0.0",
- eu.vicci.process.model;bundle-version="1.0.0"
-Bundle-Vendor: TUD
+ eu.vicci.process.model;bundle-version="1.0.0",
+ com.netflix.feign.core;bundle-version="8.18.0",
+ com.fasterxml.jackson.core.jackson-annotations;bundle-version="2.4.0",
+ com.google.gson;bundle-version="2.5.0",
+ com.fasterxml.jackson.core.jackson-databind;bundle-version="2.4.4",
+ jackson-mapper-asl;bundle-version="1.9.13",
+ com.fasterxml.jackson.core.jackson-core;bundle-version="2.4.4",
+ jackson-core-asl;bundle-version="1.9.13"
+Bundle-Vendor: IoTUDresden
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
-Bundle-ClassPath: .,
- maven_libs/animal-sniffer-annotation.jar,
- maven_libs/feign-core.jar,
- maven_libs/gson.jar,
- maven_libs/jackson-annotations.jar,
- maven_libs/jackson-core.jar,
- maven_libs/jackson-core-asl.jar,
- maven_libs/jackson-databind.jar,
- maven_libs/jackson-mapper-asl.jar,
- maven_libs/log4j.jar,
- maven_libs/slf4j-api.jar,
- maven_libs/slf4j-log4j12.jar,
- maven_libs/xmlpull.jar,
- maven_libs/xpp3_min.jar,
- maven_libs/xstream.jar
+Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy
+Import-Package: org.slf4j;version="1.7.13"

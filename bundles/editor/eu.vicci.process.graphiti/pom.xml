@@ -12,17 +12,25 @@
 
 	<name>Process Editor Graphiti Plugin</name>
 	<packaging>eclipse-plugin</packaging>
-
+	
+	<!-- If the third party lib available as bundle/plugin via p2 repo, then add it to the target platform. -->
+	<!-- Otherwise put it here. It will be copied to maven_libs. In the manifest.mf add it to the runtime classpath -->
+<!--  
 	<dependencies>
 		<dependency>
-			<groupId>com.predic8</groupId>
-			<artifactId>soa-model-core</artifactId>
-			<version>1.5.0</version>
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.model</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.13</version>
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.model.util</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
-	</dependencies>
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.core</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>-->
 </project>

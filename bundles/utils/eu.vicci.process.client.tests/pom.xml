@@ -9,5 +9,11 @@
   
   <groupId>eu.vicci.process</groupId>
   <artifactId>eu.vicci.process.client.tests</artifactId>
-  <packaging>pom</packaging>
+  <dependencies>
+  	<dependency>
+  		<groupId>eu.vicci.proteus.bundles.utils</groupId>
+  		<artifactId>eu.vicci.process.client</artifactId>
+  		<version>1.0.0-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>

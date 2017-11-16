@@ -3,9 +3,6 @@
    <bundle id="eu.vicci.process.graphiti.adapter.view" version="1.0.0.qualifier">
       <category name="processeditor.plugins"/>
    </bundle>
-   <bundle id="eu.vicci.process.gesture" version="1.0.0.qualifier">
-      <category name="processeditor.plugins"/>
-   </bundle>
    <bundle id="eu.vicci.process.graphiti" version="1.0.0.qualifier">
       <category name="processeditor.plugins"/>
    </bundle>
@@ -30,5 +27,15 @@
    <bundle id="eu.vicci.process.model.util" version="1.0.0.qualifier">
       <category name="processeditor.plugins"/>
    </bundle>
-   <category-def name="processeditor.plugins" label="Process Editor Plugins"/>
+   <bundle id="eu.vicci.process.editor.app" version="1.0.0.qualifier">
+      <category name="processeditor.plugins"/>
+   </bundle>
+   <category-def name="processeditor.plugins" label="Process Editor Plugins">
+      <description>
+         Process Editor Plugins for modeling executable processes for PROtEUS
+      </description>
+   </category-def>
+   <repository-reference location="http://https://iotudresden.github.io/proteus-deps/" enabled="true" />
+   <repository-reference location="http://download.eclipse.org/releases/mars/" enabled="true" />
+   <repository-reference location="http://archive.eclipse.org/graphiti/updates/0.12.1/" enabled="true" />
 </site>

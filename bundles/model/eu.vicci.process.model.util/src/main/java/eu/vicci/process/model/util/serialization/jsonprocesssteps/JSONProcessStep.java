@@ -13,12 +13,10 @@ import org.eclipse.emf.common.util.EList;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 
 import eu.vicci.process.model.sofia.Identifiable;
-import eu.vicci.process.model.sofia.impl.ProcessImpl;
 import eu.vicci.process.model.util.serialization.jsonprocesssteps.core.IJSONProcessStep;
+
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class JSONProcessStep implements IJSONProcessStep {
@@ -27,43 +25,6 @@ public class JSONProcessStep implements IJSONProcessStep {
 	
 	private Map<String, Object> fieldMap = new HashMap<String, Object>();
 	
-	
-	public static String serialize(Identifiable ident) {
-		alreadyDone.clear();
-		IJSONProcessStep jsonStep = null;
-		
-		if (alreadyDone.containsKey(ident.getId())) {
-			jsonStep = alreadyDone.get(ident.getId());
-		} else {
-			jsonStep = new JSONProcessStep(ident);
-			alreadyDone.put(ident.getId(), jsonStep);
-		}
-		
-		XStream xstream = new XStream(new JettisonMappedXmlDriver());
-		xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
-        xstream.alias("product", JSONProcessStep.class);
-		return xstream.toXML(jsonStep);
-
-		
-//		XStream xstream = new XStream();
-//		xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
-//        xstream.alias("product", Process.class);
-//		return xstream.toXML(ident);
-	}
-	
-	public static IJSONProcessStep deserialize(String json){
-		XStream xstream = new XStream(new JettisonMappedXmlDriver());
-		xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
-        xstream.alias("product", JSONProcessStep.class);
-		return ((IJSONProcessStep) xstream.fromXML(json));
-	}
-	
-	public static ProcessImpl deser(String xml){
-		XStream xstream = new XStream();
-		xstream.setMode(XStream.XPATH_RELATIVE_REFERENCES);
-        xstream.alias("product", ProcessImpl.class);
-		return ((ProcessImpl) xstream.fromXML(xml));
-	}
 
 	public JSONProcessStep(Identifiable ident) {
 //		Class<? extends Identifiable> clss = ident.getClass();

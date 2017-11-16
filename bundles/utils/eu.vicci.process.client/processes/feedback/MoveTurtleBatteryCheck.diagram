@@ -1,257 +1,247 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:algorithms="http://eclipse.org/graphiti/mm/algorithms" xmlns:pictograms="http://eclipse.org/graphiti/mm/pictograms" xmlns:sofia="http://vicci.eu/sofia/1.0">
-  <pictograms:Diagram visible="true" gridUnit="10" diagramTypeId="VICCIProcess" name="MoveTurtleBatteryCheck" snapToGrid="true" pictogramLinks="/0/@children.0/@link /0/@children.0/@children.0/@link /0/@children.0/@children.1/@link /0/@children.0/@children.2/@link /0/@children.0/@children.3/@link /0/@children.0/@children.4/@link /0/@children.0/@children.5/@link /0/@children.0/@children.5/@children.0/@link /0/@children.0/@children.5/@children.1/@link /0/@children.0/@children.5/@children.2/@link /0/@children.0/@children.5/@children.3/@link /0/@children.0/@children.5/@children.4/@link /0/@children.0/@children.5/@children.5/@link /0/@children.0/@children.5/@children.5/@children.0/@link /0/@children.0/@children.5/@children.5/@children.1/@link /0/@children.0/@children.5/@children.5/@children.2/@link /0/@children.0/@children.5/@children.5/@children.3/@link /0/@children.0/@children.5/@children.5/@children.4/@link /0/@children.0/@children.5/@children.5/@children.5/@link /0/@children.0/@children.6/@link /0/@children.0/@children.6/@children.0/@link /0/@children.0/@children.5/@children.6/@link /0/@children.0/@children.5/@children.6/@children.0/@link /0/@children.0/@children.5/@children.5/@children.6/@link /0/@children.0/@children.5/@children.5/@children.6/@children.0/@link /0/@connections.0/@link /0/@connections.1/@link" version="0.12.0">
-    <graphicsAlgorithm xsi:type="algorithms:Rectangle" background="/0/@colors.1" foreground="/0/@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
-    <children xsi:type="pictograms:ContainerShape" visible="true" active="true">
-      <properties key="gesture" value="1"/>
-      <properties key="portYPosition" value="25"/>
-      <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" filled="false" width="681" height="441" x="150" y="50">
-        <properties key="resizable" value="width, height"/>
-        <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.0"/>
-      </graphicsAlgorithm>
-      <link businessObjects="/1"/>
-      <anchors xsi:type="pictograms:ChopboxAnchor" active="true"/>
-      <children visible="true">
-        <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" transparency="50.0" width="681" height="20">
-          <properties key="resizable" value="width"/>
-          <background href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.2"/>
-          <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.0"/>
-        </graphicsAlgorithm>
-        <link businessObjects="/1"/>
-      </children>
-      <children visible="true">
-        <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="681" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="Process">
-          <properties key="resizable" value="width"/>
-          <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
-        </graphicsAlgorithm>
-        <link businessObjects="/1"/>
-      </children>
-      <children visible="true">
-        <properties key="name" value="name"/>
-        <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="681" height="20" x="15" y="24" value="name: MoveTurtleBatteryCheck">
-          <properties key="resizable" value="width"/>
-          <properties key="name" value="name"/>
-          <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
-        </graphicsAlgorithm>
-        <link businessObjects="/1"/>
-      </children>
-      <children visible="true">
-        <properties key="name" value="type"/>
-        <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="681" height="20" x="15" y="40" value="type: ">
-          <properties key="resizable" value="width"/>
-          <properties key="name" value="type"/>
-          <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
-        </graphicsAlgorithm>
-        <link businessObjects="/1"/>
-      </children>
-      <children visible="true">
-        <properties key="name" value="resource"/>
-        <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="681" height="20" x="15" y="56" value="resource: ">
-          <properties key="resizable" value="width"/>
-          <properties key="name" value="resource"/>
-          <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
-        </graphicsAlgorithm>
-        <link businessObjects="/1"/>
-      </children>
-      <children xsi:type="pictograms:ContainerShape" visible="true" active="true">
-        <properties key="gesture" value="1"/>
-        <properties key="portYPosition" value="25"/>
-        <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" filled="false" width="421" height="281" x="140" y="90">
-          <properties key="resizable" value="width, height"/>
-          <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.0"/>
-        </graphicsAlgorithm>
-        <link businessObjects="/1/@subSteps.0"/>
-        <anchors xsi:type="pictograms:ChopboxAnchor" active="true"/>
-        <children visible="true">
-          <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" transparency="50.0" width="421" height="20">
-            <properties key="resizable" value="width"/>
-            <background href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.2"/>
-            <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.0"/>
-          </graphicsAlgorithm>
-          <link businessObjects="/1/@subSteps.0"/>
-        </children>
-        <children visible="true">
-          <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="421" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="Process">
-            <properties key="resizable" value="width"/>
-            <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
-          </graphicsAlgorithm>
-          <link businessObjects="/1/@subSteps.0"/>
-        </children>
-        <children visible="true">
-          <properties key="name" value="name"/>
-          <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="421" height="20" x="15" y="24" value="name: MoveRemote">
-            <properties key="resizable" value="width"/>
-            <properties key="name" value="name"/>
-            <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
-          </graphicsAlgorithm>
-          <link businessObjects="/1/@subSteps.0"/>
-        </children>
-        <children visible="true">
-          <properties key="name" value="type"/>
-          <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="421" height="20" x="15" y="40" value="type:">
-            <properties key="resizable" value="width"/>
-            <properties key="name" value="type"/>
-            <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
-          </graphicsAlgorithm>
-          <link businessObjects="/1/@subSteps.0"/>
-        </children>
-        <children visible="true">
-          <properties key="name" value="resource"/>
-          <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="421" height="20" x="15" y="56" value="resource:">
-            <properties key="resizable" value="width"/>
-            <properties key="name" value="resource"/>
-            <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/process.pictograms#//@colors.1"/>
-          </graphicsAlgorithm>
-          <link businessObjects="/1/@subSteps.0"/>
-        </children>
-        <children xsi:type="pictograms:ContainerShape" visible="true" active="true">
-          <properties key="portYPosition" value="25"/>
-          <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" filled="false" width="281" height="171" x="80" y="80">
-            <properties key="resizable" value="width, height"/>
-            <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/loadclassstep.pictograms#//@colors.0"/>
-          </graphicsAlgorithm>
-          <link businessObjects="/1/@subSteps.0/@subSteps.0"/>
-          <anchors xsi:type="pictograms:ChopboxAnchor" active="true"/>
-          <children visible="true">
-            <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" transparency="50.0" width="281" height="20">
-              <properties key="resizable" value="width"/>
-              <background href="../../../../plugin/eu.vicci.process.graphiti/model/loadclassstep.pictograms#//@colors.2"/>
-              <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/loadclassstep.pictograms#//@colors.0"/>
-            </graphicsAlgorithm>
-            <link businessObjects="/1/@subSteps.0/@subSteps.0"/>
-          </children>
-          <children visible="true">
-            <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="281" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="LoadClassStep">
-              <properties key="resizable" value="width"/>
-              <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/loadclassstep.pictograms#//@colors.1"/>
-            </graphicsAlgorithm>
-            <link businessObjects="/1/@subSteps.0/@subSteps.0"/>
-          </children>
-          <children visible="true">
-            <properties key="name" value="name"/>
-            <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="281" height="20" x="15" y="24" value="name: MovingTurtleMethod">
-              <properties key="resizable" value="width"/>
-              <properties key="name" value="name"/>
-              <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/loadclassstep.pictograms#//@colors.1"/>
-            </graphicsAlgorithm>
-            <link businessObjects="/1/@subSteps.0/@subSteps.0"/>
-          </children>
-          <children visible="true">
-            <properties key="name" value="type"/>
-            <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="281" height="20" x="15" y="40" value="type: ">
-              <properties key="resizable" value="width"/>
-              <properties key="name" value="type"/>
-              <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/loadclassstep.pictograms#//@colors.1"/>
-            </graphicsAlgorithm>
-            <link businessObjects="/1/@subSteps.0/@subSteps.0"/>
-          </children>
-          <children visible="true">
-            <properties key="name" value="delegateClassName"/>
-            <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="281" height="20" x="15" y="56" value="Delegate: eu.vicci.process.model.sofiainstance.util.processstepclasses.MoveTurtleBatteryCheck">
-              <properties key="resizable" value="width"/>
-              <properties key="name" value="delegateClassName"/>
-              <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/loadclassstep.pictograms#//@colors.1"/>
-            </graphicsAlgorithm>
-            <link businessObjects="/1/@subSteps.0/@subSteps.0"/>
-          </children>
-          <children visible="true">
-            <properties key="name" value="resource"/>
-            <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="281" height="20" x="15" y="72" value="resource: ">
-              <properties key="resizable" value="width"/>
-              <properties key="name" value="resource"/>
-              <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/loadclassstep.pictograms#//@colors.1"/>
-            </graphicsAlgorithm>
-            <link businessObjects="/1/@subSteps.0/@subSteps.0"/>
-          </children>
-          <children xsi:type="pictograms:ContainerShape" visible="true" active="true">
-            <graphicsAlgorithm xsi:type="algorithms:RoundedRectangle" lineWidth="2" width="12" height="12" y="25" cornerHeight="4" cornerWidth="4">
-              <background href="../../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.1"/>
-              <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.0"/>
-            </graphicsAlgorithm>
-            <link businessObjects="/1/@subSteps.0/@subSteps.0/@ports.0"/>
-            <anchors xsi:type="pictograms:ChopboxAnchor" active="true" incomingConnections="/0/@connections.1"/>
-            <children visible="true">
-              <graphicsAlgorithm xsi:type="algorithms:Ellipse" width="4" height="4" x="4" y="4">
-                <background href="../../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.0"/>
-              </graphicsAlgorithm>
-              <link businessObjects="/1/@subSteps.0/@subSteps.0/@ports.0"/>
-            </children>
-          </children>
-        </children>
-        <children xsi:type="pictograms:ContainerShape" visible="true" active="true">
-          <graphicsAlgorithm xsi:type="algorithms:RoundedRectangle" lineWidth="2" width="12" height="12" y="25" cornerHeight="4" cornerWidth="4">
-            <background href="../../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.1"/>
-            <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.0"/>
-          </graphicsAlgorithm>
-          <link businessObjects="/1/@subSteps.0/@ports.0"/>
-          <anchors xsi:type="pictograms:ChopboxAnchor" active="true" outgoingConnections="/0/@connections.1" incomingConnections="/0/@connections.0"/>
-          <children visible="true">
-            <graphicsAlgorithm xsi:type="algorithms:Ellipse" width="4" height="4" x="4" y="4">
-              <background href="../../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.0"/>
-            </graphicsAlgorithm>
-            <link businessObjects="/1/@subSteps.0/@ports.0"/>
-          </children>
-        </children>
-      </children>
-      <children xsi:type="pictograms:ContainerShape" visible="true" active="true">
-        <graphicsAlgorithm xsi:type="algorithms:RoundedRectangle" lineWidth="2" width="12" height="12" y="25" cornerHeight="4" cornerWidth="4">
-          <background href="../../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.1"/>
-          <foreground href="../../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.0"/>
-        </graphicsAlgorithm>
-        <link businessObjects="/1/@ports.0"/>
-        <anchors xsi:type="pictograms:ChopboxAnchor" active="true" outgoingConnections="/0/@connections.0"/>
-        <children visible="true">
-          <graphicsAlgorithm xsi:type="algorithms:Ellipse" width="4" height="4" x="4" y="4">
-            <background href="../../../../plugin/eu.vicci.process.graphiti/model/startcontrolport.pictograms#//@colors.0"/>
-          </graphicsAlgorithm>
-          <link businessObjects="/1/@ports.0"/>
-        </children>
-      </children>
-    </children>
-    <connections xsi:type="pictograms:FreeFormConnection" visible="true" active="true" start="/0/@children.0/@children.6/@anchors.0" end="/0/@children.0/@children.5/@children.6/@anchors.0">
-      <graphicsAlgorithm xsi:type="algorithms:Polyline" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
-      <link businessObjects="/1/@ports.0/@outTransitions.0"/>
-      <connectionDecorators visible="true" locationRelative="true" location="1.0">
-        <graphicsAlgorithm xsi:type="algorithms:Polygon" background="/0/@colors.2" foreground="/0/@colors.2" lineWidth="1" filled="true" transparency="0.0">
-          <points x="-10" y="5"/>
-          <points/>
-          <points x="-10" y="-5"/>
-        </graphicsAlgorithm>
-      </connectionDecorators>
-      <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-        <graphicsAlgorithm xsi:type="algorithms:Text" lineWidth="1" filled="false" transparency="0.0" font="/0/@fonts.0" value="transition"/>
-      </connectionDecorators>
-    </connections>
-    <connections xsi:type="pictograms:FreeFormConnection" visible="true" active="true" start="/0/@children.0/@children.5/@children.6/@anchors.0" end="/0/@children.0/@children.5/@children.5/@children.6/@anchors.0">
-      <graphicsAlgorithm xsi:type="algorithms:Polyline" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0"/>
-      <link businessObjects="/1/@subSteps.0/@ports.0/@outTransitions.0"/>
-      <connectionDecorators visible="true" locationRelative="true" location="1.0">
-        <graphicsAlgorithm xsi:type="algorithms:Polygon" background="/0/@colors.2" foreground="/0/@colors.2" lineWidth="1" filled="true" transparency="0.0">
-          <points x="-10" y="5"/>
-          <points/>
-          <points x="-10" y="-5"/>
-        </graphicsAlgorithm>
-      </connectionDecorators>
-      <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5">
-        <graphicsAlgorithm xsi:type="algorithms:Text" lineWidth="1" filled="false" transparency="0.0" font="/0/@fonts.0" value="transition"/>
-      </connectionDecorators>
-    </connections>
-    <colors red="227" green="238" blue="249"/>
-    <colors red="255" green="255" blue="255"/>
-    <colors/>
-    <fonts name="Arial" size="8"/>
-  </pictograms:Diagram>
-  <sofia:Process id="_7YG0AKjvEeeaMKEbA4gINQ" name="MoveTurtleBatteryCheck" type="" description="" resource="">
-    <ports xsi:type="sofia:StartControlPort" id="_Hq4NMKjwEeeaMKEbA4gINQ" name="start_0">
-      <outTransitions id="_KimoQKjwEeeaMKEbA4gINQ" name="transition" targetPort="/1/@subSteps.0/@ports.0"/>
-    </ports>
-    <subSteps xsi:type="sofia:Process" id="_-lbroKjvEeeaMKEbA4gINQ" name="MoveRemote" goal="{&#xA;   &quot;name&quot;:&quot;move turtle with enough battery power&quot;,&#xA;   &quot;objectives&quot;:[&#xA;      {&#xA;         &quot;name&quot;:&quot;enough power on current executing turtle&quot;,&#xA;         &quot;satisfiedExpression&quot;:&quot;#state == 'executed'&quot;,&#xA;         &quot;compensateExpression&quot;:&quot;#batteryValue &lt; 50 &amp;&amp; #lastCommandSendBefore(#objective, 5)&quot;,&#xA;         &quot;testNodeIdExpression&quot;:&quot;#nodeId&quot;,&#xA;         &quot;contextExpressions&quot;:[&#xA;            &quot;OPTIONAL MATCH (process:NeoProcess {processId: {piid}}) &quot;,&#xA;            &quot;OPTIONAL MATCH (peer1:NeoPeer {name: 'turtlebot2-X201EP'})-[:HAS_METRIC]->(metric1:NeoPeerMetric) &quot;,&#xA;            &quot;OPTIONAL MATCH (peer2:NeoPeer {name: 'tb-Satellite-R630'})-[:HAS_METRIC]->(metric2:NeoPeerMetric) &quot;,&#xA;            &quot;OPTIONAL MATCH (process)&lt;-[:REMOTE_FOR]-(remote:NeoProcess)-[runsOn2:RUNS_ON]->(peer2) &quot;,&#xA;            &quot;WITH process, remote, &quot;,&#xA;            &quot;CASE WHEN runsOn2 IS NOT NULL THEN peer2 ELSE peer1 END AS peer, &quot;,&#xA;            &quot;CASE WHEN process IS NOT NULL THEN id(process) ELSE 0 END AS nodeId, &quot;,&#xA;            &quot;CASE WHEN runsOn2 IS NOT NULL THEN metric2 ELSE metric1 END AS metric &quot;,&#xA;            &quot;RETURN remote.state AS state, peer, nodeId, &quot;,&#xA;            &quot;CASE WHEN metric IS NOT NULL AND metric.hasBattery THEN metric.batteryValue ELSE 100 END AS batteryValue&quot;&#xA;         ]&#xA;      }&#xA;   ]&#xA;}" context="" type="" description="" resource="" executionPeer="192.168.1.56" distributed="true">
-      <ports xsi:type="sofia:StartControlPort" id="_IFgTsKjwEeeaMKEbA4gINQ" name="start_0" inTransitions="/1/@ports.0/@outTransitions.0">
-        <outTransitions id="_K5feQKjwEeeaMKEbA4gINQ" name="transition" targetPort="/1/@subSteps.0/@subSteps.0/@ports.0"/>
-      </ports>
-      <subSteps xsi:type="sofia:LoadClassStep" id="_CQbWsKjwEeeaMKEbA4gINQ" name="MovingTurtleMethod" type="" description="" resource="" delegateClassName="eu.vicci.process.model.sofiainstance.util.processstepclasses.MoveTurtleBatteryCheck">
-        <ports xsi:type="sofia:StartControlPort" id="_Iwr-sKjwEeeaMKEbA4gINQ" name="start_0" inTransitions="/1/@subSteps.0/@ports.0/@outTransitions.0"/>
-      </subSteps>
-    </subSteps>
-  </sofia:Process>
+
+<xmi:XMI xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:algorithms="http://eclipse.org/graphiti/mm/algorithms" xmlns:pictograms="http://eclipse.org/graphiti/mm/pictograms" xmlns:sofia="http://vicci.eu/sofia/1.0" xmi:version="2.0">  
+  <pictograms:Diagram visible="true" gridUnit="10" diagramTypeId="VICCIProcess" name="MoveTurtleBatteryCheck" snapToGrid="true" pictogramLinks="/0/@children.0/@link /0/@children.0/@children.0/@link /0/@children.0/@children.1/@link /0/@children.0/@children.2/@link /0/@children.0/@children.3/@link /0/@children.0/@children.4/@link /0/@children.0/@children.5/@link /0/@children.0/@children.5/@children.0/@link /0/@children.0/@children.5/@children.1/@link /0/@children.0/@children.5/@children.2/@link /0/@children.0/@children.5/@children.3/@link /0/@children.0/@children.5/@children.4/@link /0/@children.0/@children.5/@children.5/@link /0/@children.0/@children.5/@children.5/@children.0/@link /0/@children.0/@children.5/@children.5/@children.1/@link /0/@children.0/@children.5/@children.5/@children.2/@link /0/@children.0/@children.5/@children.5/@children.3/@link /0/@children.0/@children.5/@children.5/@children.4/@link /0/@children.0/@children.5/@children.5/@children.5/@link /0/@children.0/@children.6/@link /0/@children.0/@children.6/@children.0/@link /0/@children.0/@children.5/@children.6/@link /0/@children.0/@children.5/@children.6/@children.0/@link /0/@children.0/@children.5/@children.5/@children.6/@link /0/@children.0/@children.5/@children.5/@children.6/@children.0/@link /0/@connections.0/@link /0/@connections.1/@link" version="0.12.0"> 
+    <graphicsAlgorithm xsi:type="algorithms:Rectangle" background="/0/@colors.1" foreground="/0/@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>  
+    <children xsi:type="pictograms:ContainerShape" visible="true" active="true"> 
+      <properties key="gesture" value="1"/>  
+      <properties key="portYPosition" value="25"/>  
+      <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" filled="false" width="681" height="441" x="150" y="50" foreground="/0/@colors.3"> 
+        <properties key="resizable" value="width, height"/> 
+      </graphicsAlgorithm>  
+      <link businessObjects="/1"/>  
+      <anchors xsi:type="pictograms:ChopboxAnchor" active="true"/>  
+      <children visible="true"> 
+        <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" transparency="0.50" width="681" height="20" background="/0/@colors.4" foreground="/0/@colors.3"> 
+          <properties key="resizable" value="width"/> 
+        </graphicsAlgorithm>  
+        <link businessObjects="/1"/> 
+      </children>  
+      <children visible="true"> 
+        <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="681" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="Process" foreground="/0/@colors.2"> 
+          <properties key="resizable" value="width"/> 
+        </graphicsAlgorithm>  
+        <link businessObjects="/1"/> 
+      </children>  
+      <children visible="true"> 
+        <properties key="name" value="name"/>  
+        <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="681" height="20" x="15" y="24" value="name: MoveTurtleBatteryCheck" foreground="/0/@colors.2"> 
+          <properties key="resizable" value="width"/>  
+          <properties key="name" value="name"/> 
+        </graphicsAlgorithm>  
+        <link businessObjects="/1"/> 
+      </children>  
+      <children visible="true"> 
+        <properties key="name" value="type"/>  
+        <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="681" height="20" x="15" y="40" value="type: " foreground="/0/@colors.2"> 
+          <properties key="resizable" value="width"/>  
+          <properties key="name" value="type"/> 
+        </graphicsAlgorithm>  
+        <link businessObjects="/1"/> 
+      </children>  
+      <children visible="true"> 
+        <properties key="name" value="resource"/>  
+        <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="681" height="20" x="15" y="56" value="resource: " foreground="/0/@colors.2"> 
+          <properties key="resizable" value="width"/>  
+          <properties key="name" value="resource"/> 
+        </graphicsAlgorithm>  
+        <link businessObjects="/1"/> 
+      </children>  
+      <children xsi:type="pictograms:ContainerShape" visible="true" active="true"> 
+        <properties key="gesture" value="1"/>  
+        <properties key="portYPosition" value="25"/>  
+        <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" filled="false" width="421" height="281" x="140" y="90" foreground="/0/@colors.3"> 
+          <properties key="resizable" value="width, height"/> 
+        </graphicsAlgorithm>  
+        <link businessObjects="/1/@subSteps.0"/>  
+        <anchors xsi:type="pictograms:ChopboxAnchor" active="true"/>  
+        <children visible="true"> 
+          <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" transparency="0.50" width="421" height="20" background="/0/@colors.4" foreground="/0/@colors.3"> 
+            <properties key="resizable" value="width"/> 
+          </graphicsAlgorithm>  
+          <link businessObjects="/1/@subSteps.0"/> 
+        </children>  
+        <children visible="true"> 
+          <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="421" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="Process" foreground="/0/@colors.2"> 
+            <properties key="resizable" value="width"/> 
+          </graphicsAlgorithm>  
+          <link businessObjects="/1/@subSteps.0"/> 
+        </children>  
+        <children visible="true"> 
+          <properties key="name" value="name"/>  
+          <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="421" height="20" x="15" y="24" value="name: MoveRemote" foreground="/0/@colors.2"> 
+            <properties key="resizable" value="width"/>  
+            <properties key="name" value="name"/> 
+          </graphicsAlgorithm>  
+          <link businessObjects="/1/@subSteps.0"/> 
+        </children>  
+        <children visible="true"> 
+          <properties key="name" value="type"/>  
+          <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="421" height="20" x="15" y="40" value="type:" foreground="/0/@colors.2"> 
+            <properties key="resizable" value="width"/>  
+            <properties key="name" value="type"/> 
+          </graphicsAlgorithm>  
+          <link businessObjects="/1/@subSteps.0"/> 
+        </children>  
+        <children visible="true"> 
+          <properties key="name" value="resource"/>  
+          <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="421" height="20" x="15" y="56" value="resource:" foreground="/0/@colors.2"> 
+            <properties key="resizable" value="width"/>  
+            <properties key="name" value="resource"/> 
+          </graphicsAlgorithm>  
+          <link businessObjects="/1/@subSteps.0"/> 
+        </children>  
+        <children xsi:type="pictograms:ContainerShape" visible="true" active="true"> 
+          <properties key="portYPosition" value="25"/>  
+          <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" filled="false" width="281" height="171" x="80" y="80" foreground="/0/@colors.3"> 
+            <properties key="resizable" value="width, height"/> 
+          </graphicsAlgorithm>  
+          <link businessObjects="/1/@subSteps.0/@subSteps.0"/>  
+          <anchors xsi:type="pictograms:ChopboxAnchor" active="true"/>  
+          <children visible="true"> 
+            <graphicsAlgorithm xsi:type="algorithms:Rectangle" lineWidth="2" transparency="0.50" width="281" height="20" background="/0/@colors.5" foreground="/0/@colors.3"> 
+              <properties key="resizable" value="width"/> 
+            </graphicsAlgorithm>  
+            <link businessObjects="/1/@subSteps.0/@subSteps.0"/> 
+          </children>  
+          <children visible="true"> 
+            <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="281" height="20" horizontalAlignment="ALIGNMENT_CENTER" value="LoadClassStep" foreground="/0/@colors.2"> 
+              <properties key="resizable" value="width"/> 
+            </graphicsAlgorithm>  
+            <link businessObjects="/1/@subSteps.0/@subSteps.0"/> 
+          </children>  
+          <children visible="true"> 
+            <properties key="name" value="name"/>  
+            <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="281" height="20" x="15" y="24" value="name: MovingTurtleMethod" foreground="/0/@colors.2"> 
+              <properties key="resizable" value="width"/>  
+              <properties key="name" value="name"/> 
+            </graphicsAlgorithm>  
+            <link businessObjects="/1/@subSteps.0/@subSteps.0"/> 
+          </children>  
+          <children visible="true"> 
+            <properties key="name" value="type"/>  
+            <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="281" height="20" x="15" y="40" value="type: " foreground="/0/@colors.2"> 
+              <properties key="resizable" value="width"/>  
+              <properties key="name" value="type"/> 
+            </graphicsAlgorithm>  
+            <link businessObjects="/1/@subSteps.0/@subSteps.0"/> 
+          </children>  
+          <children visible="true"> 
+            <properties key="name" value="delegateClassName"/>  
+            <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="281" height="20" x="15" y="56" value="Delegate: eu.vicci.process.model.sofiainstance.util.processstepclasses.MoveTurtleBatteryCheck" foreground="/0/@colors.2"> 
+              <properties key="resizable" value="width"/>  
+              <properties key="name" value="delegateClassName"/> 
+            </graphicsAlgorithm>  
+            <link businessObjects="/1/@subSteps.0/@subSteps.0"/> 
+          </children>  
+          <children visible="true"> 
+            <properties key="name" value="resource"/>  
+            <graphicsAlgorithm xsi:type="algorithms:Text" filled="false" width="281" height="20" x="15" y="72" value="resource: " foreground="/0/@colors.2"> 
+              <properties key="resizable" value="width"/>  
+              <properties key="name" value="resource"/> 
+            </graphicsAlgorithm>  
+            <link businessObjects="/1/@subSteps.0/@subSteps.0"/> 
+          </children>  
+          <children xsi:type="pictograms:ContainerShape" visible="true" active="true"> 
+            <graphicsAlgorithm xsi:type="algorithms:RoundedRectangle" lineWidth="2" width="12" height="12" y="25" cornerHeight="4" cornerWidth="4" background="/0/@colors.6" foreground="/0/@colors.3"></graphicsAlgorithm>  
+            <link businessObjects="/1/@subSteps.0/@subSteps.0/@ports.0"/>  
+            <anchors xsi:type="pictograms:ChopboxAnchor" active="true" incomingConnections="/0/@connections.1"/>  
+            <children visible="true"> 
+              <graphicsAlgorithm xsi:type="algorithms:Ellipse" width="4" height="4" x="4" y="4" background="/0/@colors.3"></graphicsAlgorithm>  
+              <link businessObjects="/1/@subSteps.0/@subSteps.0/@ports.0"/> 
+            </children> 
+          </children> 
+        </children>  
+        <children xsi:type="pictograms:ContainerShape" visible="true" active="true"> 
+          <graphicsAlgorithm xsi:type="algorithms:RoundedRectangle" lineWidth="2" width="12" height="12" y="25" cornerHeight="4" cornerWidth="4" background="/0/@colors.6" foreground="/0/@colors.3"></graphicsAlgorithm>  
+          <link businessObjects="/1/@subSteps.0/@ports.0"/>  
+          <anchors xsi:type="pictograms:ChopboxAnchor" active="true" outgoingConnections="/0/@connections.1" incomingConnections="/0/@connections.0"/>  
+          <children visible="true"> 
+            <graphicsAlgorithm xsi:type="algorithms:Ellipse" width="4" height="4" x="4" y="4" background="/0/@colors.3"></graphicsAlgorithm>  
+            <link businessObjects="/1/@subSteps.0/@ports.0"/> 
+          </children> 
+        </children> 
+      </children>  
+      <children xsi:type="pictograms:ContainerShape" visible="true" active="true"> 
+        <graphicsAlgorithm xsi:type="algorithms:RoundedRectangle" lineWidth="2" width="12" height="12" y="25" cornerHeight="4" cornerWidth="4" background="/0/@colors.6" foreground="/0/@colors.3"></graphicsAlgorithm>  
+        <link businessObjects="/1/@ports.0"/>  
+        <anchors xsi:type="pictograms:ChopboxAnchor" active="true" outgoingConnections="/0/@connections.0"/>  
+        <children visible="true"> 
+          <graphicsAlgorithm xsi:type="algorithms:Ellipse" width="4" height="4" x="4" y="4" background="/0/@colors.3"></graphicsAlgorithm>  
+          <link businessObjects="/1/@ports.0"/> 
+        </children> 
+      </children> 
+    </children>  
+    <connections xsi:type="pictograms:FreeFormConnection" visible="true" active="true" start="/0/@children.0/@children.6/@anchors.0" end="/0/@children.0/@children.5/@children.6/@anchors.0"> 
+      <graphicsAlgorithm xsi:type="algorithms:Polyline" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0"/>  
+      <link businessObjects="/1/@ports.0/@outTransitions.0"/>  
+      <connectionDecorators visible="true" locationRelative="true" location="1.0"> 
+        <graphicsAlgorithm xsi:type="algorithms:Polygon" background="/0/@colors.2" foreground="/0/@colors.2" lineWidth="1" filled="true" transparency="0.0"> 
+          <points x="-10" y="5"/>  
+          <points/>  
+          <points x="-10" y="-5"/> 
+        </graphicsAlgorithm> 
+      </connectionDecorators>  
+      <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5"> 
+        <graphicsAlgorithm xsi:type="algorithms:Text" lineWidth="1" filled="false" transparency="0.0" font="/0/@fonts.0" value="transition"/> 
+      </connectionDecorators> 
+    </connections>  
+    <connections xsi:type="pictograms:FreeFormConnection" visible="true" active="true" start="/0/@children.0/@children.5/@children.6/@anchors.0" end="/0/@children.0/@children.5/@children.5/@children.6/@anchors.0"> 
+      <graphicsAlgorithm xsi:type="algorithms:Polyline" foreground="/0/@colors.2" lineWidth="1" filled="false" transparency="0.0"/>  
+      <link businessObjects="/1/@subSteps.0/@ports.0/@outTransitions.0"/>  
+      <connectionDecorators visible="true" locationRelative="true" location="1.0"> 
+        <graphicsAlgorithm xsi:type="algorithms:Polygon" background="/0/@colors.2" foreground="/0/@colors.2" lineWidth="1" filled="true" transparency="0.0"> 
+          <points x="-10" y="5"/>  
+          <points/>  
+          <points x="-10" y="-5"/> 
+        </graphicsAlgorithm> 
+      </connectionDecorators>  
+      <connectionDecorators visible="true" active="true" locationRelative="true" location="0.5"> 
+        <graphicsAlgorithm xsi:type="algorithms:Text" lineWidth="1" filled="false" transparency="0.0" font="/0/@fonts.0" value="transition"/> 
+      </connectionDecorators> 
+    </connections>  
+    <colors red="227" green="238" blue="249"/>  
+    <colors red="255" green="255" blue="255"/>  
+    <colors/>  
+    <fonts name="Arial" size="8"/>  
+    <colors red="102" green="102" blue="255"/>
+    <colors red="200" green="200" blue="255"/>
+    <colors red="150" green="200" blue="150"/>
+    <colors red="102" green="255" blue="102"/>
+  </pictograms:Diagram>  
+  <sofia:Process id="_7YG0AKjvEeeaMKEbA4gINQ" name="MoveTurtleBatteryCheck" type="" description="" resource=""> 
+    <ports xsi:type="sofia:StartControlPort" id="_Hq4NMKjwEeeaMKEbA4gINQ" name="start_0"> 
+      <outTransitions id="_KimoQKjwEeeaMKEbA4gINQ" name="transition" targetPort="/1/@subSteps.0/@ports.0"/> 
+    </ports>  
+    <subSteps xsi:type="sofia:Process" id="_-lbroKjvEeeaMKEbA4gINQ" name="MoveRemote" goal="{
+   &quot;name&quot;:&quot;move turtle with enough battery power&quot;,
+   &quot;objectives&quot;:[
+      {
+         &quot;name&quot;:&quot;enough power on current executing turtle&quot;,
+         &quot;satisfiedExpression&quot;:&quot;#state == 'executed'&quot;,
+         &quot;compensateExpression&quot;:&quot;#batteryValue &lt; 50 &amp;&amp; #lastCommandSendBefore(#objective, 5)&quot;,
+         &quot;testNodeIdExpression&quot;:&quot;#nodeId&quot;,
+         &quot;contextExpressions&quot;:[
+            &quot;OPTIONAL MATCH (process:NeoProcess {processId: {piid}}) &quot;,
+            &quot;OPTIONAL MATCH (peer1:NeoPeer {name: 'turtlebot2-X201EP'})-[:HAS_METRIC]-&gt;(metric1:NeoPeerMetric) &quot;,
+            &quot;OPTIONAL MATCH (peer2:NeoPeer {name: 'tb-Satellite-R630'})-[:HAS_METRIC]-&gt;(metric2:NeoPeerMetric) &quot;,
+            &quot;OPTIONAL MATCH (process)&lt;-[:REMOTE_FOR]-(remote:NeoProcess)-[runsOn2:RUNS_ON]-&gt;(peer2) &quot;,
+            &quot;WITH process, remote, &quot;,
+            &quot;CASE WHEN runsOn2 IS NOT NULL THEN peer2 ELSE peer1 END AS peer, &quot;,
+            &quot;CASE WHEN process IS NOT NULL THEN id(process) ELSE 0 END AS nodeId, &quot;,
+            &quot;CASE WHEN runsOn2 IS NOT NULL THEN metric2 ELSE metric1 END AS metric &quot;,
+            &quot;RETURN remote.state AS state, peer, nodeId, &quot;,
+            &quot;CASE WHEN metric IS NOT NULL AND metric.hasBattery THEN metric.batteryValue ELSE 100 END AS batteryValue&quot;
+         ]
+      }
+   ]
+}" context="" type="" description="" resource="" executionPeer="192.168.1.56" distributed="true"> 
+      <ports xsi:type="sofia:StartControlPort" id="_IFgTsKjwEeeaMKEbA4gINQ" name="start_0" inTransitions="/1/@ports.0/@outTransitions.0"> 
+        <outTransitions id="_K5feQKjwEeeaMKEbA4gINQ" name="transition" targetPort="/1/@subSteps.0/@subSteps.0/@ports.0"/> 
+      </ports>  
+      <subSteps xsi:type="sofia:LoadClassStep" id="_CQbWsKjwEeeaMKEbA4gINQ" name="MovingTurtleMethod" type="" description="" resource="" delegateClassName="eu.vicci.process.model.sofiainstance.util.processstepclasses.MoveTurtleBatteryCheck"> 
+        <ports xsi:type="sofia:StartControlPort" id="_Iwr-sKjwEeeaMKEbA4gINQ" name="start_0" inTransitions="/1/@subSteps.0/@ports.0/@outTransitions.0"/> 
+      </subSteps> 
+    </subSteps> 
+  </sofia:Process> 
 </xmi:XMI>

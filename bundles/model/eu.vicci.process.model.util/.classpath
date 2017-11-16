@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="src" path="src/main/java"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/animal-sniffer-annotation.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/feign-core.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/gson.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/jackson-annotations.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/jackson-core.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/jackson-core-asl.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/jackson-databind.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/jackson-mapper-asl.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/log4j.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/slf4j-api.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/slf4j-log4j12.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/xmlpull.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/xpp3_min.jar"/>
-	<classpathentry exported="true" kind="lib" path="maven_libs/xstream.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

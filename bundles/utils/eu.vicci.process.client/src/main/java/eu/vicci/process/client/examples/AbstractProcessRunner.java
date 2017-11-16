@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -31,7 +32,10 @@ public abstract class AbstractProcessRunner {
 	protected Process processInfo;
 	protected ProcessInstance processInstanceInfo;
 	
-	public AbstractProcessRunner() {	}	
+	public AbstractProcessRunner() {	
+		//logging config
+		DOMConfigurator.configure("client_log4j.xml");		
+	}	
 	
 	public void run(){
 		createClient();

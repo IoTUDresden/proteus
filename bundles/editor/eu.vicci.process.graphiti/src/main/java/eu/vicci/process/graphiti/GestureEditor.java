@@ -3,9 +3,9 @@ package eu.vicci.process.graphiti;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 import org.eclipse.graphiti.ui.editor.DiagramEditor;
 
-import eu.vicci.process.gesture.Editor;
-
-public class GestureEditor extends Editor {
+//FIXME update or drop support
+//extend from gesture editor!
+public class GestureEditor extends DiagramEditor {
 
 	/**
 	 * The ID of the {@link DiagramEditor} as it is registered with the
@@ -20,7 +20,7 @@ public class GestureEditor extends Editor {
 
     @Override
     protected DiagramBehavior createDiagramBehavior() {
-
-        return new SofiaDiagramBehaviour(this);
+    	throw new UnsupportedOperationException("dropped support for gestures for now, cause xmlpull is too old");
+//        return new SofiaDiagramBehaviour(this);
     }
 }

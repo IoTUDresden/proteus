@@ -16,8 +16,9 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<!--<module>process-editor</module>-->
-		<!--<module>proteus</module>-->
+		<!-- dont include editor at the moment -->
+		<module>editor</module>
+		<module>proteus</module>
 	</modules>
 
 </project>

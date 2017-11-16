@@ -47,15 +47,6 @@ public interface IConfigurationReader {
 	boolean startOsgiRuntime();
 
 	/**
-	 * Should start Semiwa listener?
-	 * 
-	 * @deprecated semiwa not used anymore
-	 * @return
-	 */
-	@Deprecated
-	boolean startSemiwaListener();
-
-	/**
 	 * Should start oh listener? Important for event processing (otherwise, no
 	 * events will arrive). OH must run, before vicci runtime is started.
 	 * 

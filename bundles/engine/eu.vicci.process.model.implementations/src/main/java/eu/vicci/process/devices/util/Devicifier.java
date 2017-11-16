@@ -3,9 +3,8 @@ package eu.vicci.process.devices.util;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import eu.vicci.process.devices.Actuator;
+import eu.vicci.openhab.util.IOpenHabRestClient;
 import eu.vicci.process.devices.DeviceManager;
-import eu.vicci.process.devices.core.Device;
 import eu.vicci.process.devices.core.Sensor;
 import eu.vicci.process.devices.events.EventManager;
 import eu.vicci.process.devices.events.core.EventType;
@@ -16,9 +15,6 @@ import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.DoubleTypeInstance;
 import eu.vicci.process.model.sofiainstance.IntegerTypeInstance;
 import eu.vicci.process.model.sofiainstance.StringTypeInstance;
-import eu.vicci.openhab.util.IOpenHabRestClient;
-import eu.vicci.semiwa.common.enums.SeMiWaNodeEmum;
-import eu.vicci.semiwa.common.node.NodeInformation;
 
 /**
  * Creates a device object from node registered and unregistered messages
@@ -47,43 +43,6 @@ public class Devicifier {
 		return device;
 	}
 
-	/**
-	 * Create device from Node object from SeMiWa or gets the already exisiting device
-	 * from the device manager
-	 * 
-	 * @param node
-	 * @return
-	 */
-	public static Device createDevice(NodeInformation node) {
-		Device device = DeviceManager.getInstance().getDeviceIfRegistered(node.getUid(), Device.class);
-		if (device != null)
-			return device;
-
-		if (node.getNodeType().equals(SeMiWaNodeEmum.Sensor)) {
-			String sensingProcedure = node.getSemanticInformationJSON().getAsJsonObject()
-					.get("Sensing_" + node.getUid()).getAsJsonObject().get("sensingProcedure")
-					.getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
-			String sensing = node.getSemanticInformationJSON().getAsJsonObject().get(sensingProcedure)
-					.getAsJsonObject().get("observedProperty").getAsJsonArray().get(0).getAsJsonObject()
-					.get("value").getAsString();
-			String type = sensing;
-			if (!sensing.equals("null")) {
-				String location = node.getSemanticInformationJSON().getAsJsonObject()
-						.get("Sensor_" + node.getUid()).getAsJsonObject().get("deployedAt").getAsJsonArray()
-						.get(0).getAsJsonObject().get("value").getAsString();
-				Sensor sensor = new Sensor(node.getUid(), location, sensing, type, null, null);
-				DeviceManager.getInstance().addDevice(sensor);
-				return sensor;
-			}
-		} else {
-			if (node.getNodeType().equals(SeMiWaNodeEmum.Actuator)) {
-				Actuator actuator = new Actuator(node.getUid(), node.traverse("/deployedAt"), "");
-				DeviceManager.getInstance().addDevice(actuator);
-				return actuator;
-			}
-		}
-		return null;
-	}
 
 	/**
 	 * Create Sensor from data port instance or gets the already existing device from the

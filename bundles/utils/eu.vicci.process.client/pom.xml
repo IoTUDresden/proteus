@@ -8,10 +8,8 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>eu.vicci.process.client</artifactId>
-	
+	<artifactId>eu.vicci.process.client</artifactId>	
 	<name>PROtEUS Process Engine Client</name>
-
 	<packaging>eclipse-plugin</packaging>
 
 	<dependencies>
@@ -25,6 +23,26 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.7.13</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.model.util</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.model</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.core</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.12</version>
 		</dependency>
 	</dependencies>
 	

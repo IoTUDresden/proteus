@@ -8,9 +8,16 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-
-	<groupId>eu.vicci.process</groupId>
 	<artifactId>eu.vicci.process.model.implementation.tests</artifactId>
-
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
+	
+	<dependencies>
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.engine</groupId>
+			<artifactId>eu.vicci.process.model.implementations</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	
+	
 </project>

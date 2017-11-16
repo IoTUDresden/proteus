@@ -21,8 +21,8 @@
 	</properties>	
 
 	<modules>
-		<module>eu.vicci.process.core</module>
 		<module>eu.vicci.process.model</module>
+		<module>eu.vicci.process.core</module>
 		<module>eu.vicci.process.model.util</module>
 	</modules>
 

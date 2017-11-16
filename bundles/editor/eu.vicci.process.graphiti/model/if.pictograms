@@ -9,7 +9,7 @@
       <points y="40"/>
     </graphicsAlgorithm>
     <children visible="true">
-      <graphicsAlgorithm xsi:type="al:Ellipse" foreground="//@colors.0" lineWidth="2" filled="true" transparency="80.0" width="20" height="20" x="10" y="10"/>
+      <graphicsAlgorithm xsi:type="al:Ellipse" foreground="//@colors.0" lineWidth="2" filled="true" transparency="0.8" width="20" height="20" x="10" y="10"/>
     </children>
     <children visible="true">
       <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.1" filled="false" width="20" height="20" x="17" y="10" horizontalAlignment="ALIGNMENT_LEFT" value="If"/>

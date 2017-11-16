@@ -6,10 +6,11 @@ import java.util.Scanner;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.devices.util.OpenHabListener;
-import eu.vicci.process.devices.util.SeMiWaListener;
 import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.engine.ProcessManagerPublic;
 import eu.vicci.process.engine.core.IProcessManager;
@@ -17,6 +18,7 @@ import eu.vicci.process.model.cep.EsperEngine;
 import eu.vicci.process.model.sofia.SofiaPackage;
 import eu.vicci.process.model.sofiainstance.SofiaInstancePackage;
 import eu.vicci.process.model.sofiainstance.impl.custom.SofiaInstanceFactoryImplCustom;
+import eu.vicci.process.model.sofiainstance.util.LifeCycleManager;
 import eu.vicci.process.model.util.ConfigurationReader;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.osgi.OSGiRuntime;
@@ -25,24 +27,26 @@ import eu.vicci.process.wampserver.SuperPeer;
 import ws.wamp.jawampa.ApplicationError;
 
 public class VicciRuntime {
+	private static final Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
 	private static final String PATH_MODEL = "processes/models/";
+	
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		VicciRuntime runtime = new VicciRuntime();
-		println("starting vicci runtime...\n");
+		LOG.info("starting vicci runtime...");
 		boolean started = runtime.start();
 		if(!started){
-			printlnErr("\n\nfailed to start vicci runtime");
+			LOG.error("failed to start vicci runtime");
 			return;
 		}
 		
-		println("\n\nvicci runtime started (" + runtime.getRuntimeType()  +")");
+		LOG.info("vicci runtime started as {}", runtime.getRuntimeType());
 		readLineTillStopIsEntered();
 		
-		println("\n\nstopping the runtime...");
+		LOG.info("stopping the runtime...");
 		runtime.stop();
 	}	
 
@@ -65,6 +69,9 @@ public class VicciRuntime {
 		boolean isWebSocketServerStarted = startWebSocketServer(configReader);
 		
 		DistributionManager.getInstance().setPeerProfile(server.getPeerProfile());
+		
+		//init process execution system
+		LifeCycleManager.INSTANCE.getClass();
 		
 		return isWebSocketServerStarted;
 	}
@@ -95,10 +102,6 @@ public class VicciRuntime {
 		// Start OSGi Runtime
 		if (configReader.startOsgiRuntime())
 			OSGiRuntime.getInstance().start();
-
-		// Start SeMiWaListener
-		if (configReader.startSemiwaListener())
-			SeMiWaListener.getInstance().start();
 
 		// Start OpenHabListener
 		if(configReader.startOpenHabListener())
@@ -160,10 +163,6 @@ public class VicciRuntime {
 	private static void printUsage(){
 		println("######## VICCI RUNTIME ########");
 		println("type 'stop' for stopping the runtime");
-	}
-	
-	private static void printlnErr(Object txt){
-		System.err.print(txt);
 	}
 	
 	private static void println(Object txt){

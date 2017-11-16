@@ -29,7 +29,6 @@ public class ConfigurationReader implements IConfigurationReader {
 	
 	//listeners for runtime
 	private boolean startOsgiRuntime;
-	private boolean startSemiwaListener;
 	private boolean startOpenHabListener;
 	private boolean startCepEngine;
 	private boolean startXmlRpcWebServer;
@@ -73,11 +72,6 @@ public class ConfigurationReader implements IConfigurationReader {
 	@Override
 	public boolean startOsgiRuntime() {
 		return startOsgiRuntime;
-	}
-
-	@Override
-	public boolean startSemiwaListener() {
-		return startSemiwaListener;
 	}
 
 	@Override
@@ -128,7 +122,6 @@ public class ConfigurationReader implements IConfigurationReader {
 		ip = properties.getProperty("ip");
 		port = properties.getProperty("port");
 		startOsgiRuntime = TRUE_STR.equals(properties.getProperty(ConfigProperties.START_OSGI_RUNTIME));
-		startSemiwaListener = TRUE_STR.equals(properties.getProperty(ConfigProperties.START_SEMIWA_LISTENER));
 		startOpenHabListener = TRUE_STR.equals(properties.getProperty(ConfigProperties.START_OPENHAB_LISTENER));
 		startCepEngine = TRUE_STR.equals(properties.getProperty(ConfigProperties.START_CEP_ENGINE));
 		startXmlRpcWebServer = TRUE_STR.equals(properties.getProperty(ConfigProperties.START_XMLRPC_WEBSERVER));

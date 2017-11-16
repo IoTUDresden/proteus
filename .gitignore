@@ -7,7 +7,7 @@ eu.vicci.process.server/processes/
 eu.vicci.process.server/processes/*
 eu.vicci.process.server/processes/models/*.sofia
 *.log
-
+*.sofia
 
 # Package Files #
 

@@ -5,8 +5,6 @@ import org.eclipse.graphiti.ui.editor.DefaultPersistencyBehavior;
 import org.eclipse.graphiti.ui.editor.DiagramBehavior;
 import org.eclipse.graphiti.ui.editor.IDiagramContainerUI;
 
-import eu.vicci.process.gesture.GesturePaletteBehavior;
-
 public class SofiaDiagramBehaviour extends DiagramBehavior {
 
     public SofiaDiagramBehaviour(IDiagramContainerUI diagramContainer) {
@@ -21,7 +19,8 @@ public class SofiaDiagramBehaviour extends DiagramBehavior {
     }
 
     protected DefaultPaletteBehavior createPaletteBehaviour() {
-
-        return new GesturePaletteBehavior(this);
+    	//FIXME update or drop support for gestures
+    	return new DefaultPaletteBehavior(this);
+//        return new GesturePaletteBehavior(this);
     }
 }

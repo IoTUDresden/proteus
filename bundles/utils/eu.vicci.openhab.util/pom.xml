@@ -9,7 +9,6 @@
 	</parent>
 
 	<artifactId>eu.vicci.openhab.util</artifactId>
-
 	<name>OpenHAB Utils</name>
 	<packaging>eclipse-plugin</packaging>
 
@@ -17,7 +16,7 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.3</version>
+			<version>4.4.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -39,6 +38,20 @@
 			<artifactId>jersey-common</artifactId>
 			<version>2.18</version>
 		</dependency>
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.core</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.model.util</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>eu.vicci.proteus.bundles.model</groupId>
+			<artifactId>eu.vicci.process.model</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
-
 </project>

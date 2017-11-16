@@ -8,7 +8,7 @@ import eu.vicci.process.model.sofiainstance.DataDuplicationStepInstance;
  * type. Multiple in-going data ports are possible but they have to have
  * distinct data types.
  * 
- * @author ronsei, Reik Müller
+ * @author ronsei, Reik MÃ¼ller
  * 
  */
 public class DataDuplicationStepInstanceImplCustom extends

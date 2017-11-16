@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import eu.vicci.process.model.util.messages.core.IMessageReceiver;
 import eu.vicci.process.model.util.messages.core.IWampMessage;
+import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.JSONProcessStepInstance;
 import rx.Subscriber;
 import ws.wamp.jawampa.PubSubData;
 
@@ -59,10 +60,19 @@ public abstract class AbstractSubscriber<K extends PubSubData, S extends IWampMe
 	}
 	
 	protected <T> T convertFromJson(JsonNode json, Class<T> clazz){
+		//classloader stuff is a dirty fix, cause jackson tries to load from this classloader
+		//https://stackoverflow.com/questions/19724312/jackson-deserializing-custom-classes-in-an-osgi-environment
+		ClassLoader oldLoader = Thread.currentThread().getContextClassLoader();
 		try {
+			ClassLoader tmpLoader = JSONProcessStepInstance.class.getClassLoader();
+			Thread.currentThread().setContextClassLoader(tmpLoader);
 			return mapper.readValue(json.toString(), clazz);
 		} catch (IOException e) {
+			logger.error(e.getMessage());
 			e.printStackTrace();
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(oldLoader);			
 		}
 		return null;
 	}

@@ -7,7 +7,6 @@ public class ConfigProperties {
 	
 	public static final String OPENHAB_URI = "openHabUri";	
 	public static final String START_OSGI_RUNTIME = "startOsgiRuntime";
-	public static final String START_SEMIWA_LISTENER = "startSemiwaListener";
 	public static final String START_OPENHAB_LISTENER = "startOpenHabListener";
 	public static final String START_CEP_ENGINE = "startCepEngine";
 	public static final String START_XMLRPC_WEBSERVER = "startXmlRpcWebServer";

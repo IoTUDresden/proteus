@@ -8,7 +8,7 @@
 		<artifactId>pom</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	
+
 	<groupId>eu.vicci.proteus.bundles</groupId>
 	<artifactId>pom</artifactId>
 
@@ -16,10 +16,51 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>editor</module>
-		<module>engine</module>
 		<module>model</module>
 		<module>utils</module>
+		<module>editor</module>
+		<module>engine</module>
 	</modules>
+
+	<build>
+
+		<!-- we have to define source and deploy plugin here or it will break the p2 repo build-->
+		<plugins>
+
+			<!-- Attach source -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Attach javadoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.0.0-M1</version>
+				<configuration>
+					<!-- no checks for javadoc -->
+					<additionalparam>-Xdoclint:none</additionalparam>
+				</configuration>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
