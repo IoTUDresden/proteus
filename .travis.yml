@@ -18,7 +18,7 @@ deploy:
     file: $TRAVIS_BUILD_PATH/$USER_NAME/$RELEASES_PATH/*
     on:
       branch: master
-      tags: true
+      
 env:
   global:
   - GH_REF="github.com/IoTUDresden/proteus-repo.git"
