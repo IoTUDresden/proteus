@@ -14,12 +14,12 @@ deploy:
       secure: SRpHdFv8N2gEssdEqo1rzy1zeS8v8FEpWBsuJya/3/uFybQn/RKsV8nAXON6I1RztFbcbfasR3DzkZxxACO9q763SYWzQd4aYorv8vxJ5UUXbvzcu5qz4edHGavxa1rhjx+tIEiRKIZNc83CfXyC0Lcm8Fdgh2rh3V8h6mQdFMQDRVeozOWZxYZIcG2fIyRA1ZS1J+ShFWB5fg+a7+cR37+P6ljqbVtFv5IxhP05RnLPmfCMYFPC+CGKraBFCL2IKI2p8JaNBKL02g7yxV0t+D7K9hRNGNw28tzgk1SoDRxHo3pybQjGjvuviVtPN3FfOxiZkJEIXI6TZuUN688aTjglgEU4NVdPgmqm9pCZovjCbQPOS/DsVv9Id36W0gGjv2/oqjYvUi6niv83w4s4lg9H4ENZe7xwXQ5bbMZOtHX4BtW6TrPfHNfVVmBhOTEYaKjWxMCsHjIGfv1tCL30pAW5FqmbCyyYPs3tvKN44Di1xDwkKPRHuW9G6OQrQXGZ1RA1k4tXk95+V/DXwe1Q2oq29mt2aLrMCuYeuduqlH3PDvugLQjUQhYiOMKYCcbHOhJa1ne2QTvSAH1QNZ2lKXbzoqfnaGKJCfT5tgiwRX6pJWW4Ykj63MYFWvYybQURm5Li8Htb/wXmtgVsCSIyuMiHaid34CzYswF0NAzebxs=
     skip_cleanup: true
     file_glob: true
-    file: $TRAVIS_BUILD_PATH/$RELEASES_PATH/*
+    file: $TRAVIS_BUILD_PATH/$USER_NAME/$RELEASES_PATH/*
     on:
       branch: master
-      repo: IoTUDresden/proteus
 env:
   global:
   - GH_REF="github.com/IoTUDresden/proteus-repo.git"
   - RELEASES_PATH="bin_release"
   - TRAVIS_BUILD_PATH="/home/travis/build"
+  - USER_NAME="IoTUDresden"

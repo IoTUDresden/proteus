@@ -26,7 +26,7 @@ EDITOR_PATH="products/editor/target/products"
 PROTEUS_SHADED_PATH="products/proteus"
 
 # user name for travis user
-USER_NAME="IoTUDresden"
+#USER_NAME="IoTUDresden"
 # user name for github user (where the repo is from)
 GH_USER_NAME="IoTUDresden"
 # gh project name for the repo (p2 and maven)
