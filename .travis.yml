@@ -5,12 +5,24 @@ jdk:
 script: mvn deploy
 
 deploy:
-  provider: script
-  skip_cleanup: true
-  script: sh $TRAVIS_BUILD_DIR/deploy.sh
-  on:
-    branch: master
+  - provider: script
+    skip_cleanup: true
+    script: sh $TRAVIS_BUILD_DIR/deploy.sh
+    on:
+        branch: master
+        
+  - provider: releases
+    file_glob: true
+    file: $TRAVIS_BUILD_PATH/$RELEASES_PATH/*
+    skip_cleanup: true
+    on:
+        branch: master
+        tags: true
     
 env:
   global:
-    - GH_REF: github.com/IoTUDresden/proteus-repo.git
+      - GH_REF: github.com/IoTUDresden/proteus-repo.git
+        # Releases path. All files in here are deployed to gh releases.
+      - RELEASES_PATH="bin_release"
+        # the base path where travis will put build artifacts
+      - TRAVIS_BUILD_PATH="/home/travis/build"
