@@ -28,9 +28,6 @@
                   <resource>application.conf</resource>
                 </transformer>
                 <transformer>
-                  <resource>log4j.xml</resource>
-                </transformer>
-                <transformer>
                   <mainClass>eu.vicci.process.runtime.VicciRuntime</mainClass>
                 </transformer>
               </transformers>
