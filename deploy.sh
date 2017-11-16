@@ -48,16 +48,16 @@ mkdir -p "$TRAVIS_BUILD_PATH/$USER_NAME/$RELEASES_PATH"
 
 echo "copy editor build to release..."
 
-cd $TRAVIS_BUILD_PATH/$USER_NAME/$EDITOR_PATH/
+cd $TRAVIS_BUILD_PATH/$USER_NAME/$PROTEUS_NAME/$EDITOR_PATH
 find . -name '*.zip' -exec mv {} "$TRAVIS_BUILD_PATH/$USER_NAME/$RELEASES_PATH" \;
 
 echo "assamble vicci-runtime and copy to release..."
 
-cd $TRAVIS_BUILD_PATH/$USER_NAME/$PROTEUS_SHADED_PATH/
+cd $TRAVIS_BUILD_PATH/$USER_NAME/$PROTEUS_NAME/$PROTEUS_SHADED_PATH
 chmod a+x assamble.sh
 ./assamble.sh
 
-cp -r $TRAVIS_BUILD_PATH/$USER_NAME/$PROTEUS_SHADED_PATH/vicci-runtime.zip $TRAVIS_BUILD_PATH/$USER_NAME/$RELEASES_PATH/vicci-runtime.zip
+cp -r $TRAVIS_BUILD_PATH/$USER_NAME/$PROTEUS_NAME/$PROTEUS_SHADED_PATH/vicci-runtime.zip $TRAVIS_BUILD_PATH/$USER_NAME/$RELEASES_PATH/vicci-runtime.zip
 
 ###########################
 # Deploy the repositories #
