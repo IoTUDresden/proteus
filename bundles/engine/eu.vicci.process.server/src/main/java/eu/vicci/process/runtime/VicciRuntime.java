@@ -2,7 +2,6 @@ package eu.vicci.process.runtime;
 
 import java.io.File;
 import java.util.Map;
-import java.util.Scanner;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -44,10 +43,6 @@ public class VicciRuntime {
 		}
 		
 		LOG.info("vicci runtime started as {}", runtime.getRuntimeType());
-		readLineTillStopIsEntered();
-		
-		LOG.info("stopping the runtime...");
-		runtime.stop();
 	}	
 
 	private SuperPeer server;
@@ -145,27 +140,5 @@ public class VicciRuntime {
 				tmpFile.delete();
 		}		
 	}
-	
-	private static void readLineTillStopIsEntered() {
-		boolean stop = false;
-		Scanner scanner = new Scanner(System.in);
-		while (!stop) {
-			String input = scanner.nextLine();
-			if(input != null)
-				input = input.toLowerCase();
-			stop = "stop".equals(input);
-			if(!stop)
-				printUsage();				
-		}	
-		scanner.close();
-	}
-	
-	private static void printUsage(){
-		println("######## VICCI RUNTIME ########");
-		println("type 'stop' for stopping the runtime");
-	}
-	
-	private static void println(Object txt){
-		System.out.println(txt);
-	}
+
 }

@@ -351,6 +351,7 @@ public class SuperPeer {
 		String ip = Util.getLocalIpWithFilter();
 		if(ip == null || ip.isEmpty())
 			throw new RuntimeException("Cant find the ip of this host. Maybe check the ip filter in the config file.");
+		LOG.debug("Runtime exposes IP: {}", ip);
 		return ip;		
 	}
 	
