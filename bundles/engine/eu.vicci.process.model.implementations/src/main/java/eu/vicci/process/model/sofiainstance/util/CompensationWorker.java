@@ -130,7 +130,7 @@ public class CompensationWorker implements Runnable {
         httpClient = HttpClients.createDefault();
         sseClient = ClientBuilder.newBuilder().register(SseFeature.class).build();
         serviceUri = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.FEEDBACK_SERVICE_URI);
-        contextUri = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.CONTEXT_URI);
+        contextUri = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.FEEDBACK_CONTEXT_URI);
     }
     
     private void addDefaultParameters(){

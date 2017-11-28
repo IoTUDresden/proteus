@@ -93,12 +93,12 @@ public final class ConfigurationManager {
 		addIfNotNull(ConfigProperties.OPENHAB_URI, reader.getOpenHabUri());
 		addIfNotNull(ConfigProperties.FEEDBACK_SERVICE_URI, reader.getFeedbackServiceUri());
 		addIfNotNull(ConfigProperties.ELASTICSEARCH_HOST, reader.getElasticsearchHost());
-		addIfNotNull(ConfigProperties.CONTEXT_URI, reader.getContextUri());
-		addIfNotNull(ConfigProperties.NAMESPACE, reader.getNamespace());
-		addIfNotNull(ConfigProperties.REALMNAME, reader.getRealmName());
-		addIfNotNull(ConfigProperties.PORT, reader.getPort());
-		addIfNotNull(ConfigProperties.SUPER_PEER_IP, reader.getSuperPeerIp());
-		addIfNotNull(ConfigProperties.IP_FILTER, reader.getIpFilter());
+		addIfNotNull(ConfigProperties.FEEDBACK_CONTEXT_URI, reader.getContextUri());
+		addIfNotNull(ConfigProperties.PROTEUS_WAMP_NAMESPACE, reader.getNamespace());
+		addIfNotNull(ConfigProperties.PROTEUS_WAMP_REALM_NAME, reader.getRealmName());
+		addIfNotNull(ConfigProperties.PROTEUS_WAMP_PORT, reader.getPort());
+		addIfNotNull(ConfigProperties.PROTEUS_SUPER_PEER_IP, reader.getSuperPeerIp());
+		addIfNotNull(ConfigProperties.PROTEUS_IP_FILTER, reader.getIpFilter());
 	}
 
 	private void addIfNotNull(String key, String value) {

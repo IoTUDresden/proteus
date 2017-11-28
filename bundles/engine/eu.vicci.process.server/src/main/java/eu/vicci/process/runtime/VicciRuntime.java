@@ -3,6 +3,13 @@ package eu.vicci.process.runtime;
 import java.io.File;
 import java.util.Map;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.slf4j.Logger;
@@ -27,15 +34,31 @@ import ws.wamp.jawampa.ApplicationError;
 
 public class VicciRuntime {
 	private static final Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
-	private static final String PATH_MODEL = "processes/models/";
-	
+	private static final String PATH_MODEL = "processes/models/";	
 
 	/**
-	 * @param args
+	 * @param args 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
+		//https://commons.apache.org/proper/commons-cli/usage.html
+		Options options = prepareOptions();
+		CommandLine cmd = parseArguments(args, options);
+		if(cmd == null) return;
+		
+		if(cmd.hasOption("help")){
+			HelpFormatter help = new HelpFormatter();
+			help.printHelp("vicci-runtime", options);	
+			return;
+		}
+			
+		
+		LOG.info("starting vicci runtime...");			
 		VicciRuntime runtime = new VicciRuntime();
-		LOG.info("starting vicci runtime...");
+		
+		if(cmd.hasOption("container")){	
+			runtime.readConfigFromEnv = true;
+		}
+		
 		boolean started = runtime.start();
 		if(!started){
 			LOG.error("failed to start vicci runtime");
@@ -44,16 +67,42 @@ public class VicciRuntime {
 		
 		LOG.info("vicci runtime started as {}", runtime.getRuntimeType());
 	}	
+	
+	private static CommandLine parseArguments(String[] args, Options options){
+		CommandLineParser parser = new DefaultParser();
+		try {
+			 return parser.parse(options, args);
+		} catch (ParseException e) {
+			LOG.error(e.getLocalizedMessage());
+		}		
+		return null;		
+	}
+	
+	private static Options prepareOptions(){
+		Option optionContainer = Option.builder("container")
+				.desc("To tell proteus, it is running in a container. "
+						+ "PROtEUS will try to get all config values from the environment.")
+				.build();
+		Option optionHelp = Option.builder("help").desc("Show this help.").build();
+		Options options = new Options();
+		options.addOption(optionHelp);
+		options.addOption(optionContainer);
+		return options;
+	}
 
 	private SuperPeer server;
 	private IProcessManager processManagerPublic;
+	private boolean readConfigFromEnv = false; 
 	
 	public VicciRuntime(){	
 		processManagerPublic = new ProcessManagerPublic();
 	}
 	
-	public boolean start(){
-		IConfigurationReader configReader = new ConfigurationReader("server.conf");
+	public boolean start(){		
+		IConfigurationReader configReader;
+		if(readConfigFromEnv) configReader = new ConfigurationReader();
+		else  configReader = new ConfigurationReader("server.conf");
+		
 		ConfigurationManager.getInstance().updateFromConfigReader(configReader);
 		
 		if(!configReader.deployExistingProcessModels())

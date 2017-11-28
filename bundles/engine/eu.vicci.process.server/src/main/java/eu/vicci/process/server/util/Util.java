@@ -47,7 +47,7 @@ public class Util {
 	 * @return null if no IP was found
 	 */
 	public static String getLocalIpWithFilter(){
-		String filter = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.IP_FILTER);
+		String filter = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PROTEUS_IP_FILTER);
 		String ip = null;
 		
 		try {

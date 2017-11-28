@@ -20,6 +20,7 @@ import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
 import eu.vicci.process.model.sofiainstance.State;
 import eu.vicci.process.model.util.ConfigurationReader;
+import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.messages.core.HumanTaskRequestListener;
 import eu.vicci.process.model.util.messages.core.IHumanTaskRequest;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
@@ -81,6 +82,20 @@ public abstract class AbstractProcessRunner {
 		
 	}
 	
+	/**
+	 * @return The ip for the proteus super peer.
+	 */
+	protected String getIp(){
+		return "localhost";
+	}
+	
+	/**
+	 * @return The port for the proteus super peer.
+	 */
+	protected String getPort(){
+		return ConfigProperties.DEFAULT_PROTEUS_WAMP_PORT;
+	}
+	
 	private void changeProcessBeforeUploading(){
 		String path = getModelFilePath();
 		Process model = null;		
@@ -133,10 +148,14 @@ public abstract class AbstractProcessRunner {
 		pec.startProcessInstance(rootInstanceId, getInputParameter());
 	}
 	
-	private void createClient(){
-		IConfigurationReader configReader = getConfigurationReader();		
-		ProcessEngineClientBuilder builder = new ProcessEngineClientBuilder();
-		pec = builder.fromConfig(configReader).build();		
+	private void createClient(){	
+		pec = new ProcessEngineClientBuilder()
+				.withIp(getIp())
+				.withPort(getPort())
+				.withName("Example Client")
+				.withNamespace(ConfigProperties.DEFAULT_PROTEUS_WAMP_NAMESPACE)
+				.withRealmName(ConfigProperties.DEFAULT_PROTEUS_WAMP_REALM_NAME)
+				.build();
 	}
 	
 	protected void println(String txt){

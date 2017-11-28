@@ -207,10 +207,10 @@ public class DistributionManager implements IDistributionManager {
 		updateConfigIfNeeded();
 		
 		IProcessEngineClient pec = builder.withIp("localhost")
-				.withPort(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PORT))
+				.withPort(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PROTEUS_WAMP_PORT))
 				.withName(CLIENT_NAME)
-				.withNamespace(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.NAMESPACE))
-				.withRealmName(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.REALMNAME))
+				.withNamespace(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PROTEUS_WAMP_NAMESPACE))
+				.withRealmName(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PROTEUS_WAMP_REALM_NAME))
 				.build();
 
 		pec.connect();
@@ -218,7 +218,7 @@ public class DistributionManager implements IDistributionManager {
 	}
 
 	private void updateConfigIfNeeded() {
-		if(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PORT) != null)
+		if(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PROTEUS_WAMP_PORT) != null)
 			return;
 		IConfigurationReader configReader = new ConfigurationReader("server.conf");
 		ConfigurationManager.getInstance().updateFromConfigReader(configReader);

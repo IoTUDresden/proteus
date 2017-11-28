@@ -33,7 +33,7 @@
 	</logger>
 	
 	<root>
-		<priority value="debug"/>
+		<priority value="info"/>
 		<appender-ref ref="stdout" />
 		<appender-ref ref="file" />
 	</root>
