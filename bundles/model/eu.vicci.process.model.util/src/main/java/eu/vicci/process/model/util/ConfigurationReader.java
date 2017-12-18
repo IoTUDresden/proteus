@@ -119,8 +119,7 @@ public class ConfigurationReader implements IConfigurationReader {
 			e.printStackTrace();
 			return;
 		}
-		setProps(properties);
-		setDefaultValues();		
+		setProps(properties);	
 	}
 	
 	private void readPropertiesFromEnvironment(){
@@ -152,6 +151,7 @@ public class ConfigurationReader implements IConfigurationReader {
 			readPropertiesFromEnvironment();
 		else
 			readPropertiesFromFile();
+		setDefaultValues();	
 	}
 	
 	private void setProps(Properties properties){

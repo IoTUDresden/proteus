@@ -12,14 +12,12 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
 import eu.vicci.process.client.ProcessEngineClientBuilder;
-import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.client.core.IProcessEngineClient;
 import eu.vicci.process.model.sofia.DataType;
 import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
 import eu.vicci.process.model.sofiainstance.State;
-import eu.vicci.process.model.util.ConfigurationReader;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.messages.core.HumanTaskRequestListener;
 import eu.vicci.process.model.util.messages.core.IHumanTaskRequest;
@@ -56,10 +54,6 @@ public abstract class AbstractProcessRunner {
 	}
 	
 	protected abstract String getModelFilePath();
-	
-	protected IConfigurationReader getConfigurationReader(){
-		return new ConfigurationReader("server.conf");
-	}
 	
 	protected Map<String, DataTypeInstance> getInputParameter(){
 		return null;

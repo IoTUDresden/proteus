@@ -1,11 +1,12 @@
 package eu.vicci.process.client.demo;
 
 import eu.vicci.process.client.ProcessEngineClientBuilder;
-import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.client.core.IProcessEngineClient;
-import eu.vicci.process.model.util.ConfigurationReader;
+import eu.vicci.process.model.util.configuration.ConfigProperties;
 
 public class UploadAllDemoProcesses {
+	private static final String IP = "localhost";
+	private static final String PORT = "8081";
 	private static final String path = "processes/demo/";
 	private static final String[] models = { "HomematicDoorAndLight", "KodiNotificationDemo", "KodiSoundAndPicture", 
 			"EMDemo", "ResetAll", "MoveRobotToPerson", "YouHaveAVisitor", "StackedProcess" };
@@ -31,13 +32,13 @@ public class UploadAllDemoProcesses {
 	}
 
 	private IProcessEngineClient createClient() {
-		IConfigurationReader configReader = getConfigurationReader();
-		ProcessEngineClientBuilder builder = new ProcessEngineClientBuilder();
-		return builder.fromConfig(configReader).build();
-	}
-	
-	private IConfigurationReader getConfigurationReader(){
-		return new ConfigurationReader("server.conf");
+		return new ProcessEngineClientBuilder()
+				.withIp(IP)
+				.withPort(PORT)
+				.withName("Example Client")
+				.withNamespace(ConfigProperties.DEFAULT_PROTEUS_WAMP_NAMESPACE)
+				.withRealmName(ConfigProperties.DEFAULT_PROTEUS_WAMP_REALM_NAME)
+				.build();		
 	}
 
 }
