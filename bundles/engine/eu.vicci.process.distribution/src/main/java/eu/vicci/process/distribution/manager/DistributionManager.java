@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import eu.vicci.process.client.ProcessEngineClientBuilder;
 import eu.vicci.process.client.core.AbstractClientBuilder;
-import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.client.core.IProcessEngineClient;
 import eu.vicci.process.distribution.core.DistributedSession;
 import eu.vicci.process.distribution.core.DistributionManagerListener;
@@ -22,7 +21,6 @@ import eu.vicci.process.distribution.core.RemoteListener;
 import eu.vicci.process.distribution.core.RemoteProcess;
 import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
-import eu.vicci.process.model.util.ConfigurationReader;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.model.util.messages.core.CompensationRequest;
@@ -201,32 +199,19 @@ public class DistributionManager implements IDistributionManager {
 	private IProcessEngineClient createSuperPeerClient(String name) {
 		AbstractClientBuilder builder = new ProcessEngineClientBuilder();
 		
-		//TODO this is a workaround. prefs are not set, if we run this plugin in the editor
-		//this plugin should actually not be used in editor
-		//FIXME workaround wont work
-		updateConfigIfNeeded();
-		
 		IProcessEngineClient pec = builder.withIp("localhost")
-				.withPort(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PORT))
+				.withPort(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PROTEUS_WAMP_PORT))
 				.withName(CLIENT_NAME)
-				.withNamespace(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.NAMESPACE))
-				.withRealmName(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.REALMNAME))
+				.withNamespace(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PROTEUS_WAMP_NAMESPACE))
+				.withRealmName(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PROTEUS_WAMP_REALM_NAME))
 				.build();
 
 		pec.connect();
 		return pec;
 	}
 
-	private void updateConfigIfNeeded() {
-		if(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.PORT) != null)
-			return;
-		IConfigurationReader configReader = new ConfigurationReader("server.conf");
-		ConfigurationManager.getInstance().updateFromConfigReader(configReader);
-		
-	}
-
 	// FIXME StateChanges are not correct, e.g. the instance id in the state change must not be the same as on the superpeer, 
-	// so we need additional infos (the peer id, instance id on peer and instance id on superpeer ar enough)
+	// so we need additional info (the peer id, instance id on peer and instance id on superpeer are enough)
 	private void handleStateChange(IStateChangeMessage message) {
 		if(message.getPeerId() == null 
 				|| message.getPeerId().isEmpty()

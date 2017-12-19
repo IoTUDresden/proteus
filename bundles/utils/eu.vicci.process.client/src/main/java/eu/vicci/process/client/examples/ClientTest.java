@@ -26,11 +26,14 @@ import eu.vicci.process.model.sofiainstance.ListTypeInstance;
 import eu.vicci.process.model.sofiainstance.SofiaInstanceFactory;
 import eu.vicci.process.model.sofiainstance.StringTypeInstance;
 import eu.vicci.process.model.util.ConfigurationReader;
+import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import eu.vicci.process.model.util.messages.core.StateChangeListener;
 
 @SuppressWarnings("unused")
 public class ClientTest {
+	private static final String IP = "localhost";
+	private static final String PORT = "8081";
 	
 	private IProcessEngineClient pec;
 	
@@ -39,11 +42,15 @@ public class ClientTest {
 		test.run();
 	}
 	
-	public void run(){
-		IConfigurationReader configReader = new ConfigurationReader("server.conf");
+	public void run(){		
+		pec = new ProcessEngineClientBuilder()
+				.withIp(IP)
+				.withPort(PORT)
+				.withName("Example Client")
+				.withNamespace(ConfigProperties.DEFAULT_PROTEUS_WAMP_NAMESPACE)
+				.withRealmName(ConfigProperties.DEFAULT_PROTEUS_WAMP_REALM_NAME)
+				.build();
 		
-		ProcessEngineClientBuilder builder = new ProcessEngineClientBuilder();
-		pec = builder.fromConfig(configReader).build();
 		pec.connect();
 		
 		pec.addStateChangeListener(stateChangeListener);

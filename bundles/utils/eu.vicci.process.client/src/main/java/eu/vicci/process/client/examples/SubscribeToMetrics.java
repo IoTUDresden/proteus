@@ -4,11 +4,14 @@ import eu.vicci.process.client.ProcessEngineClientBuilder;
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.client.core.IProcessEngineClient;
 import eu.vicci.process.model.util.ConfigurationReader;
+import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.TopicId;
 import eu.vicci.process.model.util.messages.core.IMessageReceiver;
 import eu.vicci.process.model.util.messages.core.PeerMetrics;
 
 public class SubscribeToMetrics {
+	private static final String IP = "localhost";
+	private static final String PORT = "8081";
 	
 	//runs for the given time
 	private static final int millis = 600000;
@@ -37,11 +40,14 @@ public class SubscribeToMetrics {
 	
 	IProcessEngineClient client;
 	
-	public void run(){		
-		IConfigurationReader configReader = new ConfigurationReader("server.conf");
-		ProcessEngineClientBuilder builder = new ProcessEngineClientBuilder();
-		
-		client = builder.fromConfig(configReader).build();		
+	public void run(){				
+		client = new ProcessEngineClientBuilder()
+				.withIp(IP)
+				.withPort(PORT)
+				.withName("Example Client")
+				.withNamespace(ConfigProperties.DEFAULT_PROTEUS_WAMP_NAMESPACE)
+				.withRealmName(ConfigProperties.DEFAULT_PROTEUS_WAMP_REALM_NAME)
+				.build();	 		
 		client.connect();
 		
 		client.subscribeToTopic(TopicId.PEER_METRICS, metricsReceiver, PeerMetrics.class);

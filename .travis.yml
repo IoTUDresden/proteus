@@ -1,7 +1,25 @@
+sudo: required
+
 language: java
+
+cache:
+  directories:
+    - $HOME/.m2
+
+services:
+  - docker
+
 jdk:
-- oraclejdk8
-script: mvn deploy
+  - oraclejdk8
+
+script: 
+  - if [ $TRAVIS_BRANCH == 'master' ]; then 
+      docker login -e $DOCKER_EMAIL -u $DOCKER_USERNAME -p $DOCKER_PASSWORD     
+      mvn deploy; 
+    else 
+      mvn package; 
+    fi
+
 deploy:
   - provider: script
     skip_cleanup: true

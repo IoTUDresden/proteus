@@ -43,10 +43,6 @@
 								<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
 									<resource>application.conf</resource>
 								</transformer>					
-								
-								<!-- <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer"> -->
-								<!-- 	<resource>log4j.xml</resource> -->
-								<!-- </transformer> -->
 
 								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>eu.vicci.process.runtime.VicciRuntime</mainClass>
@@ -71,6 +67,30 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<!-- https://github.com/spotify/dockerfile-maven -->
+			<!-- Must run after the shade plugin (or no shaded jar will be there ;)) -->
+			<!-- This configures the actual plugin to build your image with mvn package and push it with mvn deploy.  -->
+			<!-- Of course you can also say mvn dockerfile:build explicitly. -->
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>${dockerfile-maven-version}</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<repository>iotudresden/vicci-runtime</repository>
+				</configuration>
+			</plugin>
+
 		</plugins>	
 	</build>
 

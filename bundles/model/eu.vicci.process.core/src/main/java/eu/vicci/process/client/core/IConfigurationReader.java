@@ -62,13 +62,6 @@ public interface IConfigurationReader {
 	boolean startCepEngine();
 
 	/**
-	 * @deprecated not used anymore
-	 * @return
-	 */
-	@Deprecated
-	boolean startXmlRpcWebServer();
-
-	/**
 	 * 
 	 * @return
 	 */

@@ -11,6 +11,11 @@ import java.util.Properties;
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 
+/**
+ * This Config Reader reads the runtime config file (in most cases server.conf) 
+ * and some environment variables.
+ * Sets default values, if no config is specified.
+ */
 public class ConfigurationReader implements IConfigurationReader {
 	private static final String TRUE_STR = "true";
 	private static final String LIST_SEPARATOR = ",";
@@ -31,13 +36,17 @@ public class ConfigurationReader implements IConfigurationReader {
 	private boolean startOsgiRuntime;
 	private boolean startOpenHabListener;
 	private boolean startCepEngine;
-	private boolean startXmlRpcWebServer;
 	private boolean deployExistingProcessModels;
 
 	private String elasticsearchHost;	
 	
 	private String ipFilter;
 	private List<String> devices;
+	
+	public ConfigurationReader(){
+		readProperties();
+	}
+	
 	
 	public ConfigurationReader(String path) {
 		this.path = path;
@@ -85,11 +94,6 @@ public class ConfigurationReader implements IConfigurationReader {
 	}
 
 	@Override
-	public boolean startXmlRpcWebServer() {
-		return startXmlRpcWebServer;
-	}
-
-	@Override
 	public boolean deployExistingProcessModels() {
 		return deployExistingProcessModels;
 	}
@@ -99,7 +103,7 @@ public class ConfigurationReader implements IConfigurationReader {
 		return ipFilter;
 	}
 	
-	private void readProperties(){
+	private void readPropertiesFromFile(){
 		Properties properties = new Properties();
 		BufferedInputStream stream = null;
 		try {
@@ -115,27 +119,69 @@ public class ConfigurationReader implements IConfigurationReader {
 			e.printStackTrace();
 			return;
 		}
-		setProps(properties);
+		setProps(properties);	
+	}
+	
+	private void readPropertiesFromEnvironment(){
+		ip = System.getenv(ConfigProperties.PROTEUS_SUPER_PEER_IP);
+		port = System.getenv(ConfigProperties.PROTEUS_WAMP_PORT);
+		realmName = System.getenv(ConfigProperties.PROTEUS_WAMP_REALM_NAME);
+		namespace = System.getenv(ConfigProperties.PROTEUS_WAMP_NAMESPACE);
+		String tmpDeploy = System.getenv(ConfigProperties.DEPLOY_EXISTING_PROCESSMODELS);
+		deployExistingProcessModels =  TRUE_STR.equals(tmpDeploy) 
+				|| (tmpDeploy == null && TRUE_STR.equals(ConfigProperties.DEFAULT_DEPLOY_EXISTING_PROCESSMODELS));
+		
+		openHabUri = System.getenv(ConfigProperties.OPENHAB_URI);
+		startOpenHabListener = openHabUri != null;	
+		String tmpCep = System.getenv(ConfigProperties.START_CEP_ENGINE);
+		startCepEngine = tmpCep == null || TRUE_STR.equals(tmpCep);	
+		
+		elasticsearchHost = System.getenv(ConfigProperties.ELASTICSEARCH_HOST);
+		superPeerIp = System.getenv(ConfigProperties.PROTEUS_SUPER_PEER_IP);
+		ipFilter = System.getenv(ConfigProperties.PROTEUS_IP_FILTER);
+		devices = splitValue(System.getenv(ConfigProperties.PROTEUS_DEVICES), LIST_SEPARATOR);		
+		
+		String tmpOsgi = System.getenv(ConfigProperties.START_OSGI_RUNTIME);
+		startOsgiRuntime = TRUE_STR.equals(tmpOsgi) ||
+				(tmpOsgi == null && TRUE_STR.equals(ConfigProperties.DEFAULT_START_OSGI_RUNTIME));
+	}
+	
+	private void readProperties(){
+		if(path == null)
+			readPropertiesFromEnvironment();
+		else
+			readPropertiesFromFile();
+		setDefaultValues();	
 	}
 	
 	private void setProps(Properties properties){
-		ip = properties.getProperty("ip");
-		port = properties.getProperty("port");
-		startOsgiRuntime = TRUE_STR.equals(properties.getProperty(ConfigProperties.START_OSGI_RUNTIME));
-		startOpenHabListener = TRUE_STR.equals(properties.getProperty(ConfigProperties.START_OPENHAB_LISTENER));
-		startCepEngine = TRUE_STR.equals(properties.getProperty(ConfigProperties.START_CEP_ENGINE));
-		startXmlRpcWebServer = TRUE_STR.equals(properties.getProperty(ConfigProperties.START_XMLRPC_WEBSERVER));
-		deployExistingProcessModels = TRUE_STR.equals(properties.getProperty(ConfigProperties.DEPLOY_EXISTING_PROCESSMODELS));		
-		realmName = properties.getProperty(ConfigProperties.REALMNAME);
-		namespace = properties.getProperty(ConfigProperties.NAMESPACE);
-		openHabUri = properties.getProperty(ConfigProperties.OPENHAB_URI);
+		ip = properties.getProperty(ConfigProperties.PROTEUS_SUPER_PEER_IP);
+		port = properties.getProperty(ConfigProperties.PROTEUS_WAMP_PORT);
+		realmName = properties.getProperty(ConfigProperties.PROTEUS_WAMP_REALM_NAME);
+		namespace = properties.getProperty(ConfigProperties.PROTEUS_WAMP_NAMESPACE);
+		String tmpDeploy = properties.getProperty(ConfigProperties.DEPLOY_EXISTING_PROCESSMODELS);
+		deployExistingProcessModels =  TRUE_STR.equals(tmpDeploy) 
+				|| (tmpDeploy == null && TRUE_STR.equals(ConfigProperties.DEFAULT_DEPLOY_EXISTING_PROCESSMODELS));
 		
-		contextUri = properties.getProperty(ConfigProperties.CONTEXT_URI);
-		feedbackServiceUri = properties.getProperty(ConfigProperties.FEEDBACK_SERVICE_URI);
+		openHabUri = properties.getProperty(ConfigProperties.OPENHAB_URI);
+		startOpenHabListener = openHabUri != null;	
+		String tmpCep = properties.getProperty(ConfigProperties.START_CEP_ENGINE);
+		startCepEngine = tmpCep == null || TRUE_STR.equals(tmpCep);	
+		
 		elasticsearchHost = properties.getProperty(ConfigProperties.ELASTICSEARCH_HOST);
-		superPeerIp = properties.getProperty(ConfigProperties.SUPER_PEER_IP);
-		ipFilter = properties.getProperty(ConfigProperties.IP_FILTER);
-		devices = splitValue(properties.getProperty(ConfigProperties.DEVICES), LIST_SEPARATOR);
+		superPeerIp = properties.getProperty(ConfigProperties.PROTEUS_SUPER_PEER_IP);
+		ipFilter = properties.getProperty(ConfigProperties.PROTEUS_IP_FILTER);
+		devices = splitValue(properties.getProperty(ConfigProperties.PROTEUS_DEVICES), LIST_SEPARATOR);	
+		
+		String tmpOsgi = properties.getProperty(ConfigProperties.START_OSGI_RUNTIME);
+		startOsgiRuntime = TRUE_STR.equals(tmpOsgi) ||
+				(tmpOsgi == null && TRUE_STR.equals(ConfigProperties.DEFAULT_START_OSGI_RUNTIME));
+	}
+	
+	private void setDefaultValues(){
+		if(port == null) port = ConfigProperties.DEFAULT_PROTEUS_WAMP_PORT;
+		if(realmName == null) realmName = ConfigProperties.DEFAULT_PROTEUS_WAMP_REALM_NAME;
+		if(namespace == null) namespace = ConfigProperties.DEFAULT_PROTEUS_WAMP_NAMESPACE;
 	}
 	
 	private List<String> splitValue(String value, String separator){
