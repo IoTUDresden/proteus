@@ -7,33 +7,37 @@
 			<param name="ConversionPattern" value="%d{ISO8601} [%t] %-5p %c{2} %x - %m%n" />
 		</layout>
 	</appender>
-	
+
 	<appender name="file" class="org.apache.log4j.FileAppender">
-		<param name="file" value="vicci-runtime.log"/>
+		<param name="file" value="vicci-runtime.log" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern"	value="%d{ISO8601} [%t] %-5p %c{2} %x - %m%n" />
+			<param name="ConversionPattern" value="%d{ISO8601} [%t] %-5p %c{2} %x - %m%n" />
 		</layout>
 	</appender>
-	
-	
+
+
 	<logger name="io.netty">
-		<level value="error"/>
+		<level value="error" />
 	</logger>
-	
+
 	<logger name="ws.wamp">
-		<level value="error"/>
-	</logger>	
-	
+		<level value="error" />
+	</logger>
+
 	<logger name="org.apache.http">
-		<level value="error"/>
+		<level value="error" />
 	</logger>
-	
+
 	<logger name="com.espertech.esper">
-		<level value="warn"/>
+		<level value="warn" />
 	</logger>
-	
+
+	<logger name="org.eclipse.jetty">
+		<level value="error" />
+	</logger>
+
 	<root>
-		<priority value="info"/>
+		<priority value="info" />
 		<appender-ref ref="stdout" />
 		<appender-ref ref="file" />
 	</root>

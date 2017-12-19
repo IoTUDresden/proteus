@@ -14,6 +14,7 @@ public class ConfigProperties {
 	public static final String PROTEUS_WAMP_REALM_NAME = "PROTEUS_WAMP_REALM_NAME";
 	public static final String PROTEUS_WAMP_NAMESPACE = "PROTEUS_WAMP_NAMESPACE";
 	public static final String PROTEUS_WAMP_PORT = "PROTEUS_WAMP_PORT";
+	public static final String PROTEUS_HTTP_PORT = "PROTEUS_HTTP_PORT";
 	
 	public static final String FEEDBACK_CONTEXT_URI = "FEEDBACK_CONTEXT_URI";
 	public static final String FEEDBACK_SERVICE_URI = "FEEDBACK_SERVICE_URI";
@@ -31,6 +32,7 @@ public class ConfigProperties {
 	public static final String DEFAULT_PROTEUS_WAMP_REALM_NAME = "vicciRealm";
 	public static final String DEFAULT_PROTEUS_WAMP_NAMESPACE = "vicciWs";
 	public static final String DEFAULT_PROTEUS_WAMP_PORT = "8081";
+	public static final String DEFAULT_PROTEUS_HTTP_PORT = "8082";
 	
 	public static final String DEFAULT_START_OSGI_RUNTIME = "false";
 	

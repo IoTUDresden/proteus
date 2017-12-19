@@ -28,6 +28,8 @@ import eu.vicci.process.model.sofiainstance.util.LifeCycleManager;
 import eu.vicci.process.model.util.ConfigurationReader;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.osgi.OSGiRuntime;
+import eu.vicci.process.server.http.ProteusHttpServer;
+import eu.vicci.process.server.util.RuntimeContext;
 import eu.vicci.process.wampserver.Peer;
 import eu.vicci.process.wampserver.SuperPeer;
 import ws.wamp.jawampa.ApplicationError;
@@ -93,9 +95,11 @@ public class VicciRuntime {
 	private SuperPeer server;
 	private IProcessManager processManagerPublic;
 	private boolean readConfigFromEnv = false; 
+	private ProteusHttpServer httpServer;
 	
 	public VicciRuntime(){	
 		processManagerPublic = new ProcessManagerPublic();
+		RuntimeContext.getInstance().registerProcessManager(processManagerPublic);
 	}
 	
 	public boolean start(){		
@@ -111,6 +115,7 @@ public class VicciRuntime {
 		initializeSofiaModel();
 		registerListener(configReader);
 		boolean isWebSocketServerStarted = startWebSocketServer(configReader);
+		startHttpServer(configReader);
 		
 		DistributionManager.getInstance().setPeerProfile(server.getPeerProfile());
 		
@@ -179,6 +184,14 @@ public class VicciRuntime {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	private void startHttpServer(IConfigurationReader configReader){
+		httpServer = new ProteusHttpServer(configReader.getHttpPort());
+		Thread t = new Thread(httpServer);
+		t.setName("ProteusHttpServerThread");
+		t.setDaemon(true);
+		t.start();
 	}
 	
 	private void deleteExistingModels(){

@@ -32,6 +32,10 @@
 		<level value="warn"/>
 	</logger>
 	
+	<logger name="org.eclipse.jetty">
+		<level value="warn"/>	
+	</logger>
+	
 	<root>
 		<priority value="debug"/>
 		<appender-ref ref="stdout" />
