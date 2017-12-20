@@ -18,6 +18,7 @@
 	<modules>
 		<module>eu.vicci.openhab.util</module>
 		<module>eu.vicci.process.client</module>
+		<module>eu.vicci.process.client.rest</module>
 	</modules>
 
 </project>

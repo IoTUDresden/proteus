@@ -45,22 +45,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>com.spotify</groupId>
-        <artifactId>dockerfile-maven-plugin</artifactId>
-        <version>${dockerfile-maven-version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>build</goal>
-              <goal>push</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <repository>iotudresden/vicci-runtime</repository>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
 </project>

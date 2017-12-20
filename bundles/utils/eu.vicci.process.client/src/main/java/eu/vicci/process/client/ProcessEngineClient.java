@@ -802,6 +802,4 @@ public class ProcessEngineClient implements IProcessEngineClient {
 		System.out.println("Text: \n" + text);
 	}
 
-
-
 }
