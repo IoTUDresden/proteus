@@ -2,16 +2,19 @@ package eu.vicci.process.client.rest;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import eu.vicci.process.client.core.UploadAndDeployRequest;
 import eu.vicci.process.engine.core.IProcessInfo;
+import eu.vicci.process.engine.core.IProcessInstanceInfo;
 import feign.Feign;
-import feign.Response;
 
+/**
+ * Implementation of a REST Client which can access the PROtEUS REST API.
+ * This backs a  <a href="https://github.com/OpenFeign/feign">Feign Rest Client</a>
+ * 
+ * @author andre
+ */
 public class ProteusRestClient {
-	private static final Logger LOG = LoggerFactory.getLogger(ProteusRestClient.class);
+//	private static final Logger LOG = LoggerFactory.getLogger(ProteusRestClient.class);
 	private final RestClientInternal restClient;
 
 	public ProteusRestClient() {
@@ -45,6 +48,13 @@ public class ProteusRestClient {
 	public List<? extends IProcessInfo> listDeployedProcesses() {
 		return restClient.listDeployedProcesses();
 	}
+	
+	/**
+	 * listing deployed process instances
+	 */
+	public List<? extends IProcessInstanceInfo> listDeployedProcessInstances(){
+		return restClient.listDeployedProcessInstances();
+	}
 
 	/**
 	 * 
@@ -52,19 +62,25 @@ public class ProteusRestClient {
 	 *            the process as string
 	 * @param overrideExisting
 	 *            override the existing model file
-	 * @return
+	 * @return process id or null if failed
 	 */
 	public String uploadAndDeploy(String processDocument, boolean overrideExisting) {
 		UploadAndDeployRequest request = new UploadAndDeployRequest();
 		request.setProcessdocument(processDocument);
 		request.setOverrideExisting(overrideExisting);
-		Response response = restClient.uploadAndDeploy(request);
-
-		if (response.status() != 200) {
-			LOG.error("uploadAndDeployed failed: \n{}", response.body().toString());
-			return null;
-		}
-		return response.body().toString();
+		return restClient.uploadAndDeploy(request);	
+	}
+	
+	/**
+	 * 
+	 * Same as {@link #uploadAndDeploy(String, boolean)} with args (processDocument, true).
+	 * 
+	 * @param processDocument
+	 *            the process as string
+	 * @return process id or null if failed
+	 */
+	public String uploadAndDeploy(String processDocument) {
+		return uploadAndDeploy(processDocument, true);
 	}
 
 	/**
@@ -76,7 +92,15 @@ public class ProteusRestClient {
 	 * @return instance id or null if failed
 	 */
 	public String deployProcessInstance(String processId) {
-		return null;
+		return restClient.deployProcessInstance(processId);		
+	}
+	
+	/**
+	 * @param processInstanceId
+	 *            the instance id of the process which should be started
+	 */
+	public void startProcessInstance(String processInstanceId){
+		restClient.startProcessInstance(processInstanceId);
 	}
 
 }

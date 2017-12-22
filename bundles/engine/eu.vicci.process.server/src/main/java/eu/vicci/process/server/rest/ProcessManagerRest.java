@@ -5,8 +5,10 @@ import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,7 +30,11 @@ import eu.vicci.process.engine.core.IProcessInfo;
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.model.sofia.Process;
 import eu.vicci.process.model.sofia.SofiaPackage;
+import eu.vicci.process.server.exception.BadRequestException;
+import eu.vicci.process.server.exception.NotFoundErrorException;
+import eu.vicci.process.server.exception.ServerErrorException;
 import eu.vicci.process.server.util.RuntimeContext;
+import static eu.vicci.process.server.rest.Messages.*;
 
 //TODO use swagger.io for api description
 @Path("processes")
@@ -45,40 +51,71 @@ public class ProcessManagerRest {
 		return processManager;
 	}
 
-	@GET
-	@Path("/hello")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String hello() {
-		return "ready? " + (processManager != null);
-	}
-
+	// Lists all deployed process instances, which available for deploying a
+	// process instance.
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<IProcessInfo> deployedProcesses() {
 		return processManager.listDeployedProcesses();
 	}
 
+	// Uploads a process definition, which is saved to file. The process is then
+	// deployed to the engine
+	// and available for deploying as process instance.
 	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
-	public Response uploadAndDeploy(UploadAndDeployRequest request) {
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response uploadAndDeploy(UploadAndDeployRequest request) 
+			throws BadRequestException, ServerErrorException 
+	{
 		if (request == null || isNullOrEmpty(request.getProcessdocument()))
-			return Response.status(Status.BAD_REQUEST).build();
-
+			throw new BadRequestException(ERR_MISSING_PROCESS_DOC);
 		Process process = null;
-
+		
 		try {
 			process = getProcessFromString(request.getProcessdocument());
 		} catch (Exception e) {
-			LOG.error(e.getLocalizedMessage());
-			return Response.serverError().build();
+			LOG.error(e.getMessage());
+			throw new ServerErrorException(e.getMessage());
 		}
-
-		if (process == null)
-			return Response.serverError().build();
 		
-		processManager.uploadAndDeploy(process);
-		return Response.ok(process.getId(), MediaType.TEXT_PLAIN).build();
+		if (process == null)
+			throw new ServerErrorException(ERR_PROCESS_NOT_CREATED);
+		
+		Process tmpProcess = processManager.getProcessInfos(process.getId());
+		if(tmpProcess != null && !request.isOverrideExisting())
+			throw new BadRequestException(ERR_EXISTING_PROCESS_NO_OVERRIDE, process.getId());
+		
+		String processId = processManager.uploadAndDeploy(process);
+		if (processId == null)
+			throw new ServerErrorException(ERR_COULD_NOT_DEPLOY_PROCESS);
+		
+		return Response
+				.status(request.isOverrideExisting() ? Status.OK : Status.CREATED)
+				.entity(processId)
+				.type(MediaType.TEXT_PLAIN)
+				.build();
+	}
+
+	// Deploys a process instance for the given process id. This instance can then be used for execution.
+	@POST
+	@Path("{processId}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deployProcessInstance(@PathParam("processId") String processId) 
+			throws BadRequestException, NotFoundErrorException, ServerErrorException 
+	{
+		if (isNullOrEmpty(processId))
+			throw new BadRequestException(ERR_MISSING_PROCESS_ID);
+		
+		Process process = processManager.getProcessInfos(processId);
+		if (process == null)
+			throw new NotFoundErrorException(ERR_PROCESS_WITH_ID_NOT_FOUND, processId);
+		
+		String instanceId = processManager.deployProcessInstance(processId);
+		if(instanceId == null)
+			throw new ServerErrorException(ERR_COULD_NOT_DEPLOY_INSTANCE_FOR_ID, processId);
+		
+		return instanceId;
 	}
 
 	private static boolean isNullOrEmpty(String value) {
@@ -97,8 +134,8 @@ public class ProcessManagerRest {
 
 	/**
 	 * @throws Exception
-	 *             Thrown if something is wrong with the document or the document
-	 *             failed to load to resource.
+	 *             Thrown if something is wrong with the document or the
+	 *             document failed to load to resource.
 	 */
 	private Process getProcessFromString(String input) throws Exception {
 		ResourceSet resSet = getConfiguredResourceSet();
@@ -116,8 +153,9 @@ public class ProcessManagerRest {
 		ResourceSet resSet = new ResourceSetImpl();
 
 		resSet.getPackageRegistry().put(SofiaPackage.eINSTANCE.getNsURI(), SofiaPackage.eINSTANCE);
-		resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(Resource.Factory.Registry.DEFAULT_EXTENSION,
-				new XMIResourceFactoryImpl());
+		resSet.getResourceFactoryRegistry()
+		.getExtensionToFactoryMap()
+		.put(Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
 
 		// this option let us load a diagram file without to have graphiti stuff
 		// in the classpath

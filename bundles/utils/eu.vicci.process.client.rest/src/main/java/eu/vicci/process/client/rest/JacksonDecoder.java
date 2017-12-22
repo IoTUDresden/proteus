@@ -38,6 +38,12 @@ public class JacksonDecoder implements Decoder {
 		if (response.body() == null)
 			return null;
 		Reader reader = response.body().asReader();
+
+		//This returns the content as string or jackson will fail to parse
+		if (String.class.equals(type)) {
+			return Util.toString(reader);
+		}
+
 		if (!reader.markSupported()) {
 			reader = new BufferedReader(reader, 1);
 		}
@@ -49,6 +55,7 @@ public class JacksonDecoder implements Decoder {
 								// due to end-of-input"
 			}
 			reader.reset();
+
 			return mapper.readValue(reader, mapper.constructType(type));
 		} catch (RuntimeJsonMappingException e) {
 			if (e.getCause() != null && e.getCause() instanceof IOException) {

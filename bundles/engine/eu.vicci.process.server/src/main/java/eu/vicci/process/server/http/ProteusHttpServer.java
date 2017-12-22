@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import eu.vicci.process.server.events.StateChangesSse;
+import eu.vicci.process.server.exception.BadRequestException;
 import eu.vicci.process.server.rest.ProcessManagerRest;
 
 /**
@@ -50,7 +51,8 @@ public class ProteusHttpServer implements Runnable {
 	
 	private ServletHolder getRestServlet(){
         ResourceConfig restConfig = new ResourceConfig();
-        restConfig.packages(ProcessManagerRest.class.getPackage().getName());        
+        restConfig.packages(ProcessManagerRest.class.getPackage().getName());
+        restConfig.packages(BadRequestException.class.getPackage().getName());
         ServletHolder restServlet = new ServletHolder(new ServletContainer(restConfig));
         return restServlet;
 	}
@@ -58,6 +60,7 @@ public class ProteusHttpServer implements Runnable {
 	private ServletHolder getSseServlet(){
         ResourceConfig sseConfig = new ResourceConfig();
         sseConfig.packages(StateChangesSse.class.getPackage().getName());        
+        sseConfig.packages(BadRequestException.class.getPackage().getName());
         ServletHolder sseServlet = new ServletHolder(new ServletContainer(sseConfig));
         return sseServlet;
 	}	
