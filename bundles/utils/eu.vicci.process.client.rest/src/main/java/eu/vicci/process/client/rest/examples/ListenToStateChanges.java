@@ -32,11 +32,8 @@ public class ListenToStateChanges extends AbstractExample{
 						inboundEvent.readData(String.class)));
 			}
 		};
-//		eventSource.register(listener);
+
 		eventSource.open();
-//		eventSources.add(eventSource);		
-		
-		
 		waitForever();
 	}
 	
@@ -49,7 +46,6 @@ public class ListenToStateChanges extends AbstractExample{
 		try {
 			count.await();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
