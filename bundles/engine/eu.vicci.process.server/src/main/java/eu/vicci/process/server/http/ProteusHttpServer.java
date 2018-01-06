@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 import eu.vicci.process.server.events.StateChangesSse;
 import eu.vicci.process.server.exception.BadRequestException;
 import eu.vicci.process.server.rest.ProcessManagerRest;
+import io.swagger.jaxrs.listing.ApiListingResource;
+import io.swagger.jaxrs.listing.SwaggerSerializers;
 
 /**
  * Encapsulates jetty http server for REST and HTTP services.
@@ -27,11 +29,14 @@ public class ProteusHttpServer implements Runnable {
 	private static final String REST_PATH = "/rest/*";
 	private static final String SSE_PATH = "/events/*";
 	private static final String HTTP_CTX_PATH = "/";
+	private static final String SWAGGER_PATH = "/api/*";
 	
+	private final int httpPort;	
 	private final Server server;
 	
 	public ProteusHttpServer(int httpPort) {	
-		server = new Server(httpPort);	
+		server = new Server(httpPort);
+		this.httpPort = httpPort;
 		
 		Handler http = getHttpHandler();
 		Handler servlets = getServletsHandler();		
@@ -45,7 +50,8 @@ public class ProteusHttpServer implements Runnable {
 	private Handler getServletsHandler(){        
         ServletContextHandler restHandler = new ServletContextHandler(server, HTTP_CTX_PATH);                
         restHandler.addServlet(getRestServlet(), REST_PATH); 
-        restHandler.addServlet(getSseServlet(), SSE_PATH); 
+        restHandler.addServlet(getSseServlet(), SSE_PATH);
+        restHandler.addServlet(getSwaggerServlet(), SWAGGER_PATH);
         return restHandler;		
 	}
 	
@@ -72,8 +78,16 @@ public class ProteusHttpServer implements Runnable {
         return httpHandler;
 	}	
 	
+	private ServletHolder getSwaggerServlet(){
+		ResourceConfig config = new ResourceConfig();
+		config.packages(ProcessManagerRest.class.getPackage().getName());
+		config.packages(ApiListingResource.class.getPackage().getName());
+		config.packages(SwaggerSerializers.class.getPackage().getName());
+		return new ServletHolder(new ServletContainer(config));		
+	}
+	
 	private void start(){ 
-		LOG.debug("starting proteus http server...");
+		LOG.debug("starting proteus http server on port '{}'...", httpPort);
         try {
             server.start();
             server.join();

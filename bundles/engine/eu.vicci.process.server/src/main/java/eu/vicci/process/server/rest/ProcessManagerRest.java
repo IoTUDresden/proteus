@@ -34,10 +34,14 @@ import eu.vicci.process.server.exception.BadRequestException;
 import eu.vicci.process.server.exception.NotFoundErrorException;
 import eu.vicci.process.server.exception.ServerErrorException;
 import eu.vicci.process.server.util.RuntimeContext;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import static eu.vicci.process.server.rest.Messages.*;
 
-//TODO use swagger.io for api description
+
 @Path("processes")
+@Api(tags = {"processes"})
 public class ProcessManagerRest {
 	private static final Logger LOG = LoggerFactory.getLogger(ProcessManagerRest.class);
 	private final IProcessManager processManager;
@@ -51,20 +55,21 @@ public class ProcessManagerRest {
 		return processManager;
 	}
 
-	// Lists all deployed process instances, which available for deploying a
-	// process instance.
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Lists all deployed process instances, "
+			+ "which available for deploying a process instance.",
+			response = IProcessInfo.class)
 	public List<IProcessInfo> deployedProcesses() {
 		return processManager.listDeployedProcesses();
 	}
 
-	// Uploads a process definition, which is saved to file. The process is then
-	// deployed to the engine
-	// and available for deploying as process instance.
 	@PUT
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Uploads a process definition, which is saved to file. "
+			+ "The process is then deployed to the engine and available for deploying as process instance.",
+			notes = "Returns the process id as string for the deployed process" ) 
 	public Response uploadAndDeploy(UploadAndDeployRequest request) 
 			throws BadRequestException, ServerErrorException 
 	{
@@ -97,10 +102,12 @@ public class ProcessManagerRest {
 				.build();
 	}
 
-	// Deploys a process instance for the given process id. This instance can then be used for execution.
 	@POST
 	@Path("{processId}")
 	@Produces(MediaType.TEXT_PLAIN)
+	@ApiOperation(value = "Deploys a process instance for the given process id. "
+			+ "This instance can then be used for execution.",
+			notes = "Returns the instance id as string of the deployed process")
 	public String deployProcessInstance(@PathParam("processId") String processId) 
 			throws BadRequestException, NotFoundErrorException, ServerErrorException 
 	{

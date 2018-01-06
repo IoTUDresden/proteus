@@ -75,6 +75,10 @@
 					<groupId>com.fasterxml.jackson.core</groupId>
 					<artifactId>jackson-databind</artifactId>
 				</exclusion>
+				<exclusion>
+					<groupId>com.googlecode.guava-osgi</groupId>
+					<artifactId>guava-osgi</artifactId>
+				</exclusion>
 			</exclusions>
 		</dependency>
 
@@ -144,5 +148,12 @@
 			<version>1.0.0-SNAPSHOT</version>
 			<type>eclipse-plugin</type>
 		</dependency>
+
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-jersey2-jaxrs</artifactId>
+			<version>1.5.17</version>
+		</dependency>
+
 	</dependencies>
 </project>
