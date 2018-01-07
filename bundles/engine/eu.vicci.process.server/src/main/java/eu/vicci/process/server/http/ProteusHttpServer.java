@@ -24,94 +24,94 @@ import io.swagger.jaxrs.listing.SwaggerSerializers;
  * @author andre
  */
 public class ProteusHttpServer implements Runnable {
-	private static final Logger LOG = LoggerFactory.getLogger(ProteusHttpServer.class);	
+	private static final Logger LOG = LoggerFactory.getLogger(ProteusHttpServer.class);
 	
-	private static final String REST_PATH = "/rest/*";
+	public static final String REST_BASE_PATH = "/rest";
+	private static final String REST_PATH = REST_BASE_PATH + "/*";
 	private static final String SSE_PATH = "/events/*";
 	private static final String HTTP_CTX_PATH = "/";
 	private static final String SWAGGER_PATH = "/api/*";
-	
-	private final int httpPort;	
+
+	private final int httpPort;
 	private final Server server;
-	
-	public ProteusHttpServer(int httpPort) {	
+
+	public ProteusHttpServer(int httpPort) {
 		server = new Server(httpPort);
 		this.httpPort = httpPort;
-		
+
 		Handler http = getHttpHandler();
-		Handler servlets = getServletsHandler();		
-        
-        HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[]{ http, servlets });
-        
-        server.setHandler(handlers);      
-    }
-	
-	private Handler getServletsHandler(){        
-        ServletContextHandler restHandler = new ServletContextHandler(server, HTTP_CTX_PATH);                
-        restHandler.addServlet(getRestServlet(), REST_PATH); 
-        restHandler.addServlet(getSseServlet(), SSE_PATH);
-        restHandler.addServlet(getSwaggerServlet(), SWAGGER_PATH);
-        return restHandler;		
+		Handler servlets = getServletsHandler();
+
+		HandlerList handlers = new HandlerList();
+		handlers.setHandlers(new Handler[] { http, servlets });
+
+		server.setHandler(handlers);
 	}
-	
-	private ServletHolder getRestServlet(){
-        ResourceConfig restConfig = new ResourceConfig();
-        restConfig.packages(ProcessManagerRest.class.getPackage().getName());
-        restConfig.packages(BadRequestException.class.getPackage().getName());
-        ServletHolder restServlet = new ServletHolder(new ServletContainer(restConfig));
-        return restServlet;
+
+	private Handler getServletsHandler() {
+		ServletContextHandler restHandler = new ServletContextHandler(server, HTTP_CTX_PATH);
+		restHandler.addServlet(getRestServlet(), REST_PATH);
+		restHandler.addServlet(getSseServlet(), SSE_PATH);
+		restHandler.addServlet(getSwaggerServlet(), SWAGGER_PATH);
+		return restHandler;
 	}
-	
-	private ServletHolder getSseServlet(){
-        ResourceConfig sseConfig = new ResourceConfig();
-        sseConfig.packages(StateChangesSse.class.getPackage().getName());        
-        sseConfig.packages(BadRequestException.class.getPackage().getName());
-        ServletHolder sseServlet = new ServletHolder(new ServletContainer(sseConfig));
-        return sseServlet;
-	}	
-	
-	private Handler getHttpHandler(){
-        ResourceHandler httpHandler = new ResourceHandler();       
-        httpHandler.setBaseResource(Resource.newClassPathResource("web"));
-        httpHandler.setWelcomeFiles(new String[]{"index.html"});
-        return httpHandler;
-	}	
-	
-	private ServletHolder getSwaggerServlet(){
-		ResourceConfig config = new ResourceConfig();
-		config.packages(ProcessManagerRest.class.getPackage().getName());
-		config.packages(ApiListingResource.class.getPackage().getName());
-		config.packages(SwaggerSerializers.class.getPackage().getName());
-		return new ServletHolder(new ServletContainer(config));		
+
+	private ServletHolder getRestServlet() {
+		ResourceConfig restConfig = new ResourceConfig();
+		restConfig.packages(ProcessManagerRest.class.getPackage().getName());
+		restConfig.packages(BadRequestException.class.getPackage().getName());
+		ServletHolder restServlet = new ServletHolder(new ServletContainer(restConfig));
+		return restServlet;
 	}
-	
-	private void start(){ 
+
+	private ServletHolder getSseServlet() {
+		ResourceConfig sseConfig = new ResourceConfig();
+		sseConfig.packages(StateChangesSse.class.getPackage().getName());
+		sseConfig.packages(BadRequestException.class.getPackage().getName());
+		ServletHolder sseServlet = new ServletHolder(new ServletContainer(sseConfig));
+		return sseServlet;
+	}
+
+	private Handler getHttpHandler() {
+		ResourceHandler httpHandler = new ResourceHandler();
+		httpHandler.setBaseResource(Resource.newClassPathResource("web"));
+		httpHandler.setWelcomeFiles(new String[] { "index.html" });
+		return httpHandler;
+	}
+
+	private ServletHolder getSwaggerServlet() {
+		ResourceConfig resConfig = new ResourceConfig();
+		resConfig.packages(ProcessManagerRest.class.getPackage().getName());
+		resConfig.packages(ApiListingResource.class.getPackage().getName());
+		resConfig.packages(SwaggerSerializers.class.getPackage().getName());
+		return new ServletHolder(new ServletContainer(resConfig));
+	}
+
+	private void start() {
 		LOG.debug("starting proteus http server on port '{}'...", httpPort);
-        try {
-            server.start();
-            server.join();
-        } catch (Exception ex) {
-            LOG.error(ex.getMessage());
-        } finally {
-        	server.destroy();
-        }		
+		try {
+			server.start();
+			server.join();
+		} catch (Exception ex) {
+			LOG.error(ex.getMessage());
+		} finally {
+			server.destroy();
+		}
 	}
-	
-	public void stop(){
+
+	public void stop() {
 		try {
 			server.stop();
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
-		}
-		finally {
+		} finally {
 			server.destroy();
 		}
 	}
 
 	@Override
 	public void run() {
-		start();		
+		start();
 	}
 
 }

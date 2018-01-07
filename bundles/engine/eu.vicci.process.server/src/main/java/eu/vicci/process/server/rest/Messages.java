@@ -11,7 +11,9 @@ public class Messages {
 	public static final String ERR_MISSING_PROCESS_ID = "Missing process id.";
 	public static final String ERR_PROCESS_WITH_ID_NOT_FOUND = "Process with id '%s' could not be found.";
 	public static final String ERR_COULD_NOT_DEPLOY_INSTANCE_FOR_ID = "Instance could not deployed for '%s'.";
-	public static final String ERR_PROCESS_INSTANCE_WITH_ID_NOT_FOUND = "ProcessInstance with id '%s' could not be found.";
+	public static final String ERR_PROCESS_INSTANCE_WITH_ID_NOT_FOUND = "ProcessInstance with id '%s' could not be found.";	
+	public static final String ERR_MISSING_INSTANCE_ID = "Instance id cant be null or empty";
+	public static final String ERR_STATE_NOT_FOUND_FOR = "Cant find the latest state message for process instance '{}'";
 
 
 }

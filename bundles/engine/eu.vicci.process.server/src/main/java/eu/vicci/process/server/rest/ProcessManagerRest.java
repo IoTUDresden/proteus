@@ -1,5 +1,13 @@
 package eu.vicci.process.server.rest;
 
+import static eu.vicci.process.server.rest.Messages.ERR_COULD_NOT_DEPLOY_INSTANCE_FOR_ID;
+import static eu.vicci.process.server.rest.Messages.ERR_COULD_NOT_DEPLOY_PROCESS;
+import static eu.vicci.process.server.rest.Messages.ERR_EXISTING_PROCESS_NO_OVERRIDE;
+import static eu.vicci.process.server.rest.Messages.ERR_MISSING_PROCESS_DOC;
+import static eu.vicci.process.server.rest.Messages.ERR_MISSING_PROCESS_ID;
+import static eu.vicci.process.server.rest.Messages.ERR_PROCESS_NOT_CREATED;
+import static eu.vicci.process.server.rest.Messages.ERR_PROCESS_WITH_ID_NOT_FOUND;
+
 import java.util.List;
 import java.util.Map;
 
@@ -36,10 +44,19 @@ import eu.vicci.process.server.exception.ServerErrorException;
 import eu.vicci.process.server.util.RuntimeContext;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
-import static eu.vicci.process.server.rest.Messages.*;
-
-
+/**
+ * Rest resource for processes.
+ * 
+ * Api operations are described by the 
+ * <a href="https://github.com/swagger-api/swagger-core/wiki/Annotations-2.X">Swagger Annotations</a>
+ * 
+ * @author andre
+ *
+ */
 @Path("processes")
 @Api(tags = {"processes"})
 public class ProcessManagerRest {
@@ -59,7 +76,8 @@ public class ProcessManagerRest {
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Lists all deployed process instances, "
 			+ "which available for deploying a process instance.",
-			response = IProcessInfo.class)
+			response = IProcessInfo.class,
+			responseContainer = "List")
 	public List<IProcessInfo> deployedProcesses() {
 		return processManager.listDeployedProcesses();
 	}
@@ -67,10 +85,24 @@ public class ProcessManagerRest {
 	@PUT
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	@ApiOperation(value = "Uploads a process definition, which is saved to file. "
+	@ApiOperation(value = "Uploads a process definition, which is saved to file on server. "
 			+ "The process is then deployed to the engine and available for deploying as process instance.",
-			notes = "Returns the process id as string for the deployed process" ) 
-	public Response uploadAndDeploy(UploadAndDeployRequest request) 
+			notes = "Returns the process id as string for the deployed process",
+			response = String.class) 
+	@ApiResponses(value = { 
+		@ApiResponse(code = 200, message = "Process updaded."),
+		@ApiResponse(code = 201, message = "Process uploaded and deployed."),
+		@ApiResponse(code = 400, message = "Request contains errors or missing values."),
+		@ApiResponse(code = 500, message = "Upload and deployment failed on server. Be sure the model is consistent.")
+	})
+	public Response uploadAndDeploy(
+			@ApiParam(value = "The request for uploading and deploying processes. "
+					+ "The setting 'overrideExisting' will not update the model on the server properly at the moment. "
+					+ "Set it to 'true' "
+					+ "Restart the engine if you want to update the model. "
+					+ "'processdocument' should contain the process model (*.diagram file) as string. "
+					+ "Restart the engine if you want to update the model.", required = true) 
+			UploadAndDeployRequest request) 
 			throws BadRequestException, ServerErrorException 
 	{
 		if (request == null || isNullOrEmpty(request.getProcessdocument()))
@@ -107,8 +139,17 @@ public class ProcessManagerRest {
 	@Produces(MediaType.TEXT_PLAIN)
 	@ApiOperation(value = "Deploys a process instance for the given process id. "
 			+ "This instance can then be used for execution.",
-			notes = "Returns the instance id as string of the deployed process")
-	public String deployProcessInstance(@PathParam("processId") String processId) 
+			notes = "Returns the instance id as string of the deployed process",
+			response = String.class)
+	@ApiResponses(value = { 
+			@ApiResponse(code = 200, message = "Process instance was created."),
+			@ApiResponse(code = 400, message = "Request contains errors or missing values."),
+			@ApiResponse(code = 404, message = "The process with the given process id does not exist on the server."),
+			@ApiResponse(code = 500, message = "Upload and deployment failed on server. Be sure the model is consistent.")
+		})
+	public String deployProcessInstance(
+			@ApiParam(value = "The process id for the process which should be deployed as instance.", required = true)
+			@PathParam("processId") String processId) 
 			throws BadRequestException, NotFoundErrorException, ServerErrorException 
 	{
 		if (isNullOrEmpty(processId))
