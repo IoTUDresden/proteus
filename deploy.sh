@@ -93,3 +93,11 @@ git add -A
 git commit -m "deploy p2 and maven repo"
 # this does a silent commit and also does not show any errors. So the token will should not be vissible in the travis log
 git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" gh-pages > /dev/null 2>&1
+
+###########################
+# Deploy the docker image #
+###########################
+
+echo "deploying docker image..."
+docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD 
+docker push iotudresden/vicci-runtime

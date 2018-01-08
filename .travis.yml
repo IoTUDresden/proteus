@@ -20,12 +20,9 @@ script:
 deploy:
   - provider: script
     skip_cleanup: true
-    script: 
-      - cd $TRAVIS_BUILD_DIR
-        sh deploy.sh
-      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD 
-        docker push iotudresden/vicci-runtime
+    script: sh $TRAVIS_BUILD_DIR/deploy.sh
     on:
+      branch: master
       tags: true
 
   - provider: releases
@@ -36,6 +33,7 @@ deploy:
     file_glob: true
     file: $TRAVIS_BUILD_PATH/$USER_NAME/$RELEASES_PATH/*
     on:
+      branch: master
       tags: true
       
 env:
