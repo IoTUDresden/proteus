@@ -1,6 +1,6 @@
 package eu.vicci.process.model.util.serialization.jsontypes;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import eu.vicci.process.model.sofia.DataMapping;
 import eu.vicci.process.model.sofia.SofiaFactory;

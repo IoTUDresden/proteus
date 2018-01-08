@@ -30,6 +30,7 @@
                 <transformer>
                   <mainClass>eu.vicci.process.runtime.VicciRuntime</mainClass>
                 </transformer>
+                <transformer />
               </transformers>
               <filters>
                 <filter>

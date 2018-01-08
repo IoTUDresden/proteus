@@ -86,8 +86,6 @@ For more information contact us at https://github.com/IoTUDresden/.
       <plugin id="io.netty.handler"/>
       <plugin id="io.netty.transport"/>
       <plugin id="io.reactivex.rxjava"/>
-      <plugin id="jackson-core-asl"/>
-      <plugin id="jackson-mapper-asl"/>
       <plugin id="javax.annotation"/>
       <plugin id="javax.inject"/>
       <plugin id="javax.ws.rs-api"/>

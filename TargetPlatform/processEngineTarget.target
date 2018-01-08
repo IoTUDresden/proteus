@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target includeMode="feature" name="Process Engine Platform" sequenceNumber="118">
+<?pde version="3.8"?><target includeMode="feature" name="Process Engine Platform" sequenceNumber="128">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.graphiti.feature.feature.group" version="0.12.1.v20150916-0905"/>
@@ -31,7 +31,6 @@
 <repository location="http://download.eclipse.org/releases/mars/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="com.fasterxml.jackson.core.jackson-annotations" version="2.4.0"/>
 <unit id="org.jvnet.animal-sniffer-annotation" version="1.0.0"/>
 <unit id="io.netty.handler" version="4.0.24.Final"/>
 <unit id="org.apache.httpcomponents.httpcore" version="4.4.1"/>
@@ -45,10 +44,9 @@
 <unit id="org.msgpack.core" version="0.7.0.p7"/>
 <unit id="groovy-json" version="2.3.9"/>
 <unit id="org.glassfish.hk2.osgi-resource-locator" version="1.0.1"/>
-<unit id="com.fasterxml.jackson.core.jackson-databind" version="2.4.4"/>
 <unit id="org.glassfish.hk2.api" version="2.4.0.b12"/>
 <unit id="xmlpull" version="1.1.3.1"/>
-<unit id="jackson-core-asl" version="1.9.13"/>
+<unit id="com.fasterxml.jackson.core.jackson-databind" version="2.8.4"/>
 <unit id="org.glassfish.hk2.external.javax.inject" version="2.4.0.b12"/>
 <unit id="log4j" version="1.2.17"/>
 <unit id="io.netty.transport" version="4.0.24.Final"/>
@@ -62,9 +60,8 @@
 <unit id="io.netty.common" version="4.0.24.Final"/>
 <unit id="slf4j.api" version="1.7.13"/>
 <unit id="org.glassfish.hk2.external.aopalliance-repackaged" version="2.4.0.b12"/>
-<unit id="com.fasterxml.jackson.core.jackson-core" version="2.4.4"/>
+<unit id="com.fasterxml.jackson.core.jackson-core" version="2.8.4"/>
 <unit id="xstream" version="1.4.7"/>
-<unit id="jackson-mapper-asl" version="1.9.13"/>
 <unit id="com.google.gson" version="2.5.0"/>
 <unit id="ws.wamp.jawampa.core" version="0.4.2"/>
 <unit id="slf4j.log4j12" version="1.7.13"/>
@@ -78,10 +75,11 @@
 <unit id="groovy-xml" version="2.3.9"/>
 <unit id="org.apache.commons.codec" version="1.9.0"/>
 <unit id="com.netflix.feign.core" version="8.18.0"/>
+<unit id="com.fasterxml.jackson.core.jackson-annotations" version="2.8.0"/>
 <repository location="https://iotudresden.github.io/proteus-deps/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.e4.tools.model.spy.feature.feature.group" version="0.1.0.v20170601-0901"/>
+<unit id="org.eclipse.e4.tools.model.spy.feature.feature.group" version="0.1.0.v20171217-2215"/>
 <repository location="http://download.eclipse.org/e4/snapshots/org.eclipse.e4.tools/latest/"/>
 </location>
 </locations>

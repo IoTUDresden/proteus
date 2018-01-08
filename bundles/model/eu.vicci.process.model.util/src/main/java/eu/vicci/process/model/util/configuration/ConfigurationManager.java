@@ -85,7 +85,7 @@ public final class ConfigurationManager {
 	/**
 	 * Updates following values in the config: <br>
 	 * - OPENHAB_URI, FEEDBACK_SERVICE_URI, ELASTICSEARCH_HOST, CONTEXT_URI,
-	 * NAMESPACE, REALMNAME, PORT, SUPER_PEER_IP
+	 * NAMESPACE, REALMNAME, PORT, SUPER_PEER_IP, PROTEUS_HTTP_PORT
 	 * 
 	 * @param reader
 	 */
@@ -99,6 +99,7 @@ public final class ConfigurationManager {
 		addIfNotNull(ConfigProperties.PROTEUS_WAMP_PORT, reader.getPort());
 		addIfNotNull(ConfigProperties.PROTEUS_SUPER_PEER_IP, reader.getSuperPeerIp());
 		addIfNotNull(ConfigProperties.PROTEUS_IP_FILTER, reader.getIpFilter());
+		configurations.put(ConfigProperties.PROTEUS_HTTP_PORT, Integer.valueOf(reader.getHttpPort()));
 	}
 
 	private void addIfNotNull(String key, String value) {

@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 
@@ -17,8 +20,11 @@ import eu.vicci.process.model.util.configuration.ConfigProperties;
  * Sets default values, if no config is specified.
  */
 public class ConfigurationReader implements IConfigurationReader {
+	private static final Logger LOG = LoggerFactory.getLogger(ConfigurationReader.class);
 	private static final String TRUE_STR = "true";
 	private static final String LIST_SEPARATOR = ",";
+	
+	private static final String ERR_PARSE_HTTP_PORT = "cant parse the given value to integer for {}. Please check your config.";
 	
 	private String ip;
 	private String port;
@@ -26,6 +32,7 @@ public class ConfigurationReader implements IConfigurationReader {
 	private String realmName;
 	private String namespace;
 	private String openHabUri;
+	private int httpPort = 0;
 	
 	private String superPeerIp;
 	
@@ -144,6 +151,14 @@ public class ConfigurationReader implements IConfigurationReader {
 		String tmpOsgi = System.getenv(ConfigProperties.START_OSGI_RUNTIME);
 		startOsgiRuntime = TRUE_STR.equals(tmpOsgi) ||
 				(tmpOsgi == null && TRUE_STR.equals(ConfigProperties.DEFAULT_START_OSGI_RUNTIME));
+		
+		String tmpHttpPort = System.getenv(ConfigProperties.PROTEUS_HTTP_PORT);
+		tmpHttpPort = tmpHttpPort == null ? ConfigProperties.DEFAULT_PROTEUS_HTTP_PORT : tmpHttpPort;
+		try {
+			httpPort = Integer.parseInt(tmpHttpPort);				
+		} catch (NumberFormatException e) {
+			LOG.error(ERR_PARSE_HTTP_PORT, ConfigProperties.PROTEUS_HTTP_PORT);
+		}	
 	}
 	
 	private void readProperties(){
@@ -176,6 +191,14 @@ public class ConfigurationReader implements IConfigurationReader {
 		String tmpOsgi = properties.getProperty(ConfigProperties.START_OSGI_RUNTIME);
 		startOsgiRuntime = TRUE_STR.equals(tmpOsgi) ||
 				(tmpOsgi == null && TRUE_STR.equals(ConfigProperties.DEFAULT_START_OSGI_RUNTIME));
+		
+		String tmpHttpPort = properties.getProperty(ConfigProperties.PROTEUS_HTTP_PORT);
+		tmpHttpPort = tmpHttpPort == null ? ConfigProperties.DEFAULT_PROTEUS_HTTP_PORT : tmpHttpPort;
+		try {
+			httpPort = Integer.parseInt(tmpHttpPort);				
+		} catch (NumberFormatException e) {
+			LOG.error(ERR_PARSE_HTTP_PORT, ConfigProperties.PROTEUS_HTTP_PORT);
+		}	
 	}
 	
 	private void setDefaultValues(){
@@ -222,5 +245,10 @@ public class ConfigurationReader implements IConfigurationReader {
 	@Override
 	public List<String> getDevices() {
 		return devices;
+	}
+
+	@Override
+	public int getHttpPort() {
+		return httpPort;
 	}	
 }

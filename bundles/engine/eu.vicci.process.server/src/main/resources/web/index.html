@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PROtEUS</title>
+		<link rel="icon" type="image/png" href="/img/favicon-16x16.png" />
+		<link href="/js/plugins/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+	</head>
+	<body>
+		<h1>Welcome to PROtEUS: A Process Execution System for Cyber-physical Systems</h1>
+		<div>State</div>
+		<div id="connection_state_box" style="background-color: red">disconnected</div>
+		<div>
+			<a href="/api">REST API</a>
+		</div>
+		
+		<h3>Processes</h3>
+		<table id="process_table" class="display compact"></table>
+		<h3>Process Instances</h3>
+		<table id="instance_table" class="display compact"></table>
+		
+		<script src="/js/jquery-3.2.1.min.js"></script> 
+		<script src="/js/plugins/DataTables/js/jquery.dataTables.min.js"></script> 
+		<script src="/js/app.js"></script> 
+		<script type="text/javascript">
+			$(document).ready(loadContents());
+		</script>
+	</body>
+</html>

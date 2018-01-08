@@ -3,7 +3,7 @@ package eu.vicci.process.model.util.messages;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import eu.vicci.process.model.sofiainstance.State;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;

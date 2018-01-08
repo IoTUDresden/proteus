@@ -1,9 +1,7 @@
 package eu.vicci.process.client.examples;
 
 import eu.vicci.process.client.ProcessEngineClientBuilder;
-import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.client.core.IProcessEngineClient;
-import eu.vicci.process.model.util.ConfigurationReader;
 import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import eu.vicci.process.model.util.messages.core.StateChangeListener;

@@ -11,6 +11,7 @@ COPY target/eu.vicci.proteus-1.0.0-SNAPSHOT.jar /vicci-runtime/bin/
 
 # Make port 8081 available to the world outside this container
 EXPOSE 8081
+EXPOSE 8082
 
 # Run runtime when the container launches
 CMD ["java", "-jar", "/vicci-runtime/bin/eu.vicci.proteus-1.0.0-SNAPSHOT.jar", "-container"]

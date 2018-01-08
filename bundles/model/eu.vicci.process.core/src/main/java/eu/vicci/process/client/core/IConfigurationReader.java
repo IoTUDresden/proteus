@@ -130,5 +130,10 @@ public interface IConfigurationReader {
 	 * @return
 	 */
 	List<String> getDevices();
+	
+	/**
+	 * @return The port for the HTTP server. Default is 8082
+	 */
+	int getHttpPort();
 
 }

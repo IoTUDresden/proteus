@@ -1,6 +1,6 @@
 package eu.vicci.process.model.util.serialization.jsonprocessstepinstances;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import eu.vicci.process.model.sofiainstance.DataPortInstance;
 import eu.vicci.process.model.sofiainstance.SofiaInstanceFactory;
