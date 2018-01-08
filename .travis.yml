@@ -15,17 +15,18 @@ jdk:
 script: 
   - mvn deploy
   - cd $TRAVIS_BUILD_DIR/products/proteus
-  - docker build -t vicci-runtime .
+    docker build -t vicci-runtime .
 
 deploy:
   - provider: script
     skip_cleanup: true
     script: 
-      - sh $TRAVIS_BUILD_DIR/deploy.sh
+      - cd $TRAVIS_BUILD_DIR
+        sh deploy.sh
       - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD 
-      - docker push iotudresden/vicci-runtime
+        docker push iotudresden/vicci-runtime
     on:
-      branch: master
+      tags: true
 
   - provider: releases
     api_key:
@@ -35,7 +36,7 @@ deploy:
     file_glob: true
     file: $TRAVIS_BUILD_PATH/$USER_NAME/$RELEASES_PATH/*
     on:
-      branch: master
+      tags: true
       
 env:
   global:
