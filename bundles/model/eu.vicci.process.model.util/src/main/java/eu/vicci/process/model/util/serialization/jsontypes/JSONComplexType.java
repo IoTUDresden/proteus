@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import eu.vicci.process.model.sofia.BooleanType;
 import eu.vicci.process.model.sofia.ComplexType;

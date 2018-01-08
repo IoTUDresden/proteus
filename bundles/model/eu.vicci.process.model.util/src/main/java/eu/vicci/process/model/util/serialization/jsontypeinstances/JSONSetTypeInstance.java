@@ -3,7 +3,7 @@ package eu.vicci.process.model.util.serialization.jsontypeinstances;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import eu.vicci.process.model.sofiainstance.SetTypeInstance;
 import eu.vicci.process.model.sofiainstance.SofiaInstanceFactory;

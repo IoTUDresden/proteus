@@ -1,10 +1,14 @@
 package eu.vicci.process.client.rest;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import eu.vicci.process.client.core.UploadAndDeployRequest;
 import eu.vicci.process.model.util.ProcessInfo;
 import eu.vicci.process.model.util.ProcessInstanceInfo;
+import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.JSONProcessStepInstance;
+import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.core.IJSONProcessStepInstance;
+import eu.vicci.process.model.util.serialization.jsontypeinstances.core.IJSONTypeInstance;
 import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
@@ -48,5 +52,27 @@ public interface RestClientInternal {
 	 */
 	@RequestLine("POST /rest/processinstances/{processInstanceId}")
 	void startProcessInstance(@Param("processInstanceId") String processInstanceId);
+
+	/**
+	 * 
+	 * @param processInstanceId
+	 *            the instance id of the process which should be started
+	 * @param inputParameters
+	 *            the input parameters as map, with the instance id of the
+	 *            datatype as key
+	 */
+	@RequestLine("POST /rest/processinstances/{processInstanceId}")
+	void startProcessInstance(@Param("processInstanceId") String processInstanceId,
+			Map<String, IJSONTypeInstance> inputParameters);
+
+	/**
+	 * Get the process step instance.
+	 * 
+	 * @param processInstanceId
+	 *            The instance id of the root process.
+	 * @return {@link IJSONProcessStepInstance}
+	 */
+	@RequestLine("GET /rest/processinstances/{processInstanceId}")
+	JSONProcessStepInstance getProcessStepInstance(@Param("processInstanceId") String processInstanceId);
 
 }

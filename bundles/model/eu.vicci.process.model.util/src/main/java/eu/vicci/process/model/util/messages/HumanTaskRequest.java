@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import eu.vicci.process.model.sofia.HumanTaskType;
 import eu.vicci.process.model.sofia.HumanTaskUseCase;

@@ -1,6 +1,6 @@
 package eu.vicci.process.model.util.serialization.jsontypeinstances;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;

@@ -3,7 +3,7 @@ package eu.vicci.process.model.util.serialization.jsonprocessstepinstances;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

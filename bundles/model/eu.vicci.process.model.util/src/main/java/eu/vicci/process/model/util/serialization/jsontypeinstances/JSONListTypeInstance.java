@@ -3,7 +3,7 @@ package eu.vicci.process.model.util.serialization.jsontypeinstances;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import eu.vicci.process.model.sofia.CollectionType;
 import eu.vicci.process.model.sofia.DataType;

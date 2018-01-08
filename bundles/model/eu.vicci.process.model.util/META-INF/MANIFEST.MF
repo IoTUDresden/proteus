@@ -19,7 +19,6 @@ Require-Bundle: eu.vicci.process.core;bundle-version="1.0.0",
  com.fasterxml.jackson.core.jackson-annotations;bundle-version="2.4.0",
  com.google.gson;bundle-version="2.5.0",
  com.fasterxml.jackson.core.jackson-databind;bundle-version="2.4.4",
- jackson-mapper-asl;bundle-version="1.9.13",
  com.fasterxml.jackson.core.jackson-core;bundle-version="2.4.4",
  jackson-core-asl;bundle-version="1.9.13"
 Bundle-Vendor: IoTUDresden

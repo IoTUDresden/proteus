@@ -7,10 +7,13 @@ import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 import eu.vicci.process.server.events.StateChangesSse;
 import eu.vicci.process.server.exception.BadRequestException;
@@ -58,6 +61,8 @@ public class ProteusHttpServer implements Runnable {
 
 	private ServletHolder getRestServlet() {
 		ResourceConfig restConfig = new ResourceConfig();
+		restConfig.register(JacksonJsonProvider.class);
+		restConfig.register(JacksonFeature.class);
 		restConfig.packages(ProcessManagerRest.class.getPackage().getName());
 		restConfig.packages(BadRequestException.class.getPackage().getName());
 		ServletHolder restServlet = new ServletHolder(new ServletContainer(restConfig));
@@ -66,6 +71,7 @@ public class ProteusHttpServer implements Runnable {
 
 	private ServletHolder getSseServlet() {
 		ResourceConfig sseConfig = new ResourceConfig();
+//		sseConfig.register(JacksonFeature.class);
 		sseConfig.packages(StateChangesSse.class.getPackage().getName());
 		sseConfig.packages(BadRequestException.class.getPackage().getName());
 		ServletHolder sseServlet = new ServletHolder(new ServletContainer(sseConfig));
@@ -81,6 +87,9 @@ public class ProteusHttpServer implements Runnable {
 
 	private ServletHolder getSwaggerServlet() {
 		ResourceConfig resConfig = new ResourceConfig();
+//		resConfig.register(MOXyJsonProvider.class);
+		resConfig.register(JacksonJsonProvider.class);
+		resConfig.register(JacksonFeature.class);
 		resConfig.packages(ProcessManagerRest.class.getPackage().getName());
 		resConfig.packages(ApiListingResource.class.getPackage().getName());
 		resConfig.packages(SwaggerSerializers.class.getPackage().getName());

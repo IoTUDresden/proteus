@@ -1,20 +1,30 @@
 package eu.vicci.process.client.rest;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import eu.vicci.process.client.core.UploadAndDeployRequest;
 import eu.vicci.process.engine.core.IProcessInfo;
 import eu.vicci.process.engine.core.IProcessInstanceInfo;
+import eu.vicci.process.model.sofiainstance.DataTypeInstance;
+import eu.vicci.process.model.sofiainstance.ProcessInstance;
+import eu.vicci.process.model.sofiainstance.ProcessStepInstance;
+import eu.vicci.process.model.sofiainstance.SofiaInstanceFactory;
+import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.core.IJSONProcessStepInstance;
+import eu.vicci.process.model.util.serialization.jsontypeinstances.JSONTypeInstanceSerializer;
+import eu.vicci.process.model.util.serialization.jsontypeinstances.core.IJSONTypeInstance;
 import feign.Feign;
 
 /**
- * Implementation of a REST Client which can access the PROtEUS REST API.
- * This backs a  <a href="https://github.com/OpenFeign/feign">Feign Rest Client</a>
+ * Implementation of a REST Client which can access the PROtEUS REST API. This
+ * backs a <a href="https://github.com/OpenFeign/feign">Feign Rest Client</a>
  * 
  * @author andre
  */
 public class ProteusRestClient {
-//	private static final Logger LOG = LoggerFactory.getLogger(ProteusRestClient.class);
+	// private static final Logger LOG =
+	// LoggerFactory.getLogger(ProteusRestClient.class);
 	private final RestClientInternal restClient;
 
 	public ProteusRestClient() {
@@ -48,11 +58,11 @@ public class ProteusRestClient {
 	public List<? extends IProcessInfo> listDeployedProcesses() {
 		return restClient.listDeployedProcesses();
 	}
-	
+
 	/**
 	 * listing deployed process instances
 	 */
-	public List<? extends IProcessInstanceInfo> listDeployedProcessInstances(){
+	public List<? extends IProcessInstanceInfo> listDeployedProcessInstances() {
 		return restClient.listDeployedProcessInstances();
 	}
 
@@ -68,12 +78,13 @@ public class ProteusRestClient {
 		UploadAndDeployRequest request = new UploadAndDeployRequest();
 		request.setProcessdocument(processDocument);
 		request.setOverrideExisting(overrideExisting);
-		return restClient.uploadAndDeploy(request);	
+		return restClient.uploadAndDeploy(request);
 	}
-	
+
 	/**
 	 * 
-	 * Same as {@link #uploadAndDeploy(String, boolean)} with args (processDocument, true).
+	 * Same as {@link #uploadAndDeploy(String, boolean)} with args
+	 * (processDocument, true).
 	 * 
 	 * @param processDocument
 	 *            the process as string
@@ -92,15 +103,56 @@ public class ProteusRestClient {
 	 * @return instance id or null if failed
 	 */
 	public String deployProcessInstance(String processId) {
-		return restClient.deployProcessInstance(processId);		
+		return restClient.deployProcessInstance(processId);
 	}
-	
+
 	/**
 	 * @param processInstanceId
 	 *            the instance id of the process which should be started
 	 */
-	public void startProcessInstance(String processInstanceId){
+	public void startProcessInstance(String processInstanceId) {
 		restClient.startProcessInstance(processInstanceId);
+	}
+
+	/**
+	 * 
+	 * @param processInstanceId
+	 *            the instance id of the process which should be started
+	 * @param inputParameters
+	 *            the input parameters as map, with the instance id of the
+	 *            datatype as key
+	 */
+	public void startProcessInstance(String processInstanceId, Map<String, DataTypeInstance> inputParameters) {
+		Map<String, IJSONTypeInstance> convertedInput = convertInputParameter(inputParameters);
+		if(convertedInput == null)
+			restClient.startProcessInstance(processInstanceId);
+		else
+			restClient.startProcessInstance(processInstanceId, convertedInput);
+	}
+	
+	/**
+	 * Get the process step instance.
+	 * 
+	 * @param processInstanceId
+	 *            The instance id of the root process.
+	 * @return {@link ProcessStepInstance}
+	 */
+	public ProcessInstance getProcessStepInstance(String processInstanceId){
+		IJSONProcessStepInstance json = restClient.getProcessStepInstance(processInstanceId);
+		ProcessInstance processInstance = (ProcessInstance)json.makeProcessStepInstance(SofiaInstanceFactory.eINSTANCE);
+		return processInstance;
+	}
+
+	private static Map<String, IJSONTypeInstance> convertInputParameter(Map<String, DataTypeInstance> inputParameters) {
+		if (inputParameters == null)
+			return null;
+		Map<String, IJSONTypeInstance> convertedInput = new HashMap<String, IJSONTypeInstance>();
+		for (String dtId : inputParameters.keySet()) {
+			DataTypeInstance dti = inputParameters.get(dtId);
+			IJSONTypeInstance json = JSONTypeInstanceSerializer.makeJSONTypeInstance(dti);
+			convertedInput.put(dtId, json);
+		}
+		return convertedInput;
 	}
 
 }

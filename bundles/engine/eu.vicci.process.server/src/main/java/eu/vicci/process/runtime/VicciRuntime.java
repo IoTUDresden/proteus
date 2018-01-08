@@ -15,6 +15,10 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectReader;
+
 import eu.vicci.process.client.core.IConfigurationReader;
 import eu.vicci.process.devices.util.OpenHabListener;
 import eu.vicci.process.distribution.manager.DistributionManager;
@@ -66,6 +70,11 @@ public class VicciRuntime {
 			LOG.error("failed to start vicci runtime");
 			return;
 		}
+		
+		ObjectMapper m = new ObjectMapper();
+		ObjectReader reader = m.reader();
+		Version version = reader.version();
+		LOG.info("Jackson Version:\n{}", version.toString());		
 		
 		LOG.info("vicci runtime started as {}", runtime.getRuntimeType());
 	}	
