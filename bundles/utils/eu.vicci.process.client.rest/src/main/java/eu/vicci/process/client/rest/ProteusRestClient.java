@@ -11,6 +11,7 @@ import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
 import eu.vicci.process.model.sofiainstance.ProcessStepInstance;
 import eu.vicci.process.model.sofiainstance.SofiaInstanceFactory;
+import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.core.IJSONProcessStepInstance;
 import eu.vicci.process.model.util.serialization.jsontypeinstances.JSONTypeInstanceSerializer;
 import eu.vicci.process.model.util.serialization.jsontypeinstances.core.IJSONTypeInstance;
@@ -119,8 +120,8 @@ public class ProteusRestClient {
 	 * @param processInstanceId
 	 *            the instance id of the process which should be started
 	 * @param inputParameters
-	 *            the input parameters as map, with the instance id of the
-	 *            datatype as key
+	 *            the input parameters as map, with the id of the
+	 *            datatype as key (not instance id!)
 	 */
 	public void startProcessInstance(String processInstanceId, Map<String, DataTypeInstance> inputParameters) {
 		Map<String, IJSONTypeInstance> convertedInput = convertInputParameter(inputParameters);
@@ -141,6 +142,15 @@ public class ProteusRestClient {
 		IJSONProcessStepInstance json = restClient.getProcessStepInstance(processInstanceId);
 		ProcessInstance processInstance = (ProcessInstance)json.makeProcessStepInstance(SofiaInstanceFactory.eINSTANCE);
 		return processInstance;
+	}
+	
+	/**
+	 * Gets the most recent state change message for the given process.
+	 * @param processInstanceId
+	 * @return {@link IStateChangeMessage}
+	 */
+	public IStateChangeMessage getRecentState(String processInstanceId){
+		return restClient.getRecentState(processInstanceId);
 	}
 
 	private static Map<String, IJSONTypeInstance> convertInputParameter(Map<String, DataTypeInstance> inputParameters) {

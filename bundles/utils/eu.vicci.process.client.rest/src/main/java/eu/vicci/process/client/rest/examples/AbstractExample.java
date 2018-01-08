@@ -41,6 +41,7 @@ public abstract class AbstractExample {
 	
 	protected void enableWaitForInstance(String processInstanceId){
 		this.processInstanceId = processInstanceId;	
+		waitForProcess = new CountDownLatch(1);
 		runSse();
 	}
 	
@@ -67,7 +68,7 @@ public abstract class AbstractExample {
 		return doc;
 	}
 	
-	private void runSse() {
+	private void runSse() {		
 		sseClient = createSseClient();
 		String uri = host + ":" + port + "/events/statechanges";
 		if(!uri.startsWith("http"))

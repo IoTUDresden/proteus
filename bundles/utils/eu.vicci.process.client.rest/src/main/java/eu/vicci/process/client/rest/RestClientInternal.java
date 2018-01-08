@@ -6,6 +6,8 @@ import java.util.Map;
 import eu.vicci.process.client.core.UploadAndDeployRequest;
 import eu.vicci.process.model.util.ProcessInfo;
 import eu.vicci.process.model.util.ProcessInstanceInfo;
+import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
+import eu.vicci.process.model.util.messages.StateChangeMessage;
 import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.JSONProcessStepInstance;
 import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.core.IJSONProcessStepInstance;
 import eu.vicci.process.model.util.serialization.jsontypeinstances.core.IJSONTypeInstance;
@@ -58,9 +60,10 @@ public interface RestClientInternal {
 	 * @param processInstanceId
 	 *            the instance id of the process which should be started
 	 * @param inputParameters
-	 *            the input parameters as map, with the instance id of the
-	 *            datatype as key
+	 *            the input parameters as map, with the id of the
+	 *            datatype as key (not instance id!)
 	 */
+	@Headers("Content-Type: application/json")
 	@RequestLine("POST /rest/processinstances/{processInstanceId}")
 	void startProcessInstance(@Param("processInstanceId") String processInstanceId,
 			Map<String, IJSONTypeInstance> inputParameters);
@@ -74,5 +77,13 @@ public interface RestClientInternal {
 	 */
 	@RequestLine("GET /rest/processinstances/{processInstanceId}")
 	JSONProcessStepInstance getProcessStepInstance(@Param("processInstanceId") String processInstanceId);
+	
+	/**
+	 * Gets the most recent state change message for the given process.
+	 * @param processInstanceId
+	 * @return {@link IStateChangeMessage}
+	 */
+	@RequestLine("GET /rest/processinstances/recentstate/{processInstanceId}")
+	StateChangeMessage getRecentState(@Param("processInstanceId") String processInstanceId);
 
 }

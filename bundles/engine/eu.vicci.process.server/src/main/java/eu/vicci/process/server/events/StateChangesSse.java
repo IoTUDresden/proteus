@@ -37,11 +37,6 @@ public class StateChangesSse {
 	public EventOutput getStateChangesForInstance(@PathParam("processInstanceId") final String processInstanceId)
 			throws NotFoundErrorException, IOException 
 	{
-//		TODO Not sure about this one. Error if instance is not already exists?
-//		ProcessInstance processInstance = processManager.getProcessInstanceInfos(processInstanceId);
-//		if (processInstance == null)
-//			throw new NotFoundErrorException(ERR_PROCESS_INSTANCE_WITH_ID_NOT_FOUND, processInstanceId);
-		
 		final EventOutput event = new StateChangeEventOutput(processInstanceId);		
 		broadcaster.add(event);
 		return event;

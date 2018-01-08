@@ -36,13 +36,13 @@ public class TriggeredEventInstanceImplCustom extends
 		triggeredEventWorker = new TriggeredEventWorker();
 		String eplStmt = ((TriggeredEvent)getProcessStepType()).getEPLStatement();
 		
-		//TODO use startParameter for replacing the placeholder in the epl statement
 		List<EndDataPortInstance> endports = ports.stream()
 				.filter(p -> p instanceof EndDataPortInstance)
 				.map(p -> (EndDataPortInstance)p)
 				.collect(Collectors.toList());
 		
-		//This blocks till the event is received
+		//This blocks till the event is received. 
+		//Placeholders in eplStmt are replaced with values from startparameters
 		returnValues = triggeredEventWorker.work(eplStmt, startParameter, endports);
 	}
 	

@@ -1,18 +1,15 @@
 package eu.vicci.process.client.rest.examples;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import eu.vicci.process.client.rest.ProteusRestClient;
-import eu.vicci.process.model.sofia.EndDataPort;
 import eu.vicci.process.model.sofiainstance.DataPortInstance;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
-import eu.vicci.process.model.sofiainstance.EndDataPortInstance;
 import eu.vicci.process.model.sofiainstance.IntegerTypeInstance;
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
 import eu.vicci.process.model.sofiainstance.StringTypeInstance;
+import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 
 public class RunWithInputParameter extends AbstractExample {
 
@@ -44,12 +41,12 @@ public class RunWithInputParameter extends AbstractExample {
 		client.startProcessInstance(instanceId, inputParameters);
 		
 		// this will block, till process is finished
-		waitForProcess();		
+		waitForProcess();				
 		
-		// we get the finished instance
-		ProcessInstance finishedInstance = client.getProcessStepInstance(instanceId);	
+		// after execution we can get the final values e.g. with the final state message
+		IStateChangeMessage finalMessage = client.getRecentState(instanceId);	
 		
-		printAllEndportData(finishedInstance);
+		printAllEndportData(finalMessage);
 	}
 
 	private Map<String, DataTypeInstance> createInputParams(ProcessInstance processInstance) {
@@ -71,25 +68,21 @@ public class RunWithInputParameter extends AbstractExample {
 		stringInstance.setValue("Hello World");
 		intInstance.setValue(12345);
 		
-		// add to the map, with the datatype instance id as key
+		// add to the map, with the datatype id (not instance id!) as key
 		Map<String, DataTypeInstance> params = new HashMap<>();
-		params.put(stringInstance.getInstanceId(), stringInstance);
-		params.put(intInstance.getInstanceId(), intInstance);
+		params.put(stringInstance.getTypeId(), stringInstance);
+		params.put(intInstance.getTypeId(), intInstance);
 		
 		return params;
 	}
 	
-	private void printAllEndportData(ProcessInstance processInstance){
+	private void printAllEndportData(IStateChangeMessage message){
 		System.out.println("\nFinished Instance has following values:\n");
-		List<EndDataPortInstance> endDataPorts = processInstance.getPorts().stream()
-				.filter(p -> p instanceof EndDataPort)
-				.map(p -> (EndDataPortInstance)p)
-				.collect(Collectors.toList());
-		
-		endDataPorts.stream()
+		message.getEndDataPorts().values().stream()
 		.forEach(p -> 
-			System.out.println(p.getName() + ":  " + p.getDataInstance().getValueAsObject()));
-		
+			System.out.println(p.getDataTypeInstance().getDataType().getName() 
+					+ ":  " 
+					+ p.getDataTypeInstance().getValueString()));		
 	}
 
 }

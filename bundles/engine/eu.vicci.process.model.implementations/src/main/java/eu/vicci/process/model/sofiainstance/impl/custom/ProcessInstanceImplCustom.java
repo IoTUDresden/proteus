@@ -15,7 +15,7 @@ public class ProcessInstanceImplCustom extends ProcessStepInstanceImplCustom imp
 
 	@Override
 	public boolean start(Map<String, DataTypeInstance> parameters) {
-		logInfo("Prozess start");
+		logInfo("Process start");
 		if (parameters != null && !parameters.isEmpty())
 			activateStartDataPortsWithParamter(parameters);
 		else

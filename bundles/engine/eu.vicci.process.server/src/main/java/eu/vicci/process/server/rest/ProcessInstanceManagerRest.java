@@ -19,9 +19,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
-
 import eu.vicci.process.engine.core.IProcessInstanceInfo;
 import eu.vicci.process.engine.core.IProcessManager;
 import eu.vicci.process.model.sofiainstance.DataTypeInstance;
