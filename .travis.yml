@@ -13,17 +13,17 @@ jdk:
   - oraclejdk8
 
 script: 
-  - if [ [$TRAVIS_BRANCH == 'master'] && ["$TRAVIS_PULL_REQUEST" == "false"] ]; then 
-      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD     
-      mvn deploy; 
-    else 
-      mvn package; 
-    fi
+  - mvn deploy
+  - docker build -t vicci-runtime .
 
 deploy:
   - provider: script
     skip_cleanup: true
-    script: sh $TRAVIS_BUILD_DIR/deploy.sh
+    script: 
+      - sh $TRAVIS_BUILD_DIR/deploy.sh
+      - cd $TRAVIS_BUILD_DIR/products/proteus
+      - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD 
+      - docker push iotudresden/vicci-runtime
     on:
       branch: master
 
