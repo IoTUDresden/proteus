@@ -12,6 +12,10 @@ vironments. Journal of Computational Science, 10:137 – 148.
 
 Seiger, R., Huber, S., Schlegel, T., (2016), Toward an execution system for self-healing workflows in cyber-physical systems. Software & Systems Modeling, pages 1–22.
 
+# usage
+
+See the [wiki](https://github.com/IoTUDresden/proteus/wiki) for information how to use PROtEUS.
+
 # ide setup
 
 - download the Eclipse Installer from <https://wiki.eclipse.org/Eclipse_Installer>
