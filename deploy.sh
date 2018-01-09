@@ -100,4 +100,5 @@ git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" gh-pages > /dev/null 2>
 
 echo "deploying docker image..."
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD 
-docker push iotudresden/vicci-runtime
+docker tag vicci-runtime iotudresden/vicci-runtime:latest
+docker push iotudresden/vicci-runtime:latest
