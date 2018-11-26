@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target includeMode="feature" name="Process Engine Platform" sequenceNumber="128">
+<?pde version="3.8"?><target includeMode="feature" name="Process Engine Platform" sequenceNumber="133">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.graphiti.feature.feature.group" version="0.12.1.v20150916-0905"/>
@@ -79,7 +79,7 @@
 <repository location="https://iotudresden.github.io/proteus-deps/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.e4.tools.model.spy.feature.feature.group" version="0.1.0.v20171217-2215"/>
+<unit id="org.eclipse.e4.tools.model.spy.feature.feature.group" version="0.1.100.v20181023-1826"/>
 <repository location="http://download.eclipse.org/e4/snapshots/org.eclipse.e4.tools/latest/"/>
 </location>
 </locations>
