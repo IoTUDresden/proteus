@@ -97,43 +97,43 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
-			<version>9.2.14.v20151106</version>
+			<version>9.4.7.v20170914</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-servlet</artifactId>
-			<version>9.2.14.v20151106</version>
+			<version>9.4.7.v20170914</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.jersey.core</groupId>
 			<artifactId>jersey-server</artifactId>
-			<version>2.25.1</version>
+			<version>2.27</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-servlet-core</artifactId>
-			<version>2.25.1</version>
+			<version>2.27</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-jetty-http</artifactId>
-			<version>2.25.1</version>
+			<version>2.27</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-sse</artifactId>
-			<version>2.25.1</version>
+			<version>2.27</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
 			<artifactId>jersey-container-servlet</artifactId>
-			<version>2.25.1</version>
+			<version>2.27</version>
 		</dependency>
 
 		<!-- <dependency> <groupId>org.glassfish.jersey.media</groupId> <artifactId>jersey-media-moxy</artifactId> 
@@ -142,7 +142,7 @@
 		<dependency>
 			<groupId>org.glassfish.jersey.media</groupId>
 			<artifactId>jersey-media-json-jackson</artifactId>
-			<version>2.25.1</version>
+			<version>2.27</version>
 		</dependency>
 
 		<dependency>
@@ -158,5 +158,15 @@
 			<version>1.5.17</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-common</artifactId>
+			<version>2.27</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>2.27</version>
+		</dependency>
 	</dependencies>
 </project>

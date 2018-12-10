@@ -8,12 +8,11 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
 import org.glassfish.jersey.jackson.JacksonFeature;
+import org.glassfish.jersey.jackson.internal.jackson.jaxrs.json.JacksonJsonProvider;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 import eu.vicci.process.server.events.StateChangesSse;
 import eu.vicci.process.server.exception.BadRequestException;
@@ -82,6 +81,7 @@ public class ProteusHttpServer implements Runnable {
 		ResourceHandler httpHandler = new ResourceHandler();
 		httpHandler.setBaseResource(Resource.newClassPathResource("web"));
 		httpHandler.setWelcomeFiles(new String[] { "index.html" });
+		httpHandler.setRedirectWelcome(true);
 		return httpHandler;
 	}
 
