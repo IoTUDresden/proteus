@@ -159,5 +159,5 @@ public class OpenHabListener {
 		return value;		
 	}
 	
-	private static final String OH_DecimalType = "DecimalType";
+	private static final String OH_DecimalType = "Decimal";
 }
