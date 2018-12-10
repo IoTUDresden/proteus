@@ -158,7 +158,7 @@ public class OpenHabEventProvider {
 		return eventName.substring(0, tmp);
 	}
 
-	private static <T extends OpenHabEvent> T ohEventFromInbound(InboundEvent event, Class<T> clazz) {
+	private static <T extends OpenHabEvent> T ohEventFromInbound(InboundEvent event, Class<T> clazz) {		
 		return OpenHabEvent.fromJson(event.readData(String.class), clazz);
 	}
 
