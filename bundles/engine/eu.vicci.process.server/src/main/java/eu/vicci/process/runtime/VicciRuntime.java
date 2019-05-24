@@ -3,6 +3,9 @@ package eu.vicci.process.runtime;
 import java.io.File;
 import java.util.Map;
 
+import javax.jmdns.ServiceEvent;
+import javax.jmdns.ServiceListener;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
@@ -173,6 +176,24 @@ public class VicciRuntime {
 		if(configReader.deployExistingProcessModels())
 			processManagerPublic.loadExistingModels();
 	}
+	
+	private ServiceListener serviceListener = new ServiceListener(){
+		@Override
+		public void serviceAdded(ServiceEvent arg0) {
+			// TODO Auto-generated method stub			
+		}
+
+		@Override
+		public void serviceRemoved(ServiceEvent arg0) {
+			
+		}
+
+		@Override
+		public void serviceResolved(ServiceEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}		
+	};
 
 	/**
 	 * starts router and server client if this is a SuperPeer. otherwise only the server client is started, 
