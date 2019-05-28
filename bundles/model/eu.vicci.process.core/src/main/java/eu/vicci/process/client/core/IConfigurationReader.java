@@ -135,5 +135,12 @@ public interface IConfigurationReader {
 	 * @return The port for the HTTP server. Default is 8082
 	 */
 	int getHttpPort();
+	
+	/**
+	 * Updates openhab uri e.g. if found by discovery service.
+	 * @param uri
+	 */
+	void updateOpenHabUri(String uri);
+	
 
 }

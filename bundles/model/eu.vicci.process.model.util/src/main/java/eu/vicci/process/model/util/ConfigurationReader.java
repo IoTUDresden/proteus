@@ -250,5 +250,10 @@ public class ConfigurationReader implements IConfigurationReader {
 	@Override
 	public int getHttpPort() {
 		return httpPort;
+	}
+
+	@Override
+	public void updateOpenHabUri(String uri) {
+		openHabUri = uri;		
 	}	
 }

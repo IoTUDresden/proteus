@@ -3,7 +3,7 @@ package eu.vicci.process.runtime;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class Activator implements BundleActivator{
+class Activator implements BundleActivator{
 	private VicciRuntime vicciRuntime;
 
 	@Override

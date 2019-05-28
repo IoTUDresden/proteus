@@ -1,8 +1,12 @@
 package eu.vicci.process.runtime;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
+import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
 import javax.jmdns.ServiceListener;
 
@@ -23,7 +27,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 
 import eu.vicci.process.client.core.IConfigurationReader;
-import eu.vicci.process.devices.util.OpenHabListener;
 import eu.vicci.process.distribution.manager.DistributionManager;
 import eu.vicci.process.engine.ProcessManagerPublic;
 import eu.vicci.process.engine.core.IProcessManager;
@@ -33,6 +36,7 @@ import eu.vicci.process.model.sofiainstance.SofiaInstancePackage;
 import eu.vicci.process.model.sofiainstance.impl.custom.SofiaInstanceFactoryImplCustom;
 import eu.vicci.process.model.sofiainstance.util.LifeCycleManager;
 import eu.vicci.process.model.util.ConfigurationReader;
+import eu.vicci.process.model.util.configuration.ConfigProperties;
 import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.osgi.OSGiRuntime;
 import eu.vicci.process.server.http.ProteusHttpServer;
@@ -43,60 +47,60 @@ import ws.wamp.jawampa.ApplicationError;
 
 public class VicciRuntime {
 	private static final Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
-	private static final String PATH_MODEL = "processes/models/";	
+	private static final String PATH_MODEL = "processes/models/";
+	private static final String OPENHAB_MDNS_NAME = "openhab";
+	private static final String OPENHAB_MDNS_TYPE = "_openhab-server._tcp.";
 
 	/**
-	 * @param args 
+	 * @param args
 	 */
-	public static void main(String[] args) {		
-		//https://commons.apache.org/proper/commons-cli/usage.html
+	public static void main(String[] args) throws IOException {
+		// https://commons.apache.org/proper/commons-cli/usage.html
 		Options options = prepareOptions();
 		CommandLine cmd = parseArguments(args, options);
-		if(cmd == null) return;
-		
-		if(cmd.hasOption("help")){
+		if (cmd == null)
+			return;
+
+		if (cmd.hasOption("help")) {
 			HelpFormatter help = new HelpFormatter();
-			help.printHelp("vicci-runtime", options);	
+			help.printHelp("vicci-runtime", options);
 			return;
 		}
-			
-		
-		LOG.info("starting vicci runtime...");			
+
+		LOG.info("starting vicci runtime...");
 		VicciRuntime runtime = new VicciRuntime();
-		
-		if(cmd.hasOption("container")){	
+
+		if (cmd.hasOption("container")) {
 			runtime.readConfigFromEnv = true;
 		}
-		
+
 		boolean started = runtime.start();
-		if(!started){
+		if (!started) {
 			LOG.error("failed to start vicci runtime");
 			return;
 		}
-		
+
 		ObjectMapper m = new ObjectMapper();
 		ObjectReader reader = m.reader();
 		Version version = reader.version();
-		LOG.info("Jackson Version:\n{}", version.toString());		
-		
+		LOG.info("Jackson Version:\n{}", version.toString());
+
 		LOG.info("vicci runtime started as {}", runtime.getRuntimeType());
-	}	
-	
-	private static CommandLine parseArguments(String[] args, Options options){
+	}
+
+	private static CommandLine parseArguments(String[] args, Options options) {
 		CommandLineParser parser = new DefaultParser();
 		try {
-			 return parser.parse(options, args);
+			return parser.parse(options, args);
 		} catch (ParseException e) {
 			LOG.error(e.getLocalizedMessage());
-		}		
-		return null;		
+		}
+		return null;
 	}
-	
-	private static Options prepareOptions(){
-		Option optionContainer = Option.builder("container")
-				.desc("To tell proteus, it is running in a container. "
-						+ "PROtEUS will try to get all config values from the environment.")
-				.build();
+
+	private static Options prepareOptions() {
+		Option optionContainer = Option.builder("container").desc("To tell proteus, it is running in a container. "
+				+ "PROtEUS will try to get all config values from the environment.").build();
 		Option optionHelp = Option.builder("help").desc("Show this help.").build();
 		Options options = new Options();
 		options.addOption(optionHelp);
@@ -106,42 +110,54 @@ public class VicciRuntime {
 
 	private SuperPeer server;
 	private IProcessManager processManagerPublic;
-	private boolean readConfigFromEnv = false; 
+	private boolean readConfigFromEnv = false;
 	private ProteusHttpServer httpServer;
-	
-	public VicciRuntime(){	
+	private CountDownLatch waitForOHAddress;
+
+	public VicciRuntime() {
 		processManagerPublic = new ProcessManagerPublic();
 		RuntimeContext.getInstance().registerProcessManager(processManagerPublic);
 	}
-	
-	public boolean start(){		
+
+	public boolean start() throws IOException {
 		IConfigurationReader configReader;
-		if(readConfigFromEnv) configReader = new ConfigurationReader();
-		else  configReader = new ConfigurationReader("server.conf");
-		
+		if (readConfigFromEnv)
+			configReader = new ConfigurationReader();
+		else
+			configReader = new ConfigurationReader("server.conf");
+
 		ConfigurationManager.getInstance().updateFromConfigReader(configReader);
-		
-		if(!configReader.deployExistingProcessModels())
-			deleteExistingModels();		
-		
+		waitForOHAddress = new CountDownLatch(1);
+
+		if (!configReader.deployExistingProcessModels())
+			deleteExistingModels();
+
+		// this block will wait, till the openhab address was found if config
+		// was set to auto
+		try {
+			autoResolveOpenHabIfEnabled(configReader);
+		} catch (Exception e) {
+			LOG.error("failed autoresolving openhab, all steps using openhab will probably fail: {}", e.getMessage());
+		}
+
 		initializeSofiaModel();
 		registerListener(configReader);
 		boolean isWebSocketServerStarted = startWebSocketServer(configReader);
 		startHttpServer(configReader);
-		
+
 		DistributionManager.getInstance().setPeerProfile(server.getPeerProfile());
-		
-		//init process execution system
+
+		// init process execution system
 		LifeCycleManager.INSTANCE.getClass();
-		
+
 		return isWebSocketServerStarted;
 	}
-	
-	private String getRuntimeType(){
+
+	private String getRuntimeType() {
 		return server.getClass().getSimpleName();
 	}
 
-	public void stop(){
+	public void stop() {
 		server.stop();
 	}
 
@@ -149,7 +165,7 @@ public class VicciRuntime {
 		// Initialize the models
 		SofiaPackage.eINSTANCE.eClass();
 		SofiaInstancePackage.eINSTANCE.eClass();
-		//PictogramsPackage.eINSTANCE.eClass();
+		// PictogramsPackage.eINSTANCE.eClass();
 
 		Resource.Factory.Registry reg = Resource.Factory.Registry.INSTANCE;
 		Map<String, Object> m = reg.getExtensionToFactoryMap();
@@ -164,46 +180,68 @@ public class VicciRuntime {
 		if (configReader.startOsgiRuntime())
 			OSGiRuntime.getInstance().start();
 
+		// FIXME depending on the discovery mode
 		// Start OpenHabListener
-		if(configReader.startOpenHabListener())
-			OpenHabListener.getInstance().start();
+		// if(configReader.startOpenHabListener())
+		// OpenHabListener.getInstance().start();
 
 		// Start CEP Engine
-		if(configReader.startCepEngine())
+		if (configReader.startCepEngine())
 			EsperEngine.getInstance();
 
 		// Deploy existing process models
-		if(configReader.deployExistingProcessModels())
+		if (configReader.deployExistingProcessModels())
 			processManagerPublic.loadExistingModels();
 	}
-	
-	private ServiceListener serviceListener = new ServiceListener(){
+
+	private void autoResolveOpenHabIfEnabled(IConfigurationReader configReader) throws Exception {
+		if ("auto".equals(configReader.getOpenHabUri())) {
+			LOG.info("searching for openhab...");
+			JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+			jmdns.addServiceListener("_openhab-server._tcp.local.", ohServiceListener);
+			waitForOHAddress.await();
+			//update this config reader with the new global setting
+			//there is no longer the auto option set for oh uri
+			configReader.updateOpenHabUri(ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.OPENHAB_URI));
+		}
+	}
+
+	private ServiceListener ohServiceListener = new ServiceListener() {
 		@Override
-		public void serviceAdded(ServiceEvent arg0) {
-			// TODO Auto-generated method stub			
+		public void serviceAdded(ServiceEvent serviceEvent) {
 		}
 
 		@Override
-		public void serviceRemoved(ServiceEvent arg0) {
-			
+		public void serviceRemoved(ServiceEvent serviceEvent) {
 		}
 
 		@Override
-		public void serviceResolved(ServiceEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}		
+		public void serviceResolved(ServiceEvent serviceEvent) {
+			try {
+				String completeAddress = "http://" + serviceEvent.getInfo().getHostAddresses()[0] + ":"
+						+ serviceEvent.getInfo().getPort();
+				ConfigurationManager.getInstance().OverrideConfig(ConfigProperties.OPENHAB_URI, completeAddress);
+				LOG.info("openhab found on '{}'", completeAddress);
+				waitForOHAddress.countDown();
+			} catch (Exception e) {
+				LOG.error("unable to resolve openhab address {}", e.getMessage());
+				LOG.error("steps using openhab will probably fail");
+				waitForOHAddress.countDown();
+			}
+		}
 	};
 
 	/**
-	 * starts router and server client if this is a SuperPeer. otherwise only the server client is started, 
-	 * which connects to the router on the SuperPeer.
+	 * starts router and server client if this is a SuperPeer. otherwise only
+	 * the server client is started, which connects to the router on the
+	 * SuperPeer.
+	 * 
 	 * @param configReader
 	 * @return
 	 */
 	private boolean startWebSocketServer(IConfigurationReader configReader) {
 		try {
-			if(configReader.getSuperPeerIp() == null)
+			if (configReader.getSuperPeerIp() == null)
 				server = new SuperPeer(processManagerPublic, configReader);
 			else
 				server = new Peer(processManagerPublic, configReader, configReader.getSuperPeerIp());
@@ -215,22 +253,23 @@ public class VicciRuntime {
 		}
 		return false;
 	}
-	
-	private void startHttpServer(IConfigurationReader configReader){
+
+	private void startHttpServer(IConfigurationReader configReader) {
 		httpServer = new ProteusHttpServer(configReader.getHttpPort());
 		Thread t = new Thread(httpServer);
 		t.setName("ProteusHttpServerThread");
 		t.setDaemon(true);
 		t.start();
 	}
-	
-	private void deleteExistingModels(){
+
+	private void deleteExistingModels() {
 		File file = new File(PATH_MODEL);
-		if(!file.exists()) return;
+		if (!file.exists())
+			return;
 		for (File tmpFile : file.listFiles()) {
-			if(tmpFile.isFile())
+			if (tmpFile.isFile())
 				tmpFile.delete();
-		}		
+		}
 	}
 
 }
