@@ -48,8 +48,7 @@ import ws.wamp.jawampa.ApplicationError;
 public class VicciRuntime {
 	private static final Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
 	private static final String PATH_MODEL = "processes/models/";
-	private static final String OPENHAB_MDNS_NAME = "openhab";
-	private static final String OPENHAB_MDNS_TYPE = "_openhab-server._tcp.";
+	private static final String OPENHAB_MDNS_TYPE = "_openhab-server._tcp.local.";
 
 	/**
 	 * @param args
@@ -198,7 +197,7 @@ public class VicciRuntime {
 		if ("auto".equals(configReader.getOpenHabUri())) {
 			LOG.info("searching for openhab...");
 			JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
-			jmdns.addServiceListener("_openhab-server._tcp.local.", ohServiceListener);
+			jmdns.addServiceListener(OPENHAB_MDNS_TYPE, ohServiceListener);
 			waitForOHAddress.await();
 			//update this config reader with the new global setting
 			//there is no longer the auto option set for oh uri
