@@ -41,7 +41,7 @@
 	</logger>
 
 	<logger name="javax.jmdns">
-		<level value="warn" />
+		<level value="error" />
 	</logger>
 
 	<root>

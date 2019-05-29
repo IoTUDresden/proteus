@@ -64,6 +64,7 @@ public class HumanTaskInvokeWorker implements HumanTaskMessageManagerListener {
 
 		StateBase oldState = hti.getCurrentState();
 		hti.setCurrentState(new WaitingState(hti));
+		HumanTaskMessageManager.getInstance().AddOpenRequest(humanTaskRequest);
 		messageQueue.addMessage(humanTaskRequest);
 
 		try {
@@ -87,6 +88,7 @@ public class HumanTaskInvokeWorker implements HumanTaskMessageManagerListener {
 		if (!humanTaskInstanceId.equals(response.getHumanTaskInstanceId()))
 			return;
 		receivedResponse = response;
+		HumanTaskMessageManager.getInstance().RemoveOpenRequestIfStillPresent(humanTaskInstanceId);
 		HumanTaskMessageManager.getInstance().removeHumanTaskMessageManagerListener(this);
 		responseReceived.countDown();
 	}
