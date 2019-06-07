@@ -8,6 +8,7 @@ import java.util.concurrent.CountDownLatch;
 
 import javax.jmdns.JmDNS;
 import javax.jmdns.ServiceEvent;
+import javax.jmdns.ServiceInfo;
 import javax.jmdns.ServiceListener;
 
 import org.apache.commons.cli.CommandLine;
@@ -41,6 +42,7 @@ import eu.vicci.process.model.util.configuration.ConfigurationManager;
 import eu.vicci.process.osgi.OSGiRuntime;
 import eu.vicci.process.server.http.ProteusHttpServer;
 import eu.vicci.process.server.util.RuntimeContext;
+import eu.vicci.process.server.util.Util;
 import eu.vicci.process.wampserver.Peer;
 import eu.vicci.process.wampserver.SuperPeer;
 import ws.wamp.jawampa.ApplicationError;
@@ -132,8 +134,9 @@ public class VicciRuntime {
 		if (!configReader.deployExistingProcessModels())
 			deleteExistingModels();
 
-		JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
-		jmdns.registerServiceType(PROTEUS_MDNS_TYPE);
+		JmDNS jmdns = JmDNS.create(getAddressByFilter());
+        ServiceInfo serviceInfo = ServiceInfo.create(PROTEUS_MDNS_TYPE, "proteus", 8082, "path=index.html");
+		jmdns.registerService(serviceInfo);
 		
 		// this block will wait, till the openhab address was found if config
 		// was set to auto
@@ -154,6 +157,26 @@ public class VicciRuntime {
 		LifeCycleManager.INSTANCE.getClass();
 
 		return isWebSocketServerStarted;
+	}
+	
+	private InetAddress getAddressByFilter() throws IOException{
+		String ip = Util.getLocalIpWithFilter();
+		InetAddress out;
+		if(ip == null){
+			LOG.error("Failed to get ip via ip filter. Using first localhost ip");
+			out = InetAddress.getLocalHost();
+		}
+		else{
+			String[] split = ip.split("\\.");
+			out = InetAddress.getByAddress(
+					new byte[]{
+							(byte)Integer.parseInt(split[0]),
+							(byte)Integer.parseInt(split[1]),
+							(byte)Integer.parseInt(split[2]),
+							(byte)Integer.parseInt(split[3])});
+		}
+		LOG.info("using host ip for network discovery: '{}'", out.getHostAddress());
+		return out;
 	}
 
 	private String getRuntimeType() {
