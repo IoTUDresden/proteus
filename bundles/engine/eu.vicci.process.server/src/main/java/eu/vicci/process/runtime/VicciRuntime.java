@@ -49,6 +49,7 @@ public class VicciRuntime {
 	private static final Logger LOG = LoggerFactory.getLogger(VicciRuntime.class);
 	private static final String PATH_MODEL = "processes/models/";
 	private static final String OPENHAB_MDNS_TYPE = "_openhab-server._tcp.local.";
+	private static final String PROTEUS_MDNS_TYPE = "_proteus._tcp.local.";
 
 	/**
 	 * @param args
@@ -131,10 +132,13 @@ public class VicciRuntime {
 		if (!configReader.deployExistingProcessModels())
 			deleteExistingModels();
 
+		JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
+		jmdns.registerServiceType(PROTEUS_MDNS_TYPE);
+		
 		// this block will wait, till the openhab address was found if config
 		// was set to auto
 		try {
-			autoResolveOpenHabIfEnabled(configReader);
+			autoResolveOpenHabIfEnabled(jmdns, configReader);
 		} catch (Exception e) {
 			LOG.error("failed autoresolving openhab, all steps using openhab will probably fail: {}", e.getMessage());
 		}
@@ -193,10 +197,9 @@ public class VicciRuntime {
 			processManagerPublic.loadExistingModels();
 	}
 
-	private void autoResolveOpenHabIfEnabled(IConfigurationReader configReader) throws Exception {
+	private void autoResolveOpenHabIfEnabled(JmDNS jmdns, IConfigurationReader configReader) throws Exception {
 		if ("auto".equals(configReader.getOpenHabUri())) {
 			LOG.info("searching for openhab...");
-			JmDNS jmdns = JmDNS.create(InetAddress.getLocalHost());
 			jmdns.addServiceListener(OPENHAB_MDNS_TYPE, ohServiceListener);
 			waitForOHAddress.await();
 			//update this config reader with the new global setting
