@@ -118,7 +118,7 @@ public class HumanTaskMessageManager {
 	 * Removes the open request if still present.
 	 */
 	public void RemoveOpenRequestIfStillPresent(String requestInstanceId) {
-		if(!openRequests.containsKey(requestInstanceId)){
+		if(openRequests.containsKey(requestInstanceId)){
 			openRequests.remove(requestInstanceId);
 		}
 	}

@@ -15,19 +15,19 @@ public class HumanTaskExample extends AbstractExample {
 	@Override
 	protected void run() {
 		ProteusRestClient client = getClient();
-		String diagram = readProcessDoc("processes/simpleHumanTask.diagram");	
+		String diagram = readProcessDoc("processes/SimpleWizard.diagram");	
 		
 		String id = client.uploadAndDeploy(diagram);
 		System.out.println("Process Id: " + id);
-		String instanceId = client.deployProcessInstance(id);
-		System.out.println("Process Instance Id: " + instanceId);
-		
-		enableWaitForInstance(instanceId);
+//		String instanceId = client.deployProcessInstance(id);
+//		System.out.println("Process Instance Id: " + instanceId);
+//		
+//		enableWaitForInstance(instanceId);
 
-		ProcessInstance processInstance = client.getProcessStepInstance(instanceId);
+//		ProcessInstance processInstance = client.getProcessStepInstance(instanceId);
 		
-		client.startProcessInstance(instanceId);
+//		client.startProcessInstance(instanceId);
 		
-		waitForProcess();		
+//		waitForProcess();		
 	}
 }
