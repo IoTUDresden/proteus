@@ -14,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import eu.vicci.process.model.util.messages.HumanTaskMessageManager;
 import eu.vicci.process.model.util.messages.HumanTaskResponse;
 import eu.vicci.process.model.util.messages.core.IHumanTaskRequest;
-import eu.vicci.process.model.util.messages.core.IHumanTaskResponse;
 import eu.vicci.process.server.exception.BadRequestException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -75,8 +74,6 @@ public class HumanTaskManagerRest {
 		.collect(Collectors.toMap(ht -> ht.getHumanTaskInstanceId(), ht -> ht ));
 	}
 	
-	public void HandleHumanTaskResponse(IHumanTaskResponse response){
-		HumanTaskMessageManager.getInstance().addHumanTaskResponse(response);
-	}
+
 
 }
