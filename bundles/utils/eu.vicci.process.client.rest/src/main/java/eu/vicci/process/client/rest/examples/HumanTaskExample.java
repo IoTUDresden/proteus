@@ -17,7 +17,7 @@ public class HumanTaskExample extends AbstractExample {
 	@Override
 	protected void run() {
 		ProteusRestClient client = getClient();
-		String diagram = readProcessDoc("processes/tinkerforge_ambientLight.diagram");	
+		String diagram = readProcessDoc("processes/wizard/tinkerforge_ambientLight.diagram");	
 		
 		String id = client.uploadAndDeploy(diagram);
 		System.out.println("Process Id: " + id);
