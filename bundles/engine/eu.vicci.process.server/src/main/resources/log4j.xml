@@ -29,7 +29,7 @@
 	</logger>
 
 	<logger name="com.espertech.esper">
-		<level value="debug" />
+		<level value="warn" />
 	</logger>
 
 	<logger name="org.eclipse.jetty">
@@ -38,6 +38,10 @@
 
 	<logger name="io.swagger">
 		<level value="warn" />
+	</logger>
+
+	<logger name="javax.jmdns">
+		<level value="error" />
 	</logger>
 
 	<root>

@@ -15,9 +15,13 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import eu.vicci.process.model.util.configuration.ConfigProperties;
+import eu.vicci.process.model.util.configuration.ConfigurationManager;
+
 //TODO change impl to the newer CloseableClient
 @SuppressWarnings("deprecation")
 public class RESTInvokeWorker {
+	public static final String placeHolderOpenhab = "<{openhab}>";
 
 	boolean sysout = true;
 
@@ -27,6 +31,18 @@ public class RESTInvokeWorker {
 	public RESTInvokeWorker(String uri) {
 		client = new DefaultHttpClient();
 		this.uri = uri;
+		replaceUriWithVar();
+	}
+	
+	private void replaceUriWithVar(){
+		if(uri == null && !uri.isEmpty())return;
+		if(uri.startsWith(placeHolderOpenhab)){
+			String ohUri = ConfigurationManager.getInstance().getConfigAsString(ConfigProperties.OPENHAB_URI);
+			if(ohUri == null){
+				throw new RuntimeException("failed to resolve oh ip");
+			}
+			uri = uri.replace(placeHolderOpenhab, ohUri);
+		}
 	}
 
 	public String executeXMLGetCall() throws Exception {
@@ -125,7 +141,10 @@ public class RESTInvokeWorker {
 			return false;
 		}
 	}
+	
+	
 
+	//this was changed to json cause nobody uses xml
 	public boolean executeXMLPutCall(String xml) throws Exception {
 		syso(".executeXMLPutCall()");
 		syso(" parameter: " + xml);
@@ -133,7 +152,7 @@ public class RESTInvokeWorker {
 
 		HttpPut put = new HttpPut(uri);
 
-		StringEntity entity = new StringEntity(xml, ContentType.APPLICATION_XML);
+		StringEntity entity = new StringEntity(xml, ContentType.APPLICATION_JSON);
 		put.setEntity(entity);
 
 		HttpResponse response = client.execute(put);

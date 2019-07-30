@@ -15,7 +15,8 @@ jdk:
 script: 
   - mvn deploy
   - cd $TRAVIS_BUILD_DIR/products/proteus
-  - docker build -t vicci-runtime .
+  - echo "skipping docker build..."
+#  - docker build -t vicci-runtime .
 
 deploy:
   - provider: script

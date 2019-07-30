@@ -58,9 +58,8 @@ public class RESTInvokeInstanceImplCustom extends ProcessStepInstanceImplCustom 
 				break;
 
 			case PUT:
-				worker.executeXMLPutCall(startParameter.get(0).serializeToXML());
+				worker.executeXMLPutCall(startParameter.get(0).getValueAsObject().toString());
 				break;
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -11,6 +11,8 @@ import eu.vicci.process.model.sofiainstance.DataTypeInstance;
 import eu.vicci.process.model.sofiainstance.ProcessInstance;
 import eu.vicci.process.model.sofiainstance.ProcessStepInstance;
 import eu.vicci.process.model.sofiainstance.SofiaInstanceFactory;
+import eu.vicci.process.model.util.messages.core.IHumanTaskRequest;
+import eu.vicci.process.model.util.messages.core.IHumanTaskResponse;
 import eu.vicci.process.model.util.messages.core.IStateChangeMessage;
 import eu.vicci.process.model.util.serialization.jsonprocessstepinstances.core.IJSONProcessStepInstance;
 import eu.vicci.process.model.util.serialization.jsontypeinstances.JSONTypeInstanceSerializer;
@@ -142,6 +144,22 @@ public class ProteusRestClient {
 		IJSONProcessStepInstance json = restClient.getProcessStepInstance(processInstanceId);
 		ProcessInstance processInstance = (ProcessInstance)json.makeProcessStepInstance(SofiaInstanceFactory.eINSTANCE);
 		return processInstance;
+	}
+	
+	/**
+	 * sends a human task response
+	 * @param response
+	 */
+	public void sendHumanTaskResponse(IHumanTaskResponse response){
+		throw new UnsupportedOperationException("not implemented yet");
+	}
+	
+	/**
+	 * retrieve human task requests
+	 * @return
+	 */
+	public Map<String, IHumanTaskRequest> getHumanTasks(){
+		throw new UnsupportedOperationException("not implemented yet");
 	}
 	
 	/**

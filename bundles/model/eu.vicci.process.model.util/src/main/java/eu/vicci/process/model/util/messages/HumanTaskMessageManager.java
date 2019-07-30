@@ -102,6 +102,26 @@ public class HumanTaskMessageManager {
 	public Map<String, IHumanTaskRequest> getOpenRequest() {
 		return openRequests;
 	}
+	
+	/**
+	 * Adds an HumanTaskRequest
+	 * @param request
+	 */
+	public void AddOpenRequest(IHumanTaskRequest request){
+		String htInstanceId = request.getHumanTaskInstanceId();
+		if(!openRequests.containsKey(htInstanceId)){
+			openRequests.put(htInstanceId, request);
+		}
+	}
+	
+	/**
+	 * Removes the open request if still present.
+	 */
+	public void RemoveOpenRequestIfStillPresent(String requestInstanceId) {
+		if(openRequests.containsKey(requestInstanceId)){
+			openRequests.remove(requestInstanceId);
+		}
+	}
 
 	/**
 	 * Gets all responses which are handled by the process engine

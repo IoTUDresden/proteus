@@ -101,6 +101,20 @@ public final class ConfigurationManager {
 		addIfNotNull(ConfigProperties.PROTEUS_IP_FILTER, reader.getIpFilter());
 		configurations.put(ConfigProperties.PROTEUS_HTTP_PORT, Integer.valueOf(reader.getHttpPort()));
 	}
+	
+	/**
+	 * Overrides the given config value (if set)
+	 */
+	public void OverrideConfig(String key, Object value) {
+		if(key == null){
+			logger.error("cant add config with key=null");
+			return;
+		}
+		if(value == null){
+			logger.warn("adding config '{}' with null", key);
+		}
+		configurations.put(key, value);
+	}
 
 	private void addIfNotNull(String key, String value) {
 		if (value == null)
